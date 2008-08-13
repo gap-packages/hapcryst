@@ -1,0 +1,169 @@
+<Section><Heading>Fundamental Domains</Heading>
+
+Let <M>S</M> be a crystallographic group. A Fundamental domain is a closed
+convex set containing a system of representatives for the Orbits of <M>S</M> in
+its natural action on euclidian space.<Br/>
+
+There are two algorithms for calculating fundamental domains in
+<Package>HAPcryst</Package>. One uses the geometry and relies on having the
+standard rule for evaluating the scalar product (i.e. the gramian matrix is the
+identity). The other one is independent of the gramian matrix but does only
+work for Bieberbach groups, while the first ("geometric") algorithm works for
+arbitrary crystallographic groups given a point with trivial stabilizer.
+
+<ManSection>
+<Meth Name="FundamentalDomainStandardSpaceGroup" Arg="[v], G" />
+<Meth Name="FundamentalDomainStandardSpaceGroup" Arg="v, G" />
+ <Returns>a <K>PolymakeObject</K></Returns>
+  <Description>
+   Let <A>G</A> be an <K>AffineCrystGroupOnRight</K> and <A>v</A> a vector. A
+   fundamental domain containing <A>v</A> is calculated and returned as a
+   <K>PolymakeObject</K>. The vector <A>v</A> is used as the starting point for
+   a Dirichlet-Voronoi construction. If no <A>v</A> is given and <A>G</A> is a
+   Bieberbach group, the origin in used as starting point.<Br/>
+
+   The method for this calculation is chosen automatically depending on the
+   group. The Gram-independent algorithm (see 
+   <Ref Meth="FundamentalDomainBieberbachGroup" />) is used whenever possible.
+  </Description>
+</ManSection>
+
+<Example><![CDATA[
+gap> fd:=FundamentalDomainStandardSpaceGroup([1/2,0,1/5],SpaceGroup(3,9));
+<polymake object>
+gap> Polymake(fd,"N_VERTICES");
+24
+gap> fd:=FundamentalDomainStandardSpaceGroup(SpaceGroup(3,9));
+<polymake object>
+gap> Polymake(fd,"N_VERTICES");
+8
+]]></Example>
+
+<ManSection>
+<Meth Name="FundamentalDomainBieberbachGroup" Arg="G"/> 
+<Meth Name="FundamentalDomainBieberbachGroup" Arg="v G [gram]"/> 
+ <Returns>a <K>PolymakeObject</K></Returns>
+ <Description>
+  Given a starting vector <A>v</A> and a Bieberbach group <A>G</A> in
+  standard form, this method calculates the Dirichlet domain with
+  respect to <A>v</A>. If <A>gram</A> is not supplied, the average
+  gramian matrix is used (see
+  <Ref Meth="GramianOfAverageScalarProductFromFiniteMatrixGroup"/>).
+  It is not tested if <A>gram</A> is symmetric and positive
+  definite. It is also not tested, if the product defined
+  by <A>gram</A> is invariant under the point group of <A>G</A>. 
+  <P/>
+
+  The behaviour of this function is influenced by the option 
+  <K>ineqThreshold</K><Label
+  Name="ineqThreshold"/><Index>ineqThreshold</Index>. 
+  The algorithm calculates
+  approximations to a fundamental domain by iteratively adding inequalities.
+  For an approximating polyhedron, every vertex is tested to find new
+  inequalities. When all vertices have been considered or the number of new 
+  inequalities already found exceeds
+  the value of <K>ineqThreshold</K>, a new approximating polyhedron in
+  calculated. The default for <K>ineqThreshold</K> is 200. Roughly speaking,
+  a large threshold means shifting work from <K>polymake</K> to &GAP;, a small
+  one means more calls of (and work for) <K>polymake</K>.
+  <P/>
+  If the value of <Ref InfoClass="InfoHAPcryst"/> is 2 or more, for each
+  approximation the number of vertices of the approximation, the number of
+  vertices that have to be considered during the calculation, the number of
+  facets, and  new inequalities is shown.
+  <P/>
+ 
+  Note that the algorithm chooses vertices in random order and also writes
+  inequalities for <K>polymake</K> in random order.
+ </Description>
+</ManSection>
+
+
+<Example><![CDATA[
+gap> a0:=[[ 1, 0, 0, 0, 0, 0, 0 ], [ 0, -1, 0, 0, 0, 0, 0 ], 
+>     [ 0, 0, 1, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0, 0 ], 
+>     [ 0, 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, -1, -1, 0 ],
+>     [ -1/2, 0, 0, 1/6, 0, 0, 1 ] 
+>     ];;
+gap> a1:=[[ 0, -1, 0, 0, 0, 0, 0 ],[ 0, 0, -1, 0, 0, 0, 0 ],
+>         [ 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0, 0 ], 
+>         [ 0, 0, 0, 0, 1, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 0 ],
+>         [ 0, 0, 0, 0, 1/3, -1/3, 1 ] 
+>        ];;
+gap> trans:=List(Group((1,2,3,4,5,6)),g->
+>           TranslationOnRightFromVector(Permuted([1,0,0,0,0,0],g)));;
+gap> S:=AffineCrystGroupOnRight(Concatenation(trans,[a0,a1]));
+<matrix group with 8 generators>
+gap> SetInfoLevel(InfoHAPcryst,2);
+gap> FundamentalDomainBieberbachGroup(S:ineqThreshold:=10);
+#I  v: 104/104 f:15
+#I  new: 201
+#I  v: 961/961 f:58
+#I  new: 20
+#I  v: 1143/805 f:69
+#I  new: 12
+#I  v: 1059/555 f:64
+#I  new: 15
+#I  v: 328/109 f:33
+#I  new: 12
+#I  v: 336/58 f:32
+#I  new: 0
+<polymake object>
+gap> FundamentalDomainBieberbachGroup(S:ineqThreshold:=1000);
+#I  v: 104/104 f:15
+#I  new: 149
+#I  v: 635/635 f:41
+#I  new: 115
+#I  v: 336/183 f:32
+#I  new: 0
+#I  out of inequalities
+<polymake object>]]>
+</Example>
+
+<ManSection>
+<Meth Name="FundamentalDomainFromGeneralPointAndOrbitPartGeometric" Arg="v
+orbit"/>
+ <Returns>a <K>PolymakeObject</K></Returns>
+ <Description>
+  Let <A>v</A> be a vector and <A>orbit</A> a sufficiently large part of the
+  orbit of <A>v</A> under a crystallographic group with standard- orthogonal
+  point group (satisfying <M>A^t=A^-1</M>). A geometric algorithm is then used
+  to calculate the Dirichlet domain with respect to <A>v</A>. This also works
+  for crystallographic groups which are not Bieberbach. The point <A>v</A> has
+  to have trivial stabilizer.
+ </Description>
+</ManSection>
+
+<Example><![CDATA[
+gap> G:=SpaceGroup(3,9);;
+gap> v:=[0,0,0];
+[ 0, 0, 0 ]
+gap> orbit:=OrbitStabilizerInUnitCubeOnRight(G,v).orbit;
+[ [ 0, 0, 0 ], [ 0, 0, 1/2 ] ]
+gap> fd:=FundamentalDomainFromGeneralPointAndOrbitPartGeometric(v,orbit);
+<polymake object>
+gap> Polymake(fd,"N_VERTICES");
+8
+]]></Example>
+
+
+<ManSection>
+  <Meth Name="IsFundamentalDomainStandardSpaceGroup"
+        Arg="poly G"/>
+  <Returns>
+   true or false
+  </Returns>
+  <Description>
+   This tests if a <K>PolymakeObject</K> <A>poly</A> is a fundamental domain
+   for the affine crystallographic group <A>G</A> in standard form.<Br/>
+   
+   The function tests the following: First, does the orbit of any vertex
+   of <A>poly</A> have a point inside <A>poly</A> (if this is the
+   case, <C>false</C> is returned).  Second: Is every facet
+   of <A>poly</A> the image of a different facet under a group element
+   which does not fix <A>poly</A>. If this is satisfied,
+   <C>true</C> is returned.
+  </Description>
+</ManSection>
+
+</Section>

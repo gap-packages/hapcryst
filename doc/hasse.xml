@@ -1,0 +1,10 @@
+<Section><Heading>Generating (parts of) the Hasse diagram</Heading>
+
+To generate a resolution of a crystallographic group, we don't
+necessarily need the full Hasse diagram of a corresponding fundamental
+domain. Here are a few functions which can be used to calculate a
+(sufficient) part of it.
+
+blabla...
+
+</Section>

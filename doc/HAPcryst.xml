@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE Book SYSTEM "gapdoc.dtd">
+
+<Book Name="HAPcryst">
+
+<TitlePage>
+
+  <Title><Package>HAPcryst</Package> &ndash; An extension of the &GAP; package <Package>HAP</Package> for
+  crystallographic groups</Title>
+
+  <Version>( Version
+<#Include SYSTEM "../../version.ver">
+ )
+  </Version>
+  <Author>Marc Röder
+    <Email>marc.roeder(at)nuigalway.ie</Email>
+  </Author>
+
+  <Abstract>
+  
+  </Abstract>
+
+  <Address>
+  Marc Röder, Department of Mathematics, NUI Galway, Irleland
+  </Address>
+
+  <Acknowledgements>
+  This work was supported by Marie Curie Grant No. MTKD-CT-2006-042685
+  </Acknowledgements>
+
+  <Copyright>&copyright; 2007 Marc Röder. <P/>
+
+    This package is distributed under the terms of the GNU General
+    Public License version 2 or later (at your convenience). See the  file
+    <File>LICENSE.txt</File> or 
+    <URL>http://www.gnu.org/copyleft/gpl.html</URL>
+
+  </Copyright>
+</TitlePage>
+
+<TableOfContents/>
+
+<Body>
+
+<Chapter><Heading>Introduction</Heading>
+ <#Include SYSTEM "intro.xml">
+</Chapter>
+
+<Chapter><Heading>Bits and Pieces</Heading>
+ <#Include SYSTEM "misc.xml">
+</Chapter>
+<Chapter><Heading>Algorithms of Orbit-Stabilizer Type</Heading>
+ <#Include SYSTEM "spacegroups.xml">
+</Chapter>
+
+<Chapter><Heading>Resolutions of  Crystallographic Groups</Heading>
+<!-- <#Include SYSTEM "chaincomplex.xml">-->
+ <#Include SYSTEM "fundamentaldomain.xml">
+ <#Include SYSTEM "geometry.xml">
+</Chapter>
+
+</Body>
+<Bibliography Databases="HAPcryst" /> 
+<TheIndex/>
+</Book>

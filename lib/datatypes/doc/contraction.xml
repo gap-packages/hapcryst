@@ -1,0 +1,67 @@
+<Section><Heading>The <K>PartialContractingHomotopy</K> Data Type</Heading>
+
+A partial contracting homotopy is a component object that knows the values of a
+contracting homotopy on some subspace of a resolution.
+It has two mandatory components:
+<List>
+ <Item><C>.resolution</C> a <K>HapResolution</K> on which the contraction is
+                          defined.</Item> 
+ <Item><C>.knownPartOfHomotopy</C> a list of <K>Record</K>s with components
+                                   <C>.space</C> and <C>.map</C>.</Item>
+</List>
+
+Let <C>h</C> be a contracting homotopy. The lookup table
+<C>.knownPartOfHomotopy</C> has one entry for each term of the resolution
+<C>h.resolution</C> (that is, one more than <C>Length(h.resolution)</C>).
+<P/>
+The <M>i</M> th element of <C>.knownPartOfHomotopy</C> contains a record with
+components <C>.space</C> and <C>.map</C> where <C>.space</C> is a 
+<K>FreeZGWord</K> of the <M>i-1</M> st term of the resolution. 
+
+The component <C>.map</C> is a list of length
+<C>Dimension(h.resolution)(i-1)</C>. The entries of this list are pairs
+<C>[g,im]</C> where <C>g</C> represents a group element and <C>im</C>
+represents the image of the contraction. So the entry <C>[g,im]</C> in the
+<C>k</C>th component of the list <C>.map</C> means that the <C>k</C>th free
+generator of the corresponding module multiplied with the group element
+represented by <C>g</C> is mapped to <C>im</C> under the partial contracting
+homotopy. Note that the data type of <C>g</C> or <C>im</C> are not fixed at
+this level. They must be specified by the sub representations. Also, <C>im</C>
+need not represent the actual image under a contracting homotopy. It is
+possible to just store a bit of information that is then used to generate the
+actual image.
+<P/>
+
+As this is a very general data type, it has very few methods.
+
+<ManSection>
+ <Meth Name="ResolutionOfContractingHomotopy" Arg="homotopy"/>
+  <Returns>A <K>HapResolution</K></Returns>
+  <Description>
+   This returns the resolution of the homotopy <A>homotopy</A> (the component
+   <A>homotopy!.resolution</A>).
+  </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="PartialContractingHomotopyLookup" Arg="homotopy term generator groupel"/>
+ <Meth Name="PartialContractingHomotopyLookupNC" Arg="homotopy term generator groupel"/>
+  <Returns>The entry <C>im</C> of the corresponding lookup table</Returns>
+  <Description>
+   Looks up the known part of the contracting homotopy <A>homotopy</A> and
+   returns the corresponding image. More precisely, it returns the image of the
+   <A>generator</A>th generator times the group element represented by
+   <A>groupel</A>  in term <A>term</A> under the partial homotopy. The data
+   type of this image depends on the representation of <A>homotopy</A>. 
+   <P/>
+   <A>term</A> has to be an integer and <A>generator</A> a positive
+   integer. <A>groupel</A> only has to be an <K>Object</K>.
+   <P/>
+   The NC version does not do any checks on the input. The other version checks
+   if  <A>term</A> and <A>generator</A> are sensible. It does not check <A>groupel</A>.
+  </Description>
+</ManSection>
+
+</Section>
+

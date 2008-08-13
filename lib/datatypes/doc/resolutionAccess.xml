@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE Book SYSTEM "gapdoc.dtd">
+
+<Book Name="HAPprog">
+
+<TitlePage>
+
+  <Title><Package>Hap Programming</Package> &ndash; An experimental framework
+for objectifying the data structures of Hap</Title>
+
+  <Version>( development version of
+<#Include SYSTEM "today.ver">
+ )
+  </Version>
+  <Author>Marc Röder
+    <Email>marc.roeder(at)nuigalway.ie</Email>
+  </Author>
+
+  <Abstract>
+   This extension does not change the behaviour of Hap and is fully
+   backwards-compatible. It is not a part of Hap and there is no guarantee that
+   it will at any point be supported by Hap. Use at your own risk.
+  </Abstract>
+
+  <Address>
+  Marc Röder, Department of Mathematics, NUI Galway, Irleland
+  </Address>
+
+  <Acknowledgements>
+  This work was supported by Marie Curie Grant No. MTKD-CT-2006-042685
+  </Acknowledgements>
+
+  <Copyright>&copyright; 2007 Marc Röder. <P/>
+
+    This package is distributed under the terms of the GNU General
+    Public License version 2 or later (at your convenience). See the  file
+    <File>LICENSE.txt</File> or 
+    <URL>http://www.gnu.org/copyleft/gpl.html</URL>
+
+  </Copyright>
+</TitlePage>
+
+<TableOfContents/>
+
+
+<Body>
+<Chapter Label="hapresolution"><Heading>Resolutions in Hap</Heading>
+
+This document is only concerned with the representation of resolutions in
+Hap. Note that it is not a part of Hap. The framework provided here is just an
+extension of Hap data types used in HAPcryst and HAPprime. 
+<P />
+From now on, let <M>G</M> be a group and <M>\dots \to M_n\to M_{n-1}\to\dots\to M_1\to M_0\to Z</M> be a
+resolution with free <M>ZG</M> modules <M>M_i</M>.
+
+<P/>
+The elements of the modules <M>M_i</M> can be represented in different
+ways. This is what makes different representations for resolutions
+desirable. First, we will look at the standard representation
+(<C>HapResolutionRep</C>) as it is defined in Hap. After that, we will present
+another representation for infinite groups.
+Note that all non-standard representations must be sub-representations of the
+standard representation to ensure compatibility with Hap.
+
+
+
+
+<Section Label="hapresolutionrep"><Heading>The Standard Representation <K>HapResolutionRep</K></Heading>
+
+For every <M>M_i</M> we fix a basis and number its elements. Furthermore, it is
+assumed that we have a (partial) enumeration of the group of a resolution.
+In practice this is done by generating a lookup table on the fly.
+<P/>
+
+In standard representation, the elements of the modules <M>M_k</M> are
+represented by lists -"words"- of pairs of integers. A letter <C>[i,g]</C> of
+such a word consists of the number of a basis element <C>i</C> or <C>-i</C> for
+its additive inverse and a number
+<M>g</M> representing a group element.
+<P/>
+
+A <C>HapResolution</C> in <C>HapResolutionRep</C> representation is a component
+object with the components
+
+<List>
+<Item><C>group</C>, a group of arbitrary type.</Item>
+
+<Item><C>elts</C>, a (partial) list of (possibly duplicate) elements in G. This
+list provides the "enumeration" of the group. Note that there are
+functions in Hap which assume that <C>elts[1]</C> is the identity element of G.
+</Item>
+
+<Item><C>appendToElts(g)</C>  a function that appends the group element
+   <C>g</C> to <C>.elts</C>. This is not documented in Hap 1.8.6 but seems to
+   be required for infinite groups. This requirement might vanish in some later
+   version of Hap [G. Ellis, private communication].
+</Item>
+
+<Item><C>dimension(k)</C>, a function which returns the ZG-rank of the Module
+<M>M_k</M></Item>
+
+<Item><C>boundary(k,j)</C>, a function which returns the image in <M>M_{k-1}</M>
+of the <M>j</M>th free generator of <M>M_k</M>. Note that negative <M>j</M> are
+valid as input as well. In this case the additive inverse of the boundary of
+the <M>j</M>th generator is returned</Item>
+
+<Item><C>homotopy(k,[i,g])</C> a function which returns the image in
+<M>M_{k+1}</M>, under a contracting homotopy <M>M_k \to M_{k+1}</M>, of the
+element <C>[[i,g]]</C>  in <M>M_k</M>. The value of this might be <K>fail</K>. 
+However, currently (version 1.8.4) some Hap functions assume that
+<C>homotopy</C> is a function without testing.</Item>
+
+<Item><C>properties</C>, a list of pairs <C>["name","value"]</C> "name" is a
+string and value is anything (boolean, number, string...). Every
+<C>HapResolution</C> (regardless of representation) has to have
+<C>["type","resolution"]</C>, <C>["length",length]</C> where <C>length</C> is
+the length of the resolution and <C>["characteristic",char]</C>. Currently (Hap
+1.8.6), <C>length</C> must not be <K>infinity</K>.
+The values of these properties can be tested using the Hap function
+<C>EvaluateProperty(resolution,propertyname)</C>.</Item>
+
+</List>
+
+Note that making <C>HapResolution</C>s immutable will make the <C>.elts</C>
+component immutable. As this lookup table might change during calculations,
+we do not recommend using immutable resolutions (in any representation).
+</Section>
+
+<Section Label="largegrouprep"><Heading>The <K>HapLargeGroupResolutionRep</K> Representation</Heading>
+
+In this sub-representation of the standard representation, the module elements
+in this resolution are lists of groupring elements.
+So the lookup table <C>.elts</C> is not used as long as no conversion to
+standard representation takes place.
+In addition to the components of a <K>HapResolution</K>, a resolution in large
+group representation has the following components:
+
+<List>
+<Item><C>boundary2(resolution,term,gen)</C>, a function that returns the
+boundary of the <A>gen</A>th generator of the <A>term</A>th module.</Item>
+<Item><C>groupring</C> the group ring of the resolution <A>resolution</A>.</Item>
+<Item><C>dimension2(resolution,term)</C> a function that returns the dimension
+of the <A>term</A>th module of the resolution <A>resolution</A>.</Item>
+</List>
+The effort of having two versions of <C>boundary</C> and <C>dimension</C> is
+necessary to keep the structure compatible with the usual Hap resolution.
+</Section>
+
+</Chapter>
+
+
+
+<!-- ================================================== -->
+
+
+<Chapter><Heading>Accessing and Manipulating Resolutions</Heading>
+
+
+<Section><Heading>Representation-Independent Access Methods</Heading>
+
+All methods listed below take a <C>HapResolution</C> in any representation. If
+the other arguments are compatible with the representation of the resolution,
+the returned value will be in the form defined by this representation. If the
+other arguments are in a different representation, &GAP;s method selection is
+used via <C>TryNextMethod()</C> to find an applicable method (a suitable representation).
+<P/>
+
+The idea behind this is that the results of computations have the same form as
+the input. And as all representations are sub-representations of the
+<C>HapResolutionRep</C> representation, input which is compatible with the
+<C>HapResolutionRep</C> representation is always valid.
+<P/>
+
+Every new representation must support the functions of this section.
+
+<ManSection>
+ <Meth Name="StrongestValidRepresentationForLetter" Arg="resolution term
+letter"/>
+ <Returns>filter</Returns>
+ <Description>
+  Finds the sub-representation of <C>HapResolutionRep</C> for which
+  <A>letter</A> is a valid letter of the <A>term</A>th module of
+  <A>resolution</A>. Note that <A>resolution</A> automatically is in some
+  sub-representation of <C>HapResolutionRep</C>.This is mainly meant for
+  debugging.
+ </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="StrongestValidRepresentationForWord" Arg="resolution term
+word"/>
+ <Returns>filter</Returns>
+ <Description>
+  Finds the sub-representation of <C>HapResolutionRep</C> for which
+  <A>word</A> is a valid word of the <A>term</A>th module of
+  <A>resolution</A>. Note that <A>resolution</A> automatically is in some
+  sub-representation of <C>HapResolutionRep</C>. This is mainly meant for
+  debugging. 
+ </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="PositionInGroupOfResolution" Arg="resolution g" />
+ <Meth Name="PositionInGroupOfResolutionNC" Arg="resolution g"/>
+ <Returns>positive integer</Returns>
+  <Description>
+   This returns the position of the group element <A>g</A> in the enumeration
+   of the group of <A>resolution</A>. The NC version does not check if <A>g</A>
+   really is an element of the group of <A>resolution</A>.
+  </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="IsValidGroupInt" Arg="resolution n"/>
+ <Returns>boolean</Returns>
+  <Description>
+   Returns true if the <A>n</A>th element of the group of <A>resolution</A> is known.
+  </Description>
+</ManSection>
+
+<ManSection>
+ <Meth Name="GroupElementFromPosition" Arg="resolution n"/>
+ <Returns>group element or <K>fail</K></Returns>
+  <Description>
+   Returns <A>n</A>th element of the group of <A>resolution</A>. If the
+   <A>n</A>th element is not known, <K>fail</K> is returned.
+  </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="MultiplyGroupElts" Arg="resolution x y"/>
+ <Returns>positive integer or group element, depending on the type of <A>x</A> and <A>y</A></Returns>
+  <Description>
+   If <C>x</C> and <C>y</C> are given in standard representation (i.e. as
+   integers), this returns the position of the product of the group elements
+   represented by the positive integers <A>x</A> and <A>x</A>.
+   <P/>
+   If <C>x</C> and <C>y</C> are given in any other representation, the returned
+   group element will also be represented in this way.
+  </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="MultiplyFreeZGLetterWithGroupElt" Arg="resolution letter g"/>
+ <Returns>A letter</Returns>
+  <Description>
+   Multiplies the letter <A>letter</A> with the group element <A>g</A> and
+   returns the result. If <A>resolution</A> is in standard representation,
+   <A>g</A> has to be an integer and <A>letter</A> has to be a pair of
+   integer. If <A>resolution</A> is in any other representation, <A>letter</A>
+   and <A>g</A> can be in a form compatible with that representation or in the
+   standard form (in the latter case, the returned value will also have
+   standard form).
+  </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="MultiplyFreeZGWordWithGroupElt" Arg="resolution word g"/>
+ <Returns>A word</Returns>
+  <Description>
+   Multiplies the word <A>word</A> with the group element <A>g</A> and
+   returns the result. If <A>resolution</A> is in standard representation,
+   <A>g</A> has to be an integer and <A>word</A> has to be a list of pairs of
+   integers. If <A>resolution</A> is in any other representation, <A>word</A>
+   and <A>g</A> can be in a form compatible with that representation or in the
+   standard form (in the latter case, the returned value will also have
+   standard form).
+  </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="BoundaryOfFreeZGLetter" Arg="resolution term letter"/>
+ <Returns>free ZG word (in the same representation as <A>letter</A>)</Returns>
+  <Description>
+   Calculates the boundary of the letter (word of length 1) <A>letter</A> of
+   the <A>term</A>th module of <A>resolution</A>.
+   <P/>
+   The returned value is a word of the <A>term</A>-1st module and comes in the
+   same representation as <A>letter</A>.
+  </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="BoundaryOfFreeZGWord" Arg="resolution term word"/>
+ <Returns>free ZG word (in the same representation as <A>letter</A>)</Returns>
+  <Description>
+   Calculates the boundary of the word <A>word</A> of
+   the <A>term</A>th module of <A>resolution</A>.
+   <P/>
+   The returned value is a word of the <A>term</A>-1st module and comes in the
+   same representation as <A>word</A>.
+  </Description>
+</ManSection>
+
+
+</Section>
+
+
+<Section><Heading>Converting Between Representations</Heading>
+
+Four methods are provided to convert letters and words from standard
+representation to any other representation and back again.
+
+<ManSection>
+ <Meth Name="ConvertStandardLetter" Arg="resolution term letter"/>
+ <Meth Name="ConvertStandardLetterNC" Arg="resolution term letter"/>
+ <Returns>letter in the representation of <A>resolution</A></Returns>
+  <Description>
+   Converts the letter <A>letter</A> in standard representation to the
+   representation of <A>resolution</A>. The NC version does not check whether
+   <A>letter</A> really is a letter in standard representation.
+  </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="ConvertStandardWord" Arg="resolution term word"/>
+ <Meth Name="ConvertStandardWordNC" Arg="resolution term word"/>
+ <Returns>word in the representation of <A>resolution</A></Returns>
+  <Description>
+   Converts the word <A>word</A> in standard representation to the
+   representation of <A>resolution</A>. The NC version does not check whether
+   <A>word</A> is a valid word in standard representation.
+  </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="ConvertLetterToStandardRep" Arg="resolution term letter"/>
+ <Meth Name="ConvertLetterToStandardRepNC" Arg="resolution term letter"/>
+ <Returns>letter in standard representation</Returns>
+  <Description>
+   Converts the letter <A>letter</A> in the representation of <A>resolution</A>
+   to the standard representation. The NC version does not check whether
+   <A>letter</A> is a valid letter of <A>resolution</A>.
+  </Description>
+</ManSection>
+
+<ManSection>
+ <Meth Name="ConvertWordToStandardRep" Arg="resolution term word"/>
+ <Meth Name="ConvertWordToStandardRepNC" Arg="resolution term word"/>
+ <Returns>word in standard representation</Returns>
+  <Description>
+   Converts the word <A>word</A> in the representation of <A>resolution</A>
+   to the standard representation. The NC version does not check whether
+   <A>word</A> is a valid word of <A>resolution</A>.
+  </Description>
+</ManSection>
+
+
+</Section>
+
+
+<Section><Heading>Special Methods for <K>HapResolutionRep</K></Heading>
+
+Some methods explicitely require the input to be in the standard
+representation (<A>HapResolutionRep</A>). Two of these test if a word/letter is
+really in standard representation, the other ones are non-check versions of the
+universal methods.
+
+<ManSection>
+ <Meth Name="IsFreeZGLetter" Arg="resolution term letter"/>
+ <Returns>boolean</Returns>
+  <Description>
+   Checks if <A>letter</A> is an valid letter (word of length 1) in standard
+   representation of the <A>term</A>th module of <A>resolution</A>.
+  </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="IsFreeZGWord" Arg="resolution term word"/>
+ <Returns>boolean</Returns>
+  <Description>
+   Check if <A>word</A> is a valid word in large standard representation of the
+   <A>term</A>th module in <A>resolution</A>.
+  </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="MultiplyGroupEltsNC" Arg="resolution x y"/>
+ <Returns>positive integer</Returns>
+  <Description>
+   Given positive integers <C>x</C> and <C>y</C>, this returns the position of
+   the product of the group elements  represented by the positive integers
+   <A>x</A> and <A>x</A>. This assumes that all input is in standard
+   representation and does not check the input.
+  </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="MultiplyFreeZGLetterWithGroupEltNC" Arg="resolution letter g"/>
+ <Returns>A letter in standard representation</Returns>
+  <Description>
+   Multiplies the letter <A>letter</A> with the group element represented by 
+   the positive integer <A>g</A> and
+   returns the result. The input is assumed to be in <A>HapResolutionRep</A>
+   and is not checked.
+  </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="MultiplyFreeZGWordWithGroupEltNC" Arg="resolution word g"/>
+ <Returns>A letter in standard representation</Returns>
+  <Description>
+   Multiplies the word <A>word</A> with the group element represented by 
+   the positive integer <A>g</A> and
+   returns the result. The input is assumed to be in <A>HapResolutionRep</A>
+   and is not checked.
+  </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="BoundaryOfFreeZGLetterNC" Arg="resolution term letter"/>
+ <Returns>free ZG word in standard representation</Returns>
+  <Description>
+   Calculates the boundary of the letter (word of length 1) <A>letter</A> of
+   the <A>term</A>th module of <A>resolution</A>.
+   The input is assumed to be in standard representation and not checked.
+  </Description>
+</ManSection>
+
+
+
+<ManSection>
+ <Meth Name="BoundaryOfFreeZGWordNC" Arg="resolution term word"/>
+ <Returns>free ZG word in standard representation</Returns>
+  <Description>
+   Calculates the boundary of the word <A>word</A> of
+   the <A>term</A>th module of <A>resolution</A>.
+   The input is assumed to be in standard representation and not checked.
+  </Description>
+</ManSection>
+
+
+</Section>
+
+<#Include SYSTEM "./resolutionAccess_GroupRing.xml">
+
+</Chapter>
+
+<Chapter><Heading>Contracting Homotopies</Heading>
+
+<#Include SYSTEM "./contraction.xml">
+</Chapter>
+
+</Body>
+</Book>
