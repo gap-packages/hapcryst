@@ -27,19 +27,6 @@ Revision.("/home/roeder/gap/HAPcryst/HAPcryst/lib/FundamentalDomainBieberbach_gi
 	"@(#)$Id$";
 #############################################################################
 ##
-##  QUESTION:
-##
-## The fundamental domain algorithm contains a parameter which determines
-## how many inequalities are calculated before the next convex hull step
-## is made.
-##
-## This is currently hardcoded (to 200). Wouldn't it be better to have an 
-## option here?
-## 
-##
-
-#############################################################################
-##
 #O FundamentalDomainBieberbachGroupNC(<group>)
 ##
 InstallMethod(FundamentalDomainBieberbachGroupNC,
@@ -98,20 +85,39 @@ end);
 InstallMethod(FundamentalDomainBieberbachGroup,
         [IsVector,IsGroup,IsMatrix],
         function(center,group,gram)
-    local   dim;
+    local   needBieberbachTest,  phi,  dim,  fd;
+    
+    needBieberbachTest:=false;
     if not (IsStandardSpaceGroup(group) and IsAffineCrystGroupOnRight(group))
        then
         Error("group must be a StandardSpaceGroup acting on right");
-    elif not IsAlmostBieberbachGroup(Image(IsomorphismPcpGroup(group)))
-      then
-        Error("group must be a Bieberbach group");
+    else 
+        phi:=IsomorphismPcpGroup(group);
+        if phi=fail
+           then
+            Info(InfoHAPcryst,1,"Couldn't calculate pcp representation. Testing tortion freeness later");
+            needBieberbachTest:=true;
+        elif not IsAlmostBieberbachGroup(Image(phi))
+          then
+            Error("group must be a Bieberbach group");
+        fi;
     fi;
     dim:=Size(center);
     if not (dim=Size(gram) and DimensionOfMatrixGroup(group)=dim+1)
        then
         Error("dimensions don't match");
     fi;
-    return FundamentalDomainBieberbachGroupNC(center,group,gram);
+    if not IsTrivial(StabilizerOnSetsStandardSpaceGroup(group,[center]))
+       then
+        Error("group must be a Bieberbach group");
+    fi;
+    fd:=FundamentalDomainBieberbachGroupNC(center,group,gram);
+    if not needBieberbachTest or IsFundamentalDomainBieberbachGroup(fd,group)
+       then
+        return fd;
+    else
+        Error("group must be a Bieberbach group");
+    fi;
 end);
     
     
@@ -209,7 +215,6 @@ InstallMethod(FundamentalDomainBieberbachGroupNC,
         local   dim,  affinevertex,  returnlist,  g,  gl,  gli,  gt,  
                 affimage,  image,  trans,  t;
 
-
         dim:=Size(vertex);
         affinevertex:=Concatenation(vertex,[1]);
         returnlist:=[];
@@ -256,8 +261,8 @@ InstallMethod(FundamentalDomainBieberbachGroupNC,
        for i in [Size(list),Size(list)-1..1]
          do
            nextpos:=Random(1,i);
-           Add(positionlist,indexlist[i]);
-           Remove(indexlist,i);
+           Add(positionlist,indexlist[nextpos]);
+           Remove(indexlist,nextpos);
        od;
        return list{positionlist};
     end;
@@ -287,7 +292,10 @@ InstallMethod(FundamentalDomainBieberbachGroupNC,
     orbitpart:=OrbitStabilizerInUnitCubeOnRight(group,center).orbit;;
     
     newinequalities:=initialInequalities(center,gram);;
-    partialFD:=CreatePolymakeObject("partialFD",POLYMAKE_DATA_DIR);
+    partialFD:=CreatePolymakeObject("partialFD",
+                       POLYMAKE_DATA_DIR,
+                       ["polytope","2.3","RationalPolytope"]
+                       );
     AppendToPolymakeObject(partialFD,
             ConvertMatrixToPolymakeString("FACETS",newinequalities)
             );
@@ -347,9 +355,9 @@ InstallMethod(FundamentalDomainBieberbachGroupNC,
         Info(InfoHAPcryst,3,"new: ",Size(newinequalities));
         if newinequalities<>[]
            then
-            ClearPolymakeObject(partialFD);
-            AppendInequalitiesToPolymakeObject(partialFD,shuffledList(inequalities));;
-#            AppendInequalitiesToPolymakeObject(partialFD,inequalities);;
+            ClearPolymakeObject(partialFD,["polytope","2.3","RationalPolytope"]);
+#            AppendInequalitiesToPolymakeObject(partialFD,shuffledList(inequalities));;
+            AppendInequalitiesToPolymakeObject(partialFD,inequalities);;
             Polymake(partialFD,"VERTICES FACETS");
         fi;
     until newinequalities=[];

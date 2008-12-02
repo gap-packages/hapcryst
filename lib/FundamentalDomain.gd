@@ -62,7 +62,26 @@ DeclareOperation("FundamentalDomainBieberbachGroup",
 DeclareOperation("FundamentalDomainBieberbachGroup",
         [IsVector,IsGroup,IsMatrix]);
 
-
+#############################################################################
+##
+#O IsFundamentalDomainStandardSpaceGroup
+##
+##  tests if a given polyhedron is a fundamental domain of a crystallographic
+##  group (not necessarily Bieberbach)
+##
 DeclareOperation("IsFundamentalDomainStandardSpaceGroup",
         [IsPolymakeObject,IsGroup]);
 
+#############################################################################
+##
+#O IsFundamentalDomainBieberbachGroup
+##
+##  Tests if a given polyhedron is a fundamental domain for a group and if the
+##  group is Bieberbach.
+##  Returns 'true' if group is Bieberbach and polyhedron is fundamental domain
+##  Returns 'false' if the polyhedron is not a fundamental domain 
+##  (regardless of structure of group).
+##  Returns 'fail' if the group is not Bieberbach
+##
+DeclareOperation("IsFundamentalDomainBieberbachGroup",
+        [IsPolymakeObject,IsGroup]);

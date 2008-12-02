@@ -19,12 +19,9 @@ arbitrary crystallographic groups given a point with trivial stabilizer.
    Let <A>G</A> be an <K>AffineCrystGroupOnRight</K> and <A>v</A> a vector. A
    fundamental domain containing <A>v</A> is calculated and returned as a
    <K>PolymakeObject</K>. The vector <A>v</A> is used as the starting point for
-   a Dirichlet-Voronoi construction. If no <A>v</A> is given and <A>G</A> is a
-   Bieberbach group, the origin in used as starting point.<Br/>
-
-   The method for this calculation is chosen automatically depending on the
-   group. The Gram-independent algorithm (see 
-   <Ref Meth="FundamentalDomainBieberbachGroup" />) is used whenever possible.
+   a Dirichlet-Voronoi construction. If no <A>v</A> is given, the origin is
+   used as starting point if it has trivial stabiliser. Otherwise an error is 
+   cast. <Br />
   </Description>
 </ManSection>
 
@@ -125,12 +122,17 @@ gap> FundamentalDomainBieberbachGroup(S:ineqThreshold:=1000);
 orbit"/>
  <Returns>a <K>PolymakeObject</K></Returns>
  <Description>
+  This uses an alternative algorithm based on geometric considerations. It is 
+  not used in any of the high-level methods.
   Let <A>v</A> be a vector and <A>orbit</A> a sufficiently large part of the
   orbit of <A>v</A> under a crystallographic group with standard- orthogonal
   point group (satisfying <M>A^t=A^-1</M>). A geometric algorithm is then used
   to calculate the Dirichlet domain with respect to <A>v</A>. This also works
   for crystallographic groups which are not Bieberbach. The point <A>v</A> has
-  to have trivial stabilizer.
+  to have trivial stabilizer.<Br/>
+
+  The intersection of the full orbit with the unit cube around <A>v</A> is
+  sufficiently large.
  </Description>
 </ManSection>
 
@@ -165,5 +167,32 @@ gap> Polymake(fd,"N_VERTICES");
    <C>true</C> is returned.
   </Description>
 </ManSection>
+
+
+<ManSection>
+  <Meth Name="IsFundamentalDomainBieberbachGroup"
+        Arg="poly G"/>
+  <Returns>
+   true, false or fail
+  </Returns>
+  <Description>
+   This tests if a <K>PolymakeObject</K> <A>poly</A> is a fundamental domain
+   for the affine crystallographic group <A>G</A> in standard form and if this
+   group is torsion free (ie a Bieberbach group)<Br />
+   
+   It returns <K>true</K> if <A>G</A> is torsion free and <A>poly</A> is a
+   fundamental domain for <A>G</A>. If <A>poly</A> is not a fundamental domain,
+   <K>false</K> is returned regardless of the structure of <A>G</A>. And if
+   <A>G</A> is not torsion free, the method returns <K>fail</K>.
+
+   If <A>G</A> is polycyclic, torsion freeness is tested using a representation
+   as pcp group. Otherwise the stabilisers of the faces of the fundamental
+   domain <A>poly</A> are calculated (<A>G</A> is torsion free if and only 
+   if it all these stabilisers are trivial).
+  </Description>
+</ManSection>
+
+
+
 
 </Section>

@@ -15,10 +15,10 @@ Subtitle := "A HAP extension for crytallographic groups",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "0.1.7",
-Date := "13/08/2008",
+Version := "0.1.8",
+Date := "02/12/2008",
 
-ArchiveURL := "http://www.maths.nuigalway.ie/~roeder/CHA/HAPcryst/downloads/HAPcryst0_1_7",
+ArchiveURL := "http://www.mathematik.uni-kl.de/~roeder/HAPcryst/HAPcryst0_1_8",
 
   
 ##  All provided formats as list of file extensions, separated by white
@@ -99,13 +99,13 @@ Persons := [
     IsAuthor      := true,
     IsMaintainer  := true,
     Email         := "marc_roeder@web.de",
-    WWWHome       := "http://www.maths.nuigalway.ie/~roeder",
-    PostalAddress := Concatenation( [
-                     "Department of Mathematics\n",
-                     "NUI Galway\n",
-                     "Ireland" ] ),
-     Place         := "Galway",
-     Institution   := "National University of Ireland, Galway"
+    WWWHome       := "http://www.mathematik.uni-kl.de/~roeder",
+#    PostalAddress := Concatenation( [
+#                     "Department of Mathematics\n",
+#                     "NUI Galway\n",
+#                     "Ireland" ] ),
+#     Place         := "Galway",
+#     Institution   := "National University of Ireland, Galway"
   ),
 # provide such a record for each author and/or maintainer ...
   
@@ -140,8 +140,8 @@ Status := "deposited",
 ##  the updating of package information on the GAP Website, and inclusion
 ##  and updating of the package in the GAP distribution.
 #
-           README_URL := "http://www.maths.nuigalway.ie/~roeder/CHA/HAPcryst/downloads/README.HAPcryst",
-           PackageInfoURL := "http://www.maths.nuigalway.ie/~roeder/CHA/HAPcryst/downloads/PackageInfo.g",
+           README_URL := "http://www.mathematik.uni-kl.de/~roeder/HAPcryst/README.HAPcryst",
+           PackageInfoURL := "http://www.mathematik.uni-kl.de/~roeder/HAPcryst/PackageInfo.g",
 
 ##  Here you  must provide a short abstract explaining the package content 
 ##  in HTML format (used on the package overview Web page) and an URL 
@@ -152,7 +152,7 @@ Status := "deposited",
 ##  
 AbstractHTML := "This is an extension to the HAP package by Graham Ellis. It implements geometric methods for the calculation of resolutions of Bieberbach groups.",
 
-PackageWWWHome := "http://www.maths.nuigalway.ie/~roeder/CHA/HAPcryst",
+PackageWWWHome := "http://www.mathematik.uni-kl.de/~roeder/HAPcryst.html",
                
 ##  Here is the information on the help books of the package, used for
 ##  loading into GAP's online help and maybe for an online copy of the 
@@ -228,7 +228,7 @@ Dependencies := rec(
   # without these, the package will not load
   NeededOtherPackages := [
                    ["HAP",">=1.8"],
-                   ["polymaking",">=0.6"],
+                   ["polymaking",">=0.7.6"],
                    ["cryst",">=4.1.5"],
                    ],
   # without these the package will issue a warning while loading

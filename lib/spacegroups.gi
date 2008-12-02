@@ -158,7 +158,7 @@ InstallMethod(OrbitStabilizerInUnitCubeOnRight,"for space groups on right",
             Add(stabilizer,g*translation);
         fi;
     od;
-    return rec(orbit:=orbitpart,stabilizer:=Group(stabilizer));
+    return rec(orbit:=orbitpart,stabilizer:=Subgroup(group,stabilizer));
 end);
 
 

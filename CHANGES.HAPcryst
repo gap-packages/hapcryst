@@ -1,3 +1,16 @@
+0.1.8:
+- IsFundamentalDomainBieberbachGroup added 
+- FundamentalDomainBieberbachGroup now tests for Bieberbachness in the 
+   non-pcp case as well.
+- FundamentalDomainStandardSpaceGroup now uses the same algorithm for all cases
+- HAPcryst now requires polymaking version >=0.7.6
+- polymake files generated now know about their data type
+- Package moved from Galway to Kaiserslautern
+
+
+
+------------------
+
 0.1.7:
 - TranslationOnRightFromVector now uses a ShallowCopy of the given vector as 
    the last row of the returned matrix (rather than the vector itself)

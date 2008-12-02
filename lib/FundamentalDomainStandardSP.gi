@@ -150,7 +150,7 @@ reducePolytope:=function(poly,center,offset,signvectors,radiussquare,orbitpart)
     if inequalities <> []
        then
         UniteSet(inequalities,Polymake(poly,"FACETS"));
-        ClearPolymakeObject(poly);
+        ClearPolymakeObject(poly,["polytope","2.3","RationalPolytope"]);
         AppendInequalitiesToPolymakeObject(poly,inequalities);
         Polymake(poly,"VERTICES FACETS");
         if InfoLevel(InfoHAPcryst)>1
@@ -168,7 +168,10 @@ initialPolytope:=function(center)
     local   dim,  poly,  signvectors,  cubevertices;
     
     dim:=Size(center);
-    poly:=CreatePolymakeObject("partialFD",POLYMAKE_DATA_DIR);
+    poly:=CreatePolymakeObject("partialFD",
+                  POLYMAKE_DATA_DIR,
+                  ["polytope","2.3","RationalPolytope"]
+                  );
     signvectors:=Tuples([-1,1],dim);
     cubevertices:=(1/2*signvectors)+center;
     
