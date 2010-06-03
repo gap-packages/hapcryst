@@ -23,7 +23,7 @@
 #Y along with this program; if not, write to the Free Software 
 #Y Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
-Revision.("/home/roeder/gap/HAPcryst/HAPcryst/lib/CWcomplexThings_GroupRingRep_gd"):=
+Revision.("/Users/roeder/gap/HAPcryst/HAPcryst/lib/CWcomplexThings_GroupRingRep_gd"):=
 	"@(#)$Id$";
 DeclareOperation("UndirectedWord_LargeGroupRep",
         [IsHapLargeGroupResolutionRep,IsDenseList]);
