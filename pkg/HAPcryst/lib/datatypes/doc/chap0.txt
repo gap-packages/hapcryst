@@ -1,0 +1,94 @@
+  
+  
+     [1X[5XHap Programming[0X – An experimental framework for objectifying the data[0X
+                               [1Xstructures of Hap[0X
+  
+  
+                     ( development version of 13.08.2008 )
+  
+  
+                                   Marc Röder
+  
+  
+  
+  Marc Röder
+      Email:    [7Xmailto:marc.roeder(at)nuigalway.ie[0X
+  
+  
+  Address: Marc Röder, Department of Mathematics, NUI Galway, Irleland
+  
+  
+  -------------------------------------------------------
+  [1XAbstract[0X
+  This   extension  does  not  change  the  behaviour  of  Hap  and  is  fully
+  backwards-compatible. It is not a part of Hap and there is no guarantee that
+  it will at any point be supported by Hap. Use at your own risk.
+  
+  
+  -------------------------------------------------------
+  [1XCopyright[0X
+  © 2007 Marc Röder.
+  
+  This  package  is  distributed  under  the  terms  of the GNU General Public
+  License  version  2 or later (at your convenience). See the file [11XLICENSE.txt[0X
+  or [7Xhttp://www.gnu.org/copyleft/gpl.html[0X
+  
+  
+  -------------------------------------------------------
+  [1XAcknowledgements[0X
+  This work was supported by Marie Curie Grant No. MTKD-CT-2006-042685
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContent (HAPprog)[0X
+  
+  1. Resolutions in Hap
+    1.1 The Standard Representation [9XHapResolutionRep[0X
+    1.2 The [9XHapLargeGroupResolutionRep[0X Representation
+  2. Accessing and Manipulating Resolutions
+    2.1 Representation-Independent Access Methods
+      2.1-1 StrongestValidRepresentationForLetter
+      2.1-2 StrongestValidRepresentationForWord
+      2.1-3 PositionInGroupOfResolution
+      2.1-4 IsValidGroupInt
+      2.1-5 GroupElementFromPosition
+      2.1-6 MultiplyGroupElts
+      2.1-7 MultiplyFreeZGLetterWithGroupElt
+      2.1-8 MultiplyFreeZGWordWithGroupElt
+      2.1-9 BoundaryOfFreeZGLetter
+      2.1-10 BoundaryOfFreeZGWord
+    2.2 Converting Between Representations
+      2.2-1 ConvertStandardLetter
+      2.2-2 ConvertStandardWord
+      2.2-3 ConvertLetterToStandardRep
+      2.2-4 ConvertWordToStandardRep
+    2.3 Special Methods for [9XHapResolutionRep[0X
+      2.3-1 IsFreeZGLetter
+      2.3-2 IsFreeZGWord
+      2.3-3 MultiplyGroupEltsNC
+      2.3-4 MultiplyFreeZGLetterWithGroupEltNC
+      2.3-5 MultiplyFreeZGWordWithGroupEltNC
+      2.3-6 BoundaryOfFreeZGLetterNC
+      2.3-7 BoundaryOfFreeZGWordNC
+    2.4 The [9XHapLargeGroupResolutionRep[0X Representation
+      2.4-1 GroupRingOfResolution
+      2.4-2 MultiplyGroupElts_LargeGroupRep
+      2.4-3 IsFreeZGLetterNoTermCheck_LargeGroupRep
+      2.4-4 IsFreeZGWordNoTermCheck_LargeGroupRep
+      2.4-5 IsFreeZGLetter_LargeGroupRep
+      2.4-6 IsFreeZGWord_LargeGroupRep
+      2.4-7 MultiplyFreeZGLetterWithGroupElt_LargeGroupRep
+      2.4-8 MultiplyFreeZGWordWithGroupElt_LargeGroupRep
+      2.4-9 GeneratorsOfModuleOfResolution_LargeGroupRep
+      2.4-10 BoundaryOfGenerator_LargeGroupRep
+      2.4-11 BoundaryOfFreeZGLetterNC_LargeGroupRep
+      2.4-12 BoundaryOfFreeZGWord_LargeGroupRep
+  3. Contracting Homotopies
+    3.1 The [9XPartialContractingHomotopy[0X Data Type
+      3.1-1 ResolutionOfContractingHomotopy
+      3.1-2 PartialContractingHomotopyLookup
+  
+  
+  -------------------------------------------------------

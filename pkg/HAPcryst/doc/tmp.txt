@@ -1,0 +1,1 @@
+<!-- $Id: spacegroups.xml, v 0.1.7 2008/08/13  12:11:22  gap Exp $-->\n

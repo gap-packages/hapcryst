@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE jvx-model SYSTEM "http://www.javaview.de/rsrc/jvx.dtd">
+<jvx-model>
+   <meta generator="JavaView v.2.00"/>
+	<meta dtd="1.06.000"/>
+##Insert Title##
+   <authors>
+      <author>
+         <firstname>Marc</firstname>
+         <lastname>Roeder</lastname>
+         <affiliation>
+            <organization>The CHA group</organization>
+            <address>
+	       <line>National University of Ireland</line>
+               <line>Galway</line>
+            </address>
+         </affiliation>
+         <email>marc.roeder@nuigalway.ie</email>
+         <url>http://hamilton.nuigalway.ie/CHA</url>
+      </author>
+   </authors>
+   <description>
+##Insert Abstract##
+##Insert Detail##
+     <keywords>
+      <keyword>Fundamental Cell</keyword>
+      <keyword>Crystallographic Group</keyword>
+     </keywords>
+     <software>HAPcryst</software>   
+   </description> 
+
+##Insert Data String##
+
+</jvx-model>

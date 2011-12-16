@@ -1,0 +1,61 @@
+  
+  [1X3. Contracting Homotopies[0X
+  
+  
+  [1X3.1 The [9XPartialContractingHomotopy[0X[1X Data Type[0X
+  
+  A  partial  contracting homotopy is a component object that knows the values
+  of  a  contracting  homotopy  on  some  subspace of a resolution. It has two
+  mandatory components:
+  
+  --    [10X.resolution[0X a [9XHapResolution[0X on which the contraction is defined.
+  
+  --    [10X.knownPartOfHomotopy[0X  a  list  of  [9XRecord[0Xs  with components [10X.space[0X and
+        [10X.map[0X.
+  
+  Let  [10Xh[0X  be a contracting homotopy. The lookup table [10X.knownPartOfHomotopy[0X has
+  one  entry  for  each term of the resolution [10Xh.resolution[0X (that is, one more
+  than [10XLength(h.resolution)[0X).
+  
+  The  i  th element of [10X.knownPartOfHomotopy[0X contains a record with components
+  [10X.space[0X  and  [10X.map[0X  where  [10X.space[0X  is  a [9XFreeZGWord[0X of the i-1 st term of the
+  resolution.     The     component    [10X.map[0X    is    a    list    of    length
+  [10XDimension(h.resolution)(i-1)[0X.  The  entries  of  this  list are pairs [10X[g,im][0X
+  where  [10Xg[0X  represents  a  group  element  and  [10Xim[0X represents the image of the
+  contraction. So the entry [10X[g,im][0X in the [10Xk[0Xth component of the list [10X.map[0X means
+  that  the [10Xk[0Xth free generator of the corresponding module multiplied with the
+  group element represented by [10Xg[0X is mapped to [10Xim[0X under the partial contracting
+  homotopy.  Note  that  the data type of [10Xg[0X or [10Xim[0X are not fixed at this level.
+  They  must  be  specified  by  the  sub  representations.  Also, [10Xim[0X need not
+  represent  the  actual image under a contracting homotopy. It is possible to
+  just  store  a  bit  of information that is then used to generate the actual
+  image.
+  
+  As this is a very general data type, it has very few methods.
+  
+  [1X3.1-1 ResolutionOfContractingHomotopy[0X
+  
+  [2X> ResolutionOfContractingHomotopy( [0X[3Xhomotopy[0X[2X ) ________________________[0Xmethod
+  [6XReturns:[0X  A [9XHapResolution[0X
+  
+  This  returns  the  resolution  of  the  homotopy  [3Xhomotopy[0X  (the  component
+  [3Xhomotopy!.resolution[0X).
+  
+  [1X3.1-2 PartialContractingHomotopyLookup[0X
+  
+  [2X> PartialContractingHomotopyLookup( [0X[3Xhomotopy, term, generator, groupel[0X[2X ) [0Xmethod
+  [2X> PartialContractingHomotopyLookupNC( [0X[3Xhomotopy, term, generator, groupel[0X[2X ) [0Xmethod
+  [6XReturns:[0X  The entry [10Xim[0X of the corresponding lookup table
+  
+  Looks up the known part of the contracting homotopy [3Xhomotopy[0X and returns the
+  corresponding image. More precisely, it returns the image of the [3Xgenerator[0Xth
+  generator  times the group element represented by [3Xgroupel[0X in term [3Xterm[0X under
+  the   partial  homotopy.  The  data  type  of  this  image  depends  on  the
+  representation of [3Xhomotopy[0X.
+  
+  [3Xterm[0X has to be an integer and [3Xgenerator[0X a positive integer. [3Xgroupel[0X only has
+  to be an [9XObject[0X.
+  
+  The NC version does not do any checks on the input. The other version checks
+  if [3Xterm[0X and [3Xgenerator[0X are sensible. It does not check [3Xgroupel[0X.
+  

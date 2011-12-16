@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (HAPprog) - Chapter 3: Contracting Homotopies</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+</head>
+<body>
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">Top of Book</a>&nbsp;  &nbsp;<a href="chap2.html">Previous Chapter</a>&nbsp;  </div>
+
+<p><a id="X792B9CC97C670AEA" name="X792B9CC97C670AEA"></a></p>
+<div class="ChapSects"><a href="chap3.html#X792B9CC97C670AEA">3. <span class="Heading">Contracting Homotopies</span></a>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap3.html#X7E957D2381DBE362">3.1 <span class="Heading">The <code class="keyw">PartialContractingHomotopy</code> Data Type</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X7D899ACD7EB512FA">3.1-1 ResolutionOfContractingHomotopy</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap3.html#X79C69C9B877C6D60">3.1-2 PartialContractingHomotopyLookup</a></span>
+</div>
+</div>
+
+<h3>3. <span class="Heading">Contracting Homotopies</span></h3>
+
+<p><a id="X7E957D2381DBE362" name="X7E957D2381DBE362"></a></p>
+
+<h4>3.1 <span class="Heading">The <code class="keyw">PartialContractingHomotopy</code> Data Type</span></h4>
+
+<p>A partial contracting homotopy is a component object that knows the values of a contracting homotopy on some subspace of a resolution. It has two mandatory components:</p>
+
+
+<ul>
+<li><p><code class="code">.resolution</code> a <code class="keyw">HapResolution</code> on which the contraction is defined.</p>
+
+</li>
+<li><p><code class="code">.knownPartOfHomotopy</code> a list of <code class="keyw">Record</code>s with components <code class="code">.space</code> and <code class="code">.map</code>.</p>
+
+</li>
+</ul>
+<p>Let <code class="code">h</code> be a contracting homotopy. The lookup table <code class="code">.knownPartOfHomotopy</code> has one entry for each term of the resolution <code class="code">h.resolution</code> (that is, one more than <code class="code">Length(h.resolution)</code>).</p>
+
+<p>The i th element of <code class="code">.knownPartOfHomotopy</code> contains a record with components <code class="code">.space</code> and <code class="code">.map</code> where <code class="code">.space</code> is a <code class="keyw">FreeZGWord</code> of the i-1 st term of the resolution. The component <code class="code">.map</code> is a list of length <code class="code">Dimension(h.resolution)(i-1)</code>. The entries of this list are pairs <code class="code">[g,im]</code> where <code class="code">g</code> represents a group element and <code class="code">im</code> represents the image of the contraction. So the entry <code class="code">[g,im]</code> in the <code class="code">k</code>th component of the list <code class="code">.map</code> means that the <code class="code">k</code>th free generator of the corresponding module multiplied with the group element represented by <code class="code">g</code> is mapped to <code class="code">im</code> under the partial contracting homotopy. Note that the data type of <code class="code">g</code> or <code class="code">im</code> are not fixed at this level. They must be specified by the sub representations. Also, <code class="code">im</code> need not represent the actual image under a contracting homotopy. It is possible to just store a bit of information that is then used to generate the actual image.</p>
+
+<p>As this is a very general data type, it has very few methods.</p>
+
+<p><a id="X7D899ACD7EB512FA" name="X7D899ACD7EB512FA"></a></p>
+
+<h5>3.1-1 ResolutionOfContractingHomotopy</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; ResolutionOfContractingHomotopy</code>( <var class="Arg">homotopy</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>A <code class="keyw">HapResolution</code></p>
+
+<p>This returns the resolution of the homotopy <var class="Arg">homotopy</var> (the component <var class="Arg">homotopy!.resolution</var>).</p>
+
+<p><a id="X79C69C9B877C6D60" name="X79C69C9B877C6D60"></a></p>
+
+<h5>3.1-2 PartialContractingHomotopyLookup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; PartialContractingHomotopyLookup</code>( <var class="Arg">homotopy, term, generator, groupel</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; PartialContractingHomotopyLookupNC</code>( <var class="Arg">homotopy, term, generator, groupel</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>The entry <code class="code">im</code> of the corresponding lookup table</p>
+
+<p>Looks up the known part of the contracting homotopy <var class="Arg">homotopy</var> and returns the corresponding image. More precisely, it returns the image of the <var class="Arg">generator</var>th generator times the group element represented by <var class="Arg">groupel</var> in term <var class="Arg">term</var> under the partial homotopy. The data type of this image depends on the representation of <var class="Arg">homotopy</var>.</p>
+
+<p><var class="Arg">term</var> has to be an integer and <var class="Arg">generator</var> a positive integer. <var class="Arg">groupel</var> only has to be an <code class="keyw">Object</code>.</p>
+
+<p>The NC version does not do any checks on the input. The other version checks if <var class="Arg">term</var> and <var class="Arg">generator</var> are sensible. It does not check <var class="Arg">groupel</var>.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">Top of Book</a>&nbsp;  &nbsp;<a href="chap2.html">Previous Chapter</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

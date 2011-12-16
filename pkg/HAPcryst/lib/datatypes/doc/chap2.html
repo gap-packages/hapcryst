@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (HAPprog) - Chapter 2: Accessing and Manipulating Resolutions</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+</head>
+<body>
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">Top of Book</a>&nbsp;  &nbsp;<a href="chap1.html">Previous Chapter</a>&nbsp;  &nbsp;<a href="chap3.html">Next Chapter</a>&nbsp;  </div>
+
+<p><a id="X86374CEA7CDC6946" name="X86374CEA7CDC6946"></a></p>
+<div class="ChapSects"><a href="chap2.html#X86374CEA7CDC6946">2. <span class="Heading">Accessing and Manipulating Resolutions</span></a>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X7A7225067E7895A9">2.1 <span class="Heading">Representation-Independent Access Methods</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7CBC6D4C783383BE">2.1-1 StrongestValidRepresentationForLetter</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7C10841285614D04">2.1-2 StrongestValidRepresentationForWord</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X780AD2DB7F5D4935">2.1-3 PositionInGroupOfResolution</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7A58EC7B8130D6E2">2.1-4 IsValidGroupInt</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X822604B67B2A9133">2.1-5 GroupElementFromPosition</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7D3673E8840FA0B6">2.1-6 MultiplyGroupElts</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8540F3B37BAC695F">2.1-7 MultiplyFreeZGLetterWithGroupElt</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X826835B185CA4DAF">2.1-8 MultiplyFreeZGWordWithGroupElt</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7D8B54D7828D7C5C">2.1-9 BoundaryOfFreeZGLetter</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X81A6037F82C3C31E">2.1-10 BoundaryOfFreeZGWord</a></span>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X7B94A2ED857C62D5">2.2 <span class="Heading">Converting Between Representations</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7EB515317948BE8E">2.2-1 ConvertStandardLetter</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7A1CB5DF7A459D76">2.2-2 ConvertStandardWord</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X83153E2682184860">2.2-3 ConvertLetterToStandardRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X848203218271A166">2.2-4 ConvertWordToStandardRep</a></span>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X84FB45EB83B5822C">2.3 <span class="Heading">Special Methods for <code class="keyw">HapResolutionRep</code></span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7B803CC184BD2612">2.3-1 IsFreeZGLetter</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7A36FB7B84E9A892">2.3-2 IsFreeZGWord</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X836D3F9886EED6AC">2.3-3 MultiplyGroupEltsNC</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X85893CC5823508A8">2.3-4 MultiplyFreeZGLetterWithGroupEltNC</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8073DE7E7AD8B7CB">2.3-5 MultiplyFreeZGWordWithGroupEltNC</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7BD3994E7C414149">2.3-6 BoundaryOfFreeZGLetterNC</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X84B1DA21805A0880">2.3-7 BoundaryOfFreeZGWordNC</a></span>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X8024014D8488FE30">2.4 <span class="Heading">The <code class="keyw">HapLargeGroupResolutionRep</code> Representation</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X861BE6C787FA8032">2.4-1 GroupRingOfResolution</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8338F7A37F240E33">2.4-2 MultiplyGroupElts_LargeGroupRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X86F91A948022DEBB">2.4-3 IsFreeZGLetterNoTermCheck_LargeGroupRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X793BA61478AEBE16">2.4-4 IsFreeZGWordNoTermCheck_LargeGroupRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X85A7BFC284E9D9CB">2.4-5 IsFreeZGLetter_LargeGroupRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7BF4A7EC83BE61C8">2.4-6 IsFreeZGWord_LargeGroupRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7A4B682079630694">2.4-7 MultiplyFreeZGLetterWithGroupElt_LargeGroupRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7F2365D2851E3E3C">2.4-8 MultiplyFreeZGWordWithGroupElt_LargeGroupRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8355F6E8842B3D8C">2.4-9 GeneratorsOfModuleOfResolution_LargeGroupRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X840DF79086D5473E">2.4-10 BoundaryOfGenerator_LargeGroupRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X83D90EC28357DCCE">2.4-11 BoundaryOfFreeZGLetterNC_LargeGroupRep</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X78C681D37F8DC2A1">2.4-12 BoundaryOfFreeZGWord_LargeGroupRep</a></span>
+</div>
+</div>
+
+<h3>2. <span class="Heading">Accessing and Manipulating Resolutions</span></h3>
+
+<p><a id="X7A7225067E7895A9" name="X7A7225067E7895A9"></a></p>
+
+<h4>2.1 <span class="Heading">Representation-Independent Access Methods</span></h4>
+
+<p>All methods listed below take a <code class="code">HapResolution</code> in any representation. If the other arguments are compatible with the representation of the resolution, the returned value will be in the form defined by this representation. If the other arguments are in a different representation, <strong class="pkg">GAP</strong>s method selection is used via <code class="code">TryNextMethod()</code> to find an applicable method (a suitable representation).</p>
+
+<p>The idea behind this is that the results of computations have the same form as the input. And as all representations are sub-representations of the <code class="code">HapResolutionRep</code> representation, input which is compatible with the <code class="code">HapResolutionRep</code> representation is always valid.</p>
+
+<p>Every new representation must support the functions of this section.</p>
+
+<p><a id="X7CBC6D4C783383BE" name="X7CBC6D4C783383BE"></a></p>
+
+<h5>2.1-1 StrongestValidRepresentationForLetter</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; StrongestValidRepresentationForLetter</code>( <var class="Arg">resolution, term, letter</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>filter</p>
+
+<p>Finds the sub-representation of <code class="code">HapResolutionRep</code> for which <var class="Arg">letter</var> is a valid letter of the <var class="Arg">term</var>th module of <var class="Arg">resolution</var>. Note that <var class="Arg">resolution</var> automatically is in some sub-representation of <code class="code">HapResolutionRep</code>.This is mainly meant for debugging.</p>
+
+<p><a id="X7C10841285614D04" name="X7C10841285614D04"></a></p>
+
+<h5>2.1-2 StrongestValidRepresentationForWord</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; StrongestValidRepresentationForWord</code>( <var class="Arg">resolution, term, word</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>filter</p>
+
+<p>Finds the sub-representation of <code class="code">HapResolutionRep</code> for which <var class="Arg">word</var> is a valid word of the <var class="Arg">term</var>th module of <var class="Arg">resolution</var>. Note that <var class="Arg">resolution</var> automatically is in some sub-representation of <code class="code">HapResolutionRep</code>. This is mainly meant for debugging.</p>
+
+<p><a id="X780AD2DB7F5D4935" name="X780AD2DB7F5D4935"></a></p>
+
+<h5>2.1-3 PositionInGroupOfResolution</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; PositionInGroupOfResolution</code>( <var class="Arg">resolution, g</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; PositionInGroupOfResolutionNC</code>( <var class="Arg">resolution, g</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>positive integer</p>
+
+<p>This returns the position of the group element <var class="Arg">g</var> in the enumeration of the group of <var class="Arg">resolution</var>. The NC version does not check if <var class="Arg">g</var> really is an element of the group of <var class="Arg">resolution</var>.</p>
+
+<p><a id="X7A58EC7B8130D6E2" name="X7A58EC7B8130D6E2"></a></p>
+
+<h5>2.1-4 IsValidGroupInt</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; IsValidGroupInt</code>( <var class="Arg">resolution, n</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>boolean</p>
+
+<p>Returns true if the <var class="Arg">n</var>th element of the group of <var class="Arg">resolution</var> is known.</p>
+
+<p><a id="X822604B67B2A9133" name="X822604B67B2A9133"></a></p>
+
+<h5>2.1-5 GroupElementFromPosition</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; GroupElementFromPosition</code>( <var class="Arg">resolution, n</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>group element or <code class="keyw">fail</code></p>
+
+<p>Returns <var class="Arg">n</var>th element of the group of <var class="Arg">resolution</var>. If the <var class="Arg">n</var>th element is not known, <code class="keyw">fail</code> is returned.</p>
+
+<p><a id="X7D3673E8840FA0B6" name="X7D3673E8840FA0B6"></a></p>
+
+<h5>2.1-6 MultiplyGroupElts</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; MultiplyGroupElts</code>( <var class="Arg">resolution, x, y</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>positive integer or group element, depending on the type of <var class="Arg">x</var> and <var class="Arg">y</var></p>
+
+<p>If <code class="code">x</code> and <code class="code">y</code> are given in standard representation (i.e. as integers), this returns the position of the product of the group elements represented by the positive integers <var class="Arg">x</var> and <var class="Arg">x</var>.</p>
+
+<p>If <code class="code">x</code> and <code class="code">y</code> are given in any other representation, the returned group element will also be represented in this way.</p>
+
+<p><a id="X8540F3B37BAC695F" name="X8540F3B37BAC695F"></a></p>
+
+<h5>2.1-7 MultiplyFreeZGLetterWithGroupElt</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; MultiplyFreeZGLetterWithGroupElt</code>( <var class="Arg">resolution, letter, g</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>A letter</p>
+
+<p>Multiplies the letter <var class="Arg">letter</var> with the group element <var class="Arg">g</var> and returns the result. If <var class="Arg">resolution</var> is in standard representation, <var class="Arg">g</var> has to be an integer and <var class="Arg">letter</var> has to be a pair of integer. If <var class="Arg">resolution</var> is in any other representation, <var class="Arg">letter</var> and <var class="Arg">g</var> can be in a form compatible with that representation or in the standard form (in the latter case, the returned value will also have standard form).</p>
+
+<p><a id="X826835B185CA4DAF" name="X826835B185CA4DAF"></a></p>
+
+<h5>2.1-8 MultiplyFreeZGWordWithGroupElt</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; MultiplyFreeZGWordWithGroupElt</code>( <var class="Arg">resolution, word, g</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>A word</p>
+
+<p>Multiplies the word <var class="Arg">word</var> with the group element <var class="Arg">g</var> and returns the result. If <var class="Arg">resolution</var> is in standard representation, <var class="Arg">g</var> has to be an integer and <var class="Arg">word</var> has to be a list of pairs of integers. If <var class="Arg">resolution</var> is in any other representation, <var class="Arg">word</var> and <var class="Arg">g</var> can be in a form compatible with that representation or in the standard form (in the latter case, the returned value will also have standard form).</p>
+
+<p><a id="X7D8B54D7828D7C5C" name="X7D8B54D7828D7C5C"></a></p>
+
+<h5>2.1-9 BoundaryOfFreeZGLetter</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; BoundaryOfFreeZGLetter</code>( <var class="Arg">resolution, term, letter</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>free ZG word (in the same representation as <var class="Arg">letter</var>)</p>
+
+<p>Calculates the boundary of the letter (word of length 1) <var class="Arg">letter</var> of the <var class="Arg">term</var>th module of <var class="Arg">resolution</var>.</p>
+
+<p>The returned value is a word of the <var class="Arg">term</var>-1st module and comes in the same representation as <var class="Arg">letter</var>.</p>
+
+<p><a id="X81A6037F82C3C31E" name="X81A6037F82C3C31E"></a></p>
+
+<h5>2.1-10 BoundaryOfFreeZGWord</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; BoundaryOfFreeZGWord</code>( <var class="Arg">resolution, term, word</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>free ZG word (in the same representation as <var class="Arg">letter</var>)</p>
+
+<p>Calculates the boundary of the word <var class="Arg">word</var> of the <var class="Arg">term</var>th module of <var class="Arg">resolution</var>.</p>
+
+<p>The returned value is a word of the <var class="Arg">term</var>-1st module and comes in the same representation as <var class="Arg">word</var>.</p>
+
+<p><a id="X7B94A2ED857C62D5" name="X7B94A2ED857C62D5"></a></p>
+
+<h4>2.2 <span class="Heading">Converting Between Representations</span></h4>
+
+<p>Four methods are provided to convert letters and words from standard representation to any other representation and back again.</p>
+
+<p><a id="X7EB515317948BE8E" name="X7EB515317948BE8E"></a></p>
+
+<h5>2.2-1 ConvertStandardLetter</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; ConvertStandardLetter</code>( <var class="Arg">resolution, term, letter</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; ConvertStandardLetterNC</code>( <var class="Arg">resolution, term, letter</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>letter in the representation of <var class="Arg">resolution</var></p>
+
+<p>Converts the letter <var class="Arg">letter</var> in standard representation to the representation of <var class="Arg">resolution</var>. The NC version does not check whether <var class="Arg">letter</var> really is a letter in standard representation.</p>
+
+<p><a id="X7A1CB5DF7A459D76" name="X7A1CB5DF7A459D76"></a></p>
+
+<h5>2.2-2 ConvertStandardWord</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; ConvertStandardWord</code>( <var class="Arg">resolution, term, word</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; ConvertStandardWordNC</code>( <var class="Arg">resolution, term, word</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>word in the representation of <var class="Arg">resolution</var></p>
+
+<p>Converts the word <var class="Arg">word</var> in standard representation to the representation of <var class="Arg">resolution</var>. The NC version does not check whether <var class="Arg">word</var> is a valid word in standard representation.</p>
+
+<p><a id="X83153E2682184860" name="X83153E2682184860"></a></p>
+
+<h5>2.2-3 ConvertLetterToStandardRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; ConvertLetterToStandardRep</code>( <var class="Arg">resolution, term, letter</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; ConvertLetterToStandardRepNC</code>( <var class="Arg">resolution, term, letter</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>letter in standard representation</p>
+
+<p>Converts the letter <var class="Arg">letter</var> in the representation of <var class="Arg">resolution</var> to the standard representation. The NC version does not check whether <var class="Arg">letter</var> is a valid letter of <var class="Arg">resolution</var>.</p>
+
+<p><a id="X848203218271A166" name="X848203218271A166"></a></p>
+
+<h5>2.2-4 ConvertWordToStandardRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; ConvertWordToStandardRep</code>( <var class="Arg">resolution, term, word</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; ConvertWordToStandardRepNC</code>( <var class="Arg">resolution, term, word</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>word in standard representation</p>
+
+<p>Converts the word <var class="Arg">word</var> in the representation of <var class="Arg">resolution</var> to the standard representation. The NC version does not check whether <var class="Arg">word</var> is a valid word of <var class="Arg">resolution</var>.</p>
+
+<p><a id="X84FB45EB83B5822C" name="X84FB45EB83B5822C"></a></p>
+
+<h4>2.3 <span class="Heading">Special Methods for <code class="keyw">HapResolutionRep</code></span></h4>
+
+<p>Some methods explicitely require the input to be in the standard representation (<var class="Arg">HapResolutionRep</var>). Two of these test if a word/letter is really in standard representation, the other ones are non-check versions of the universal methods.</p>
+
+<p><a id="X7B803CC184BD2612" name="X7B803CC184BD2612"></a></p>
+
+<h5>2.3-1 IsFreeZGLetter</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; IsFreeZGLetter</code>( <var class="Arg">resolution, term, letter</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>boolean</p>
+
+<p>Checks if <var class="Arg">letter</var> is an valid letter (word of length 1) in standard representation of the <var class="Arg">term</var>th module of <var class="Arg">resolution</var>.</p>
+
+<p><a id="X7A36FB7B84E9A892" name="X7A36FB7B84E9A892"></a></p>
+
+<h5>2.3-2 IsFreeZGWord</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; IsFreeZGWord</code>( <var class="Arg">resolution, term, word</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>boolean</p>
+
+<p>Check if <var class="Arg">word</var> is a valid word in large standard representation of the <var class="Arg">term</var>th module in <var class="Arg">resolution</var>.</p>
+
+<p><a id="X836D3F9886EED6AC" name="X836D3F9886EED6AC"></a></p>
+
+<h5>2.3-3 MultiplyGroupEltsNC</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; MultiplyGroupEltsNC</code>( <var class="Arg">resolution, x, y</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>positive integer</p>
+
+<p>Given positive integers <code class="code">x</code> and <code class="code">y</code>, this returns the position of the product of the group elements represented by the positive integers <var class="Arg">x</var> and <var class="Arg">x</var>. This assumes that all input is in standard representation and does not check the input.</p>
+
+<p><a id="X85893CC5823508A8" name="X85893CC5823508A8"></a></p>
+
+<h5>2.3-4 MultiplyFreeZGLetterWithGroupEltNC</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; MultiplyFreeZGLetterWithGroupEltNC</code>( <var class="Arg">resolution, letter, g</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>A letter in standard representation</p>
+
+<p>Multiplies the letter <var class="Arg">letter</var> with the group element represented by the positive integer <var class="Arg">g</var> and returns the result. The input is assumed to be in <var class="Arg">HapResolutionRep</var> and is not checked.</p>
+
+<p><a id="X8073DE7E7AD8B7CB" name="X8073DE7E7AD8B7CB"></a></p>
+
+<h5>2.3-5 MultiplyFreeZGWordWithGroupEltNC</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; MultiplyFreeZGWordWithGroupEltNC</code>( <var class="Arg">resolution, word, g</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>A letter in standard representation</p>
+
+<p>Multiplies the word <var class="Arg">word</var> with the group element represented by the positive integer <var class="Arg">g</var> and returns the result. The input is assumed to be in <var class="Arg">HapResolutionRep</var> and is not checked.</p>
+
+<p><a id="X7BD3994E7C414149" name="X7BD3994E7C414149"></a></p>
+
+<h5>2.3-6 BoundaryOfFreeZGLetterNC</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; BoundaryOfFreeZGLetterNC</code>( <var class="Arg">resolution, term, letter</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>free ZG word in standard representation</p>
+
+<p>Calculates the boundary of the letter (word of length 1) <var class="Arg">letter</var> of the <var class="Arg">term</var>th module of <var class="Arg">resolution</var>. The input is assumed to be in standard representation and not checked.</p>
+
+<p><a id="X84B1DA21805A0880" name="X84B1DA21805A0880"></a></p>
+
+<h5>2.3-7 BoundaryOfFreeZGWordNC</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; BoundaryOfFreeZGWordNC</code>( <var class="Arg">resolution, term, word</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>free ZG word in standard representation</p>
+
+<p>Calculates the boundary of the word <var class="Arg">word</var> of the <var class="Arg">term</var>th module of <var class="Arg">resolution</var>. The input is assumed to be in standard representation and not checked.</p>
+
+<p><a id="X8024014D8488FE30" name="X8024014D8488FE30"></a></p>
+
+<h4>2.4 <span class="Heading">The <code class="keyw">HapLargeGroupResolutionRep</code> Representation</span></h4>
+
+<p>The large group representation has one additional component called <code class="code">groupring</code>. Elements of the modules in a resolution are represented by lists of group ring elements. The length of the list corresponds to the dimension of the free module.</p>
+
+<p>All methods for the generic representation do also work for the large group representation. Some of them are wrappers for special methods which do only work for this representation. The following list only contains the methods which are not already present in the generic representation.</p>
+
+<p>Note that the input or the output of these functions does not comply with the standard representation.</p>
+
+<p><a id="X861BE6C787FA8032" name="X861BE6C787FA8032"></a></p>
+
+<h5>2.4-1 GroupRingOfResolution</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; GroupRingOfResolution</code>( <var class="Arg">resolution</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>group ring</p>
+
+<p>This returns the group ring of <var class="Arg">resolution</var>. Note that by the way that group rings are handled in <strong class="pkg">GAP</strong>, this is not equal to <code class="code">GroupRing(R,GroupOfResolution(<var class="Arg">resolution</var>))</code> where <code class="code">R</code> is the ring of the resolution.</p>
+
+<p><a id="X8338F7A37F240E33" name="X8338F7A37F240E33"></a></p>
+
+<h5>2.4-2 MultiplyGroupElts_LargeGroupRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; MultiplyGroupElts_LargeGroupRep</code>( <var class="Arg">resolution, x, y</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; MultiplyGroupEltsNC_LargeGroupRep</code>( <var class="Arg">resolution, x, y</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>group element</p>
+
+<p>Returns the product of <var class="Arg">x</var> and <var class="Arg">y</var>. The NC version does not check whether <var class="Arg">x</var> and <var class="Arg">y</var> are actually elements of the group of <var class="Arg">resolution</var>.</p>
+
+<p><a id="X86F91A948022DEBB" name="X86F91A948022DEBB"></a></p>
+
+<h5>2.4-3 IsFreeZGLetterNoTermCheck_LargeGroupRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; IsFreeZGLetterNoTermCheck_LargeGroupRep</code>( <var class="Arg">resolution, letter</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>boolean</p>
+
+<p>Returns <code class="keyw">true</code> if <var class="Arg">letter</var> has the form of a letter (a module element with exactly one non-zero entry which has exactly one non-zero coefficient) a module of <var class="Arg">resolution</var> in the <code class="keyw">HapLargeGroupResolution</code> representation. Note that it is not tested if <var class="Arg">letter</var> actually is a letter in any term of <var class="Arg">resolution</var></p>
+
+<p><a id="X793BA61478AEBE16" name="X793BA61478AEBE16"></a></p>
+
+<h5>2.4-4 IsFreeZGWordNoTermCheck_LargeGroupRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; IsFreeZGWordNoTermCheck_LargeGroupRep</code>( <var class="Arg">resolution, word</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>boolean</p>
+
+<p>Returns <code class="keyw">true</code> if <var class="Arg">word</var> has the form of a word of a module of <var class="Arg">resolution</var> in the <code class="keyw">HapLargeGroupResolution</code> representation. Note that it is not tested if <var class="Arg">word</var> actually is a word in any term of <var class="Arg">resolution</var>.</p>
+
+<p><a id="X85A7BFC284E9D9CB" name="X85A7BFC284E9D9CB"></a></p>
+
+<h5>2.4-5 IsFreeZGLetter_LargeGroupRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; IsFreeZGLetter_LargeGroupRep</code>( <var class="Arg">resolution, term, letter</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>boolean</p>
+
+<p>Returns <code class="keyw">true</code> if and only if <var class="Arg">letter</var> is a letter (a word of length 1) of the <var class="Arg">term</var>th module of <var class="Arg">resolution</var> in the <code class="keyw">hapLargeGroupResolution</code> representation. I.e. it tests if <var class="Arg">letter</var> is a module element with exactly one non-zero entry which has exactly one non-zero coefficient.</p>
+
+<p><a id="X7BF4A7EC83BE61C8" name="X7BF4A7EC83BE61C8"></a></p>
+
+<h5>2.4-6 IsFreeZGWord_LargeGroupRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; IsFreeZGWord_LargeGroupRep</code>( <var class="Arg">resolution, term, word</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>boolean</p>
+
+<p>Tests if <var class="Arg">word</var> is an element of the <var class="Arg">term</var>th module of <var class="Arg">resoultion</var>.</p>
+
+<p><a id="X7A4B682079630694" name="X7A4B682079630694"></a></p>
+
+<h5>2.4-7 MultiplyFreeZGLetterWithGroupElt_LargeGroupRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; MultiplyFreeZGLetterWithGroupElt_LargeGroupRep</code>( <var class="Arg">resolution, letter, g</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; MultiplyFreeZGLetterWithGroupEltNC_LargeGroupRep</code>( <var class="Arg">resolution, letter, g</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>free ZG letter in large group representation</p>
+
+<p>Multiplies the letter <var class="Arg">letter</var> with the group element <var class="Arg">g</var> and returns the result. The NC version does not check whether <var class="Arg">g</var> is an element of the group of <var class="Arg">resolution</var> and <var class="Arg">letter</var> can be a letter.</p>
+
+<p><a id="X7F2365D2851E3E3C" name="X7F2365D2851E3E3C"></a></p>
+
+<h5>2.4-8 MultiplyFreeZGWordWithGroupElt_LargeGroupRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; MultiplyFreeZGWordWithGroupElt_LargeGroupRep</code>( <var class="Arg">resolution, word, g</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; MultiplyFreeZGWordWithGroupEltNC_LargeGroupRep</code>( <var class="Arg">resolution, word, g</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>free ZG word in large group representation</p>
+
+<p>Multiplies the word <var class="Arg">word</var> with the group element <var class="Arg">g</var> and returns the result. The NC version does not check whether <var class="Arg">g</var> is an element of the group of <var class="Arg">resolution</var> and <var class="Arg">word</var> can be a word.</p>
+
+<p><a id="X8355F6E8842B3D8C" name="X8355F6E8842B3D8C"></a></p>
+
+<h5>2.4-9 GeneratorsOfModuleOfResolution_LargeGroupRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; GeneratorsOfModuleOfResolution_LargeGroupRep</code>( <var class="Arg">resolution, term</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>list of letters/words in large group representation</p>
+
+<p>Returns a set of generators for the <var class="Arg">term</var>th module of <var class="Arg">resolution</var>. The returned value is a list of vectors of group ring elements.</p>
+
+<p><a id="X840DF79086D5473E" name="X840DF79086D5473E"></a></p>
+
+<h5>2.4-10 BoundaryOfGenerator_LargeGroupRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; BoundaryOfGenerator_LargeGroupRep</code>( <var class="Arg">resolution, term, n</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; BoundaryOfGeneratorNC_LargeGroupRep</code>( <var class="Arg">resolution, term, n</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>free ZG word in the large group representation</p>
+
+<p>Returns the boundary of the <var class="Arg">n</var>th generator of the <var class="Arg">term</var>th module of <var class="Arg">resolution</var> as a word in the <var class="Arg">n-1</var>st module (in large group representation). The NC version does not check whether there is a <var class="Arg">term</var>th module and if it has at least <var class="Arg">n</var> generators.</p>
+
+<p><a id="X83D90EC28357DCCE" name="X83D90EC28357DCCE"></a></p>
+
+<h5>2.4-11 BoundaryOfFreeZGLetterNC_LargeGroupRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; BoundaryOfFreeZGLetterNC_LargeGroupRep</code>( <var class="Arg">resolution, term, letter</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; BoundaryOfFreeZGLetter_LargeGroupRep</code>( <var class="Arg">resolution, term, letter</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>free ZG word in large group representation</p>
+
+<p>Calculates the boundary of the letter <var class="Arg">letter</var> of the <var class="Arg">term</var>th module of <var class="Arg">resolution</var> in large group representation. The NC version does not check whether <var class="Arg">letter</var> actually is a letter in the <var class="Arg">term</var>th module.</p>
+
+<p><a id="X78C681D37F8DC2A1" name="X78C681D37F8DC2A1"></a></p>
+
+<h5>2.4-12 BoundaryOfFreeZGWord_LargeGroupRep</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; BoundaryOfFreeZGWord_LargeGroupRep</code>( <var class="Arg">resolution, term, word</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>free ZG word in large group representation</p>
+
+<p>Calculates the boundary of the element <var class="Arg">word</var> of the <var class="Arg">term</var>th module of <var class="Arg">resolution</var> in large group representation. The NC version does not check whether <var class="Arg">word</var> actually is a word in the <var class="Arg">term</var>th module.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">Top of Book</a>&nbsp;  &nbsp;<a href="chap1.html">Previous Chapter</a>&nbsp;  &nbsp;<a href="chap3.html">Next Chapter</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

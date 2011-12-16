@@ -1,0 +1,195 @@
+  
+  [1X2. Bits and Pieces[0X
+  
+  This  chapter contains a few very basic functions which are needed for space
+  group calculations and were missing in standard [5XGAP[0X.
+  
+  
+  [1X2.1 Matrices and Vectors[0X
+  
+  [1X2.1-1 SignRat[0X
+  
+  [2X> SignRat( [0X[3Xx[0X[2X ) _______________________________________________________[0Xmethod
+  [6XReturns:[0X  sign  of  the  rational  number [3Xx[0X (Standard [5XGAP[0X currently only has
+            [10XSignInt[0X).
+  
+  [1X2.1-2 VectorModOne[0X
+  
+  [2X> VectorModOne( [0X[3Xv[0X[2X ) __________________________________________________[0Xmethod
+  [6XReturns:[0X  Rational vector of the same length with enties in [0,1)
+  
+  For a rational vector [3Xv[0X, this returns the vector with all entries taken "mod
+  1".
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> SignRat((-4)/(-2));[0X
+    [4X1[0X
+    [4Xgap> SignRat(9/(-2));[0X
+    [4X-1[0X
+    [4Xgap> VectorModOne([1/10,100/9,5/6,6/5]);[0X
+    [4X[ 1/10, 1/9, 5/6, 1/5 ][0X
+  [4X------------------------------------------------------------------[0X
+  
+  [1X2.1-3 IsSquareMat[0X
+  
+  [2X> IsSquareMat( [0X[3Xmatrix[0X[2X ) ______________________________________________[0Xmethod
+  [6XReturns:[0X  [9Xtrue[0X if [3Xmatrix[0X is a square matrix and [9Xfalse[0X otherwise.
+  
+  [1X2.1-4 DimensionSquareMat[0X
+  
+  [2X> DimensionSquareMat( [0X[3Xmatrix[0X[2X ) _______________________________________[0Xmethod
+  [6XReturns:[0X  Number  of  lines  in  the  matrix [3Xmatrix[0X if it is square and [9Xfail[0X
+            otherwise
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> m:=[[1,2,3],[4,5,6],[9,6,12]];[0X
+    [4X[ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 9, 6, 12 ] ][0X
+    [4Xgap> IsSquareMat(m);[0X
+    [4Xtrue[0X
+    [4Xgap> DimensionSquareMat(m);[0X
+    [4X3[0X
+    [4Xgap> DimensionSquareMat([[1,2],[1,2,3]]);[0X
+    [4XError, Matrix is not square called from[0X
+  [4X------------------------------------------------------------------[0X
+  
+  Affine  mappings  of  n  dimensional space are often written as a pair (A,v)
+  where  A  is  a  linear  mapping  and  v  is a vector. [5XGAP[0X represents affine
+  mappings  by  n+1  times  n+1  matrices  M  which  satisfy M_{n+1,n+1}=1 and
+  M_{i,n+1}=0 for all 1<= i <= n.
+  
+  An  affine matrix acts on an n dimensional space which is written as a space
+  of n+1 tuples with n+1st entry 1. Here we give two functions to handle these
+  affine matrices.
+  
+  
+  [1X2.2 Affine Matrices OnRight[0X
+  
+  [1X2.2-1 LinearPartOfAffineMatOnRight[0X
+  
+  [2X> LinearPartOfAffineMatOnRight( [0X[3Xmat[0X[2X ) ________________________________[0Xmethod
+  [6XReturns:[0X  the  linear  part  of  the  affine matrix [3Xmat[0X. That is, everything
+            except for the last row and column.
+  
+  [1X2.2-2 BasisChangeAffineMatOnRight[0X
+  
+  [2X> BasisChangeAffineMatOnRight( [0X[3Xtransform, mat[0X[2X ) ______________________[0Xmethod
+  [6XReturns:[0X  affine matrix with same dimensions as [3Xmat[0X
+  
+  A  basis change [3Xtransform[0X of an n dimensional space induces a transformation
+  on  affine mappings on this space. If [3Xmat[0X is a affine matrix (in particular,
+  it  is  (n+1)x  (n+1)), this method returns the image of [3Xmat[0X under the basis
+  transformation induced by [3Xtransform[0X.
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> c:=[[0,1],[1,0]];[0X
+    [4X[ [ 0, 1 ], [ 1, 0 ] ][0X
+    [4Xgap> m:=[[1/2,0,0],[0,2/3,0],[1,0,1]];[0X
+    [4X[ [ 1/2, 0, 0 ], [ 0, 2/3, 0 ], [ 1, 0, 1 ] ][0X
+    [4Xgap> BasisChangeAffineMatOnRight(c,m);[0X
+    [4X[ [ 2/3, 0, 0 ], [ 0, 1/2, 0 ], [ 0, 1, 1 ] ][0X
+  [4X------------------------------------------------------------------[0X
+  
+  [1X2.2-3 TranslationOnRightFromVector[0X
+  
+  [2X> TranslationOnRightFromVector( [0X[3Xv[0X[2X ) __________________________________[0Xmethod
+  [6XReturns:[0X  Affine matrix
+  
+  Given  a  vector [3Xv[0X with n entries, this method returns a (n+1)x (n+1) matrix
+  which corresponds to the affine translation defined by [3Xv[0X.
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> m:=TranslationOnRightFromVector([1,2,3]);;[0X
+    [4Xgap> Display(m);[0X
+    [4X[ [  1,  0,  0,  0 ],[0X
+    [4X  [  0,  1,  0,  0 ],[0X
+    [4X  [  0,  0,  1,  0 ],[0X
+    [4X  [  1,  2,  3,  1 ] ][0X
+    [4Xgap> LinearPartOfAffineMatOnRight(m);[0X
+    [4X[ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ][0X
+    [4Xgap> BasisChangeAffineMatOnRight([[3,2,1],[0,1,0],[0,0,1]],m);[0X
+    [4X[ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ], [ 3, 4, 4, 1 ] ][0X
+  [4X------------------------------------------------------------------[0X
+  
+  
+  [1X2.3 Geometry[0X
+  
+  [1X2.3-1 GramianOfAverageScalarProductFromFiniteMatrixGroup[0X
+  
+  [2X> GramianOfAverageScalarProductFromFiniteMatrixGroup( [0X[3XG[0X[2X ) ____________[0Xmethod
+  [6XReturns:[0X  Symmetric positive definite matrix
+  
+  For  a  finite  matrix  group  [3XG[0X,  the  gramian matrix of the average scalar
+  product  is  returned. This is the sum over all gg^t with gin G (actually it
+  is  enough to take a generating set). The group [3XG[0X is orthogonal with respect
+  to the scalar product induced by the returned matrix.
+  
+  
+  [1X2.3-2 Inequalities[0X
+  
+  Inequalities  are  represented  in  the  same  way  they  are represented in
+  [5Xpolymaking[0X.  The  vector (v_0,...,v_n) represents the inequality 0<= v_0+v_1
+  x_1+... + v_n x_n.
+  
+  [1X2.3-3 BisectorInequalityFromPointPair[0X
+  
+  [2X> BisectorInequalityFromPointPair( [0X[3Xv1, v2[, gram][0X[2X ) __________________[0Xmethod
+  [6XReturns:[0X  vector of length [10XLength(v1)+1[0X
+  
+  Calculates  the  inequality  defining the half-space containing [3Xv1[0X such that
+  [10X[3Xv1[0X-[3Xv2[0X[0X  is  perpendicular  on  the  bounding  hyperplane.  And  [10X([3Xv1[0X-[3Xv2[0X)/2[0X  is
+  contained in the bounding hyperplane.
+  If  the  matrix [3Xgram[0X is given, it is used as the gramian matrix. Otherwiese,
+  the  standard  scalar product is used. It is not checked if [3Xgram[0X is positive
+  definite or symmetric.
+  
+  [1X2.3-4 WhichSideOfHyperplane[0X
+  
+  [2X> WhichSideOfHyperplane( [0X[3Xv, ineq[0X[2X ) ___________________________________[0Xmethod
+  [2X> WhichSideOfHyperplaneNC( [0X[3Xv, ineq[0X[2X ) _________________________________[0Xmethod
+  [6XReturns:[0X  -1 (below) 0 (in) or 1 (above).
+  
+  Let [3Xv[0X be a vector of length n and [3Xineq[0X an inequality represented by a vector
+  of  length  n+1.  Then  [10XWhichSideOfHyperplane([3Xv,  ineq[0X)[0X  returns 1 if [3Xv[0X is a
+  solution  of the inequality but not the equation given by [3Xineq[0X, it returns 0
+  if  [3Xv[0X  is  a  solution to the equation and -1 if it is not a solution of the
+  inequality [3Xineq[0X.
+  
+  The NC version does not test the input for correctness.
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> BisectorInequalityFromPointPair([0,0],[1,0]);[0X
+    [4X[ 1, -2, 0 ][0X
+    [4Xgap> ineq:=BisectorInequalityFromPointPair([0,0],[1,0],[[5,4],[4,5]]);[0X
+    [4X[ 5, -10, -8 ][0X
+    [4Xgap> ineq{[2,3]}*[1/2,0];[0X
+    [4X-5[0X
+    [4Xgap> WhichSideOfHyperplane([0,0],ineq);[0X
+    [4X1[0X
+    [4Xgap> WhichSideOfHyperplane([1/2,0],ineq);[0X
+    [4X0[0X
+  [4X------------------------------------------------------------------[0X
+  
+  [1X2.3-5 RelativePositionPointAndPolygon[0X
+  
+  [2X> RelativePositionPointAndPolygon( [0X[3Xpoint, poly[0X[2X ) _____________________[0Xmethod
+  [6XReturns:[0X  one of [10X"VERTEX", "FACET", "OUTSIDE", "INSIDE"[0X
+  
+  Let  [3Xpoly[0X  be  a  [9XPolymakeObject[0X and [3Xpoint[0X a vector. If [3Xpoint[0X is a vertex of
+  [3Xpoly[0X,  the  string [10X"VERTEX"[0X is returned. If [3Xpoint[0X lies inside [3Xpoly[0X, [10X"INSIDE"[0X
+  is returned and if it lies in a facet, [10X"FACET"[0X is returned and if [3Xpoint[0X does
+  not lie inside [3Xpoly[0X, the function returns [10X"OUTSIDE"[0X.
+  
+  
+  [1X2.4 Space Groups[0X
+  
+  [1X2.4-1 PointGroupRepresentatives[0X
+  
+  [2X> PointGroupRepresentatives( [0X[3Xgroup[0X[2X ) ______________________________[0Xattribute
+  [2X> PointGroupRepresentatives( [0X[3Xgroup[0X[2X ) _________________________________[0Xmethod
+  [6XReturns:[0X  list of matrices
+  
+  Given  an  [9XAffineCrystGroupOnLeftOrRight[0X  [3Xgroup[0X,  this  returns  a  list  of
+  representatives  of  the  point  group  of  [3Xgroup[0X.  That  is,  a  system  of
+  representatives  for  the  factor  group  modulo  translations.  This  is an
+  attribute of [9XAffineCrystGroupOnLeftOrRight[0X
+  

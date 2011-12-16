@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (HAPcryst) - Chapter 2: Bits and Pieces</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+</head>
+<body>
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">Top of Book</a>&nbsp;  &nbsp;<a href="chap1.html">Previous Chapter</a>&nbsp;  &nbsp;<a href="chap3.html">Next Chapter</a>&nbsp;  </div>
+
+<p><a id="X86FBE5B77C2F9442" name="X86FBE5B77C2F9442"></a></p>
+<div class="ChapSects"><a href="chap2.html#X86FBE5B77C2F9442">2. <span class="Heading">Bits and Pieces</span></a>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X8019925B8294F5B4">2.1 <span class="Heading">Matrices and Vectors</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7D58A1848182EC26">2.1-1 SignRat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7C0552BA873515B9">2.1-2 VectorModOne</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7BB083A57C474F45">2.1-3 IsSquareMat</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X78C932A48515EF10">2.1-4 DimensionSquareMat</a></span>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X86BD4FE4871379AD">2.2 <span class="Heading">Affine Matrices OnRight</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X838946957FC75C17">2.2-1 LinearPartOfAffineMatOnRight</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X80DD4F2286D49F8D">2.2-2 BasisChangeAffineMatOnRight</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X81F3C49580958FB6">2.2-3 TranslationOnRightFromVector</a></span>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X84A0B0637F269E37">2.3 <span class="Heading">Geometry</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7A94DAE679AD73E3">2.3-1 GramianOfAverageScalarProductFromFiniteMatrixGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X866942167802E036">2.3-2 <span class="Heading">Inequalities</span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X80C365AA87BDDAFA">2.3-3 BisectorInequalityFromPointPair</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8790464D86D189F4">2.3-4 WhichSideOfHyperplane</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X83392C417B311B6B">2.3-5 RelativePositionPointAndPolygon</a></span>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap2.html#X7B14774981F80108">2.4 <span class="Heading">Space Groups</span></a>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7E2F20607F278B70">2.4-1 PointGroupRepresentatives</a></span>
+</div>
+</div>
+
+<h3>2. <span class="Heading">Bits and Pieces</span></h3>
+
+<p>This chapter contains a few very basic functions which are needed for space group calculations and were missing in standard <strong class="pkg">GAP</strong>.</p>
+
+<p><a id="X8019925B8294F5B4" name="X8019925B8294F5B4"></a></p>
+
+<h4>2.1 <span class="Heading">Matrices and Vectors</span></h4>
+
+<p><a id="X7D58A1848182EC26" name="X7D58A1848182EC26"></a></p>
+
+<h5>2.1-1 SignRat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; SignRat</code>( <var class="Arg">x</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>sign of the rational number <var class="Arg">x</var> (Standard <strong class="pkg">GAP</strong> currently only has <code class="code">SignInt</code>).</p>
+
+<p><a id="X7C0552BA873515B9" name="X7C0552BA873515B9"></a></p>
+
+<h5>2.1-2 VectorModOne</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; VectorModOne</code>( <var class="Arg">v</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>Rational vector of the same length with enties in [0,1)</p>
+
+<p>For a rational vector <var class="Arg">v</var>, this returns the vector with all entries taken "mod 1".</p>
+
+
+<table class="example">
+<tr><td><pre>
+gap&gt; SignRat((-4)/(-2));
+1
+gap&gt; SignRat(9/(-2));
+-1
+gap&gt; VectorModOne([1/10,100/9,5/6,6/5]);
+[ 1/10, 1/9, 5/6, 1/5 ]
+</pre></td></tr></table>
+
+<p><a id="X7BB083A57C474F45" name="X7BB083A57C474F45"></a></p>
+
+<h5>2.1-3 IsSquareMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; IsSquareMat</code>( <var class="Arg">matrix</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b><code class="keyw">true</code> if <var class="Arg">matrix</var> is a square matrix and <code class="keyw">false</code> otherwise.</p>
+
+<p><a id="X78C932A48515EF10" name="X78C932A48515EF10"></a></p>
+
+<h5>2.1-4 DimensionSquareMat</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; DimensionSquareMat</code>( <var class="Arg">matrix</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>Number of lines in the matrix <var class="Arg">matrix</var> if it is square and <code class="keyw">fail</code> otherwise</p>
+
+
+<table class="example">
+<tr><td><pre>
+gap&gt; m:=[[1,2,3],[4,5,6],[9,6,12]];
+[ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 9, 6, 12 ] ]
+gap&gt; IsSquareMat(m);
+true
+gap&gt; DimensionSquareMat(m);
+3
+gap&gt; DimensionSquareMat([[1,2],[1,2,3]]);
+Error, Matrix is not square called from
+</pre></td></tr></table>
+
+<p>Affine mappings of n dimensional space are often written as a pair (A,v) where A is a linear mapping and v is a vector. <strong class="pkg">GAP</strong> represents affine mappings by n+1 times n+1 matrices M which satisfy M_{n+1,n+1}=1 and M_{i,n+1}=0 for all 1&lt;= i &lt;= n.</p>
+
+<p>An affine matrix acts on an n dimensional space which is written as a space of n+1 tuples with n+1st entry 1. Here we give two functions to handle these affine matrices.</p>
+
+<p><a id="X86BD4FE4871379AD" name="X86BD4FE4871379AD"></a></p>
+
+<h4>2.2 <span class="Heading">Affine Matrices OnRight</span></h4>
+
+<p><a id="X838946957FC75C17" name="X838946957FC75C17"></a></p>
+
+<h5>2.2-1 LinearPartOfAffineMatOnRight</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; LinearPartOfAffineMatOnRight</code>( <var class="Arg">mat</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>the linear part of the affine matrix <var class="Arg">mat</var>. That is, everything except for the last row and column.</p>
+
+<p><a id="X80DD4F2286D49F8D" name="X80DD4F2286D49F8D"></a></p>
+
+<h5>2.2-2 BasisChangeAffineMatOnRight</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; BasisChangeAffineMatOnRight</code>( <var class="Arg">transform, mat</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>affine matrix with same dimensions as <var class="Arg">mat</var></p>
+
+<p>A basis change <var class="Arg">transform</var> of an n dimensional space induces a transformation on affine mappings on this space. If <var class="Arg">mat</var> is a affine matrix (in particular, it is (n+1)x (n+1)), this method returns the image of <var class="Arg">mat</var> under the basis transformation induced by <var class="Arg">transform</var>.</p>
+
+
+<table class="example">
+<tr><td><pre>
+gap&gt; c:=[[0,1],[1,0]];
+[ [ 0, 1 ], [ 1, 0 ] ]
+gap&gt; m:=[[1/2,0,0],[0,2/3,0],[1,0,1]];
+[ [ 1/2, 0, 0 ], [ 0, 2/3, 0 ], [ 1, 0, 1 ] ]
+gap&gt; BasisChangeAffineMatOnRight(c,m);
+[ [ 2/3, 0, 0 ], [ 0, 1/2, 0 ], [ 0, 1, 1 ] ]
+</pre></td></tr></table>
+
+<p><a id="X81F3C49580958FB6" name="X81F3C49580958FB6"></a></p>
+
+<h5>2.2-3 TranslationOnRightFromVector</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; TranslationOnRightFromVector</code>( <var class="Arg">v</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>Affine matrix</p>
+
+<p>Given a vector <var class="Arg">v</var> with n entries, this method returns a (n+1)x (n+1) matrix which corresponds to the affine translation defined by <var class="Arg">v</var>.</p>
+
+
+<table class="example">
+<tr><td><pre>
+gap&gt; m:=TranslationOnRightFromVector([1,2,3]);;
+gap&gt; Display(m);
+[ [  1,  0,  0,  0 ],
+  [  0,  1,  0,  0 ],
+  [  0,  0,  1,  0 ],
+  [  1,  2,  3,  1 ] ]
+gap&gt; LinearPartOfAffineMatOnRight(m);
+[ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ]
+gap&gt; BasisChangeAffineMatOnRight([[3,2,1],[0,1,0],[0,0,1]],m);
+[ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ], [ 3, 4, 4, 1 ] ]
+</pre></td></tr></table>
+
+<p><a id="X84A0B0637F269E37" name="X84A0B0637F269E37"></a></p>
+
+<h4>2.3 <span class="Heading">Geometry</span></h4>
+
+<p><a id="X7A94DAE679AD73E3" name="X7A94DAE679AD73E3"></a></p>
+
+<h5>2.3-1 GramianOfAverageScalarProductFromFiniteMatrixGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; GramianOfAverageScalarProductFromFiniteMatrixGroup</code>( <var class="Arg">G</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>Symmetric positive definite matrix</p>
+
+<p>For a finite matrix group <var class="Arg">G</var>, the gramian matrix of the average scalar product is returned. This is the sum over all gg^t with gin G (actually it is enough to take a generating set). The group <var class="Arg">G</var> is orthogonal with respect to the scalar product induced by the returned matrix.</p>
+
+<p><a id="X866942167802E036" name="X866942167802E036"></a></p>
+
+<h5>2.3-2 <span class="Heading">Inequalities</span></h5>
+
+<p>Inequalities are represented in the same way they are represented in <strong class="pkg">polymaking</strong>. The vector (v_0,...,v_n) represents the inequality 0&lt;= v_0+v_1 x_1+... + v_n x_n.</p>
+
+<p><a id="X80C365AA87BDDAFA" name="X80C365AA87BDDAFA"></a></p>
+
+<h5>2.3-3 BisectorInequalityFromPointPair</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; BisectorInequalityFromPointPair</code>( <var class="Arg">v1, v2[, gram]</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>vector of length <code class="code">Length(v1)+1</code></p>
+
+<p>Calculates the inequality defining the half-space containing <var class="Arg">v1</var> such that <code class="code"><var class="Arg">v1</var>-<var class="Arg">v2</var></code> is perpendicular on the bounding hyperplane. And <code class="code">(<var class="Arg">v1</var>-<var class="Arg">v2</var>)/2</code> is contained in the bounding hyperplane.<br /> If the matrix <var class="Arg">gram</var> is given, it is used as the gramian matrix. Otherwiese, the standard scalar product is used. It is not checked if <var class="Arg">gram</var> is positive definite or symmetric.</p>
+
+<p><a id="X8790464D86D189F4" name="X8790464D86D189F4"></a></p>
+
+<h5>2.3-4 WhichSideOfHyperplane</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; WhichSideOfHyperplane</code>( <var class="Arg">v, ineq</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; WhichSideOfHyperplaneNC</code>( <var class="Arg">v, ineq</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>-1 (below) 0 (in) or 1 (above).</p>
+
+<p>Let <var class="Arg">v</var> be a vector of length n and <var class="Arg">ineq</var> an inequality represented by a vector of length n+1. Then <code class="code">WhichSideOfHyperplane(<var class="Arg">v, ineq</var>)</code> returns 1 if <var class="Arg">v</var> is a solution of the inequality but not the equation given by <var class="Arg">ineq</var>, it returns 0 if <var class="Arg">v</var> is a solution to the equation and -1 if it is not a solution of the inequality <var class="Arg">ineq</var>.</p>
+
+<p>The NC version does not test the input for correctness.</p>
+
+
+<table class="example">
+<tr><td><pre>
+gap&gt; BisectorInequalityFromPointPair([0,0],[1,0]);
+[ 1, -2, 0 ]
+gap&gt; ineq:=BisectorInequalityFromPointPair([0,0],[1,0],[[5,4],[4,5]]);
+[ 5, -10, -8 ]
+gap&gt; ineq{[2,3]}*[1/2,0];
+-5
+gap&gt; WhichSideOfHyperplane([0,0],ineq);
+1
+gap&gt; WhichSideOfHyperplane([1/2,0],ineq);
+0
+</pre></td></tr></table>
+
+<p><a id="X83392C417B311B6B" name="X83392C417B311B6B"></a></p>
+
+<h5>2.3-5 RelativePositionPointAndPolygon</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; RelativePositionPointAndPolygon</code>( <var class="Arg">point, poly</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>one of <code class="code">"VERTEX", "FACET", "OUTSIDE", "INSIDE"</code></p>
+
+<p>Let <var class="Arg">poly</var> be a <code class="keyw">PolymakeObject</code> and <var class="Arg">point</var> a vector. If <var class="Arg">point</var> is a vertex of <var class="Arg">poly</var>, the string <code class="code">"VERTEX"</code> is returned. If <var class="Arg">point</var> lies inside <var class="Arg">poly</var>, <code class="code">"INSIDE"</code> is returned and if it lies in a facet, <code class="code">"FACET"</code> is returned and if <var class="Arg">point</var> does not lie inside <var class="Arg">poly</var>, the function returns <code class="code">"OUTSIDE"</code>.</p>
+
+<p><a id="X7B14774981F80108" name="X7B14774981F80108"></a></p>
+
+<h4>2.4 <span class="Heading">Space Groups</span></h4>
+
+<p><a id="X7E2F20607F278B70" name="X7E2F20607F278B70"></a></p>
+
+<h5>2.4-1 PointGroupRepresentatives</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; PointGroupRepresentatives</code>( <var class="Arg">group</var> )</td><td class="tdright">( attribute )</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&gt; PointGroupRepresentatives</code>( <var class="Arg">group</var> )</td><td class="tdright">( method )</td></tr></table></div>
+<p><b>Returns: </b>list of matrices</p>
+
+<p>Given an <code class="keyw">AffineCrystGroupOnLeftOrRight</code> <var class="Arg">group</var>, this returns a list of representatives of the point group of <var class="Arg">group</var>. That is, a system of representatives for the factor group modulo translations. This is an attribute of <code class="keyw">AffineCrystGroupOnLeftOrRight</code></p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">Top of Book</a>&nbsp;  &nbsp;<a href="chap1.html">Previous Chapter</a>&nbsp;  &nbsp;<a href="chap3.html">Next Chapter</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

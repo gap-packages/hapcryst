@@ -1,0 +1,161 @@
+<Section><Heading>Abstract and Notation</Heading>
+
+<Package>HAPcryst</Package> is an extension for "Homological Algebra
+Programming" (<Package>HAP</Package>, <Cite Key="hap"></Cite>) by Graham
+Ellis. It uses geometric methods to calculate resolutions for
+crystallographic groups. 
+
+In this manual, we will use the terms "space group" and
+"crystallographic group" synonymous. As usual in &GAP;, group elements
+are supposed to act from the right. To emphasize this fact, some
+functions have names ending in "OnRight" (namely those, which rely on
+the action from the right). This is also meant to make work with
+<Package>HAPcryst</Package> and <Package>cryst</Package> <Cite Key="cryst"></Cite> easier.<P></P>
+
+The functions called "somethingStandardSpaceGroup" are supposed to work for
+standard crystallographic groups on left and right some time in the
+future. Currently only the versions acting on right are implemented.
+
+As in <Package>cryst</Package> <Cite Key="cryst"></Cite>, space groups
+are represented as affine linear groups. For the computations in
+<Package>HAPcryst</Package>, crystallographic  groups have to be in
+"standard form". That is, the translation basis has to be the standard
+basis of the space. This implies that the linear part of a group
+element need not be orthogonal with respect to the usual scalar
+product.
+
+
+<Subsection><Heading>The natural action of crystallographic groups</Heading>
+<Index>action of crystallographic groups</Index>
+
+There is some confusion about the way crystallographic groups are
+written. This concerns the question if we act on left or on right and if
+vectors are of the form <C>[1,...]</C> or <C>[...,1]</C>. <P></P>
+
+As mentioned, <Package>HAPcryst</Package> handles affine crystallographic
+groups on right (and maybe later also on left) acting on vectors of the form
+<M>[...,1]</M>.
+<P></P>
+<B>BUT:</B> The functions in <Package>HAPcryst</Package> do not take augmented
+vectors as input (no leading or ending ones). The handling of vectors is done
+internally. So in <Package>HAPcryst</Package>, a crystallographic group is a
+group of <M>n\times n</M> matrices which acts on a vector space of dimension
+<M>n-1</M> whose elements are vectors of length <M>n-1</M> (not <M>n</M>).
+Example:
+
+<Example>
+gap> G:=SpaceGroup(3,4); #This group acts on 3-Space
+SpaceGroupOnRightBBNWZ( 3, 2, 1, 1, 2 )
+gap> Display(Representative(G));
+[ [  1,  0,  0,  0 ],
+  [  0,  1,  0,  0 ],
+  [  0,  0,  1,  0 ],
+  [  0,  0,  0,  1 ] ]
+gap> OrbitStabilizerInUnitCubeOnRight(G,[1/2,0,0]);
+rec( orbit := [ [ 1/2, 0, 0 ], [ 1/2, 1/2, 0 ] ],
+  stabilizer := Group([ [ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ],
+          [ 0, 0, 0, 1 ] ] ]) )
+</Example>
+
+</Subsection>
+
+</Section>
+
+
+<Section><Heading>Requirements</Heading><Index>installation</Index>
+
+The following &GAP; packages are required
+
+<List>
+
+<Item>
+ <Package>polymaking</Package> which in turn depends on the computational
+   geometry software polymake.
+</Item>
+
+<Item> <Package>HAP</Package> </Item>
+<Item> <Package>Cryst</Package> </Item>
+
+</List>
+
+The following &GAP; packages are not required but highly recommended:
+
+<List>
+<Item><Package>carat</Package></Item>
+<Item><Package>CrystCat</Package></Item>
+<Item><Package>GAPDoc</Package> is needed to display the online manual</Item>
+</List> 
+
+<Subsection><Heading>Recommendation concerning polymake</Heading>
+<Index>polymake</Index>
+
+Calculating resolutions of Bieberbach groups involves convex hull
+computations. polymake by default uses cdd to compute convex
+hulls. Experiments suggest that lrs is the more suitable algorithm for
+the computations done in HAPcryst than the default cdd. You can change the
+behaviour of by editing the file "yourhomedirectory/.polymake/prefer.pl". It
+should contain a section like this (just make sure lrs is before cdd,
+the position of beneath_beyond does not matter):
+
+<Listing>
+#########################################
+application polytope;
+
+prefer "*.convex_hull  lrs, beneath_beyond, cdd";
+</Listing>
+
+</Subsection>
+
+</Section>
+
+<Section><Heading>Global Variables</Heading>
+
+<!-- 
+The following global variables are used to influence the behavior of
+<Package>HAPcryst</Package>. They can be found in the files
+<File>lib/environment.gd</File> and <File>lib/environment.gi</File> of
+the package directory.
+
+<ManSection>
+    <Var Name="HAPCRYST_TMPDIR"/>
+ <Description>
+  For the interaction with <K>polymake</K>, files have to be
+  written. This variable determines which directory will be used for
+  this.<P></P>
+  All data files for <K>polymake</K> are written to this directory. If
+  it is not set (which is the default), a temporary directory is
+  created using <Code>DirectoryTemporary()</Code> at the first time a
+  method tries to write a file.
+  <P></P>
+  You can set the variable by either adding the line
+<Code>HAPCRYST_TMPDIR:=Directory("nameofdir");</Code> to your <F>.gaprc</F>
+file or by using <Ref Var="SetHAPcrystDataDirectory"/>.
+ </Description>
+</ManSection>
+
+<ManSection>
+   <Meth Name="SetHAPcrystDataDirectory" Arg="dir"/>
+ <Description>
+  Sets the value of the global variable <Ref Var="HAPCRYST_TMPDIR"/> to
+  <A>dir</A>. Note that <A>dir</A> must be a directory you must be allowed to
+  read from and write to (permissions are not checked).
+ </Description>
+</ManSection>
+-->
+
+<Package>HAPcryst</Package> itself does only have one global variable, namely
+<Ref InfoClass="InfoHAPcryst"/>. 
+The location of files generated for interaction with polymake are determined by
+the value of <Ref Var="POLYMAKE_DATA_DIR" BookName="polymaking"/> which is a
+global variable of <Package>polymaking</Package>.
+
+<ManSection>
+    <InfoClass Name="InfoHAPcryst"/>
+  <Description>
+   At a level of 1, only the most important messages are printed. At level 2,
+   additional information is displayed, and level 3 is even more verbose. At
+level 0, <Package>HAPcryst</Package> remains silent.
+  </Description>
+</ManSection>
+
+</Section>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>GAP (HAPprog) - Chapter 1: Resolutions in Hap</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="GAPDoc2HTML" />
+<link rel="stylesheet" type="text/css" href="manual.css" />
+</head>
+<body>
+
+
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  </div>
+
+<div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">Top of Book</a>&nbsp;  &nbsp;<a href="chap0.html">Previous Chapter</a>&nbsp;  &nbsp;<a href="chap2.html">Next Chapter</a>&nbsp;  </div>
+
+<p><a id="X7C6DD73E7BB931AB" name="X7C6DD73E7BB931AB"></a></p>
+<div class="ChapSects"><a href="chap1.html#X7C6DD73E7BB931AB">1. <span class="Heading">Resolutions in Hap</span></a>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap1.html#X804F611B7E23BDB1">1.1 <span class="Heading">The Standard Representation <code class="keyw">HapResolutionRep</code></span></a>
+</div>
+<div class="ContSect"><span class="nocss">&nbsp;</span><a href="chap1.html#X8024014D8488FE30">1.2 <span class="Heading">The <code class="keyw">HapLargeGroupResolutionRep</code> Representation</span></a>
+</div>
+</div>
+
+<h3>1. <span class="Heading">Resolutions in Hap</span></h3>
+
+<p>This document is only concerned with the representation of resolutions in Hap. Note that it is not a part of Hap. The framework provided here is just an extension of Hap data types used in HAPcryst and HAPprime.</p>
+
+<p>From now on, let G be a group and dots -&gt; M_n-&gt; M_n-1-&gt;dots-&gt; M_1-&gt; M_0-&gt; Z be a resolution with free ZG modules M_i.</p>
+
+<p>The elements of the modules M_i can be represented in different ways. This is what makes different representations for resolutions desirable. First, we will look at the standard representation (<code class="code">HapResolutionRep</code>) as it is defined in Hap. After that, we will present another representation for infinite groups. Note that all non-standard representations must be sub-representations of the standard representation to ensure compatibility with Hap.</p>
+
+<p><a id="X804F611B7E23BDB1" name="X804F611B7E23BDB1"></a></p>
+
+<h4>1.1 <span class="Heading">The Standard Representation <code class="keyw">HapResolutionRep</code></span></h4>
+
+<p>For every M_i we fix a basis and number its elements. Furthermore, it is assumed that we have a (partial) enumeration of the group of a resolution. In practice this is done by generating a lookup table on the fly.</p>
+
+<p>In standard representation, the elements of the modules M_k are represented by lists -"words"- of pairs of integers. A letter <code class="code">[i,g]</code> of such a word consists of the number of a basis element <code class="code">i</code> or <code class="code">-i</code> for its additive inverse and a number g representing a group element.</p>
+
+<p>A <code class="code">HapResolution</code> in <code class="code">HapResolutionRep</code> representation is a component object with the components</p>
+
+
+<ul>
+<li><p><code class="code">group</code>, a group of arbitrary type.</p>
+
+</li>
+<li><p><code class="code">elts</code>, a (partial) list of (possibly duplicate) elements in G. This list provides the "enumeration" of the group. Note that there are functions in Hap which assume that <code class="code">elts[1]</code> is the identity element of G.</p>
+
+</li>
+<li><p><code class="code">appendToElts(g)</code> a function that appends the group element <code class="code">g</code> to <code class="code">.elts</code>. This is not documented in Hap 1.8.6 but seems to be required for infinite groups. This requirement might vanish in some later version of Hap [G. Ellis, private communication].</p>
+
+</li>
+<li><p><code class="code">dimension(k)</code>, a function which returns the ZG-rank of the Module M_k</p>
+
+</li>
+<li><p><code class="code">boundary(k,j)</code>, a function which returns the image in M_k-1 of the jth free generator of M_k. Note that negative j are valid as input as well. In this case the additive inverse of the boundary of the jth generator is returned</p>
+
+</li>
+<li><p><code class="code">homotopy(k,[i,g])</code> a function which returns the image in M_k+1, under a contracting homotopy M_k -&gt; M_k+1, of the element <code class="code">[[i,g]]</code> in M_k. The value of this might be <code class="keyw">fail</code>. However, currently (version 1.8.4) some Hap functions assume that <code class="code">homotopy</code> is a function without testing.</p>
+
+</li>
+<li><p><code class="code">properties</code>, a list of pairs <code class="code">["name","value"]</code> "name" is a string and value is anything (boolean, number, string...). Every <code class="code">HapResolution</code> (regardless of representation) has to have <code class="code">["type","resolution"]</code>, <code class="code">["length",length]</code> where <code class="code">length</code> is the length of the resolution and <code class="code">["characteristic",char]</code>. Currently (Hap 1.8.6), <code class="code">length</code> must not be <code class="keyw">infinity</code>. The values of these properties can be tested using the Hap function <code class="code">EvaluateProperty(resolution,propertyname)</code>.</p>
+
+</li>
+</ul>
+<p>Note that making <code class="code">HapResolution</code>s immutable will make the <code class="code">.elts</code> component immutable. As this lookup table might change during calculations, we do not recommend using immutable resolutions (in any representation).</p>
+
+<p><a id="X8024014D8488FE30" name="X8024014D8488FE30"></a></p>
+
+<h4>1.2 <span class="Heading">The <code class="keyw">HapLargeGroupResolutionRep</code> Representation</span></h4>
+
+<p>In this sub-representation of the standard representation, the module elements in this resolution are lists of groupring elements. So the lookup table <code class="code">.elts</code> is not used as long as no conversion to standard representation takes place. In addition to the components of a <code class="keyw">HapResolution</code>, a resolution in large group representation has the following components:</p>
+
+
+<ul>
+<li><p><code class="code">boundary2(resolution,term,gen)</code>, a function that returns the boundary of the <var class="Arg">gen</var>th generator of the <var class="Arg">term</var>th module.</p>
+
+</li>
+<li><p><code class="code">groupring</code> the group ring of the resolution <var class="Arg">resolution</var>.</p>
+
+</li>
+<li><p><code class="code">dimension2(resolution,term)</code> a function that returns the dimension of the <var class="Arg">term</var>th module of the resolution <var class="Arg">resolution</var>.</p>
+
+</li>
+</ul>
+<p>The effort of having two versions of <code class="code">boundary</code> and <code class="code">dimension</code> is necessary to keep the structure compatible with the usual Hap resolution.</p>
+
+
+<div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">Top of Book</a>&nbsp;  &nbsp;<a href="chap0.html">Previous Chapter</a>&nbsp;  &nbsp;<a href="chap2.html">Next Chapter</a>&nbsp;  </div>
+
+
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  </div>
+
+<hr />
+<p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>
+</body>
+</html>

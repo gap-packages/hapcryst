@@ -1,0 +1,45 @@
+  
+  
+  [1XIndex[0X
+  
+  action of crystallographic groups  1.1-1
+  [2XBasisChangeAffineMatOnRight[0X  2.2-2
+  [2XBisectorInequalityFromPointPair[0X  2.3-3
+  [2XDimensionSquareMat[0X  2.1-4
+  [2XFaceLatticeAndBoundaryBieberbachGroup[0X  4.2-2
+  [2XFundamentalDomainBieberbachGroup[0X  4.1-2
+  [2XFundamentalDomainBieberbachGroup[0X  4.1-2
+  [2XFundamentalDomainFromGeneralPointAndOrbitPartGeometric[0X  4.1-3
+  [2XFundamentalDomainStandardSpaceGroup[0X  4.1-1
+  [2XFundamentalDomainStandardSpaceGroup[0X  4.1-1
+  [2XGramianOfAverageScalarProductFromFiniteMatrixGroup[0X  2.3-1
+  ineqThreshold  4.1-2
+  [2XInfoHAPcryst[0X  1.3-1
+  installation  1.2
+  [2XIsFundamentalDomainStandardSpaceGroup[0X  4.1-4
+  [2XIsSquareMat[0X  2.1-3
+  [2XLinearPartOfAffineMatOnRight[0X  2.2-1
+  [2XOrbitPartAndRepresentativesInFacesStandardSpaceGroup[0X  3.1-5
+  [2XOrbitPartInFacesStandardSpaceGroup[0X  3.1-4
+  [2XOrbitPartInVertexSetsStandardSpaceGroup[0X  3.1-3
+  [2XOrbitStabilizerInUnitCubeOnRight[0X  3.1-1
+  [2XOrbitStabilizerInUnitCubeOnRightOnSets[0X  3.1-2
+  [2XPointGroupRepresentatives[0X  2.4-1
+  [2XPointGroupRepresentatives[0X  2.4-1
+  polymake  1.2-1
+  [2XRelativePositionPointAndPolygon[0X  2.3-5
+  [2XRepresentativeActionOnRightOnSets[0X  3.1-7
+  [2XResolutionBieberbachGroup[0X  4.2-1
+  [2XResolutionFromFLandBoundary[0X  4.2-3
+  [2XShiftedOrbitPart[0X  3.1-9
+  [2XSignRat[0X  2.1-1
+  [2XStabilizerOnSetsStandardSpaceGroup[0X  3.1-6
+  [2XTranslationOnRightFromVector[0X  2.2-3
+  [2XTranslationsToBox[0X  3.1-11
+  [2XTranslationsToOneCubeAroundCenter[0X  3.1-10
+  [2XVectorModOne[0X  2.1-2
+  [2XWhichSideOfHyperplane[0X  2.3-4
+  [2XWhichSideOfHyperplaneNC[0X  2.3-4
+  
+  
+  -------------------------------------------------------

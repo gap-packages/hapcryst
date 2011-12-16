@@ -1,0 +1,235 @@
+  
+  [1X3. Algorithms of Orbit-Stabilizer Type[0X
+  
+  We  introduce  a  way  to  calculate  a  sufficient part of an orbit and the
+  stabilizer of a point.
+  
+  
+  [1X3.1 Orbit Stabilizer for Crystallographic Groups[0X
+  
+  [1X3.1-1 OrbitStabilizerInUnitCubeOnRight[0X
+  
+  [2X> OrbitStabilizerInUnitCubeOnRight( [0X[3Xgroup, x[0X[2X ) _______________________[0Xmethod
+  [6XReturns:[0X  A record containing
+  
+  --              [9X.stabilizer[0X: the stabilizer of [3Xx[0X.
+  
+  --              [9X.orbit[0X  set  of  vectors  from  [0,1)^n which represents the
+                  orbit.
+  
+  Let  [3Xx[0X be a rational vector from [0,1)^n and [3Xgroup[0X a space group in standard
+  form.  The  function then calculates the part of the orbit which lies inside
+  the  cube [0,1)^n and the stabilizer of [3Xx[0X. Observe that every element of the
+  full  orbit  differs  from  a  point  in  the  returned orbit only by a pure
+  translation.
+  
+  Note  that  the  restriction  to  points  from [0,1)^n makes sense if orbits
+  should be compared and the vector passed to [10XOrbitStabilizerInUnitCubeOnRight[0X
+  should be an element of the returned orbit (part).
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4X   [0X
+    [4Xgap> S:=SpaceGroup(3,5);;[0X
+    [4Xgap> OrbitStabilizerInUnitCubeOnRight(S,[1/2,0,9/11]);   [0X
+    [4Xrec( orbit := [ [ 0, 1/2, 2/11 ], [ 1/2, 0, 9/11 ] ], [0X
+    [4X  stabilizer := Group([ [ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ], [0X
+    [4X          [ 0, 0, 0, 1 ] ] ]) )[0X
+    [4Xgap> OrbitStabilizerInUnitCubeOnRight(S,[0,0,0]);     [0X
+    [4Xrec( orbit := [ [ 0, 0, 0 ] ], stabilizer := <matrix group with 2 generators> )[0X
+    [4X[0X
+  [4X------------------------------------------------------------------[0X
+  
+  If  you are interested in other parts of the orbit, you can use [2XVectorModOne[0X
+  ([14X2.1-2[0X)  for  the  base  point  and  the functions [2XShiftedOrbitPart[0X ([14X3.1-9[0X),
+  [2XTranslationsToOneCubeAroundCenter[0X  ([14X3.1-10[0X)  and  [2XTranslationsToBox[0X ([14X3.1-11[0X)
+  for the resulting orbit
+  Suppose  we  want to calculate the part of the orbit of [10X[4/3,5/3,7/3][0X in the
+  cube of sidelength [10X1[0X around this point:
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> S:=SpaceGroup(3,5);;[0X
+    [4Xgap> p:=[4/3,5/3,7/3];;[0X
+    [4Xgap> o:=OrbitStabilizerInUnitCubeOnRight(S,VectorModOne(p)).orbit;[0X
+    [4X[ [ 1/3, 2/3, 1/3 ], [ 1/3, 2/3, 2/3 ] ][0X
+    [4Xgap> box:=p+[[-1,1],[-1,1],[-1,1]];[0X
+    [4X[ [ 1/3, 8/3, 7/3 ], [ 1/3, 8/3, 7/3 ], [ 1/3, 8/3, 7/3 ] ][0X
+    [4Xgap> o2:=Concatenation(List(o,i->i+TranslationsToBox(i,box)));;[0X
+    [4Xgap> # This is what we looked for. But it is somewhat large:[0X
+    [4Xgap> Size(o2);[0X
+    [4X54[0X
+  [4X------------------------------------------------------------------[0X
+  
+  [1X3.1-2 OrbitStabilizerInUnitCubeOnRightOnSets[0X
+  
+  [2X> OrbitStabilizerInUnitCubeOnRightOnSets( [0X[3Xgroup, set[0X[2X ) _______________[0Xmethod
+  [6XReturns:[0X  A record containing
+  
+  --              [9X.stabilizer[0X: the stabilizer of [3Xset[0X.
+  
+  --              [9X.orbit[0X  set of sets of vectors from [0,1)^n which represents
+                  the orbit.
+  
+  Calculates   orbit   and   stabilizer   of   a   set  of  vectors.  Just  as
+  [2XOrbitStabilizerInUnitCubeOnRight[0X  ([14X3.1-1[0X),  it needs input from [0,1)^n. The
+  returned  orbit  part  [9X.orbit[0X  is  a  set of sets such that every element of
+  [9X.orbit[0X  has  a  non-trivial  intersection with the cube [0,1)^n. In general,
+  these sets will not lie inside [0,1)^n completely.
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> S:=SpaceGroup(3,5);;[0X
+    [4Xgap> OrbitStabilizerInUnitCubeOnRightOnSets(S,[[0,0,0],[0,1/2,0]]);[0X
+    [4Xrec( orbit := [ [ [ -1/2, 0, 0 ], [ 0, 0, 0 ] ], [0X
+    [4X                [ [ 0, 0, 0 ], [ 0, 1/2, 0 ] ],[0X
+    [4X                [ [ 1/2, 0, 0 ], [ 1, 0, 0 ] ] ],[0X
+    [4X  stabilizer := Group([ [ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [0X
+    [4X                        [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ] ]) )[0X
+  [4X------------------------------------------------------------------[0X
+  
+  [1X3.1-3 OrbitPartInVertexSetsStandardSpaceGroup[0X
+  
+  [2X> OrbitPartInVertexSetsStandardSpaceGroup( [0X[3Xgroup, vertexset, allvertices[0X[2X ) [0Xmethod
+  [6XReturns:[0X  Set of subsets of [3Xallvertices[0X.
+  
+  If  [3Xallvertices[0X  is a set of vectors and [3Xvertexset[0X is a subset thereof, then
+  [2XOrbitPartInVertexSetsStandardSpaceGroup[0X  returns  that  part of the orbit of
+  [3Xvertexset[0X   which   consists   entirely  of  subsets  of  [3Xallvertices[0X.  Note
+  that,unlike  the other [10XOrbitStabilizer[0X algorithms, this does not require the
+  input to lie in some particular part of the space.
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> S:=SpaceGroup(3,5);;[0X
+    [4Xgap> OrbitPartInVertexSetsStandardSpaceGroup(S,[[0,1,5],[1,2,0]],[0X
+    [4X> Set([[1,2,0],[2,3,1],[1,2,6],[1,1,0],[0,1,5],[3/5,7,12],[1/17,6,1/2]]));[0X
+    [4X[ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ], [ [ 1, 2, 6 ], [ 2, 3, 1 ] ] ][0X
+    [4Xgap> OrbitPartInVertexSetsStandardSpaceGroup(S, [[1,2,0]],[0X
+    [4X> Set([[1,2,0],[2,3,1],[1,2,6],[1,1,0],[0,1,5],[3/5,7,12],[1/17,6,1/2]]));[0X
+    [4X[ [ [ 0, 1, 5 ] ], [ [ 1, 1, 0 ] ], [ [ 1, 2, 0 ] ], [ [ 1, 2, 6 ] ], [ [ 2, 3, 1 ] ] ][0X
+  [4X------------------------------------------------------------------[0X
+  
+  [1X3.1-4 OrbitPartInFacesStandardSpaceGroup[0X
+  
+  [2X> OrbitPartInFacesStandardSpaceGroup( [0X[3Xgroup, vertexset, faceset[0X[2X ) ____[0Xmethod
+  [6XReturns:[0X  Set of subsets of [3Xfaceset[0X.
+  
+  This  calculates  the  orbit of a space group on sets restricted to a set of
+  faces.
+  If  [3Xfaceset[0X  is  a  set  of  sets  of vectors and [3Xvertexset[0X is an element of
+  [3Xfaceset[0X,  then  [2XOrbitPartInFacesStandardSpaceGroup[0X  returns that part of the
+  orbit of [3Xvertexset[0X which consists entirely of elements of [3Xfaceset[0X.
+  Note that,unlike the other [10XOrbitStabilizer[0X algorithms, this does not require
+  the input to lie in some particular part of the space.
+  
+  [1X3.1-5 OrbitPartAndRepresentativesInFacesStandardSpaceGroup[0X
+  
+  [2X> OrbitPartAndRepresentativesInFacesStandardSpaceGroup( [0X[3Xgroup, vertexset, faceset[0X[2X ) [0Xmethod
+  [6XReturns:[0X  A set of face-matrix pairs .
+  
+  This  is  a  slight  variation of [2XOrbitPartInFacesStandardSpaceGroup[0X ([14X3.1-4[0X)
+  that also returns a representative for every orbit element.
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> S:=SpaceGroup(3,5);;[0X
+    [4Xgap> OrbitPartInVertexSetsStandardSpaceGroup(S,[[0,1,5],[1,2,0]],[0X
+    [4X> Set([[1,2,0],[2,3,1],[1,2,6],[1,1,0],[0,1,5],[3/5,7,12],[1/17,6,1/2]]));[0X
+    [4X[ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ], [ [ 1, 2, 6 ], [ 2, 3, 1 ] ] ][0X
+    [4Xgap> OrbitPartInFacesStandardSpaceGroup(S,[[0,1,5],[1,2,0]],[0X
+    [4X> Set( [ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ], [[1/17,6,1/2],[1,2,7]]]));[0X
+    [4X[ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ] ][0X
+    [4Xgap> OrbitPartAndRepresentativesInFacesStandardSpaceGroup(S,[[0,1,5],[1,2,0]],[0X
+    [4X> Set( [ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ], [[1/17,6,1/2],[1,2,7]]]));[0X
+    [4X[ [ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ],[0X
+    [4X      [ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ] ] ][0X
+  [4X------------------------------------------------------------------[0X
+  
+  [1X3.1-6 StabilizerOnSetsStandardSpaceGroup[0X
+  
+  [2X> StabilizerOnSetsStandardSpaceGroup( [0X[3Xgroup, set[0X[2X ) ___________________[0Xmethod
+  [6XReturns:[0X  finite group of affine matrices (OnRight)
+  
+  Given  a  set  [3Xset[0X of vectors and a space group [3Xgroup[0X in standard form, this
+  method  calculates  the  stabilizer of that set in the full crystallographic
+  group.
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4X[0X
+    [4Xgap> G:=SpaceGroup(3,12);;[0X
+    [4Xgap> v:=[ 0, 0,0 ];;[0X
+    [4Xgap> s:=StabilizerOnSetsStandardSpaceGroup(G,[v]);[0X
+    [4X<matrix group with 2 generators>[0X
+    [4Xgap> s2:=OrbitStabilizerInUnitCubeOnRight(G,v).stabilizer;[0X
+    [4X<matrix group with 2 generators>[0X
+    [4Xgap> s2=s;[0X
+    [4Xtrue[0X
+    [4X[0X
+  [4X------------------------------------------------------------------[0X
+  
+  [1X3.1-7 RepresentativeActionOnRightOnSets[0X
+  
+  [2X> RepresentativeActionOnRightOnSets( [0X[3Xgroup, set, imageset[0X[2X ) __________[0Xmethod
+  [6XReturns:[0X  Affine matrix.
+  
+  Returns  an  element of the space group S which takes the set [3Xset[0X to the set
+  [3Ximageset[0X. The group must be in standard form and act on the right.
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> S:=SpaceGroup(3,5);;[0X
+    [4Xgap> RepresentativeActionOnRightOnSets(G, [[0,0,0],[0,1/2,0]],[0X
+    [4X>        [ [ 0, 1/2, 0 ], [ 0, 1, 0 ] ]);[0X
+    [4X[ [ 0, -1, 0, 0 ], [ -1, 0, 0, 0 ], [ 0, 0, -1, 0 ], [ 0, 1, 0, 1 ] ][0X
+  [4X------------------------------------------------------------------[0X
+  
+  
+  [1X3.1-8 Getting other orbit parts[0X
+  
+  [5XHAPcryst[0X  does  not  calculate the full orbit but only the part of it having
+  coefficients  between  -1/2  and  1/2.  The  other parts of the orbit can be
+  calculated using the following functions.
+  
+  [1X3.1-9 ShiftedOrbitPart[0X
+  
+  [2X> ShiftedOrbitPart( [0X[3Xpoint, orbitpart[0X[2X ) _______________________________[0Xmethod
+  [6XReturns:[0X  Set of vectors
+  
+  Takes each vector in [3Xorbitpart[0X to the cube unit cube centered in [3Xpoint[0X.
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> ShiftedOrbitPart([0,0,0],[[1/2,1/2,1/3],-[1/2,1/2,1/2],[19,3,1]]);[0X
+    [4X[ [ 1/2, 1/2, 1/3 ], [ 1/2, 1/2, 1/2 ], [ 0, 0, 0 ] ][0X
+    [4Xgap> ShiftedOrbitPart([1,1,1],[[1/2,1/2,1/2],-[1/2,1/2,1/2]]);[0X
+    [4X[ [ 3/2, 3/2, 3/2 ] ][0X
+  [4X------------------------------------------------------------------[0X
+  
+  [1X3.1-10 TranslationsToOneCubeAroundCenter[0X
+  
+  [2X> TranslationsToOneCubeAroundCenter( [0X[3Xpoint, center[0X[2X ) _________________[0Xmethod
+  [6XReturns:[0X  List of integer vectors
+  
+  This  method  returns  the list of all integer vectors which translate [3Xpoint[0X
+  into the box [3Xcenter[0X+[-1/2,1/2]^n
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> TranslationsToOneCubeAroundCenter([1/2,1/2,1/3],[0,0,0]);[0X
+    [4X[ [ 0, 0, 0 ], [ 0, -1, 0 ], [ -1, 0, 0 ], [ -1, -1, 0 ] ][0X
+    [4Xgap> TranslationsToOneCubeAroundCenter([1,0,1],[0,0,0]);[0X
+    [4X[ [ -1, 0, -1 ] ][0X
+  [4X------------------------------------------------------------------[0X
+  
+  [1X3.1-11 TranslationsToBox[0X
+  
+  [2X> TranslationsToBox( [0X[3Xpoint, box[0X[2X ) ____________________________________[0Xmethod
+  [6XReturns:[0X  An iterator of integer vectors or the empty iterator
+  
+  Given  a vector v and a list of pairs, this function returns the translation
+  vectors  (integer vectors) which take v into the box [3Xbox[0X. The box [3Xbox[0X has to
+  be given as a list of pairs.
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> TranslationsToBox([0,0],[[1/2,2/3],[1/2,2/3]]);[0X
+    [4X[  ][0X
+    [4Xgap> TranslationsToBox([0,0],[[-3/2,1/2],[1,4/3]]);[0X
+    [4X[ [ -1, 1 ], [ 0, 1 ] ][0X
+    [4Xgap> TranslationsToBox([0,0],[[-3/2,1/2],[2,1]]);[0X
+    [4XError, Box must not be empty called from[0X
+    [4X...[0X
+  [4X------------------------------------------------------------------[0X
+  

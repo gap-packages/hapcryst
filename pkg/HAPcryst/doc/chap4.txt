@@ -1,0 +1,270 @@
+  
+  [1X4. Resolutions of Crystallographic Groups[0X
+  
+  
+  [1X4.1 Fundamental Domains[0X
+  
+  Let  S  be a crystallographic group. A Fundamental domain is a closed convex
+  set  containing  a  system  of  representatives  for  the Orbits of S in its
+  natural action on euclidian space.
+  There  are  two  algorithms for calculating fundamental domains in [5XHAPcryst[0X.
+  One  uses the geometry and relies on having the standard rule for evaluating
+  the  scalar product (i.e. the gramian matrix is the identity). The other one
+  is  independent  of  the  gramian  matrix  but does only work for Bieberbach
+  groups,   while  the  first  ("geometric")  algorithm  works  for  arbitrary
+  crystallographic groups given a point with trivial stabilizer.
+  
+  [1X4.1-1 FundamentalDomainStandardSpaceGroup[0X
+  
+  [2X> FundamentalDomainStandardSpaceGroup( [0X[3X[v][,]G[0X[2X ) _____________________[0Xmethod
+  [2X> FundamentalDomainStandardSpaceGroup( [0X[3Xv, G[0X[2X ) ________________________[0Xmethod
+  [6XReturns:[0X  a [9XPolymakeObject[0X
+  
+  Let  [3XG[0X  be  an  [9XAffineCrystGroupOnRight[0X and [3Xv[0X a vector. A fundamental domain
+  containing [3Xv[0X is calculated and returned as a [9XPolymakeObject[0X. The vector [3Xv[0X is
+  used  as the starting point for a Dirichlet-Voronoi construction. If no [3Xv[0X is
+  given and [3XG[0X is a Bieberbach group, the origin in used as starting point.
+  The  method  for  this  calculation is chosen automatically depending on the
+  group.  The Gram-independent algorithm (see [2XFundamentalDomainBieberbachGroup[0X
+  ([14X4.1-2[0X)) is used whenever possible.
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> fd:=FundamentalDomainStandardSpaceGroup([1/2,0,1/5],SpaceGroup(3,9));[0X
+    [4X<polymake object>[0X
+    [4Xgap> Polymake(fd,"N_VERTICES");[0X
+    [4X24[0X
+    [4Xgap> fd:=FundamentalDomainStandardSpaceGroup(SpaceGroup(3,9));[0X
+    [4X<polymake object>[0X
+    [4Xgap> Polymake(fd,"N_VERTICES");[0X
+    [4X8[0X
+  [4X------------------------------------------------------------------[0X
+  
+  [1X4.1-2 FundamentalDomainBieberbachGroup[0X
+  
+  [2X> FundamentalDomainBieberbachGroup( [0X[3XG[0X[2X ) ______________________________[0Xmethod
+  [2X> FundamentalDomainBieberbachGroup( [0X[3Xv, G[, gram][0X[2X ) ___________________[0Xmethod
+  [6XReturns:[0X  a [9XPolymakeObject[0X
+  
+  Given  a  starting  vector [3Xv[0X and a Bieberbach group [3XG[0X in standard form, this
+  method  calculates  the  Dirichlet  domain with respect to [3Xv[0X. If [3Xgram[0X is not
+  supplied,     the     average     gramian     matrix     is     used    (see
+  [2XGramianOfAverageScalarProductFromFiniteMatrixGroup[0X   ([14X2.3-1[0X)).   It  is  not
+  tested if [3Xgram[0X is symmetric and positive definite. It is also not tested, if
+  the product defined by [3Xgram[0X is invariant under the point group of [3XG[0X.
+  
+  The  behaviour  of  this function is influenced by the option [9XineqThreshold[0X.
+  The   algorithm   calculates  approximations  to  a  fundamental  domain  by
+  iteratively  adding  inequalities.  For  an  approximating polyhedron, every
+  vertex  is  tested  to  find  new  inequalities. When all vertices have been
+  considered or the number of new inequalities already found exceeds the value
+  of  [9XineqThreshold[0X, a new approximating polyhedron in calculated. The default
+  for [9XineqThreshold[0X is 200. Roughly speaking, a large threshold means shifting
+  work  from  [9Xpolymake[0X  to [5XGAP[0X, a small one means more calls of (and work for)
+  [9Xpolymake[0X.
+  
+  If  the  value  of [2XInfoHAPcryst[0X ([14X1.3-1[0X) is 2 or more, for each approximation
+  the  number  of  vertices  of the approximation, the number of vertices that
+  have  to be considered during the calculation, the number of facets, and new
+  inequalities is shown.
+  
+  Note  that  the  algorithm  chooses vertices in random order and also writes
+  inequalities for [9Xpolymake[0X in random order.
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> a0:=[[ 1, 0, 0, 0, 0, 0, 0 ], [ 0, -1, 0, 0, 0, 0, 0 ], [0X
+    [4X>     [ 0, 0, 1, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0, 0 ], [0X
+    [4X>     [ 0, 0, 0, 0, 0, 1, 0 ], [ 0, 0, 0, 0, -1, -1, 0 ],[0X
+    [4X>     [ -1/2, 0, 0, 1/6, 0, 0, 1 ] [0X
+    [4X>     ];;[0X
+    [4Xgap> a1:=[[ 0, -1, 0, 0, 0, 0, 0 ],[ 0, 0, -1, 0, 0, 0, 0 ],[0X
+    [4X>         [ 1, 0, 0, 0, 0, 0, 0 ], [ 0, 0, 0, 1, 0, 0, 0 ], [0X
+    [4X>         [ 0, 0, 0, 0, 1, 0, 0 ], [ 0, 0, 0, 0, 0, 1, 0 ],[0X
+    [4X>         [ 0, 0, 0, 0, 1/3, -1/3, 1 ] [0X
+    [4X>        ];;[0X
+    [4Xgap> trans:=List(Group((1,2,3,4,5,6)),g->[0X
+    [4X>           TranslationOnRightFromVector(Permuted([1,0,0,0,0,0],g)));;[0X
+    [4Xgap> S:=AffineCrystGroupOnRight(Concatenation(trans,[a0,a1]));[0X
+    [4X<matrix group with 8 generators>[0X
+    [4Xgap> SetInfoLevel(InfoHAPcryst,2);[0X
+    [4Xgap> FundamentalDomainBieberbachGroup(S:ineqThreshold:=10);[0X
+    [4X#I  v: 104/104 f:15[0X
+    [4X#I  new: 201[0X
+    [4X#I  v: 961/961 f:58[0X
+    [4X#I  new: 20[0X
+    [4X#I  v: 1143/805 f:69[0X
+    [4X#I  new: 12[0X
+    [4X#I  v: 1059/555 f:64[0X
+    [4X#I  new: 15[0X
+    [4X#I  v: 328/109 f:33[0X
+    [4X#I  new: 12[0X
+    [4X#I  v: 336/58 f:32[0X
+    [4X#I  new: 0[0X
+    [4X<polymake object>[0X
+    [4Xgap> FundamentalDomainBieberbachGroup(S:ineqThreshold:=1000);[0X
+    [4X#I  v: 104/104 f:15[0X
+    [4X#I  new: 149[0X
+    [4X#I  v: 635/635 f:41[0X
+    [4X#I  new: 115[0X
+    [4X#I  v: 336/183 f:32[0X
+    [4X#I  new: 0[0X
+    [4X#I  out of inequalities[0X
+    [4X<polymake object>[0X
+  [4X------------------------------------------------------------------[0X
+  
+  [1X4.1-3 FundamentalDomainFromGeneralPointAndOrbitPartGeometric[0X
+  
+  [2X> FundamentalDomainFromGeneralPointAndOrbitPartGeometric( [0X[3Xv, orbit[0X[2X ) _[0Xmethod
+  [6XReturns:[0X  a [9XPolymakeObject[0X
+  
+  Let  [3Xv[0X  be  a  vector  and [3Xorbit[0X a sufficiently large part of the orbit of [3Xv[0X
+  under  a  crystallographic  group  with  standard-  orthogonal  point  group
+  (satisfying  A^t=A^-1).  A geometric algorithm is then used to calculate the
+  Dirichlet  domain  with  respect  to [3Xv[0X. This also works for crystallographic
+  groups which are not Bieberbach. The point [3Xv[0X has to have trivial stabilizer.
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> G:=SpaceGroup(3,9);;[0X
+    [4Xgap> v:=[0,0,0];[0X
+    [4X[ 0, 0, 0 ][0X
+    [4Xgap> orbit:=OrbitStabilizerInUnitCubeOnRight(G,v).orbit;[0X
+    [4X[ [ 0, 0, 0 ], [ 0, 0, 1/2 ] ][0X
+    [4Xgap> fd:=FundamentalDomainFromGeneralPointAndOrbitPartGeometric(v,orbit);[0X
+    [4X<polymake object>[0X
+    [4Xgap> Polymake(fd,"N_VERTICES");[0X
+    [4X8[0X
+  [4X------------------------------------------------------------------[0X
+  
+  [1X4.1-4 IsFundamentalDomainStandardSpaceGroup[0X
+  
+  [2X> IsFundamentalDomainStandardSpaceGroup( [0X[3Xpoly, G[0X[2X ) ___________________[0Xmethod
+  [6XReturns:[0X  true or false
+  
+  This  tests  if a [9XPolymakeObject[0X [3Xpoly[0X is a fundamental domain for the affine
+  crystallographic group [3XG[0X in standard form.
+  The  function  tests  the  following: First, does the orbit of any vertex of
+  [3Xpoly[0X  have  a  point  inside  [3Xpoly[0X (if this is the case, [10Xfalse[0X is returned).
+  Second:  Is every facet of [3Xpoly[0X the image of a different facet under a group
+  element which does not fix [3Xpoly[0X. If this is satisfied, [10Xtrue[0X is returned.
+  
+  
+  [1X4.2 Face Lattice and Resolution[0X
+  
+  For  Bieberbach groups (torsion free crystallographic groups), the following
+  functions  calcualte free resolutions. This calculation is done by finding a
+  fundamental  domain  for  the  group. For a description of the [9XHapResolution[0X
+  datatype, see the [5XHap[0X data types documentation or the experimental datatypes
+  documentation [14XResolutions in Hap???[0X
+  
+  [1X4.2-1 ResolutionBieberbachGroup[0X
+  
+  [2X> ResolutionBieberbachGroup( [0X[3XG[, v][0X[2X ) ________________________________[0Xmethod
+  [6XReturns:[0X  a [9XHAPresolution[0X
+  
+  Let  [3XG[0X  be  a  Bieberbach  group given as an [9XAffineCrystGroupOnRight[0X and [3Xv[0X a
+  vector.  Then  a  Dirichlet  domain  with  respect  to [3Xv[0X is calculated using
+  [2XFundamentalDomainBieberbachGroup[0X  ([14X4.1-2[0X). From this domain, a resolution is
+  calculated    using    [2XFaceLatticeAndBoundaryBieberbachGroup[0X   ([14X4.2-2[0X)   and
+  [2XResolutionFromFLandBoundary[0X ([14X4.2-3[0X). If [3Xv[0X is not given, the origin is used.
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> R:=ResolutionBieberbachGroup(SpaceGroup(3,9));[0X
+    [4XResolution of length 3 in characteristic[0X
+    [4X0 for SpaceGroupOnRightBBNWZ( 3, 2, 2, 2, 2 ) .[0X
+    [4XNo contracting homotopy available.[0X
+    [4X[0X
+    [4Xgap> List([0..3],Dimension(R));[0X
+    [4X[ 1, 3, 3, 1 ][0X
+    [4Xgap> R:=ResolutionBieberbachGroup(SpaceGroup(3,9),[1/2,0,0]);[0X
+    [4XResolution of length 3 in characteristic[0X
+    [4X0 for SpaceGroupOnRightBBNWZ( 3, 2, 2, 2, 2 ) .[0X
+    [4XNo contracting homotopy available.[0X
+    [4X[0X
+    [4Xgap> List([0..3],Dimension(R));[0X
+    [4X[ 6, 12, 7, 1 ][0X
+    [4X[0X
+  [4X------------------------------------------------------------------[0X
+  
+  [1X4.2-2 FaceLatticeAndBoundaryBieberbachGroup[0X
+  
+  [2X> FaceLatticeAndBoundaryBieberbachGroup( [0X[3Xpoly, group[0X[2X ) _______________[0Xmethod
+  [6XReturns:[0X  Record  with  entries  [9X.hasse[0X and [9X.elts[0X representing a part of the
+            hasse diagram and a lookup table of group elements
+  
+  Let  [3Xgroup[0X  be a torsion free [9XAffineCrystGroupOnRight[0X (that is, a Bieberbach
+  group).  Given  a  [9XPolymakeObject[0X [3Xpoly[0X representing a fundamental domain for
+  [3Xgroup[0X,  this  method  uses [5Xpolymaking[0X to calculate the face lattice of [3Xpoly[0X.
+  From  the  set  of  faces,  a system of representatives for [3Xgroup[0X- orbits is
+  chosen.  For  each representative, the boundary is then calculated. The list
+  [9X.elts[0X  contains elements of [3Xgroup[0X (in fact, it is even a set). The structure
+  of the returned list [9X.hasse[0X is as follows:
+  
+  --    The  i-th  entry  contains  a  system  of  representatives for the i-1
+        dimensional faces of [3Xpoly[0X.
+  
+  --    Each  face  is represented by a pair of lists [10X[vertices,boundary][0X. The
+        list  of  integers  [10Xvertices[0X represents the vertices of [3Xpoly[0X which are
+        contained  in  this  face. The enumeration is chosen such that an [10Xi[0X in
+        the    list    represents    the    i-th    entry    of    the    list
+        [10XPolymake(poly,"VERTICES");[0X
+  
+  --    The  list  [10Xboundary[0X represents the boundary of the respective face. It
+        is  a list of pairs of integers [10X[j,g][0X. The first entry lies between -n
+        and  n,  where  n  is the number of faces of dimension i-1. This entry
+        represents  a  face  of  dimension  i-1  (or its additive inverse as a
+        module generator). The second entry [10Xg[0X is the position of the matrix in
+        [9X.elts[0X.
+  
+  This  representation  is  compatible  with  the  representation  of free Z G
+  modules  in  [5XHap[0X and this method essentially calculates a free resolution of
+  [3Xgroup[0X.  If  the  value  of  [2XInfoHAPcryst[0X  ([14X1.3-1[0X)  is  2 or more, additional
+  information  about  the  number of faces in every codimension, the number of
+  orbits  of  the  group  on the free module generated by those faces, and the
+  time it took to calculate the orbit decomposition is output.
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> SetInfoLevel(InfoHAPcryst,2);[0X
+    [4Xgap> G:=SpaceGroup(3,165);[0X
+    [4XSpaceGroupOnRightBBNWZ( 3, 6, 1, 1, 4 )[0X
+    [4Xgap> fd:=FundamentalDomainBieberbachGroup(G);[0X
+    [4X<polymake object>[0X
+    [4Xgap> fl:=FaceLatticeAndBoundaryBieberbachGroup(fd,G);;[0X
+    [4X#I  1(4/8): 0:00:00.004[0X
+    [4X#I  2(5/18): 0:00:00.000[0X
+    [4X#I  3(2/12): 0:00:00.000[0X
+    [4X#I  Face lattice done ( 0:00:00.004). Calculating boundary[0X
+    [4X#I  done ( 0:00:00.004) Reformating...[0X
+    [4Xgap> RecNames(fl);[0X
+    [4X[ "hasse", "elts", "groupring" ][0X
+    [4Xgap> fl.groupring;[0X
+    [4X<free left module over Integers, and ring-with-one, with 10 generators>[0X
+  [4X------------------------------------------------------------------[0X
+  
+  [1X4.2-3 ResolutionFromFLandBoundary[0X
+  
+  [2X> ResolutionFromFLandBoundary( [0X[3Xfl, group[0X[2X ) ___________________________[0Xmethod
+  [6XReturns:[0X  Free resolution
+  
+  If  [3Xfl[0X is the record output by [2XFaceLatticeAndBoundaryBieberbachGroup[0X ([14X4.2-2[0X)
+  and [3Xgroup[0X is the corresponding group, this function returns a [9XHapResolution[0X.
+  Of course, [3Xfl[0X has to be generated from a fundamental domain for [3Xgroup[0X
+  
+  [4X---------------------------  Example  ----------------------------[0X
+    [4Xgap> G:=SpaceGroup(3,165);[0X
+    [4XSpaceGroupOnRightBBNWZ( 3, 6, 1, 1, 4 )[0X
+    [4Xgap> fd:=FundamentalDomainBieberbachGroup(G);[0X
+    [4X<polymake object>[0X
+    [4Xgap> fl:=FaceLatticeAndBoundaryBieberbachGroup(fd,G);;[0X
+    [4Xgap> ResolutionFromFLandBoundary(fl,G);[0X
+    [4XResolution of length 3 in characteristic[0X
+    [4X0 for SpaceGroupOnRightBBNWZ( 3, 6, 1, 1, 4 ) .[0X
+    [4XNo contracting homotopy available.[0X
+    [4X[0X
+    [4Xgap> ResolutionFromFLandBoundary(fl,G);[0X
+    [4XResolution of length 3 in characteristic[0X
+    [4X0 for SpaceGroupOnRightBBNWZ( 3, 6, 1, 1, 4 ) .[0X
+    [4XNo contracting homotopy available.[0X
+    [4X[0X
+    [4Xgap> List([0..4],Dimension(last));[0X
+    [4X[ 2, 5, 4, 1, 0 ][0X
+  [4X------------------------------------------------------------------[0X
+  

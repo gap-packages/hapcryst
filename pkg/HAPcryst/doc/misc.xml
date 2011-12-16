@@ -1,0 +1,220 @@
+This chapter contains a few very basic functions which are needed for space
+group calculations and were missing in standard &GAP;.
+
+<Section><Heading>Matrices and Vectors</Heading>
+
+<ManSection>
+  <Meth Name="SignRat" Arg="x" />
+  <Returns> sign of the rational number <Arg>x</Arg> (Standard &GAP;
+  currently only has <C>SignInt</C>).
+</Returns>
+</ManSection>
+
+<ManSection>
+  <Meth Name="VectorModOne" Arg="v"/>
+<Returns>Rational vector of the same length with enties in <M>[0,1)</M></Returns>
+ <Description>
+  For a rational vector <Arg>v</Arg>, this returns the vector with all entries
+  taken "mod 1".
+ </Description>
+</ManSection>
+
+<Example>
+gap> SignRat((-4)/(-2));
+1
+gap> SignRat(9/(-2));
+-1
+gap> VectorModOne([1/10,100/9,5/6,6/5]);
+[ 1/10, 1/9, 5/6, 1/5 ]
+</Example>
+
+<ManSection>
+  <Meth Name="IsSquareMat" Arg="matrix"/>
+ <Returns>
+  <K>true</K> if <Arg>matrix</Arg> is a square matrix and <K>false</K> otherwise.
+ </Returns>
+</ManSection>
+
+
+<ManSection>
+  <Meth Name="DimensionSquareMat" Arg="matrix"/>
+  <Returns>Number of lines in the matrix <Arg>matrix</Arg> if it is square and
+   <K>fail</K> otherwise
+  </Returns>
+</ManSection>
+
+<Example>
+gap> m:=[[1,2,3],[4,5,6],[9,6,12]];
+[ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 9, 6, 12 ] ]
+gap> IsSquareMat(m);
+true
+gap> DimensionSquareMat(m);
+3
+gap> DimensionSquareMat([[1,2],[1,2,3]]);
+Error, Matrix is not square called from
+</Example>
+
+Affine mappings of <M>n</M> dimensional space are often written as a
+pair <M>(A,v)</M> where <M>A</M> is a linear mapping and <M>v</M> is a
+vector. &GAP; represents affine mappings by <M>n+1</M> times
+<M>n+1</M> matrices <M>M</M> which satisfy <M>M_{{n+1,n+1}}=1</M> and
+<M>M_{{i,n+1}}=0</M> for all <M>1\leq i \leq n</M>.<P></P>
+
+An affine matrix acts on an <M>n</M> dimensional space which is
+written as a space of <M>n+1</M> tuples with <M>n+1</M>st entry
+<M>1</M>.  Here we give two functions to handle these affine matrices.
+
+</Section>
+
+<Section><Heading>Affine Matrices OnRight</Heading>
+
+<ManSection>
+    <Meth Name="LinearPartOfAffineMatOnRight" Arg="mat"/>
+  <Returns>the linear part of the affine matrix <Arg>mat</Arg>. That
+   is, everything except for the last row and column.</Returns>
+</ManSection>
+
+ <ManSection>
+    <Meth Name="BasisChangeAffineMatOnRight" Arg="transform, mat"/>
+<Returns>affine matrix with same dimensions as <Arg>mat</Arg></Returns>
+  <Description>
+   A basis change <Arg>transform</Arg> of an <M>n</M> dimensional
+   space induces a transformation on affine mappings on this space.
+   If <Arg>mat</Arg> is a affine matrix (in particular, it is
+   <M>(n+1)\times (n+1)</M>), this method returns the image of
+  <Arg>mat</Arg> under the basis transformation induced by
+  <Arg>transform</Arg>.
+ </Description>
+</ManSection>
+
+<Example>
+gap> c:=[[0,1],[1,0]];
+[ [ 0, 1 ], [ 1, 0 ] ]
+gap> m:=[[1/2,0,0],[0,2/3,0],[1,0,1]];
+[ [ 1/2, 0, 0 ], [ 0, 2/3, 0 ], [ 1, 0, 1 ] ]
+gap> BasisChangeAffineMatOnRight(c,m);
+[ [ 2/3, 0, 0 ], [ 0, 1/2, 0 ], [ 0, 1, 1 ] ]
+</Example>
+
+
+ <ManSection>
+    <Meth Name="TranslationOnRightFromVector" Arg="v"/>
+<Returns>Affine matrix </Returns>
+  <Description>
+  Given a vector <Arg>v</Arg> with <M>n</M> entries, this method returns a
+  <M>(n+1)\times (n+1)</M> matrix which corresponds to the affine translation
+  defined by <Arg>v</Arg>.
+</Description>
+</ManSection>
+
+<Example>
+gap> m:=TranslationOnRightFromVector([1,2,3]);;
+gap> Display(m);
+[ [  1,  0,  0,  0 ],
+  [  0,  1,  0,  0 ],
+  [  0,  0,  1,  0 ],
+  [  1,  2,  3,  1 ] ]
+gap> LinearPartOfAffineMatOnRight(m);
+[ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ]
+gap> BasisChangeAffineMatOnRight([[3,2,1],[0,1,0],[0,0,1]],m);
+[ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ], [ 3, 4, 4, 1 ] ]
+</Example>
+
+</Section>
+
+<Section><Heading>Geometry</Heading>
+
+
+<ManSection>
+<Meth Name="GramianOfAverageScalarProductFromFiniteMatrixGroup" Arg="G"/>
+  <Returns>Symmetric positive definite matrix</Returns>
+  <Description>
+   For a finite matrix group <A>G</A>, the gramian matrix of the average scalar
+   product is returned. This is the sum over all <M>gg^t</M> with <M>g\in G</M>
+   (actually it is enough to take a generating set).
+   The group <A>G</A> is orthogonal with respect to the scalar product induced
+   by the returned matrix.
+  </Description>
+</ManSection>
+
+<Subsection><Heading>Inequalities</Heading>
+Inequalities are represented in the same way they are represented in 
+<Package>polymaking</Package>. The vector <M>(v_0,\ldots,v_n)</M>
+represents the inequality <M>0\leq v_0+v_1 x_1+\ldots + v_n x_n</M>.
+
+</Subsection>
+
+
+<ManSection>
+ <Meth Name="BisectorInequalityFromPointPair" Arg="v1, v2 [,gram]"/>
+  <Returns>vector of length <C>Length(v1)+1</C></Returns>
+  <Description>
+   Calculates the inequality defining the half-space containing <A>v1</A> such
+   that <C><A>v1</A>-<A>v2</A></C> is perpendicular on the bounding
+   hyperplane. And <C>(<A>v1</A>-<A>v2</A>)/2</C> is contained in the bounding
+   hyperplane.<Br/>
+   If the matrix <A>gram</A> is given, it is used as the gramian
+   matrix. Otherwiese, the standard scalar product is used. It is not checked
+   if <A>gram</A> is positive definite or symmetric.
+  </Description>
+</ManSection>
+
+
+<ManSection>
+  <Meth Name="WhichSideOfHyperplane" Arg="v, ineq"/>
+  <Meth Name="WhichSideOfHyperplaneNC" Arg="v, ineq"/>
+  <Returns>-1 (below) 0 (in) or 1 (above).</Returns>
+  <Description>
+   Let <A>v</A> be a vector of length <M>n</M> and <A>ineq</A> an inequality 
+   represented by a vector of length <M>n+1</M>.
+   Then <C>WhichSideOfHyperplane(<A>v, ineq</A>)</C> returns 1 if <A>v</A> is
+   a solution of the inequality but not the equation given by <A>ineq</A>, it
+   returns 0 if <A>v</A> is a solution to the equation and -1 if it is not a
+   solution of the inequality <A>ineq</A>.
+   <P/>
+   The NC version does not test the input for correctness.
+  </Description>
+</ManSection>
+
+<Example>
+gap> BisectorInequalityFromPointPair([0,0],[1,0]);
+[ 1, -2, 0 ]
+gap> ineq:=BisectorInequalityFromPointPair([0,0],[1,0],[[5,4],[4,5]]);
+[ 5, -10, -8 ]
+gap> ineq{[2,3]}*[1/2,0];
+-5
+gap> WhichSideOfHyperplane([0,0],ineq);
+1
+gap> WhichSideOfHyperplane([1/2,0],ineq);
+0
+</Example>
+
+<ManSection><Meth Name="RelativePositionPointAndPolygon" Arg="point, poly"/>
+  <Returns>one of <C>"VERTEX", "FACET", "OUTSIDE", "INSIDE"</C></Returns>
+  <Description>
+   Let <A>poly</A> be a <K>PolymakeObject</K> and <A>point</A> a vector. If
+   <A>point</A> is a vertex of <A>poly</A>, the string <C>"VERTEX"</C> is
+   returned. If <A>point</A> lies inside <A>poly</A>, <C>"INSIDE"</C> is
+   returned and if it lies in a facet, <C>"FACET"</C> is returned and if
+   <A>point</A> does not lie inside <A>poly</A>, the function returns 
+   <C>"OUTSIDE"</C>.
+  </Description>
+</ManSection>
+
+</Section>
+
+
+<Section><Heading>Space Groups</Heading>
+
+<ManSection><Attr Name="PointGroupRepresentatives" Arg="group"/>
+            <Meth Name="PointGroupRepresentatives" Arg="group"/>
+  <Returns>list of matrices</Returns>
+  <Description>
+   Given an <K>AffineCrystGroupOnLeftOrRight</K> <A>group</A>, this returns a
+   list of representatives of the point group of <A>group</A>. That is, a
+   system of representatives for the factor group modulo translations. This is
+   an attribute of <K>AffineCrystGroupOnLeftOrRight</K>
+  </Description>
+</ManSection>
+
+</Section>

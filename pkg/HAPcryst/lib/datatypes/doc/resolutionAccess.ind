@@ -1,0 +1,87 @@
+\begin{theindex}
+
+  \item \texttt  {BoundaryOfFreeZGLetter}, \hyperpage{8}
+  \item \texttt  {Boundary}\discretionary {-}{}{}\texttt  {Of}\discretionary {-}{}{}\texttt  {Free}\discretionary {-}{}{}\texttt  {Z}\discretionary {-}{}{}\texttt  {G}\discretionary {-}{}{}\texttt  {Letter{\textunderscore }}\discretionary {-}{}{}\texttt  {Large}\discretionary {-}{}{}\texttt  {GroupRep}, 
+		\hyperpage{13}
+  \item \texttt  {BoundaryOfFreeZGLetterNC}, \hyperpage{10}
+  \item \texttt  {Boundary}\discretionary {-}{}{}\texttt  {Of}\discretionary {-}{}{}\texttt  {Free}\discretionary {-}{}{}\texttt  {Z}\discretionary {-}{}{}\texttt  {G}\discretionary {-}{}{}\texttt  {Letter}\discretionary {-}{}{}\texttt  {N}\discretionary {-}{}{}\texttt  {C{\textunderscore }}\discretionary {-}{}{}\texttt  {Large}\discretionary {-}{}{}\texttt  {GroupRep}, 
+		\hyperpage{13}
+  \item \texttt  {BoundaryOfFreeZGWord}, \hyperpage{9}
+  \item \texttt  {Boundary}\discretionary {-}{}{}\texttt  {Of}\discretionary {-}{}{}\texttt  {Free}\discretionary {-}{}{}\texttt  {Z}\discretionary {-}{}{}\texttt  {G}\discretionary {-}{}{}\texttt  {Word{\textunderscore }}\discretionary {-}{}{}\texttt  {Large}\discretionary {-}{}{}\texttt  {GroupRep}, 
+		\hyperpage{13}
+  \item \texttt  {BoundaryOfFreeZGWordNC}, \hyperpage{11}
+  \item \texttt  {Boundary}\discretionary {-}{}{}\texttt  {Of}\discretionary {-}{}{}\texttt  {Generator{\textunderscore }}\discretionary {-}{}{}\texttt  {Large}\discretionary {-}{}{}\texttt  {GroupRep}, 
+		\hyperpage{12}
+  \item \texttt  {Boundary}\discretionary {-}{}{}\texttt  {Of}\discretionary {-}{}{}\texttt  {Generator}\discretionary {-}{}{}\texttt  {N}\discretionary {-}{}{}\texttt  {C{\textunderscore }}\discretionary {-}{}{}\texttt  {Large}\discretionary {-}{}{}\texttt  {GroupRep}, 
+		\hyperpage{12}
+
+  \indexspace
+
+  \item \texttt  {ConvertLetterToStandardRep}, \hyperpage{9}
+  \item \texttt  {ConvertLetterToStandardRepNC}, \hyperpage{9}
+  \item \texttt  {ConvertStandardLetter}, \hyperpage{9}
+  \item \texttt  {ConvertStandardLetterNC}, \hyperpage{9}
+  \item \texttt  {ConvertStandardWord}, \hyperpage{9}
+  \item \texttt  {ConvertStandardWordNC}, \hyperpage{9}
+  \item \texttt  {ConvertWordToStandardRep}, \hyperpage{9}
+  \item \texttt  {ConvertWordToStandardRepNC}, \hyperpage{9}
+
+  \indexspace
+
+  \item \texttt  {Generators}\discretionary {-}{}{}\texttt  {Of}\discretionary {-}{}{}\texttt  {Module}\discretionary {-}{}{}\texttt  {Of}\discretionary {-}{}{}\texttt  {Resolution{\textunderscore }}\discretionary {-}{}{}\texttt  {Large}\discretionary {-}{}{}\texttt  {GroupRep}, 
+		\hyperpage{12}
+  \item \texttt  {GroupElementFromPosition}, \hyperpage{8}
+  \item \texttt  {GroupRingOfResolution}, \hyperpage{11}
+
+  \indexspace
+
+  \item \texttt  {IsFreeZGLetter}, \hyperpage{10}
+  \item \texttt  {IsFree}\discretionary {-}{}{}\texttt  {Z}\discretionary {-}{}{}\texttt  {G}\discretionary {-}{}{}\texttt  {Letter{\textunderscore }}\discretionary {-}{}{}\texttt  {Large}\discretionary {-}{}{}\texttt  {GroupRep}, 
+		\hyperpage{12}
+  \item \texttt  {IsFree}\discretionary {-}{}{}\texttt  {Z}\discretionary {-}{}{}\texttt  {G}\discretionary {-}{}{}\texttt  {Letter}\discretionary {-}{}{}\texttt  {No}\discretionary {-}{}{}\texttt  {Term}\discretionary {-}{}{}\texttt  {Check{\textunderscore }}\discretionary {-}{}{}\texttt  {Large}\discretionary {-}{}{}\texttt  {GroupRep}, 
+		\hyperpage{11}
+  \item \texttt  {IsFreeZGWord}, \hyperpage{10}
+  \item \texttt  {IsFree}\discretionary {-}{}{}\texttt  {Z}\discretionary {-}{}{}\texttt  {G}\discretionary {-}{}{}\texttt  {Word{\textunderscore }}\discretionary {-}{}{}\texttt  {Large}\discretionary {-}{}{}\texttt  {GroupRep}, 
+		\hyperpage{12}
+  \item \texttt  {IsFree}\discretionary {-}{}{}\texttt  {Z}\discretionary {-}{}{}\texttt  {G}\discretionary {-}{}{}\texttt  {Word}\discretionary {-}{}{}\texttt  {No}\discretionary {-}{}{}\texttt  {Term}\discretionary {-}{}{}\texttt  {Check{\textunderscore }}\discretionary {-}{}{}\texttt  {Large}\discretionary {-}{}{}\texttt  {GroupRep}, 
+		\hyperpage{11}
+  \item \texttt  {IsValidGroupInt}, \hyperpage{8}
+
+  \indexspace
+
+  \item \texttt  {MultiplyFreeZGLetterWithGroupElt}, \hyperpage{8}
+  \item \texttt  {Multiply}\discretionary {-}{}{}\texttt  {Free}\discretionary {-}{}{}\texttt  {Z}\discretionary {-}{}{}\texttt  {G}\discretionary {-}{}{}\texttt  {Letter}\discretionary {-}{}{}\texttt  {With}\discretionary {-}{}{}\texttt  {Group}\discretionary {-}{}{}\texttt  {Elt{\textunderscore }}\discretionary {-}{}{}\texttt  {Large}\discretionary {-}{}{}\texttt  {GroupRep}, 
+		\hyperpage{12}
+  \item \texttt  {MultiplyFreeZGLetterWithGroupEltNC}, \hyperpage{10}
+  \item \texttt  {Multiply}\discretionary {-}{}{}\texttt  {Free}\discretionary {-}{}{}\texttt  {Z}\discretionary {-}{}{}\texttt  {G}\discretionary {-}{}{}\texttt  {Letter}\discretionary {-}{}{}\texttt  {With}\discretionary {-}{}{}\texttt  {Group}\discretionary {-}{}{}\texttt  {Elt}\discretionary {-}{}{}\texttt  {N}\discretionary {-}{}{}\texttt  {C{\textunderscore }}\discretionary {-}{}{}\texttt  {Large}\discretionary {-}{}{}\texttt  {GroupRep}, 
+		\hyperpage{12}
+  \item \texttt  {MultiplyFreeZGWordWithGroupElt}, \hyperpage{8}
+  \item \texttt  {Multiply}\discretionary {-}{}{}\texttt  {Free}\discretionary {-}{}{}\texttt  {Z}\discretionary {-}{}{}\texttt  {G}\discretionary {-}{}{}\texttt  {Word}\discretionary {-}{}{}\texttt  {With}\discretionary {-}{}{}\texttt  {Group}\discretionary {-}{}{}\texttt  {Elt{\textunderscore }}\discretionary {-}{}{}\texttt  {Large}\discretionary {-}{}{}\texttt  {GroupRep}, 
+		\hyperpage{12}
+  \item \texttt  {MultiplyFreeZGWordWithGroupEltNC}, \hyperpage{10}
+  \item \texttt  {Multiply}\discretionary {-}{}{}\texttt  {Free}\discretionary {-}{}{}\texttt  {Z}\discretionary {-}{}{}\texttt  {G}\discretionary {-}{}{}\texttt  {Word}\discretionary {-}{}{}\texttt  {With}\discretionary {-}{}{}\texttt  {Group}\discretionary {-}{}{}\texttt  {Elt}\discretionary {-}{}{}\texttt  {N}\discretionary {-}{}{}\texttt  {C{\textunderscore }}\discretionary {-}{}{}\texttt  {Large}\discretionary {-}{}{}\texttt  {GroupRep}, 
+		\hyperpage{12}
+  \item \texttt  {MultiplyGroupElts}, \hyperpage{8}
+  \item \texttt  {Multiply}\discretionary {-}{}{}\texttt  {Group}\discretionary {-}{}{}\texttt  {Elts{\textunderscore }}\discretionary {-}{}{}\texttt  {Large}\discretionary {-}{}{}\texttt  {GroupRep}, 
+		\hyperpage{11}
+  \item \texttt  {MultiplyGroupEltsNC}, \hyperpage{10}
+  \item \texttt  {Multiply}\discretionary {-}{}{}\texttt  {Group}\discretionary {-}{}{}\texttt  {Elts}\discretionary {-}{}{}\texttt  {N}\discretionary {-}{}{}\texttt  {C{\textunderscore }}\discretionary {-}{}{}\texttt  {Large}\discretionary {-}{}{}\texttt  {GroupRep}, 
+		\hyperpage{11}
+
+  \indexspace
+
+  \item \texttt  {PartialContractingHomotopyLookup}, \hyperpage{14}
+  \item \texttt  {PartialContractingHomotopyLookupNC}, \hyperpage{14}
+  \item \texttt  {PositionInGroupOfResolution}, \hyperpage{7}
+  \item \texttt  {PositionInGroupOfResolutionNC}, \hyperpage{7}
+
+  \indexspace
+
+  \item \texttt  {ResolutionOfContractingHomotopy}, \hyperpage{14}
+
+  \indexspace
+
+  \item \texttt  {StrongestValidRepresentationForLetter}, \hyperpage{7}
+  \item \texttt  {StrongestValidRepresentationForWord}, \hyperpage{7}
+
+\end{theindex}
