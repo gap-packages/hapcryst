@@ -23,10 +23,8 @@
   Let  [3XG[0X  be  an  [9XAffineCrystGroupOnRight[0X and [3Xv[0X a vector. A fundamental domain
   containing [3Xv[0X is calculated and returned as a [9XPolymakeObject[0X. The vector [3Xv[0X is
   used  as the starting point for a Dirichlet-Voronoi construction. If no [3Xv[0X is
-  given and [3XG[0X is a Bieberbach group, the origin in used as starting point.
-  The  method  for  this  calculation is chosen automatically depending on the
-  group.  The Gram-independent algorithm (see [2XFundamentalDomainBieberbachGroup[0X
-  ([14X4.1-2[0X)) is used whenever possible.
+  given,  the  origin  is used as starting point if it has trivial stabiliser.
+  Otherwise an error is cast.
   
   [4X---------------------------  Example  ----------------------------[0X
     [4Xgap> fd:=FundamentalDomainStandardSpaceGroup([1/2,0,1/5],SpaceGroup(3,9));[0X
@@ -116,11 +114,15 @@
   [2X> FundamentalDomainFromGeneralPointAndOrbitPartGeometric( [0X[3Xv, orbit[0X[2X ) _[0Xmethod
   [6XReturns:[0X  a [9XPolymakeObject[0X
   
-  Let  [3Xv[0X  be  a  vector  and [3Xorbit[0X a sufficiently large part of the orbit of [3Xv[0X
-  under  a  crystallographic  group  with  standard-  orthogonal  point  group
-  (satisfying  A^t=A^-1).  A geometric algorithm is then used to calculate the
-  Dirichlet  domain  with  respect  to [3Xv[0X. This also works for crystallographic
-  groups which are not Bieberbach. The point [3Xv[0X has to have trivial stabilizer.
+  This  uses an alternative algorithm based on geometric considerations. It is
+  not  used  in  any  of the high-level methods. Let [3Xv[0X be a vector and [3Xorbit[0X a
+  sufficiently  large  part  of  the orbit of [3Xv[0X under a crystallographic group
+  with  standard-  orthogonal  point  group (satisfying A^t=A^-1). A geometric
+  algorithm  is then used to calculate the Dirichlet domain with respect to [3Xv[0X.
+  This  also  works  for crystallographic groups which are not Bieberbach. The
+  point [3Xv[0X has to have trivial stabilizer.
+  The  intersection  of  the  full  orbit  with  the  unit  cube  around  [3Xv[0X is
+  sufficiently large.
   
   [4X---------------------------  Example  ----------------------------[0X
     [4Xgap> G:=SpaceGroup(3,9);;[0X
@@ -145,6 +147,22 @@
   [3Xpoly[0X  have  a  point  inside  [3Xpoly[0X (if this is the case, [10Xfalse[0X is returned).
   Second:  Is every facet of [3Xpoly[0X the image of a different facet under a group
   element which does not fix [3Xpoly[0X. If this is satisfied, [10Xtrue[0X is returned.
+  
+  [1X4.1-5 IsFundamentalDomainBieberbachGroup[0X
+  
+  [2X> IsFundamentalDomainBieberbachGroup( [0X[3Xpoly, G[0X[2X ) ______________________[0Xmethod
+  [6XReturns:[0X  true, false or fail
+  
+  This  tests  if a [9XPolymakeObject[0X [3Xpoly[0X is a fundamental domain for the affine
+  crystallographic  group [3XG[0X in standard form and if this group is torsion free
+  (ie a Bieberbach group)
+  It returns [9Xtrue[0X if [3XG[0X is torsion free and [3Xpoly[0X is a fundamental domain for [3XG[0X.
+  If  [3Xpoly[0X  is  not  a fundamental domain, [9Xfalse[0X is returned regardless of the
+  structure  of [3XG[0X. And if [3XG[0X is not torsion free, the method returns [9Xfail[0X. If [3XG[0X
+  is  polycyclic,  torsion  freeness  is  tested using a representation as pcp
+  group. Otherwise the stabilisers of the faces of the fundamental domain [3Xpoly[0X
+  are  calculated  ([3XG[0X  is torsion free if and only if it all these stabilisers
+  are trivial).
   
   
   [1X4.2 Face Lattice and Resolution[0X

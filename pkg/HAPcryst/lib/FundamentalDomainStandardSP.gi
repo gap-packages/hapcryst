@@ -5,7 +5,7 @@
 ##  
 
 ##
-#H @(#)$Id: FundamentalDomainStandardSP.gi, v 0.1.7 2008/08/13 12:11:22 gap Exp $
+#H @(#)$Id: FundamentalDomainStandardSP.gi, v 0.1.8 2008/12/02 18:18:33 gap Exp $
 ##
 #Y	 Copyright (C) 2006 Marc Roeder 
 #Y 
@@ -24,7 +24,7 @@
 #Y Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
 Revision.("/home/roeder/gap/HAPcryst/HAPcryst/lib/FundamentalDomainStandardSP_gi"):=
-	"@(#)$Id: FundamentalDomainStandardSP.gi, v 0.1.7 2008/08/13   12:11:22  gap Exp $";
+	"@(#)$Id: FundamentalDomainStandardSP.gi, v 0.1.8 2008/12/02   18:18:33  gap Exp $";
 ########################################################################
 ########################################################################
 ####                                                                ####
@@ -150,7 +150,7 @@ reducePolytope:=function(poly,center,offset,signvectors,radiussquare,orbitpart)
     if inequalities <> []
        then
         UniteSet(inequalities,Polymake(poly,"FACETS"));
-        ClearPolymakeObject(poly);
+        ClearPolymakeObject(poly,["polytope","2.3","RationalPolytope"]);
         AppendInequalitiesToPolymakeObject(poly,inequalities);
         Polymake(poly,"VERTICES FACETS");
         if InfoLevel(InfoHAPcryst)>1
@@ -168,7 +168,10 @@ initialPolytope:=function(center)
     local   dim,  poly,  signvectors,  cubevertices;
     
     dim:=Size(center);
-    poly:=CreatePolymakeObject("partialFD",POLYMAKE_DATA_DIR);
+    poly:=CreatePolymakeObject("partialFD",
+                  POLYMAKE_DATA_DIR,
+                  ["polytope","2.3","RationalPolytope"]
+                  );
     signvectors:=Tuples([-1,1],dim);
     cubevertices:=(1/2*signvectors)+center;
     

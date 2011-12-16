@@ -4,7 +4,7 @@
                                [1Xstructures of Hap[0X
   
   
-                     ( development version of 13.08.2008 )
+                     ( development version of 02.12.2008 )
   
   
                                    Marc Röder

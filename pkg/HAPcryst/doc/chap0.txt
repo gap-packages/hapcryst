@@ -3,7 +3,7 @@
    [1X[5XHAPcryst[0X – An extension of the [5XGAP[0X package [5XHAP[0X for crystallographic groups[0X
   
   
-                               ( Version 0.1.7 )
+                               ( Version 0.1.8 )
   
   
                                    Marc Röder
@@ -11,7 +11,7 @@
   
   
   Marc Röder
-      Email:    [7Xmailto:marc.roeder(at)nuigalway.ie[0X
+      Email:    [7Xmailto:marc_roeder(at)web.de[0X
   
   
   Address: Marc Röder, Department of Mathematics, NUI Galway, Irleland
@@ -83,6 +83,7 @@
       4.1-2 FundamentalDomainBieberbachGroup
       4.1-3 FundamentalDomainFromGeneralPointAndOrbitPartGeometric
       4.1-4 IsFundamentalDomainStandardSpaceGroup
+      4.1-5 IsFundamentalDomainBieberbachGroup
     4.2 Face Lattice and Resolution
       4.2-1 ResolutionBieberbachGroup
       4.2-2 FaceLatticeAndBoundaryBieberbachGroup

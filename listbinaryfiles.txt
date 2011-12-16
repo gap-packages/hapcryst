@@ -1,1 +1,2 @@
 HAPcryst/doc/manual.pdf
+HAPcryst/examples/3dimBieberbachFD.gap~

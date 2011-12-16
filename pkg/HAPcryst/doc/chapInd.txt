@@ -16,6 +16,7 @@
   ineqThreshold  4.1-2
   [2XInfoHAPcryst[0X  1.3-1
   installation  1.2
+  [2XIsFundamentalDomainBieberbachGroup[0X  4.1-5
   [2XIsFundamentalDomainStandardSpaceGroup[0X  4.1-4
   [2XIsSquareMat[0X  2.1-3
   [2XLinearPartOfAffineMatOnRight[0X  2.2-1

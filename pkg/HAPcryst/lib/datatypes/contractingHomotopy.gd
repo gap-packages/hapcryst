@@ -5,7 +5,7 @@
 ##  
 
 ##
-#H @(#)$Id: contractingHomotopy.gd, v 0.1.7 2008/08/13 12:11:22 gap Exp $
+#H @(#)$Id: contractingHomotopy.gd, v 0.1.8 2008/12/02 18:18:33 gap Exp $
 ##
 #Y	 Copyright (C) 2006 Marc Roeder 
 #Y 
@@ -24,7 +24,7 @@
 #Y Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
 Revision.("/home/roeder/gap/HAPcryst/HAPcryst/lib/datatypes/contractingHomotopy_gd"):=
-	"@(#)$Id: contractingHomotopy.gd, v 0.1.7 2008/08/13   12:11:22  gap Exp $";
+	"@(#)$Id: contractingHomotopy.gd, v 0.1.8 2008/12/02   18:18:33  gap Exp $";
 #############################################################################
 ##
 ##  "knownPartOfHomotopy" is a list of records with components

@@ -5,7 +5,7 @@
 ##  
 
 ##
-#H @(#)$Id: FundamentalDomain.gi, v 0.1.7 2008/08/13 12:11:22 gap Exp $
+#H @(#)$Id: FundamentalDomain.gi, v 0.1.8 2008/12/02 18:18:33 gap Exp $
 ##
 #Y	 Copyright (C) 2006 Marc Roeder 
 #Y 
@@ -24,7 +24,7 @@
 #Y Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
 Revision.("/home/roeder/gap/HAPcryst/HAPcryst/lib/FundamentalDomain_gi"):=
-	"@(#)$Id: FundamentalDomain.gi, v 0.1.7 2008/08/13   12:11:22  gap Exp $";
+	"@(#)$Id: FundamentalDomain.gi, v 0.1.8 2008/12/02   18:18:33  gap Exp $";
 #############################################################################
 ##
 #O FundamentalDomainStandardSpaceGroup
@@ -38,19 +38,7 @@ InstallMethod(FundamentalDomainStandardSpaceGroup,
         Error("group must be a StandardSpaceGroup acting on right");
     fi;
     dim:=DimensionOfMatrixGroup(group)-1;
-
-    if not IsAlmostBieberbachGroup(Image(IsomorphismPcpGroup(group)))
-       then
-        if GramianOfAverageScalarProductFromFiniteMatrixGroup(PointGroup(group))
-           <>IdentityMat(dim)
-           then
-            Error("can only handle non-Bieberbach groups with standard-orthogonal point group. Please do also provide a general point.");
-        else
-            Error("group is not Bieberbach. Please provide a general point");
-        fi;
-    else
-        return FundamentalDomainBieberbachGroup(List([1..dim],i->0),group,IdentityMat(dim));
-    fi;
+    return FundamentalDomainStandardSpaceGroup(0*[1..dim],group);
 end);
 
 
@@ -68,24 +56,14 @@ InstallMethod(FundamentalDomainStandardSpaceGroup,
     fi;
 
     dim:=Size(Representative(group))-1;
-    gram:=GramianOfAverageScalarProductFromFiniteMatrixGroup(
+        gram:=GramianOfAverageScalarProductFromFiniteMatrixGroup(
                    PointGroup(group));
-    if IsAlmostBieberbachGroup(Image(IsomorphismPcpGroup(group)))
-       then
-        return FundamentalDomainBieberbachGroup(center,group,gram);
-    elif gram<>IdentityMat(dim)
-      then
-        Error("can only handle non-Bieberbach groups with standard-orthogonal point group.");
-    else
-        orbitstab:=OrbitStabilizerInUnitCubeOnRight(group,center);
-        if IsTrivial(orbitstab.stabilizer)
-           then
-            return FundamentalDomainFromGeneralPointAndOrbitPartGeometric(center,orbitstab.orbit);
-        else
-            Error("point is not in general position");
-        fi;
-    fi;
 
+    if not IsTrivial(StabilizerOnSetsStandardSpaceGroup(group,[center]))
+       then
+        Error("center point not in general position");
+    fi;
+        return FundamentalDomainBieberbachGroupNC(center,group,gram);
 end);
 
 
@@ -189,3 +167,43 @@ InstallMethod(IsFundamentalDomainStandardSpaceGroup,
     return true;
 end);
 
+#############################################################################
+##
+#O IsFundamentalDomainBieberbachGroup
+##
+InstallMethod(IsFundamentalDomainBieberbachGroup,
+        [IsPolymakeObject,IsGroup],
+        function(poly,group)
+    local   isfd,  phi,  vertices,  facelattice,  faces,  face,  stab;
+    
+    isfd:=IsFundamentalDomainStandardSpaceGroup(poly,group);
+    if not isfd
+       then
+        return false;
+    elif IsPolycyclicGroup(group)
+      then
+        phi:=IsomorphismPcpGroup(group);
+        if IsTorsionFree(Image(phi))
+           then
+            return true;
+        else
+            return fail;
+        fi;
+    else
+        vertices:=Polymake(poly,"VERTICES");
+        facelattice:=Polymake(poly,"FACE_LATTICE");
+        for faces in facelattice
+          do
+            for face in faces
+              do
+                stab:=StabilizerOnSetsStandardSpaceGroup(group,Set(vertices{face}));
+                if not IsTrivial(stab)
+                   then
+                    return fail;
+                fi;
+            od;
+        od;
+    fi;
+    return true;
+end);
+        
