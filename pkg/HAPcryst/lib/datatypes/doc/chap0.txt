@@ -1,7 +1,7 @@
   
   
-     [1X[5XHap Programming[0X – An experimental framework for objectifying the data[0X
-                               [1Xstructures of Hap[0X
+     [1X[5XHap Programming[0m[1X – An experimental framework for objectifying the data
+                               structures of Hap[0m
   
   
                      ( development version of 02.12.2008 )
@@ -12,42 +12,42 @@
   
   
   Marc Röder
-      Email:    [7Xmailto:marc.roeder(at)nuigalway.ie[0X
+      Email:    [7Xmailto:marc.roeder(at)nuigalway.ie[0m
   
   
   Address: Marc Röder, Department of Mathematics, NUI Galway, Irleland
   
   
   -------------------------------------------------------
-  [1XAbstract[0X
+  [1XAbstract[0m
   This   extension  does  not  change  the  behaviour  of  Hap  and  is  fully
   backwards-compatible. It is not a part of Hap and there is no guarantee that
   it will at any point be supported by Hap. Use at your own risk.
   
   
   -------------------------------------------------------
-  [1XCopyright[0X
+  [1XCopyright[0m
   © 2007 Marc Röder.
   
   This  package  is  distributed  under  the  terms  of the GNU General Public
-  License  version  2 or later (at your convenience). See the file [11XLICENSE.txt[0X
-  or [7Xhttp://www.gnu.org/copyleft/gpl.html[0X
+  License  version  2 or later (at your convenience). See the file [11XLICENSE.txt[0m
+  or [7Xhttp://www.gnu.org/copyleft/gpl.html[0m
   
   
   -------------------------------------------------------
-  [1XAcknowledgements[0X
+  [1XAcknowledgements[0m
   This work was supported by Marie Curie Grant No. MTKD-CT-2006-042685
   
   
   -------------------------------------------------------
   
   
-  [1XContent (HAPprog)[0X
+  [1XContents (HAPprog)[0X
   
-  1. Resolutions in Hap
-    1.1 The Standard Representation [9XHapResolutionRep[0X
-    1.2 The [9XHapLargeGroupResolutionRep[0X Representation
-  2. Accessing and Manipulating Resolutions
+  1 Resolutions in Hap
+    1.1 The Standard Representation [9XHapResolutionRep[0m
+    1.2 The [9XHapLargeGroupResolutionRep[0m Representation
+  2 Accessing and Manipulating Resolutions
     2.1 Representation-Independent Access Methods
       2.1-1 StrongestValidRepresentationForLetter
       2.1-2 StrongestValidRepresentationForWord
@@ -64,7 +64,7 @@
       2.2-2 ConvertStandardWord
       2.2-3 ConvertLetterToStandardRep
       2.2-4 ConvertWordToStandardRep
-    2.3 Special Methods for [9XHapResolutionRep[0X
+    2.3 Special Methods for [9XHapResolutionRep[0m
       2.3-1 IsFreeZGLetter
       2.3-2 IsFreeZGWord
       2.3-3 MultiplyGroupEltsNC
@@ -72,7 +72,7 @@
       2.3-5 MultiplyFreeZGWordWithGroupEltNC
       2.3-6 BoundaryOfFreeZGLetterNC
       2.3-7 BoundaryOfFreeZGWordNC
-    2.4 The [9XHapLargeGroupResolutionRep[0X Representation
+    2.4 The [9XHapLargeGroupResolutionRep[0m Representation
       2.4-1 GroupRingOfResolution
       2.4-2 MultiplyGroupElts_LargeGroupRep
       2.4-3 IsFreeZGLetterNoTermCheck_LargeGroupRep
@@ -85,8 +85,8 @@
       2.4-10 BoundaryOfGenerator_LargeGroupRep
       2.4-11 BoundaryOfFreeZGLetterNC_LargeGroupRep
       2.4-12 BoundaryOfFreeZGWord_LargeGroupRep
-  3. Contracting Homotopies
-    3.1 The [9XPartialContractingHomotopy[0X Data Type
+  3 Contracting Homotopies
+    3.1 The [9XPartialContractingHomotopy[0m Data Type
       3.1-1 ResolutionOfContractingHomotopy
       3.1-2 PartialContractingHomotopyLookup
   

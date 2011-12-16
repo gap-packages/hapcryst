@@ -1,125 +1,125 @@
   
-  [1X2. Accessing and Manipulating Resolutions[0X
+  [1X2 Accessing and Manipulating Resolutions[0X
   
   
   [1X2.1 Representation-Independent Access Methods[0X
   
-  All  methods listed below take a [10XHapResolution[0X in any representation. If the
+  All  methods listed below take a [10XHapResolution[0m in any representation. If the
   other  arguments  are  compatible with the representation of the resolution,
   the  returned  value  will be in the form defined by this representation. If
-  the other arguments are in a different representation, [5XGAP[0Xs method selection
-  is  used  via  [10XTryNextMethod()[0X  to  find  an  applicable  method (a suitable
+  the other arguments are in a different representation, [5XGAP[0ms method selection
+  is  used  via  [10XTryNextMethod()[0m  to  find  an  applicable  method (a suitable
   representation).
   
   The  idea behind this is that the results of computations have the same form
   as  the  input.  And  as  all representations are sub-representations of the
-  [10XHapResolutionRep[0X   representation,   input  which  is  compatible  with  the
-  [10XHapResolutionRep[0X representation is always valid.
+  [10XHapResolutionRep[0m   representation,   input  which  is  compatible  with  the
+  [10XHapResolutionRep[0m representation is always valid.
   
   Every new representation must support the functions of this section.
   
-  [1X2.1-1 StrongestValidRepresentationForLetter[0X
+  [1X2.1-1 StrongestValidRepresentationForLetter[0m
   
   [2X> StrongestValidRepresentationForLetter( [0X[3Xresolution, term, letter[0X[2X ) __[0Xmethod
   [6XReturns:[0X  filter
   
-  Finds the sub-representation of [10XHapResolutionRep[0X for which [3Xletter[0X is a valid
-  letter   of   the   [3Xterm[0Xth   module  of  [3Xresolution[0X.  Note  that  [3Xresolution[0X
-  automatically  is  in  some  sub-representation  of [10XHapResolutionRep[0X.This is
+  Finds the sub-representation of [10XHapResolutionRep[0m for which [3Xletter[0m is a valid
+  letter   of   the   [3Xterm[0mth   module  of  [3Xresolution[0m.  Note  that  [3Xresolution[0m
+  automatically  is  in  some  sub-representation  of [10XHapResolutionRep[0m.This is
   mainly meant for debugging.
   
-  [1X2.1-2 StrongestValidRepresentationForWord[0X
+  [1X2.1-2 StrongestValidRepresentationForWord[0m
   
   [2X> StrongestValidRepresentationForWord( [0X[3Xresolution, term, word[0X[2X ) ______[0Xmethod
   [6XReturns:[0X  filter
   
-  Finds  the  sub-representation of [10XHapResolutionRep[0X for which [3Xword[0X is a valid
-  word  of the [3Xterm[0Xth module of [3Xresolution[0X. Note that [3Xresolution[0X automatically
-  is  in some sub-representation of [10XHapResolutionRep[0X. This is mainly meant for
+  Finds  the  sub-representation of [10XHapResolutionRep[0m for which [3Xword[0m is a valid
+  word  of the [3Xterm[0mth module of [3Xresolution[0m. Note that [3Xresolution[0m automatically
+  is  in some sub-representation of [10XHapResolutionRep[0m. This is mainly meant for
   debugging.
   
-  [1X2.1-3 PositionInGroupOfResolution[0X
+  [1X2.1-3 PositionInGroupOfResolution[0m
   
   [2X> PositionInGroupOfResolution( [0X[3Xresolution, g[0X[2X ) _______________________[0Xmethod
   [2X> PositionInGroupOfResolutionNC( [0X[3Xresolution, g[0X[2X ) _____________________[0Xmethod
   [6XReturns:[0X  positive integer
   
-  This  returns  the position of the group element [3Xg[0X in the enumeration of the
-  group of [3Xresolution[0X. The NC version does not check if [3Xg[0X really is an element
-  of the group of [3Xresolution[0X.
+  This  returns  the position of the group element [3Xg[0m in the enumeration of the
+  group of [3Xresolution[0m. The NC version does not check if [3Xg[0m really is an element
+  of the group of [3Xresolution[0m.
   
-  [1X2.1-4 IsValidGroupInt[0X
+  [1X2.1-4 IsValidGroupInt[0m
   
   [2X> IsValidGroupInt( [0X[3Xresolution, n[0X[2X ) ___________________________________[0Xmethod
   [6XReturns:[0X  boolean
   
-  Returns true if the [3Xn[0Xth element of the group of [3Xresolution[0X is known.
+  Returns true if the [3Xn[0mth element of the group of [3Xresolution[0m is known.
   
-  [1X2.1-5 GroupElementFromPosition[0X
+  [1X2.1-5 GroupElementFromPosition[0m
   
   [2X> GroupElementFromPosition( [0X[3Xresolution, n[0X[2X ) __________________________[0Xmethod
-  [6XReturns:[0X  group element or [9Xfail[0X
+  [6XReturns:[0X  group element or [9Xfail[0m
   
-  Returns  [3Xn[0Xth  element  of the group of [3Xresolution[0X. If the [3Xn[0Xth element is not
-  known, [9Xfail[0X is returned.
+  Returns  [3Xn[0mth  element  of the group of [3Xresolution[0m. If the [3Xn[0mth element is not
+  known, [9Xfail[0m is returned.
   
-  [1X2.1-6 MultiplyGroupElts[0X
+  [1X2.1-6 MultiplyGroupElts[0m
   
   [2X> MultiplyGroupElts( [0X[3Xresolution, x, y[0X[2X ) ______________________________[0Xmethod
-  [6XReturns:[0X  positive  integer or group element, depending on the type of [3Xx[0X and
-            [3Xy[0X
+  [6XReturns:[0X  positive  integer or group element, depending on the type of [3Xx[0m and
+            [3Xy[0m
   
-  If  [10Xx[0X  and  [10Xy[0X  are given in standard representation (i.e. as integers), this
+  If  [10Xx[0m  and  [10Xy[0m  are given in standard representation (i.e. as integers), this
   returns the position of the product of the group elements represented by the
-  positive integers [3Xx[0X and [3Xx[0X.
+  positive integers [3Xx[0m and [3Xx[0m.
   
-  If [10Xx[0X and [10Xy[0X are given in any other representation, the returned group element
+  If [10Xx[0m and [10Xy[0m are given in any other representation, the returned group element
   will also be represented in this way.
   
-  [1X2.1-7 MultiplyFreeZGLetterWithGroupElt[0X
+  [1X2.1-7 MultiplyFreeZGLetterWithGroupElt[0m
   
   [2X> MultiplyFreeZGLetterWithGroupElt( [0X[3Xresolution, letter, g[0X[2X ) __________[0Xmethod
   [6XReturns:[0X  A letter
   
-  Multiplies  the  letter  [3Xletter[0X  with  the  group  element [3Xg[0X and returns the
-  result.  If [3Xresolution[0X is in standard representation, [3Xg[0X has to be an integer
-  and  [3Xletter[0X  has  to  be  a  pair  of integer. If [3Xresolution[0X is in any other
-  representation,  [3Xletter[0X  and  [3Xg[0X  can  be  in  a  form  compatible  with that
+  Multiplies  the  letter  [3Xletter[0m  with  the  group  element [3Xg[0m and returns the
+  result.  If [3Xresolution[0m is in standard representation, [3Xg[0m has to be an integer
+  and  [3Xletter[0m  has  to  be  a  pair  of integer. If [3Xresolution[0m is in any other
+  representation,  [3Xletter[0m  and  [3Xg[0m  can  be  in  a  form  compatible  with that
   representation  or  in  the  standard form (in the latter case, the returned
   value will also have standard form).
   
-  [1X2.1-8 MultiplyFreeZGWordWithGroupElt[0X
+  [1X2.1-8 MultiplyFreeZGWordWithGroupElt[0m
   
   [2X> MultiplyFreeZGWordWithGroupElt( [0X[3Xresolution, word, g[0X[2X ) ______________[0Xmethod
   [6XReturns:[0X  A word
   
-  Multiplies the word [3Xword[0X with the group element [3Xg[0X and returns the result. If
-  [3Xresolution[0X  is  in  standard representation, [3Xg[0X has to be an integer and [3Xword[0X
-  has  to  be  a  list  of  pairs  of  integers. If [3Xresolution[0X is in any other
-  representation,   [3Xword[0X  and  [3Xg[0X  can  be  in  a  form  compatible  with  that
+  Multiplies the word [3Xword[0m with the group element [3Xg[0m and returns the result. If
+  [3Xresolution[0m  is  in  standard representation, [3Xg[0m has to be an integer and [3Xword[0m
+  has  to  be  a  list  of  pairs  of  integers. If [3Xresolution[0m is in any other
+  representation,   [3Xword[0m  and  [3Xg[0m  can  be  in  a  form  compatible  with  that
   representation  or  in  the  standard form (in the latter case, the returned
   value will also have standard form).
   
-  [1X2.1-9 BoundaryOfFreeZGLetter[0X
+  [1X2.1-9 BoundaryOfFreeZGLetter[0m
   
   [2X> BoundaryOfFreeZGLetter( [0X[3Xresolution, term, letter[0X[2X ) _________________[0Xmethod
-  [6XReturns:[0X  free ZG word (in the same representation as [3Xletter[0X)
+  [6XReturns:[0X  free ZG word (in the same representation as [3Xletter[0m)
   
-  Calculates  the  boundary  of  the  letter  (word of length 1) [3Xletter[0X of the
-  [3Xterm[0Xth module of [3Xresolution[0X.
+  Calculates  the  boundary  of  the  letter  (word of length 1) [3Xletter[0m of the
+  [3Xterm[0mth module of [3Xresolution[0m.
   
-  The  returned  value  is a word of the [3Xterm[0X-1st module and comes in the same
-  representation as [3Xletter[0X.
+  The  returned  value  is a word of the [3Xterm[0m-1st module and comes in the same
+  representation as [3Xletter[0m.
   
-  [1X2.1-10 BoundaryOfFreeZGWord[0X
+  [1X2.1-10 BoundaryOfFreeZGWord[0m
   
   [2X> BoundaryOfFreeZGWord( [0X[3Xresolution, term, word[0X[2X ) _____________________[0Xmethod
-  [6XReturns:[0X  free ZG word (in the same representation as [3Xletter[0X)
+  [6XReturns:[0X  free ZG word (in the same representation as [3Xletter[0m)
   
-  Calculates the boundary of the word [3Xword[0X of the [3Xterm[0Xth module of [3Xresolution[0X.
+  Calculates the boundary of the word [3Xword[0m of the [3Xterm[0mth module of [3Xresolution[0m.
   
-  The  returned  value  is a word of the [3Xterm[0X-1st module and comes in the same
-  representation as [3Xword[0X.
+  The  returned  value  is a word of the [3Xterm[0m-1st module and comes in the same
+  representation as [3Xword[0m.
   
   
   [1X2.2 Converting Between Representations[0X
@@ -127,120 +127,120 @@
   Four  methods  are  provided  to  convert  letters  and  words from standard
   representation to any other representation and back again.
   
-  [1X2.2-1 ConvertStandardLetter[0X
+  [1X2.2-1 ConvertStandardLetter[0m
   
   [2X> ConvertStandardLetter( [0X[3Xresolution, term, letter[0X[2X ) __________________[0Xmethod
   [2X> ConvertStandardLetterNC( [0X[3Xresolution, term, letter[0X[2X ) ________________[0Xmethod
-  [6XReturns:[0X  letter in the representation of [3Xresolution[0X
+  [6XReturns:[0X  letter in the representation of [3Xresolution[0m
   
-  Converts  the letter [3Xletter[0X in standard representation to the representation
-  of  [3Xresolution[0X.  The  NC  version  does not check whether [3Xletter[0X really is a
+  Converts  the letter [3Xletter[0m in standard representation to the representation
+  of  [3Xresolution[0m.  The  NC  version  does not check whether [3Xletter[0m really is a
   letter in standard representation.
   
-  [1X2.2-2 ConvertStandardWord[0X
+  [1X2.2-2 ConvertStandardWord[0m
   
   [2X> ConvertStandardWord( [0X[3Xresolution, term, word[0X[2X ) ______________________[0Xmethod
   [2X> ConvertStandardWordNC( [0X[3Xresolution, term, word[0X[2X ) ____________________[0Xmethod
-  [6XReturns:[0X  word in the representation of [3Xresolution[0X
+  [6XReturns:[0X  word in the representation of [3Xresolution[0m
   
-  Converts  the  word [3Xword[0X in standard representation to the representation of
-  [3Xresolution[0X.  The  NC  version does not check whether [3Xword[0X is a valid word in
+  Converts  the  word [3Xword[0m in standard representation to the representation of
+  [3Xresolution[0m.  The  NC  version does not check whether [3Xword[0m is a valid word in
   standard representation.
   
-  [1X2.2-3 ConvertLetterToStandardRep[0X
+  [1X2.2-3 ConvertLetterToStandardRep[0m
   
   [2X> ConvertLetterToStandardRep( [0X[3Xresolution, term, letter[0X[2X ) _____________[0Xmethod
   [2X> ConvertLetterToStandardRepNC( [0X[3Xresolution, term, letter[0X[2X ) ___________[0Xmethod
   [6XReturns:[0X  letter in standard representation
   
-  Converts  the  letter  [3Xletter[0X  in  the  representation  of [3Xresolution[0X to the
-  standard  representation.  The NC version does not check whether [3Xletter[0X is a
-  valid letter of [3Xresolution[0X.
+  Converts  the  letter  [3Xletter[0m  in  the  representation  of [3Xresolution[0m to the
+  standard  representation.  The NC version does not check whether [3Xletter[0m is a
+  valid letter of [3Xresolution[0m.
   
-  [1X2.2-4 ConvertWordToStandardRep[0X
+  [1X2.2-4 ConvertWordToStandardRep[0m
   
   [2X> ConvertWordToStandardRep( [0X[3Xresolution, term, word[0X[2X ) _________________[0Xmethod
   [2X> ConvertWordToStandardRepNC( [0X[3Xresolution, term, word[0X[2X ) _______________[0Xmethod
   [6XReturns:[0X  word in standard representation
   
-  Converts  the  word [3Xword[0X in the representation of [3Xresolution[0X to the standard
-  representation.  The  NC version does not check whether [3Xword[0X is a valid word
-  of [3Xresolution[0X.
+  Converts  the  word [3Xword[0m in the representation of [3Xresolution[0m to the standard
+  representation.  The  NC version does not check whether [3Xword[0m is a valid word
+  of [3Xresolution[0m.
   
   
-  [1X2.3 Special Methods for [9XHapResolutionRep[0X[1X[0X
+  [1X2.3 Special Methods for [9XHapResolutionRep[1X[0X
   
   Some   methods   explicitely  require  the  input  to  be  in  the  standard
-  representation  ([3XHapResolutionRep[0X).  Two  of  these test if a word/letter is
+  representation  ([3XHapResolutionRep[0m).  Two  of  these test if a word/letter is
   really  in standard representation, the other ones are non-check versions of
   the universal methods.
   
-  [1X2.3-1 IsFreeZGLetter[0X
+  [1X2.3-1 IsFreeZGLetter[0m
   
   [2X> IsFreeZGLetter( [0X[3Xresolution, term, letter[0X[2X ) _________________________[0Xmethod
   [6XReturns:[0X  boolean
   
-  Checks  if  [3Xletter[0X  is  an  valid  letter  (word  of  length  1) in standard
-  representation of the [3Xterm[0Xth module of [3Xresolution[0X.
+  Checks  if  [3Xletter[0m  is  an  valid  letter  (word  of  length  1) in standard
+  representation of the [3Xterm[0mth module of [3Xresolution[0m.
   
-  [1X2.3-2 IsFreeZGWord[0X
+  [1X2.3-2 IsFreeZGWord[0m
   
   [2X> IsFreeZGWord( [0X[3Xresolution, term, word[0X[2X ) _____________________________[0Xmethod
   [6XReturns:[0X  boolean
   
-  Check if [3Xword[0X is a valid word in large standard representation of the [3Xterm[0Xth
-  module in [3Xresolution[0X.
+  Check if [3Xword[0m is a valid word in large standard representation of the [3Xterm[0mth
+  module in [3Xresolution[0m.
   
-  [1X2.3-3 MultiplyGroupEltsNC[0X
+  [1X2.3-3 MultiplyGroupEltsNC[0m
   
   [2X> MultiplyGroupEltsNC( [0X[3Xresolution, x, y[0X[2X ) ____________________________[0Xmethod
   [6XReturns:[0X  positive integer
   
-  Given positive integers [10Xx[0X and [10Xy[0X, this returns the position of the product of
-  the  group  elements  represented  by  the  positive  integers [3Xx[0X and [3Xx[0X. This
+  Given positive integers [10Xx[0m and [10Xy[0m, this returns the position of the product of
+  the  group  elements  represented  by  the  positive  integers [3Xx[0m and [3Xx[0m. This
   assumes  that all input is in standard representation and does not check the
   input.
   
-  [1X2.3-4 MultiplyFreeZGLetterWithGroupEltNC[0X
+  [1X2.3-4 MultiplyFreeZGLetterWithGroupEltNC[0m
   
   [2X> MultiplyFreeZGLetterWithGroupEltNC( [0X[3Xresolution, letter, g[0X[2X ) ________[0Xmethod
   [6XReturns:[0X  A letter in standard representation
   
-  Multiplies  the  letter  [3Xletter[0X  with  the  group element represented by the
-  positive  integer  [3Xg[0X  and  returns the result. The input is assumed to be in
-  [3XHapResolutionRep[0X and is not checked.
+  Multiplies  the  letter  [3Xletter[0m  with  the  group element represented by the
+  positive  integer  [3Xg[0m  and  returns the result. The input is assumed to be in
+  [3XHapResolutionRep[0m and is not checked.
   
-  [1X2.3-5 MultiplyFreeZGWordWithGroupEltNC[0X
+  [1X2.3-5 MultiplyFreeZGWordWithGroupEltNC[0m
   
   [2X> MultiplyFreeZGWordWithGroupEltNC( [0X[3Xresolution, word, g[0X[2X ) ____________[0Xmethod
   [6XReturns:[0X  A letter in standard representation
   
-  Multiplies  the word [3Xword[0X with the group element represented by the positive
-  integer   [3Xg[0X  and  returns  the  result.  The  input  is  assumed  to  be  in
-  [3XHapResolutionRep[0X and is not checked.
+  Multiplies  the word [3Xword[0m with the group element represented by the positive
+  integer   [3Xg[0m  and  returns  the  result.  The  input  is  assumed  to  be  in
+  [3XHapResolutionRep[0m and is not checked.
   
-  [1X2.3-6 BoundaryOfFreeZGLetterNC[0X
+  [1X2.3-6 BoundaryOfFreeZGLetterNC[0m
   
   [2X> BoundaryOfFreeZGLetterNC( [0X[3Xresolution, term, letter[0X[2X ) _______________[0Xmethod
   [6XReturns:[0X  free ZG word in standard representation
   
-  Calculates  the  boundary  of  the  letter  (word of length 1) [3Xletter[0X of the
-  [3Xterm[0Xth  module  of  [3Xresolution[0X.  The  input  is  assumed  to  be in standard
+  Calculates  the  boundary  of  the  letter  (word of length 1) [3Xletter[0m of the
+  [3Xterm[0mth  module  of  [3Xresolution[0m.  The  input  is  assumed  to  be in standard
   representation and not checked.
   
-  [1X2.3-7 BoundaryOfFreeZGWordNC[0X
+  [1X2.3-7 BoundaryOfFreeZGWordNC[0m
   
   [2X> BoundaryOfFreeZGWordNC( [0X[3Xresolution, term, word[0X[2X ) ___________________[0Xmethod
   [6XReturns:[0X  free ZG word in standard representation
   
-  Calculates the boundary of the word [3Xword[0X of the [3Xterm[0Xth module of [3Xresolution[0X.
+  Calculates the boundary of the word [3Xword[0m of the [3Xterm[0mth module of [3Xresolution[0m.
   The input is assumed to be in standard representation and not checked.
   
   
-  [1X2.4 The [9XHapLargeGroupResolutionRep[0X[1X Representation[0X
+  [1X2.4 The [9XHapLargeGroupResolutionRep[1X Representation[0X
   
   The   large   group  representation  has  one  additional  component  called
-  [10Xgroupring[0X.  Elements of the modules in a resolution are represented by lists
+  [10Xgroupring[0m.  Elements of the modules in a resolution are represented by lists
   of  group ring elements. The length of the list corresponds to the dimension
   of the free module.
   
@@ -252,117 +252,117 @@
   Note  that  the  input or the output of these functions does not comply with
   the standard representation.
   
-  [1X2.4-1 GroupRingOfResolution[0X
+  [1X2.4-1 GroupRingOfResolution[0m
   
   [2X> GroupRingOfResolution( [0X[3Xresolution[0X[2X ) ________________________________[0Xmethod
   [6XReturns:[0X  group ring
   
-  This  returns  the group ring of [3Xresolution[0X. Note that by the way that group
-  rings     are     handled     in    [5XGAP[0X,    this    is    not    equal    to
-  [10XGroupRing(R,GroupOfResolution([3Xresolution[0X))[0X  where  [10XR[0X  is  the  ring  of  the
+  This  returns  the group ring of [3Xresolution[0m. Note that by the way that group
+  rings     are     handled     in    [5XGAP[0m,    this    is    not    equal    to
+  [10XGroupRing(R,GroupOfResolution([3Xresolution[0m[10X))[0m  where  [10XR[0m  is  the  ring  of  the
   resolution.
   
-  [1X2.4-2 MultiplyGroupElts_LargeGroupRep[0X
+  [1X2.4-2 MultiplyGroupElts_LargeGroupRep[0m
   
   [2X> MultiplyGroupElts_LargeGroupRep( [0X[3Xresolution, x, y[0X[2X ) ________________[0Xmethod
   [2X> MultiplyGroupEltsNC_LargeGroupRep( [0X[3Xresolution, x, y[0X[2X ) ______________[0Xmethod
   [6XReturns:[0X  group element
   
-  Returns  the product of [3Xx[0X and [3Xy[0X. The NC version does not check whether [3Xx[0X and
-  [3Xy[0X are actually elements of the group of [3Xresolution[0X.
+  Returns  the product of [3Xx[0m and [3Xy[0m. The NC version does not check whether [3Xx[0m and
+  [3Xy[0m are actually elements of the group of [3Xresolution[0m.
   
-  [1X2.4-3 IsFreeZGLetterNoTermCheck_LargeGroupRep[0X
+  [1X2.4-3 IsFreeZGLetterNoTermCheck_LargeGroupRep[0m
   
   [2X> IsFreeZGLetterNoTermCheck_LargeGroupRep( [0X[3Xresolution, letter[0X[2X ) ______[0Xmethod
   [6XReturns:[0X  boolean
   
-  Returns  [9Xtrue[0X  if  [3Xletter[0X  has  the  form of a letter (a module element with
+  Returns  [9Xtrue[0m  if  [3Xletter[0m  has  the  form of a letter (a module element with
   exactly  one  non-zero  entry  which has exactly one non-zero coefficient) a
-  module  of  [3Xresolution[0X  in  the [9XHapLargeGroupResolution[0X representation. Note
-  that  it  is  not  tested  if  [3Xletter[0X  actually  is  a letter in any term of
-  [3Xresolution[0X
+  module  of  [3Xresolution[0m  in  the [9XHapLargeGroupResolution[0m representation. Note
+  that  it  is  not  tested  if  [3Xletter[0m  actually  is  a letter in any term of
+  [3Xresolution[0m
   
-  [1X2.4-4 IsFreeZGWordNoTermCheck_LargeGroupRep[0X
+  [1X2.4-4 IsFreeZGWordNoTermCheck_LargeGroupRep[0m
   
   [2X> IsFreeZGWordNoTermCheck_LargeGroupRep( [0X[3Xresolution, word[0X[2X ) __________[0Xmethod
   [6XReturns:[0X  boolean
   
-  Returns [9Xtrue[0X if [3Xword[0X has the form of a word of a module of [3Xresolution[0X in the
-  [9XHapLargeGroupResolution[0X  representation.  Note that it is not tested if [3Xword[0X
-  actually is a word in any term of [3Xresolution[0X.
+  Returns [9Xtrue[0m if [3Xword[0m has the form of a word of a module of [3Xresolution[0m in the
+  [9XHapLargeGroupResolution[0m  representation.  Note that it is not tested if [3Xword[0m
+  actually is a word in any term of [3Xresolution[0m.
   
-  [1X2.4-5 IsFreeZGLetter_LargeGroupRep[0X
+  [1X2.4-5 IsFreeZGLetter_LargeGroupRep[0m
   
   [2X> IsFreeZGLetter_LargeGroupRep( [0X[3Xresolution, term, letter[0X[2X ) ___________[0Xmethod
   [6XReturns:[0X  boolean
   
-  Returns  [9Xtrue[0X  if and only if [3Xletter[0X is a letter (a word of length 1) of the
-  [3Xterm[0Xth  module  of [3Xresolution[0X in the [9XhapLargeGroupResolution[0X representation.
-  I.e.  it tests if [3Xletter[0X is a module element with exactly one non-zero entry
+  Returns  [9Xtrue[0m  if and only if [3Xletter[0m is a letter (a word of length 1) of the
+  [3Xterm[0mth  module  of [3Xresolution[0m in the [9XhapLargeGroupResolution[0m representation.
+  I.e.  it tests if [3Xletter[0m is a module element with exactly one non-zero entry
   which has exactly one non-zero coefficient.
   
-  [1X2.4-6 IsFreeZGWord_LargeGroupRep[0X
+  [1X2.4-6 IsFreeZGWord_LargeGroupRep[0m
   
   [2X> IsFreeZGWord_LargeGroupRep( [0X[3Xresolution, term, word[0X[2X ) _______________[0Xmethod
   [6XReturns:[0X  boolean
   
-  Tests if [3Xword[0X is an element of the [3Xterm[0Xth module of [3Xresoultion[0X.
+  Tests if [3Xword[0m is an element of the [3Xterm[0mth module of [3Xresoultion[0m.
   
-  [1X2.4-7 MultiplyFreeZGLetterWithGroupElt_LargeGroupRep[0X
+  [1X2.4-7 MultiplyFreeZGLetterWithGroupElt_LargeGroupRep[0m
   
   [2X> MultiplyFreeZGLetterWithGroupElt_LargeGroupRep( [0X[3Xresolution, letter, g[0X[2X ) [0Xmethod
   [2X> MultiplyFreeZGLetterWithGroupEltNC_LargeGroupRep( [0X[3Xresolution, letter, g[0X[2X ) [0Xmethod
   [6XReturns:[0X  free ZG letter in large group representation
   
-  Multiplies  the  letter  [3Xletter[0X  with  the  group  element [3Xg[0X and returns the
-  result.  The  NC version does not check whether [3Xg[0X is an element of the group
-  of [3Xresolution[0X and [3Xletter[0X can be a letter.
+  Multiplies  the  letter  [3Xletter[0m  with  the  group  element [3Xg[0m and returns the
+  result.  The  NC version does not check whether [3Xg[0m is an element of the group
+  of [3Xresolution[0m and [3Xletter[0m can be a letter.
   
-  [1X2.4-8 MultiplyFreeZGWordWithGroupElt_LargeGroupRep[0X
+  [1X2.4-8 MultiplyFreeZGWordWithGroupElt_LargeGroupRep[0m
   
   [2X> MultiplyFreeZGWordWithGroupElt_LargeGroupRep( [0X[3Xresolution, word, g[0X[2X ) [0Xmethod
   [2X> MultiplyFreeZGWordWithGroupEltNC_LargeGroupRep( [0X[3Xresolution, word, g[0X[2X ) [0Xmethod
   [6XReturns:[0X  free ZG word in large group representation
   
-  Multiplies  the  word  [3Xword[0X with the group element [3Xg[0X and returns the result.
-  The  NC  version  does  not  check  whether  [3Xg[0X is an element of the group of
-  [3Xresolution[0X and [3Xword[0X can be a word.
+  Multiplies  the  word  [3Xword[0m with the group element [3Xg[0m and returns the result.
+  The  NC  version  does  not  check  whether  [3Xg[0m is an element of the group of
+  [3Xresolution[0m and [3Xword[0m can be a word.
   
-  [1X2.4-9 GeneratorsOfModuleOfResolution_LargeGroupRep[0X
+  [1X2.4-9 GeneratorsOfModuleOfResolution_LargeGroupRep[0m
   
   [2X> GeneratorsOfModuleOfResolution_LargeGroupRep( [0X[3Xresolution, term[0X[2X ) ___[0Xmethod
   [6XReturns:[0X  list of letters/words in large group representation
   
-  Returns  a  set  of  generators  for  the  [3Xterm[0Xth  module of [3Xresolution[0X. The
+  Returns  a  set  of  generators  for  the  [3Xterm[0mth  module of [3Xresolution[0m. The
   returned value is a list of vectors of group ring elements.
   
-  [1X2.4-10 BoundaryOfGenerator_LargeGroupRep[0X
+  [1X2.4-10 BoundaryOfGenerator_LargeGroupRep[0m
   
   [2X> BoundaryOfGenerator_LargeGroupRep( [0X[3Xresolution, term, n[0X[2X ) ___________[0Xmethod
   [2X> BoundaryOfGeneratorNC_LargeGroupRep( [0X[3Xresolution, term, n[0X[2X ) _________[0Xmethod
   [6XReturns:[0X  free ZG word in the large group representation
   
-  Returns the boundary of the [3Xn[0Xth generator of the [3Xterm[0Xth module of [3Xresolution[0X
-  as  a  word  in  the  [3Xn-1[0Xst  module  (in large group representation). The NC
-  version  does  not  check  whether there is a [3Xterm[0Xth module and if it has at
-  least [3Xn[0X generators.
+  Returns the boundary of the [3Xn[0mth generator of the [3Xterm[0mth module of [3Xresolution[0m
+  as  a  word  in  the  [3Xn-1[0mst  module  (in large group representation). The NC
+  version  does  not  check  whether there is a [3Xterm[0mth module and if it has at
+  least [3Xn[0m generators.
   
-  [1X2.4-11 BoundaryOfFreeZGLetterNC_LargeGroupRep[0X
+  [1X2.4-11 BoundaryOfFreeZGLetterNC_LargeGroupRep[0m
   
   [2X> BoundaryOfFreeZGLetterNC_LargeGroupRep( [0X[3Xresolution, term, letter[0X[2X ) _[0Xmethod
   [2X> BoundaryOfFreeZGLetter_LargeGroupRep( [0X[3Xresolution, term, letter[0X[2X ) ___[0Xmethod
   [6XReturns:[0X  free ZG word in large group representation
   
-  Calculates  the  boundary  of  the  letter  [3Xletter[0X  of  the [3Xterm[0Xth module of
-  [3Xresolution[0X  in  large  group  representation.  The NC version does not check
-  whether [3Xletter[0X actually is a letter in the [3Xterm[0Xth module.
+  Calculates  the  boundary  of  the  letter  [3Xletter[0m  of  the [3Xterm[0mth module of
+  [3Xresolution[0m  in  large  group  representation.  The NC version does not check
+  whether [3Xletter[0m actually is a letter in the [3Xterm[0mth module.
   
-  [1X2.4-12 BoundaryOfFreeZGWord_LargeGroupRep[0X
+  [1X2.4-12 BoundaryOfFreeZGWord_LargeGroupRep[0m
   
   [2X> BoundaryOfFreeZGWord_LargeGroupRep( [0X[3Xresolution, term, word[0X[2X ) _______[0Xmethod
   [6XReturns:[0X  free ZG word in large group representation
   
-  Calculates  the  boundary  of  the  element  [3Xword[0X  of  the  [3Xterm[0Xth module of
-  [3Xresolution[0X  in  large  group  representation.  The NC version does not check
-  whether [3Xword[0X actually is a word in the [3Xterm[0Xth module.
+  Calculates  the  boundary  of  the  element  [3Xword[0m  of  the  [3Xterm[0mth module of
+  [3Xresolution[0m  in  large  group  representation.  The NC version does not check
+  whether [3Xword[0m actually is a word in the [3Xterm[0mth module.
   

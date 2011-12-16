@@ -3,9 +3,9 @@
   [1XReferences[0X
   
   [[20XEGN[15X]    [16XEick,    B.,    G\"ahler,    F.    and   Nickel,   W.[15X,   [17Xcryst[15X,
-  \URL{http://www.gap-system.org/Packages/cryst.html}
+  \URL{http://www.gap-system.org/Packages/cryst.html}.
   
-  [[20XEll[15X] [16XEllis, G.[15X, [17XHAP[15X, \URL{http://hamilton.nuigalway.ie/Hap/www/}
+  [[20XEll[15X] [16XEllis, G.[15X, [17XHAP[15X, \URL{http://hamilton.nuigalway.ie/Hap/www/}.
   
   
   

@@ -1,0 +1,91 @@
+<Section><Heading>The <K>HapLargeGroupResolution</K> Representation</Heading>
+
+  The large group representation has one additional component called <C>groupring</C>.
+  Elements of the modules in a resolution are represented by lists of group
+  ring elements.
+  <P/>
+  
+  All methods for the generic representation do also work for the large group
+  representation. Some of them are wrappers for special methods which do only
+  work for this representation.
+  The following list only contains the methods which are not already present in
+  the generic representation.
+  <P/>
+  Note that the input or the output of these functions does not comply
+  with the standard representation.
+
+<ManSection>
+ <Meth Name="MultiplyGroupElts_LargeGroupRep" Arg="resolution x y" />
+ <Meth Name="MultiplyGroupEltsNC_LargeGroupRep" Arg="resolution x y"/>
+ <Returns>group element</Returns>
+  <Description>
+   Returns the product of <A>x</A> and <A>y</A>. The NC version does not check
+   whether  <A>x</A> and <A>y</A> are actually elements of the group of
+   <A>resolution</A>.
+  </Description>
+</ManSection>
+
+<ManSection>
+ <Meth Name="IsFreeZGLetter_LargeGroupRep" Arg="resolution term letter"/>
+ <Returns>boolean</Returns>
+  <Description>
+   Returns <K>true</K> if and only if <A>letter</A> is a letter (a word of
+   length 1) of the <A>term</A>th module of <A>resolution</A> in the
+   <K>hapLargeGroupResolution</K> representation. I.e. it tests if
+   <A>letter</A> is a pair consisting of an integer of the right size and a
+   group element.
+  </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="IsFreeZGWord_LargeGroupRep" Arg="resolution term word"/>
+ <Returns>boolean</Returns>
+  <Description>
+    Tests if <A>word</A> is a list of letters in the large group resolution
+    representation.
+  </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="MultiplyFreeZGLetterWithGroupElt_LargeGroupRep" Arg="resolution
+letter g"/>
+ <Meth Name="MultiplyFreeZGLetterWithGroupEltNC_LargeGroupRep" Arg="resolution
+letter g"/>
+ <Returns>free ZG letter in large group representation (integer-group element pair)</Returns>
+  <Description>
+   Multiplies the letter <A>letter</A> with the group element <A>g</A> and
+   returns the result. The NC version does not check whether <A>g</A> is an
+   element of the group of <A>resolution</A> and <A>letter</A> can be a letter.
+  </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="BoundaryOfFreeZGLetterNC_LargeGroupRep" Arg="resolution term
+letter"/>
+ <Meth Name="BoundaryOfFreeZGLetter_LargeGroupRep" Arg="resolution term letter"/>
+ <Returns>free ZG word in large group representation</Returns>
+  <Description>
+   Calculates the boundary of the letter <A>letter</A> of the <A>term</A>th
+   module of <A>resolution</A> in large group representation.
+   The NC version does not check whether <A>letter</A> actually is a letter in
+   the <A>term</A>th module.
+  </Description>
+</ManSection>
+
+
+<ManSection>
+ <Meth Name="BoundaryOfFreeZGWord_LargeGroupRep" Arg="resolution term word"/>
+ <Returns>free ZG word in large group representation</Returns>
+  <Description>
+   Calculates the boundary of the element <A>word</A> of the <A>term</A>th
+   module of <A>resolution</A> in large group representation.
+   The NC version does not check whether <A>word</A> actually is a word (a list
+   of letters) in the <A>term</A>th module.
+  </Description>
+</ManSection>
+
+
+</Section>

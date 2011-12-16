@@ -35,12 +35,8 @@
 \immediate\openout\pagenrlog =\jobname.pnr
 \immediate\write\pagenrlog{PAGENRS := [}
 \newcommand{\logpage}[1]{\protect\write\pagenrlog{#1, \thepage,}}
-\newcommand{\Q}{\mathbb{Q}}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\Z}{\mathbb{Z}}
-\newcommand{\N}{\mathbb{N}}
-\newcommand{\F}{\mathbb{F}}
+%% were never documented, give conflicts with some additional packages
+
 
 \newcommand{\GAP}{\textsf{GAP}}
 

@@ -5,7 +5,7 @@
 ##  
 
 ##
-#H @(#)$Id: CWcomplexThings.gd, v 0.1.8 2008/12/02 18:18:33 gap Exp $
+#H @(#)$Id: CWcomplexThings.gd, v 0.1.9 2010/06/03 21:47:34 gap Exp $
 ##
 #Y	 Copyright (C) 2006 Marc Roeder 
 #Y 
@@ -23,8 +23,8 @@
 #Y along with this program; if not, write to the Free Software 
 #Y Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
-Revision.("/home/roeder/gap/HAPcryst/HAPcryst/lib/CWcomplexThings_gd"):=
-	"@(#)$Id: CWcomplexThings.gd, v 0.1.8 2008/12/02   18:18:33  gap Exp $";
+Revision.("/Users/roeder/gap/HAPcryst/HAPcryst/lib/CWcomplexThings_gd"):=
+	"@(#)$Id: CWcomplexThings.gd, v 0.1.9 2010/06/03   21:47:34  gap Exp $";
 DeclareOperation("UndirectedBoundaryOfFreeZGLetterNC",[IsHapResolutionRep,IsInt,IsDenseList]);
 DeclareOperation("UndirectedBoundaryOfFreeZGLetter",[IsHapResolutionRep,IsInt,IsDenseList]);
 

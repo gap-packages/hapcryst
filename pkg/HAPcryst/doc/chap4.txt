@@ -1,5 +1,5 @@
   
-  [1X4. Resolutions of Crystallographic Groups[0X
+  [1X4 Resolutions of Crystallographic Groups[0X
   
   
   [1X4.1 Fundamental Domains[0X
@@ -7,22 +7,22 @@
   Let  S  be a crystallographic group. A Fundamental domain is a closed convex
   set  containing  a  system  of  representatives  for  the Orbits of S in its
   natural action on euclidian space.
-  There  are  two  algorithms for calculating fundamental domains in [5XHAPcryst[0X.
+  There  are  two  algorithms for calculating fundamental domains in [5XHAPcryst[0m.
   One  uses the geometry and relies on having the standard rule for evaluating
   the  scalar product (i.e. the gramian matrix is the identity). The other one
   is  independent  of  the  gramian  matrix  but does only work for Bieberbach
   groups,   while  the  first  ("geometric")  algorithm  works  for  arbitrary
   crystallographic groups given a point with trivial stabilizer.
   
-  [1X4.1-1 FundamentalDomainStandardSpaceGroup[0X
+  [1X4.1-1 FundamentalDomainStandardSpaceGroup[0m
   
-  [2X> FundamentalDomainStandardSpaceGroup( [0X[3X[v][,]G[0X[2X ) _____________________[0Xmethod
+  [2X> FundamentalDomainStandardSpaceGroup( [0X[3X[v, ]G[0X[2X ) ______________________[0Xmethod
   [2X> FundamentalDomainStandardSpaceGroup( [0X[3Xv, G[0X[2X ) ________________________[0Xmethod
-  [6XReturns:[0X  a [9XPolymakeObject[0X
+  [6XReturns:[0X  a [9XPolymakeObject[0m
   
-  Let  [3XG[0X  be  an  [9XAffineCrystGroupOnRight[0X and [3Xv[0X a vector. A fundamental domain
-  containing [3Xv[0X is calculated and returned as a [9XPolymakeObject[0X. The vector [3Xv[0X is
-  used  as the starting point for a Dirichlet-Voronoi construction. If no [3Xv[0X is
+  Let  [3XG[0m  be  an  [9XAffineCrystGroupOnRight[0m and [3Xv[0m a vector. A fundamental domain
+  containing [3Xv[0m is calculated and returned as a [9XPolymakeObject[0m. The vector [3Xv[0m is
+  used  as the starting point for a Dirichlet-Voronoi construction. If no [3Xv[0m is
   given,  the  origin  is used as starting point if it has trivial stabiliser.
   Otherwise an error is cast.
   
@@ -37,36 +37,36 @@
     [4X8[0X
   [4X------------------------------------------------------------------[0X
   
-  [1X4.1-2 FundamentalDomainBieberbachGroup[0X
+  [1X4.1-2 FundamentalDomainBieberbachGroup[0m
   
   [2X> FundamentalDomainBieberbachGroup( [0X[3XG[0X[2X ) ______________________________[0Xmethod
   [2X> FundamentalDomainBieberbachGroup( [0X[3Xv, G[, gram][0X[2X ) ___________________[0Xmethod
-  [6XReturns:[0X  a [9XPolymakeObject[0X
+  [6XReturns:[0X  a [9XPolymakeObject[0m
   
-  Given  a  starting  vector [3Xv[0X and a Bieberbach group [3XG[0X in standard form, this
-  method  calculates  the  Dirichlet  domain with respect to [3Xv[0X. If [3Xgram[0X is not
+  Given  a  starting  vector [3Xv[0m and a Bieberbach group [3XG[0m in standard form, this
+  method  calculates  the  Dirichlet  domain with respect to [3Xv[0m. If [3Xgram[0m is not
   supplied,     the     average     gramian     matrix     is     used    (see
-  [2XGramianOfAverageScalarProductFromFiniteMatrixGroup[0X   ([14X2.3-1[0X)).   It  is  not
-  tested if [3Xgram[0X is symmetric and positive definite. It is also not tested, if
-  the product defined by [3Xgram[0X is invariant under the point group of [3XG[0X.
+  [2XGramianOfAverageScalarProductFromFiniteMatrixGroup[0m   ([14X2.3-1[0m)).   It  is  not
+  tested if [3Xgram[0m is symmetric and positive definite. It is also not tested, if
+  the product defined by [3Xgram[0m is invariant under the point group of [3XG[0m.
   
-  The  behaviour  of  this function is influenced by the option [9XineqThreshold[0X.
+  The  behaviour  of  this function is influenced by the option [9XineqThreshold[0m.
   The   algorithm   calculates  approximations  to  a  fundamental  domain  by
   iteratively  adding  inequalities.  For  an  approximating polyhedron, every
   vertex  is  tested  to  find  new  inequalities. When all vertices have been
   considered or the number of new inequalities already found exceeds the value
-  of  [9XineqThreshold[0X, a new approximating polyhedron in calculated. The default
-  for [9XineqThreshold[0X is 200. Roughly speaking, a large threshold means shifting
-  work  from  [9Xpolymake[0X  to [5XGAP[0X, a small one means more calls of (and work for)
-  [9Xpolymake[0X.
+  of  [9XineqThreshold[0m, a new approximating polyhedron in calculated. The default
+  for [9XineqThreshold[0m is 200. Roughly speaking, a large threshold means shifting
+  work  from  [9Xpolymake[0m  to [5XGAP[0m, a small one means more calls of (and work for)
+  [9Xpolymake[0m.
   
-  If  the  value  of [2XInfoHAPcryst[0X ([14X1.3-1[0X) is 2 or more, for each approximation
+  If  the  value  of [2XInfoHAPcryst[0m ([14X1.3-1[0m) is 2 or more, for each approximation
   the  number  of  vertices  of the approximation, the number of vertices that
   have  to be considered during the calculation, the number of facets, and new
   inequalities is shown.
   
   Note  that  the  algorithm  chooses vertices in random order and also writes
-  inequalities for [9Xpolymake[0X in random order.
+  inequalities for [9Xpolymake[0m in random order.
   
   [4X---------------------------  Example  ----------------------------[0X
     [4Xgap> a0:=[[ 1, 0, 0, 0, 0, 0, 0 ], [ 0, -1, 0, 0, 0, 0, 0 ], [0X
@@ -109,19 +109,19 @@
     [4X<polymake object>[0X
   [4X------------------------------------------------------------------[0X
   
-  [1X4.1-3 FundamentalDomainFromGeneralPointAndOrbitPartGeometric[0X
+  [1X4.1-3 FundamentalDomainFromGeneralPointAndOrbitPartGeometric[0m
   
   [2X> FundamentalDomainFromGeneralPointAndOrbitPartGeometric( [0X[3Xv, orbit[0X[2X ) _[0Xmethod
-  [6XReturns:[0X  a [9XPolymakeObject[0X
+  [6XReturns:[0X  a [9XPolymakeObject[0m
   
   This  uses an alternative algorithm based on geometric considerations. It is
-  not  used  in  any  of the high-level methods. Let [3Xv[0X be a vector and [3Xorbit[0X a
-  sufficiently  large  part  of  the orbit of [3Xv[0X under a crystallographic group
+  not  used  in  any  of the high-level methods. Let [3Xv[0m be a vector and [3Xorbit[0m a
+  sufficiently  large  part  of  the orbit of [3Xv[0m under a crystallographic group
   with  standard-  orthogonal  point  group (satisfying A^t=A^-1). A geometric
-  algorithm  is then used to calculate the Dirichlet domain with respect to [3Xv[0X.
+  algorithm  is then used to calculate the Dirichlet domain with respect to [3Xv[0m.
   This  also  works  for crystallographic groups which are not Bieberbach. The
-  point [3Xv[0X has to have trivial stabilizer.
-  The  intersection  of  the  full  orbit  with  the  unit  cube  around  [3Xv[0X is
+  point [3Xv[0m has to have trivial stabilizer.
+  The  intersection  of  the  full  orbit  with  the  unit  cube  around  [3Xv[0m is
   sufficiently large.
   
   [4X---------------------------  Example  ----------------------------[0X
@@ -136,32 +136,32 @@
     [4X8[0X
   [4X------------------------------------------------------------------[0X
   
-  [1X4.1-4 IsFundamentalDomainStandardSpaceGroup[0X
+  [1X4.1-4 IsFundamentalDomainStandardSpaceGroup[0m
   
   [2X> IsFundamentalDomainStandardSpaceGroup( [0X[3Xpoly, G[0X[2X ) ___________________[0Xmethod
   [6XReturns:[0X  true or false
   
-  This  tests  if a [9XPolymakeObject[0X [3Xpoly[0X is a fundamental domain for the affine
-  crystallographic group [3XG[0X in standard form.
+  This  tests  if a [9XPolymakeObject[0m [3Xpoly[0m is a fundamental domain for the affine
+  crystallographic group [3XG[0m in standard form.
   The  function  tests  the  following: First, does the orbit of any vertex of
-  [3Xpoly[0X  have  a  point  inside  [3Xpoly[0X (if this is the case, [10Xfalse[0X is returned).
-  Second:  Is every facet of [3Xpoly[0X the image of a different facet under a group
-  element which does not fix [3Xpoly[0X. If this is satisfied, [10Xtrue[0X is returned.
+  [3Xpoly[0m  have  a  point  inside  [3Xpoly[0m (if this is the case, [10Xfalse[0m is returned).
+  Second:  Is every facet of [3Xpoly[0m the image of a different facet under a group
+  element which does not fix [3Xpoly[0m. If this is satisfied, [10Xtrue[0m is returned.
   
-  [1X4.1-5 IsFundamentalDomainBieberbachGroup[0X
+  [1X4.1-5 IsFundamentalDomainBieberbachGroup[0m
   
   [2X> IsFundamentalDomainBieberbachGroup( [0X[3Xpoly, G[0X[2X ) ______________________[0Xmethod
   [6XReturns:[0X  true, false or fail
   
-  This  tests  if a [9XPolymakeObject[0X [3Xpoly[0X is a fundamental domain for the affine
-  crystallographic  group [3XG[0X in standard form and if this group is torsion free
+  This  tests  if a [9XPolymakeObject[0m [3Xpoly[0m is a fundamental domain for the affine
+  crystallographic  group [3XG[0m in standard form and if this group is torsion free
   (ie a Bieberbach group)
-  It returns [9Xtrue[0X if [3XG[0X is torsion free and [3Xpoly[0X is a fundamental domain for [3XG[0X.
-  If  [3Xpoly[0X  is  not  a fundamental domain, [9Xfalse[0X is returned regardless of the
-  structure  of [3XG[0X. And if [3XG[0X is not torsion free, the method returns [9Xfail[0X. If [3XG[0X
+  It returns [9Xtrue[0m if [3XG[0m is torsion free and [3Xpoly[0m is a fundamental domain for [3XG[0m.
+  If  [3Xpoly[0m  is  not  a fundamental domain, [9Xfalse[0m is returned regardless of the
+  structure  of [3XG[0m. And if [3XG[0m is not torsion free, the method returns [9Xfail[0m. If [3XG[0m
   is  polycyclic,  torsion  freeness  is  tested using a representation as pcp
-  group. Otherwise the stabilisers of the faces of the fundamental domain [3Xpoly[0X
-  are  calculated  ([3XG[0X  is torsion free if and only if it all these stabilisers
+  group. Otherwise the stabilisers of the faces of the fundamental domain [3Xpoly[0m
+  are  calculated  ([3XG[0m  is torsion free if and only if it all these stabilisers
   are trivial).
   
   
@@ -169,20 +169,20 @@
   
   For  Bieberbach groups (torsion free crystallographic groups), the following
   functions  calcualte free resolutions. This calculation is done by finding a
-  fundamental  domain  for  the  group. For a description of the [9XHapResolution[0X
-  datatype, see the [5XHap[0X data types documentation or the experimental datatypes
-  documentation [14XResolutions in Hap???[0X
+  fundamental  domain  for  the  group. For a description of the [9XHapResolution[0m
+  datatype, see the [5XHap[0m data types documentation or the experimental datatypes
+  documentation [14XHAPprog: Resolutions in Hap[0m
   
-  [1X4.2-1 ResolutionBieberbachGroup[0X
+  [1X4.2-1 ResolutionBieberbachGroup[0m
   
   [2X> ResolutionBieberbachGroup( [0X[3XG[, v][0X[2X ) ________________________________[0Xmethod
-  [6XReturns:[0X  a [9XHAPresolution[0X
+  [6XReturns:[0X  a [9XHAPresolution[0m
   
-  Let  [3XG[0X  be  a  Bieberbach  group given as an [9XAffineCrystGroupOnRight[0X and [3Xv[0X a
-  vector.  Then  a  Dirichlet  domain  with  respect  to [3Xv[0X is calculated using
-  [2XFundamentalDomainBieberbachGroup[0X  ([14X4.1-2[0X). From this domain, a resolution is
-  calculated    using    [2XFaceLatticeAndBoundaryBieberbachGroup[0X   ([14X4.2-2[0X)   and
-  [2XResolutionFromFLandBoundary[0X ([14X4.2-3[0X). If [3Xv[0X is not given, the origin is used.
+  Let  [3XG[0m  be  a  Bieberbach  group given as an [9XAffineCrystGroupOnRight[0m and [3Xv[0m a
+  vector.  Then  a  Dirichlet  domain  with  respect  to [3Xv[0m is calculated using
+  [2XFundamentalDomainBieberbachGroup[0m  ([14X4.1-2[0m). From this domain, a resolution is
+  calculated    using    [2XFaceLatticeAndBoundaryBieberbachGroup[0m   ([14X4.2-2[0m)   and
+  [2XResolutionFromFLandBoundary[0m ([14X4.2-3[0m). If [3Xv[0m is not given, the origin is used.
   
   [4X---------------------------  Example  ----------------------------[0X
     [4Xgap> R:=ResolutionBieberbachGroup(SpaceGroup(3,9));[0X
@@ -202,39 +202,39 @@
     [4X[0X
   [4X------------------------------------------------------------------[0X
   
-  [1X4.2-2 FaceLatticeAndBoundaryBieberbachGroup[0X
+  [1X4.2-2 FaceLatticeAndBoundaryBieberbachGroup[0m
   
   [2X> FaceLatticeAndBoundaryBieberbachGroup( [0X[3Xpoly, group[0X[2X ) _______________[0Xmethod
-  [6XReturns:[0X  Record  with  entries  [9X.hasse[0X and [9X.elts[0X representing a part of the
+  [6XReturns:[0X  Record  with  entries  [9X.hasse[0m and [9X.elts[0m representing a part of the
             hasse diagram and a lookup table of group elements
   
-  Let  [3Xgroup[0X  be a torsion free [9XAffineCrystGroupOnRight[0X (that is, a Bieberbach
-  group).  Given  a  [9XPolymakeObject[0X [3Xpoly[0X representing a fundamental domain for
-  [3Xgroup[0X,  this  method  uses [5Xpolymaking[0X to calculate the face lattice of [3Xpoly[0X.
-  From  the  set  of  faces,  a system of representatives for [3Xgroup[0X- orbits is
+  Let  [3Xgroup[0m  be a torsion free [9XAffineCrystGroupOnRight[0m (that is, a Bieberbach
+  group).  Given  a  [9XPolymakeObject[0m [3Xpoly[0m representing a fundamental domain for
+  [3Xgroup[0m,  this  method  uses [5Xpolymaking[0m to calculate the face lattice of [3Xpoly[0m.
+  From  the  set  of  faces,  a system of representatives for [3Xgroup[0m- orbits is
   chosen.  For  each representative, the boundary is then calculated. The list
-  [9X.elts[0X  contains elements of [3Xgroup[0X (in fact, it is even a set). The structure
-  of the returned list [9X.hasse[0X is as follows:
+  [9X.elts[0m  contains elements of [3Xgroup[0m (in fact, it is even a set). The structure
+  of the returned list [9X.hasse[0m is as follows:
   
   --    The  i-th  entry  contains  a  system  of  representatives for the i-1
-        dimensional faces of [3Xpoly[0X.
+        dimensional faces of [3Xpoly[0m.
   
-  --    Each  face  is represented by a pair of lists [10X[vertices,boundary][0X. The
-        list  of  integers  [10Xvertices[0X represents the vertices of [3Xpoly[0X which are
-        contained  in  this  face. The enumeration is chosen such that an [10Xi[0X in
+  --    Each  face  is represented by a pair of lists [10X[vertices,boundary][0m. The
+        list  of  integers  [10Xvertices[0m represents the vertices of [3Xpoly[0m which are
+        contained  in  this  face. The enumeration is chosen such that an [10Xi[0m in
         the    list    represents    the    i-th    entry    of    the    list
-        [10XPolymake(poly,"VERTICES");[0X
+        [10XPolymake(poly,"VERTICES");[0m
   
-  --    The  list  [10Xboundary[0X represents the boundary of the respective face. It
-        is  a list of pairs of integers [10X[j,g][0X. The first entry lies between -n
+  --    The  list  [10Xboundary[0m represents the boundary of the respective face. It
+        is  a list of pairs of integers [10X[j,g][0m. The first entry lies between -n
         and  n,  where  n  is the number of faces of dimension i-1. This entry
         represents  a  face  of  dimension  i-1  (or its additive inverse as a
-        module generator). The second entry [10Xg[0X is the position of the matrix in
-        [9X.elts[0X.
+        module generator). The second entry [10Xg[0m is the position of the matrix in
+        [9X.elts[0m.
   
   This  representation  is  compatible  with  the  representation  of free Z G
-  modules  in  [5XHap[0X and this method essentially calculates a free resolution of
-  [3Xgroup[0X.  If  the  value  of  [2XInfoHAPcryst[0X  ([14X1.3-1[0X)  is  2 or more, additional
+  modules  in  [5XHap[0m and this method essentially calculates a free resolution of
+  [3Xgroup[0m.  If  the  value  of  [2XInfoHAPcryst[0m  ([14X1.3-1[0m)  is  2 or more, additional
   information  about  the  number of faces in every codimension, the number of
   orbits  of  the  group  on the free module generated by those faces, and the
   time it took to calculate the orbit decomposition is output.
@@ -257,14 +257,14 @@
     [4X<free left module over Integers, and ring-with-one, with 10 generators>[0X
   [4X------------------------------------------------------------------[0X
   
-  [1X4.2-3 ResolutionFromFLandBoundary[0X
+  [1X4.2-3 ResolutionFromFLandBoundary[0m
   
   [2X> ResolutionFromFLandBoundary( [0X[3Xfl, group[0X[2X ) ___________________________[0Xmethod
   [6XReturns:[0X  Free resolution
   
-  If  [3Xfl[0X is the record output by [2XFaceLatticeAndBoundaryBieberbachGroup[0X ([14X4.2-2[0X)
-  and [3Xgroup[0X is the corresponding group, this function returns a [9XHapResolution[0X.
-  Of course, [3Xfl[0X has to be generated from a fundamental domain for [3Xgroup[0X
+  If  [3Xfl[0m is the record output by [2XFaceLatticeAndBoundaryBieberbachGroup[0m ([14X4.2-2[0m)
+  and [3Xgroup[0m is the corresponding group, this function returns a [9XHapResolution[0m.
+  Of course, [3Xfl[0m has to be generated from a fundamental domain for [3Xgroup[0m
   
   [4X---------------------------  Example  ----------------------------[0X
     [4Xgap> G:=SpaceGroup(3,165);[0X

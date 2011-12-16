@@ -5,7 +5,7 @@
 ##  
 
 ##
-#H @(#)$Id: misc.gi, v 0.1.8 2008/12/02 18:18:33 gap Exp $
+#H @(#)$Id: misc.gi, v 0.1.9 2010/06/03 21:47:34 gap Exp $
 ##
 #Y	 Copyright (C) 2006 Marc Roeder 
 #Y 
@@ -23,8 +23,8 @@
 #Y along with this program; if not, write to the Free Software 
 #Y Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
-Revision.("/home/roeder/gap/HAPcryst/HAPcryst/lib/misc_gi"):=
-	"@(#)$Id: misc.gi, v 0.1.8 2008/12/02   18:18:33  gap Exp $";
+Revision.("/Users/roeder/gap/HAPcryst/HAPcryst/lib/misc_gi"):=
+	"@(#)$Id: misc.gi, v 0.1.9 2010/06/03   21:47:34  gap Exp $";
 # there seems to be not method for rationals, even though SignInt 
 # did work in all of the cases I tried.
 InstallMethod(SignRat, "for rationals",[IsRat],

@@ -1,5 +1,5 @@
   
-  [1X1. Resolutions in Hap[0X
+  [1X1 Resolutions in Hap[0X
   
   This  document  is  only concerned with the representation of resolutions in
   Hap.  Note that it is not a part of Hap. The framework provided here is just
@@ -10,80 +10,80 @@
   
   The  elements  of the modules M_i can be represented in different ways. This
   is what makes different representations for resolutions desirable. First, we
-  will look at the standard representation ([10XHapResolutionRep[0X) as it is defined
+  will look at the standard representation ([10XHapResolutionRep[0m) as it is defined
   in  Hap.  After  that,  we  will present another representation for infinite
   groups.    Note    that    all    non-standard   representations   must   be
   sub-representations  of  the standard representation to ensure compatibility
   with Hap.
   
   
-  [1X1.1 The Standard Representation [9XHapResolutionRep[0X[1X[0X
+  [1X1.1 The Standard Representation [9XHapResolutionRep[1X[0X
   
   For  every  M_i  we  fix a basis and number its elements. Furthermore, it is
   assumed  that  we have a (partial) enumeration of the group of a resolution.
   In practice this is done by generating a lookup table on the fly.
   
   In  standard representation, the elements of the modules M_k are represented
-  by  lists  -"words"-  of  pairs  of  integers. A letter [10X[i,g][0X of such a word
-  consists  of  the number of a basis element [10Xi[0X or [10X-i[0X for its additive inverse
+  by  lists  -"words"-  of  pairs  of  integers. A letter [10X[i,g][0m of such a word
+  consists  of  the number of a basis element [10Xi[0m or [10X-i[0m for its additive inverse
   and a number g representing a group element.
   
-  A  [10XHapResolution[0X  in  [10XHapResolutionRep[0X  representation is a component object
+  A  [10XHapResolution[0m  in  [10XHapResolutionRep[0m  representation is a component object
   with the components
   
-  --    [10Xgroup[0X, a group of arbitrary type.
+  --    [10Xgroup[0m, a group of arbitrary type.
   
-  --    [10Xelts[0X,  a  (partial)  list  of (possibly duplicate) elements in G. This
+  --    [10Xelts[0m,  a  (partial)  list  of (possibly duplicate) elements in G. This
         list  provides  the  "enumeration"  of  the group. Note that there are
-        functions  in Hap which assume that [10Xelts[1][0X is the identity element of
+        functions  in Hap which assume that [10Xelts[1][0m is the identity element of
         G.
   
-  --    [10XappendToElts(g)[0X  a function that appends the group element [10Xg[0X to [10X.elts[0X.
+  --    [10XappendToElts(g)[0m  a function that appends the group element [10Xg[0m to [10X.elts[0m.
         This  is  not  documented  in  Hap  1.8.6 but seems to be required for
         infinite  groups.  This requirement might vanish in some later version
         of Hap [G. Ellis, private communication].
   
-  --    [10Xdimension(k)[0X, a function which returns the ZG-rank of the Module M_k
+  --    [10Xdimension(k)[0m, a function which returns the ZG-rank of the Module M_k
   
-  --    [10Xboundary(k,j)[0X,  a function which returns the image in M_k-1 of the jth
+  --    [10Xboundary(k,j)[0m,  a function which returns the image in M_k-1 of the jth
         free  generator  of  M_k.  Note  that negative j are valid as input as
         well.  In  this  case  the additive inverse of the boundary of the jth
         generator is returned
   
-  --    [10Xhomotopy(k,[i,g])[0X a function which returns the image in M_k+1, under a
-        contracting  homotopy M_k -> M_k+1, of the element [10X[[i,g]][0X in M_k. The
-        value  of  this might be [9Xfail[0X. However, currently (version 1.8.4) some
-        Hap functions assume that [10Xhomotopy[0X is a function without testing.
+  --    [10Xhomotopy(k,[i,g])[0m a function which returns the image in M_k+1, under a
+        contracting  homotopy M_k -> M_k+1, of the element [10X[[i,g]][0m in M_k. The
+        value  of  this might be [9Xfail[0m. However, currently (version 1.8.4) some
+        Hap functions assume that [10Xhomotopy[0m is a function without testing.
   
-  --    [10Xproperties[0X,  a  list  of pairs [10X["name","value"][0X "name" is a string and
-        value  is  anything  (boolean, number, string...). Every [10XHapResolution[0X
-        (regardless  of  representation)  has  to  have [10X["type","resolution"][0X,
-        [10X["length",length][0X  where  [10Xlength[0X  is  the length of the resolution and
-        [10X["characteristic",char][0X.  Currently  (Hap  1.8.6),  [10Xlength[0X must not be
-        [9Xinfinity[0X.  The  values of these properties can be tested using the Hap
-        function [10XEvaluateProperty(resolution,propertyname)[0X.
+  --    [10Xproperties[0m,  a  list  of pairs [10X["name","value"][0m "name" is a string and
+        value  is  anything  (boolean, number, string...). Every [10XHapResolution[0m
+        (regardless  of  representation)  has  to  have [10X["type","resolution"][0m,
+        [10X["length",length][0m  where  [10Xlength[0m  is  the length of the resolution and
+        [10X["characteristic",char][0m.  Currently  (Hap  1.8.6),  [10Xlength[0m must not be
+        [9Xinfinity[0m.  The  values of these properties can be tested using the Hap
+        function [10XEvaluateProperty(resolution,propertyname)[0m.
   
-  Note  that  making  [10XHapResolution[0Xs  immutable  will make the [10X.elts[0X component
+  Note  that  making  [10XHapResolution[0ms  immutable  will make the [10X.elts[0m component
   immutable.  As this lookup table might change during calculations, we do not
   recommend using immutable resolutions (in any representation).
   
   
-  [1X1.2 The [9XHapLargeGroupResolutionRep[0X[1X Representation[0X
+  [1X1.2 The [9XHapLargeGroupResolutionRep[1X Representation[0X
   
   In  this  sub-representation  of  the  standard  representation,  the module
   elements  in  this resolution are lists of groupring elements. So the lookup
-  table  [10X.elts[0X is not used as long as no conversion to standard representation
-  takes  place. In addition to the components of a [9XHapResolution[0X, a resolution
+  table  [10X.elts[0m is not used as long as no conversion to standard representation
+  takes  place. In addition to the components of a [9XHapResolution[0m, a resolution
   in large group representation has the following components:
   
-  --    [10Xboundary2(resolution,term,gen)[0X,  a  function that returns the boundary
-        of the [3Xgen[0Xth generator of the [3Xterm[0Xth module.
+  --    [10Xboundary2(resolution,term,gen)[0m,  a  function that returns the boundary
+        of the [3Xgen[0mth generator of the [3Xterm[0mth module.
   
-  --    [10Xgroupring[0X the group ring of the resolution [3Xresolution[0X.
+  --    [10Xgroupring[0m the group ring of the resolution [3Xresolution[0m.
   
-  --    [10Xdimension2(resolution,term)[0X  a  function that returns the dimension of
-        the [3Xterm[0Xth module of the resolution [3Xresolution[0X.
+  --    [10Xdimension2(resolution,term)[0m  a  function that returns the dimension of
+        the [3Xterm[0mth module of the resolution [3Xresolution[0m.
   
-  The  effort of having two versions of [10Xboundary[0X and [10Xdimension[0X is necessary to
+  The  effort of having two versions of [10Xboundary[0m and [10Xdimension[0m is necessary to
   keep the structure compatible with the usual Hap resolution.
   
