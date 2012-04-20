@@ -15,10 +15,10 @@ Subtitle := "A HAP extension for crytallographic groups",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "0.1.9",
-Date := "03/06/2010",
+Version := "0.1.10",
+Date := "19/04/2012",
 
-ArchiveURL := "http://csserver.evansville.edu/~mroeder/HAPcryst/HAPcryst0_1_9",
+ArchiveURL := "http://csserver.evansville.edu/~mroeder/HAPcryst/HAPcryst0_1_10",
 
   
 ##  All provided formats as list of file extensions, separated by white
@@ -227,9 +227,11 @@ Dependencies := rec(
   # insensitive, least version denoted with '>=' prepended to version string.
   # without these, the package will not load
   NeededOtherPackages := [
+                   ["Polycyclic",">=2.8.1"],
+                   ["AClib",">=1.1"],
+                   ["cryst",">=4.1.5"],
                    ["HAP",">=1.8"],
                    ["polymaking",">=0.7.6"],
-                   ["cryst",">=4.1.5"],
                    ],
   # without these the package will issue a warning while loading
   SuggestedOtherPackages := [

@@ -5,7 +5,7 @@
 ##  
 
 ##
-#H @(#)$Id: misc.gd, v 0.1.9 2010/06/03 21:47:34 gap Exp $
+#H @(#)$Id: misc.gd, v 0.1.10 2012/04/19 20:12:51 gap Exp $
 ##
 #Y	 Copyright (C) 2006 Marc Roeder 
 #Y 
@@ -24,7 +24,7 @@
 #Y Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
 Revision.("/Users/roeder/gap/HAPcryst/HAPcryst/lib/misc_gd"):=
-	"@(#)$Id: misc.gd, v 0.1.9 2010/06/03   21:47:34  gap Exp $";
+	"@(#)$Id: misc.gd, v 0.1.10 2012/04/19   20:12:51  gap Exp $";
 ##############################
 #
 DeclareOperation("SignRat",[IsRat]);
