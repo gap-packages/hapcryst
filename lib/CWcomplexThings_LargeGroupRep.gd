@@ -23,7 +23,7 @@
 #Y along with this program; if not, write to the Free Software 
 #Y Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
-Revision.("/Users/roeder/gap/HAPcryst/HAPcryst/lib/CWcomplexThings_LargeGroupRep_gd"):=
+Revision.("CWcomplexThings_LargeGroupRep_gd"):=
 	"@(#)$Id$";
 DeclareOperation("UndirectedBoundaryOfFreeZGLetterNC_LargeGroupRep",[IsHapLargeGroupResolutionRep,IsInt,IsDenseList]);
 DeclareOperation("UndirectedBoundaryOfFreeZGLetter_LargeGroupRep",[IsHapLargeGroupResolutionRep,IsInt,IsDenseList]);

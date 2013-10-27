@@ -23,7 +23,7 @@
 #Y along with this program; if not, write to the Free Software 
 #Y Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
-Revision.("/Users/roeder/gap/HAPcryst/HAPcryst/lib/FundamentalDomainBieberbach_gi"):=
+Revision.("FundamentalDomainBieberbach_gi"):=
 	"@(#)$Id$";
 #############################################################################
 ##
@@ -300,7 +300,8 @@ InstallMethod(FundamentalDomainBieberbachGroupNC,
             ConvertMatrixToPolymakeString("FACETS",newinequalities)
             );
 #    AppendInequalitiesToPolymakeObject(partialFD,newinequalities);
-#    Polymake(partialFD,"VERTICES FACETS");
+## slightly experimental: remove if this causes trouble:
+    Polymake(partialFD,"VERTICES FACETS");
     
     
     
