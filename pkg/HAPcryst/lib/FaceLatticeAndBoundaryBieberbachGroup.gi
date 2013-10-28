@@ -5,7 +5,7 @@
 ##  
 
 ##
-#H @(#)$Id: FaceLatticeAndBoundaryBieberbachGroup.gi, v 0.1.10 2012/04/19 20:12:51 gap Exp $
+#H @(#)$Id: FaceLatticeAndBoundaryBieberbachGroup.gi, v 0.1.11 2013/10/27 18:31:09 gap Exp $
 ##
 #Y	 Copyright (C) 2006 Marc Roeder 
 #Y 
@@ -23,16 +23,16 @@
 #Y along with this program; if not, write to the Free Software 
 #Y Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
-Revision.("/Users/roeder/gap/HAPcryst/HAPcryst/lib/FaceLatticeAndBoundaryBieberbachGroup_gi"):=
-	"@(#)$Id: FaceLatticeAndBoundaryBieberbachGroup.gi, v 0.1.10 2012/04/19   20:12:51  gap Exp $";
+Revision.("FaceLatticeAndBoundaryBieberbachGroup_gi"):=
+	"@(#)$Id: FaceLatticeAndBoundaryBieberbachGroup.gi, v 0.1.11 2013/10/27   18:31:09  gap Exp $";
 InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
         [IsPolymakeObject,IsGroup],
         function(poly,group)  
     local   removeSomeFaces,  orbitDecompositionAsIndices,  
             changeHasseEntries,  reformatHD,  reformatHD_GroupRing,  
-            calculateBoundary,  dim,  starttime,  vertices,  hasse,  
-            codim,  initialfacenumber,  timetmp,  faceOrbits,  tmp,  
-            k,  j,  groupring,  elts;
+            polymakeFaceLattice,  calculateBoundary,  dim,  starttime,  
+			vertices,  hasse, codim,  initialfacenumber,  timetmp,  
+			faceOrbits,  tmp,  k,  j,  groupring,  elts;
     
     removeSomeFaces:=function(upfaces,faces)
         local   upfaceentries,  faceindex,  face;
@@ -244,6 +244,36 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
         return groupelements;
     end;
     
+    ######## patch for next genertion polymake ###
+    ## first part
+    polymakeFaceLattice:=function(polygon)
+    local  faces,dimlist, dim, lattice, i;	
+
+      faces:=Polymake(polygon,"FACES");
+      dimlist:=Polymake(polygon,"DIMS");
+      dim := Length(dimlist);
+      lattice:=EmptyPlist(dim);
+
+      ## walk through the face list from top to bottom
+      # the dim list contains the maximal index of a face in the 
+      # respective dimension. The top face containing all vertices
+      # has no entry in the dimlist, so we add it beforehand.
+      ##
+      lattice[dim] := [StructuralCopy(faces[Length(faces)])];
+      for i in [1..dim-1] do
+        lattice[i] := StructuralCopy(faces{[dimlist[i]+1..dimlist[i+1]]});
+      od;
+
+      ## The reverse probably runs every time
+      ## panic-coding? I don't know, let's keep it...
+      if Length(lattice[1][1]) = 1 then
+      	 lattice := Reversed(lattice);
+      fi;
+
+      return lattice;
+    end;
+    ### end of patch
+        
     
     
 ######################################################################
@@ -422,7 +452,10 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
     dim:=DimensionOfMatrixGroup(group)-1;
     starttime:=Runtime();
     
-    Polymake(poly,"FACE_LATTICE VERTICES");
+	## patch for next generation polymake:
+	# second part. If you have the old polymake version,
+	# use "FACE_LATTICE" instead of "FACES DIMS" but keep the VERTICES!
+    Polymake(poly,"FACES DIMS VERTICES");
     vertices:=Polymake(poly,"VERTICES");
     MakeImmutable(vertices);
     if not dim=Size(vertices[1]-1)
@@ -434,8 +467,12 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
     # Note that the face lattice is generated top- down. So the 
     # order has to be reversed to be ascending in dimension.
     ##
+	## patch for next generation polymake:
+	# third part. If you have the old polymake version,
+	# use the line where "Polymake" is called with "FACE_LATTICE"
     hasse:=Concatenation([[[[1..Size(vertices)],[]]]],
-                   StructuralCopy(Polymake(poly,"FACE_LATTICE"){[1..dim]}));
+                   #StructuralCopy(Polymake(poly,"FACE_LATTICE"){[1..dim]}));
+                   StructuralCopy(polymakeFaceLattice(poly){[1..dim]}));
     #moduleGenerators:=List([1..dim+1],i->[]);
 
     #moduleGenerators is a list of list. The i^{th} entry contains the 

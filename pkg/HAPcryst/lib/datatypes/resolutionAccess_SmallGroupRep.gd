@@ -5,7 +5,7 @@
 ##  
 
 ##
-#H @(#)$Id: resolutionAccess_SmallGroupRep.gd, v 0.1.10 2012/04/19 20:12:51 gap Exp $
+#H @(#)$Id: resolutionAccess_SmallGroupRep.gd, v 0.1.11 2013/10/27 18:31:09 gap Exp $
 ##
 #Y	 Copyright (C) 2006 Marc Roeder 
 #Y 
@@ -24,7 +24,7 @@
 #Y Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
 Revision.("/Users/roeder/gap/HAPcryst/HAPcryst/lib/datatypes/resolutionAccess_SmallGroupRep_gd"):=
-	"@(#)$Id: resolutionAccess_SmallGroupRep.gd, v 0.1.10 2012/04/19   20:12:51  gap Exp $";
+	"@(#)$Id: resolutionAccess_SmallGroupRep.gd, v 0.1.11 2013/10/27   18:31:09  gap Exp $";
 #############################################################################
 ##
 ##  This file defines a representation for HapResolutions of small groups.

@@ -5,7 +5,7 @@
 ##  
 
 ##
-#H @(#)$Id: contHomBieberbach.gi, v 0.1.10 2012/04/19 20:12:51 gap Exp $
+#H @(#)$Id: contHomBieberbach.gi, v 0.1.11 2013/10/27 18:31:09 gap Exp $
 ##
 #Y	 Copyright (C) 2006 Marc Roeder 
 #Y 
@@ -24,7 +24,7 @@
 #Y Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
 Revision.("/Users/roeder/gap/HAPcryst/HAPcryst/lib/datatypes/contHomBieberbach_gi"):=
-	"@(#)$Id: contHomBieberbach.gi, v 0.1.10 2012/04/19   20:12:51  gap Exp $";
+	"@(#)$Id: contHomBieberbach.gi, v 0.1.11 2013/10/27   18:31:09  gap Exp $";
 InequalitiesTimesMatrix:=function(ineqs,mat)
     local   dim,  inverse,  translationPart,  returnlist,  ineq,  
             returnineq,  newv;

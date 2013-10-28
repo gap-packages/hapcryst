@@ -1,3 +1,11 @@
+0.1.11:
+
+- HAPcryst now calls polymaking with keywords "FACES" and "DIMS" to create
+  a resulution of a Bieberbach group. This requires a "next generation"
+  version of polymake.
+- One minor change that should reduce the number of calls to polymake by one.
+------------------
+
 0.1.10:
 - dependencies changed: AClib and Polycyclic added
 

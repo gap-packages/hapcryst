@@ -5,7 +5,7 @@
 ##  
 
 ##
-#H @(#)$Id: geometry.gd, v 0.1.10 2012/04/19 20:12:51 gap Exp $
+#H @(#)$Id: geometry.gd, v 0.1.11 2013/10/27 18:31:09 gap Exp $
 ##
 #Y	 Copyright (C) 2006 Marc Roeder 
 #Y 
@@ -23,8 +23,8 @@
 #Y along with this program; if not, write to the Free Software 
 #Y Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
-Revision.("/Users/roeder/gap/HAPcryst/HAPcryst/lib/geometry_gd"):=
-	"@(#)$Id: geometry.gd, v 0.1.10 2012/04/19   20:12:51  gap Exp $";
+Revision.("geometry_gd"):=
+	"@(#)$Id: geometry.gd, v 0.1.11 2013/10/27   18:31:09  gap Exp $";
 DeclareOperation("BisectorInequalityFromPointPair",
         [IsVector,IsVector,IsMatrix]);
 DeclareOperation("BisectorInequalityFromPointPair",

@@ -3,7 +3,7 @@
    [1X[5XHAPcryst[0m[1X – An extension of the [5XGAP[0m[1X package [5XHAP[0m[1X for crystallographic groups[0m
   
   
-                               ( Version 0.1.10 )
+                               ( Version 0.1.11 )
   
   
                                    Marc Röder

@@ -15,10 +15,10 @@ Subtitle := "A HAP extension for crytallographic groups",
 ##  See '?Extending: Version Numbers' in GAP help for an explanation
 ##  of valid version numbers. For an automatic package distribution update
 ##  you must provide a new version number even after small changes.
-Version := "0.1.10",
-Date := "19/04/2012",
+Version := "0.1.11",
+Date := "27/10/2013",
 
-ArchiveURL := "http://csserver.evansville.edu/~mroeder/HAPcryst/HAPcryst0_1_10",
+ArchiveURL := "http://csserver.evansville.edu/~mroeder/HAPcryst/HAPcryst0_1_11",
 
   
 ##  All provided formats as list of file extensions, separated by white
@@ -231,7 +231,7 @@ Dependencies := rec(
                    ["AClib",">=1.1"],
                    ["cryst",">=4.1.5"],
                    ["HAP",">=1.8"],
-                   ["polymaking",">=0.7.6"],
+                   ["polymaking",">=0.7.9"],
                    ],
   # without these the package will issue a warning while loading
   SuggestedOtherPackages := [
@@ -246,7 +246,7 @@ Dependencies := rec(
   # (no automatic test will be done for this, do this in your 
   # 'AvailabilityTest' function below)
   # ExternalConditions := []
-  ExternalConditions := ["polymake (http://www.math.tu-berlin.de/polymake/) must be installed to calculate resolutions"]
+  ExternalConditions := ["polymake (http://www.polymake.org) must be installed to calculate resolutions"]
 ),
 
 ##  Provide a test function for the availability of this package.
