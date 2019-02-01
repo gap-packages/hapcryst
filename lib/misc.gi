@@ -5,7 +5,6 @@
 ##  
 
 ##
-#H @(#)$Id$
 ##
 #Y	 Copyright (C) 2006 Marc Roeder 
 #Y 
@@ -23,8 +22,6 @@
 #Y along with this program; if not, write to the Free Software 
 #Y Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
-Revision.("misc_gi"):=
-	"@(#)$Id$";
 # there seems to be not method for rationals, even though SignInt 
 # did work in all of the cases I tried.
 InstallMethod(SignRat, "for rationals",[IsRat],
