@@ -83,14 +83,6 @@ Dependencies := rec(
 ),
 
 AvailabilityTest := ReturnTrue,
-BannerString := Concatenation(
-  "----------------------------------------------------------------\n",
-  "This is HAPcryst version ", ~.Version, "\n",
-  "by ", ~.Persons[1].FirstNames, " ", ~.Persons[1].LastName,
-        "\n",
-  "----------------------------------------------------------------\n" ),
-
-Autoload := false,
 
 TestFile := "tst/testall.g",
 
