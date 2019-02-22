@@ -3,7 +3,8 @@ SetPackageInfo( rec(
 PackageName := "HAPcryst",
 Subtitle := "A HAP extension for crytallographic groups",
 Version := "0.1.11",
-Date := "27/10/2013",
+Date := "27/10/2013", # dd/mm/yyyy format
+License := "GPL-2.0-or-later",
 
 ArchiveURL := "http://csserver.evansville.edu/~mroeder/HAPcryst/HAPcryst0_1_11",
 
