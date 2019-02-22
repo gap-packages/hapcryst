@@ -94,6 +94,23 @@ Autoload := false,
 
 TestFile := "tst/testall.g",
 
-Keywords := ["homological algebra","crystallographic groups","resolution"]
+Keywords := ["homological algebra","crystallographic groups","resolution"],
+
+AutoDoc := rec(
+    TitlePage := rec(
+        Acknowledgements := """
+          This work was supported by Marie Curie Grant No. MTKD-CT-2006-042685
+        """,
+        Copyright := """
+            &copyright; 2007 Marc Röder. <P/>
+
+            This package is distributed under the terms of the GNU General
+            Public License version 2 or later (at your convenience). See the
+            file <File>LICENSE</File> or
+            <URL>https://www.gnu.org/copyleft/gpl.html</URL>
+        """,
+        Version := Concatenation( "Version ", ~.Version ),
+    )
+),
 
 ));

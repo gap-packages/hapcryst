@@ -3,40 +3,7 @@
 
 <Book Name="HAPcryst">
 
-<TitlePage>
-
-  <Title><Package>HAPcryst</Package> &ndash; An extension of the &GAP; package <Package>HAP</Package> for
-  crystallographic groups</Title>
-
-  <Version>( Version
-<#Include SYSTEM "../../version.ver">
- )
-  </Version>
-  <Author>Marc Röder
-    <Email>marc&uscore;roeder(at)web.de</Email>
-  </Author>
-
-  <Abstract>
-  
-  </Abstract>
-
-  <Address>
-  Marc Röder, Department of Mathematics, NUI Galway, Irleland
-  </Address>
-
-  <Acknowledgements>
-  This work was supported by Marie Curie Grant No. MTKD-CT-2006-042685
-  </Acknowledgements>
-
-  <Copyright>&copyright; 2007 Marc Röder. <P/>
-
-    This package is distributed under the terms of the GNU General
-    Public License version 2 or later (at your convenience). See the  file
-    <File>LICENSE.txt</File> or 
-    <URL>http://www.gnu.org/copyleft/gpl.html</URL>
-
-  </Copyright>
-</TitlePage>
+<#Include SYSTEM "title.xml">
 
 <TableOfContents/>
 
