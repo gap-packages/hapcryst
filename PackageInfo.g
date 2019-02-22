@@ -14,14 +14,14 @@ Persons := [
     IsMaintainer  := true,
     Email         := "marc_roeder@web.de",
     WWWHome       := "http://csserver.evansville.edu/~mroeder",
-#    PostalAddress := Concatenation( [
-#                     "Department of Mathematics\n",
-#                     "NUI Galway\n",
-#                     "Ireland" ] ),
-#     Place         := "Galway",
-#     Institution   := "National University of Ireland, Galway"
   ),
-
+  rec(
+    LastName      := "GAP Team",
+    FirstNames    := "The",
+    IsAuthor      := false,
+    IsMaintainer  := true,
+    Email         := "support@gap-system.org",
+  ),
 ],
 
 # Status := "accepted",
