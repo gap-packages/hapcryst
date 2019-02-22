@@ -6,10 +6,6 @@ Version := "0.1.11",
 Date := "27/10/2013", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
-ArchiveURL := "http://csserver.evansville.edu/~mroeder/HAPcryst/HAPcryst0_1_11",
-
-ArchiveFormats := ".tar.gz,.tar.bz2,-win.zip", # the others are generated automatically
-
 Persons := [
   rec(
     LastName      := "Roeder",
@@ -31,12 +27,20 @@ Persons := [
 # Status := "accepted",
 Status := "deposited",
 
-README_URL := "http://csserver.evansville.edu/~mroeder/HAPcryst/README.HAPcryst",
-PackageInfoURL := "http://csserver.evansville.edu/~mroeder/HAPcryst/PackageInfo.g",
+PackageWWWHome  := "https://gap-packages.github.io/hapcryst/",
+README_URL      := Concatenation( ~.PackageWWWHome, "README.md" ),
+PackageInfoURL  := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+SourceRepository := rec(
+    Type := "git",
+    URL := "https://github.com/gap-packages/hapcryst",
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
+ArchiveURL      := Concatenation( ~.SourceRepository.URL,
+                                 "/releases/download/v", ~.Version,
+                                 "/hapcryst-", ~.Version ),
+ArchiveFormats := ".tar.gz",
 
 AbstractHTML := "This is an extension to the HAP package by Graham Ellis. It implements geometric methods for the calculation of resolutions of Bieberbach groups.",
-
-PackageWWWHome := "http://csserver.evansville.edu/~mroeder/HAPcryst.html",
 
 PackageDoc := [
 rec(
