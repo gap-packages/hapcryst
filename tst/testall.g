@@ -1,2 +1,3 @@
 LoadPackage("hapcryst");
-ReadTest(Filename(DirectoriesPackageLibrary("hapcryst"),"../tst/HAPcryst.tst"));
+TestDirectory(DirectoriesPackageLibrary("hapcryst", "tst"), rec(exitGAP := true));
+FORCE_QUIT_GAP(1);

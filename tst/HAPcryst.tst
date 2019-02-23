@@ -14,6 +14,7 @@ Resolution of length 4 in characteristic
 0 for SpaceGroupOnRightBBNWZ( 3, 6, 1, 1, 4 ) .
 No contracting homotopy available.
 
+#
 gap>  List([0..3],Dimension(res));
 [ 2, 5, 4, 1 ]
 gap> BoundaryOfGenerator_LargeGroupRep(res,2,1);
@@ -27,6 +28,7 @@ Resolution of length 4 in characteristic
 0 for SpaceGroupOnRightBBNWZ( 3, 6, 1, 1, 4 ) .
 No contracting homotopy available.
 
+#
 gap> List([0..3],Dimension(res));
 [ 9, 18, 10, 1 ]
 gap> BoundaryOfGenerator_LargeGroupRep(res,2,1);
@@ -52,10 +54,11 @@ Resolution of length 5 in characteristic
 0 for SpaceGroupOnRightBBNWZ( 4, 2, 1, 1, 2 ) .
 No contracting homotopy available.
 
+#
 gap> List([0..4],i->Homology(TensorWithIntegers(res),i));
 [ [ 0 ], [ 2, 0, 0, 0 ], [ 2, 2, 0, 0, 0 ], [ 2, 0 ], [  ] ]
 gap> List([0..4],i->Cohomology(HomToIntegers(res),i));
 [ [ 0 ], [ 0, 0, 0 ], [ 2, 0, 0, 0 ], [ 2, 2, 0 ], [ 2 ] ]
 
-
+#
 gap> STOP_TEST("tst.g", 10000);
