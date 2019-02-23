@@ -1,14 +1,17 @@
+dist: xenial
 language: c
 env:
   global:
     - GAPROOT=gaproot
     - COVDIR=coverage
+    - GAP_PKGS_TO_BUILD="io profiling nq"
 
 addons:
   apt_packages:
     - libgmp-dev
     - libreadline-dev
     - zlib1g-dev
+    - polymake # for polymaking
 
 matrix:
   include:
