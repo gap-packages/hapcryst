@@ -36,7 +36,6 @@ The following packages are not required but suggested:
 1. Download the package archive 
         HAPcryst<ver>.tar.bz2
         HAPcryst<ver>.tar.gz
-        HAPcryst<ver>.zoo
         HAPcryst<ver>-win.zip
    (where <ver> is some version number) to the directory pkg/ of the
    GAP home directory. If you do not have permission to do so, create
@@ -45,7 +44,6 @@ The following packages are not required but suggested:
 2. change directory to pkg/ and unpack the archive using the according command:
         tar -xjf HAPcryst<ver>.tar.bz2
         tar -xzf HAPcryst<ver>.tar.gz
-        zoo -extract HAPcryst<ver>.zoo
         unzip HAPcryst<ver>-win.zip
   (replace <ver> with the version number)
 
