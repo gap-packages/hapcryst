@@ -1,0 +1,235 @@
+  
+  [1X3 [33X[0;0YAlgorithms of Orbit-Stabilizer Type[133X[101X
+  
+  [33X[0;0YWe  introduce  a  way  to  calculate  a  sufficient part of an orbit and the
+  stabilizer of a point.[133X
+  
+  
+  [1X3.1 [33X[0;0YOrbit Stabilizer for Crystallographic Groups[133X[101X
+  
+  [1X3.1-1 OrbitStabilizerInUnitCubeOnRight[101X
+  
+  [33X[1;0Y[29X[2XOrbitStabilizerInUnitCubeOnRight[102X( [3Xgroup[103X, [3Xx[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10YA record containing[133X
+  
+            [30X    [33X[0;16Y[9X.stabilizer[109X: the stabilizer of [3Xx[103X.[133X
+  
+            [30X    [33X[0;16Y[9X.orbit[109X  set  of  vectors  from  [22X[0,1)^n[122X which represents the
+                  orbit.[133X
+  
+  [33X[0;0YLet  [3Xx[103X be a rational vector from [22X[0,1)^n[122X and [3Xgroup[103X a space group in standard
+  form.  The  function then calculates the part of the orbit which lies inside
+  the  cube [22X[0,1)^n[122X and the stabilizer of [3Xx[103X. Observe that every element of the
+  full  orbit  differs  from  a  point  in  the  returned orbit only by a pure
+  translation.[133X
+  
+  [33X[0;0YNote  that  the  restriction  to  points  from [22X[0,1)^n[122X makes sense if orbits
+  should be compared and the vector passed to [10XOrbitStabilizerInUnitCubeOnRight[110X
+  should be an element of the returned orbit (part).[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X   [128X[104X
+    [4X[25Xgap>[125X [27XS:=SpaceGroup(3,5);;[127X[104X
+    [4X[25Xgap>[125X [27XOrbitStabilizerInUnitCubeOnRight(S,[1/2,0,9/11]);   [127X[104X
+    [4X[28Xrec( orbit := [ [ 0, 1/2, 2/11 ], [ 1/2, 0, 9/11 ] ], [128X[104X
+    [4X[28X  stabilizer := Group([ [ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ], [128X[104X
+    [4X[28X          [ 0, 0, 0, 1 ] ] ]) )[128X[104X
+    [4X[25Xgap>[125X [27XOrbitStabilizerInUnitCubeOnRight(S,[0,0,0]);     [127X[104X
+    [4X[28Xrec( orbit := [ [ 0, 0, 0 ] ], stabilizer := <matrix group with 2 generators> )[128X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YIf  you are interested in other parts of the orbit, you can use [2XVectorModOne[102X
+  ([14X2.1-2[114X)  for  the  base  point  and  the functions [2XShiftedOrbitPart[102X ([14X3.1-9[114X),
+  [2XTranslationsToOneCubeAroundCenter[102X  ([14X3.1-10[114X)  and  [2XTranslationsToBox[102X ([14X3.1-11[114X)
+  for the resulting orbit[133X
+  [33X[0;0YSuppose  we  want to calculate the part of the orbit of [10X[4/3,5/3,7/3][110X in the
+  cube of sidelength [10X1[110X around this point:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XS:=SpaceGroup(3,5);;[127X[104X
+    [4X[25Xgap>[125X [27Xp:=[4/3,5/3,7/3];;[127X[104X
+    [4X[25Xgap>[125X [27Xo:=OrbitStabilizerInUnitCubeOnRight(S,VectorModOne(p)).orbit;[127X[104X
+    [4X[28X[ [ 1/3, 2/3, 1/3 ], [ 1/3, 2/3, 2/3 ] ][128X[104X
+    [4X[25Xgap>[125X [27Xbox:=p+[[-1,1],[-1,1],[-1,1]];[127X[104X
+    [4X[28X[ [ 1/3, 8/3, 7/3 ], [ 1/3, 8/3, 7/3 ], [ 1/3, 8/3, 7/3 ] ][128X[104X
+    [4X[25Xgap>[125X [27Xo2:=Concatenation(List(o,i->i+TranslationsToBox(i,box)));;[127X[104X
+    [4X[25Xgap>[125X [27X# This is what we looked for. But it is somewhat large:[127X[104X
+    [4X[25Xgap>[125X [27XSize(o2);[127X[104X
+    [4X[28X54[128X[104X
+  [4X[32X[104X
+  
+  [1X3.1-2 OrbitStabilizerInUnitCubeOnRightOnSets[101X
+  
+  [33X[1;0Y[29X[2XOrbitStabilizerInUnitCubeOnRightOnSets[102X( [3Xgroup[103X, [3Xset[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10YA record containing[133X
+  
+            [30X    [33X[0;16Y[9X.stabilizer[109X: the stabilizer of [3Xset[103X.[133X
+  
+            [30X    [33X[0;16Y[9X.orbit[109X  set of sets of vectors from [22X[0,1)^n[122X which represents
+                  the orbit.[133X
+  
+  [33X[0;0YCalculates   orbit   and   stabilizer   of   a   set  of  vectors.  Just  as
+  [2XOrbitStabilizerInUnitCubeOnRight[102X  ([14X3.1-1[114X),  it needs input from [22X[0,1)^n[122X. The
+  returned  orbit  part  [9X.orbit[109X  is  a  set of sets such that every element of
+  [9X.orbit[109X  has  a  non-trivial  intersection with the cube [22X[0,1)^n[122X. In general,
+  these sets will not lie inside [22X[0,1)^n[122X completely.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XS:=SpaceGroup(3,5);;[127X[104X
+    [4X[25Xgap>[125X [27XOrbitStabilizerInUnitCubeOnRightOnSets(S,[[0,0,0],[0,1/2,0]]);[127X[104X
+    [4X[28Xrec( orbit := [ [ [ -1/2, 0, 0 ], [ 0, 0, 0 ] ], [128X[104X
+    [4X[28X                [ [ 0, 0, 0 ], [ 0, 1/2, 0 ] ],[128X[104X
+    [4X[28X                [ [ 1/2, 0, 0 ], [ 1, 0, 0 ] ] ],[128X[104X
+    [4X[28X  stabilizer := Group([ [ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [128X[104X
+    [4X[28X                        [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ] ]) )[128X[104X
+  [4X[32X[104X
+  
+  [1X3.1-3 OrbitPartInVertexSetsStandardSpaceGroup[101X
+  
+  [33X[1;0Y[29X[2XOrbitPartInVertexSetsStandardSpaceGroup[102X( [3Xgroup[103X, [3Xvertexset[103X, [3Xallvertices[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10YSet of subsets of [3Xallvertices[103X.[133X
+  
+  [33X[0;0YIf  [3Xallvertices[103X  is a set of vectors and [3Xvertexset[103X is a subset thereof, then
+  [2XOrbitPartInVertexSetsStandardSpaceGroup[102X  returns  that  part of the orbit of
+  [3Xvertexset[103X   which   consists   entirely  of  subsets  of  [3Xallvertices[103X.  Note
+  that,unlike  the other [10XOrbitStabilizer[110X algorithms, this does not require the
+  input to lie in some particular part of the space.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XS:=SpaceGroup(3,5);;[127X[104X
+    [4X[25Xgap>[125X [27XOrbitPartInVertexSetsStandardSpaceGroup(S,[[0,1,5],[1,2,0]],[127X[104X
+    [4X[25X>[125X [27XSet([[1,2,0],[2,3,1],[1,2,6],[1,1,0],[0,1,5],[3/5,7,12],[1/17,6,1/2]]));[127X[104X
+    [4X[28X[ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ], [ [ 1, 2, 6 ], [ 2, 3, 1 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XOrbitPartInVertexSetsStandardSpaceGroup(S, [[1,2,0]],[127X[104X
+    [4X[25X>[125X [27XSet([[1,2,0],[2,3,1],[1,2,6],[1,1,0],[0,1,5],[3/5,7,12],[1/17,6,1/2]]));[127X[104X
+    [4X[28X[ [ [ 0, 1, 5 ] ], [ [ 1, 1, 0 ] ], [ [ 1, 2, 0 ] ], [ [ 1, 2, 6 ] ], [ [ 2, 3, 1 ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [1X3.1-4 OrbitPartInFacesStandardSpaceGroup[101X
+  
+  [33X[1;0Y[29X[2XOrbitPartInFacesStandardSpaceGroup[102X( [3Xgroup[103X, [3Xvertexset[103X, [3Xfaceset[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10YSet of subsets of [3Xfaceset[103X.[133X
+  
+  [33X[0;0YThis  calculates  the  orbit of a space group on sets restricted to a set of
+  faces.[133X
+  [33X[0;0YIf  [3Xfaceset[103X  is  a  set  of  sets  of vectors and [3Xvertexset[103X is an element of
+  [3Xfaceset[103X,  then  [2XOrbitPartInFacesStandardSpaceGroup[102X  returns that part of the
+  orbit of [3Xvertexset[103X which consists entirely of elements of [3Xfaceset[103X.[133X
+  [33X[0;0YNote that,unlike the other [10XOrbitStabilizer[110X algorithms, this does not require
+  the input to lie in some particular part of the space.[133X
+  
+  [1X3.1-5 OrbitPartAndRepresentativesInFacesStandardSpaceGroup[101X
+  
+  [33X[1;0Y[29X[2XOrbitPartAndRepresentativesInFacesStandardSpaceGroup[102X( [3Xgroup[103X, [3Xvertexset[103X, [3Xfaceset[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10YA set of face-matrix pairs .[133X
+  
+  [33X[0;0YThis  is  a  slight  variation of [2XOrbitPartInFacesStandardSpaceGroup[102X ([14X3.1-4[114X)
+  that also returns a representative for every orbit element.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XS:=SpaceGroup(3,5);;[127X[104X
+    [4X[25Xgap>[125X [27XOrbitPartInVertexSetsStandardSpaceGroup(S,[[0,1,5],[1,2,0]],[127X[104X
+    [4X[25X>[125X [27XSet([[1,2,0],[2,3,1],[1,2,6],[1,1,0],[0,1,5],[3/5,7,12],[1/17,6,1/2]]));[127X[104X
+    [4X[28X[ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ], [ [ 1, 2, 6 ], [ 2, 3, 1 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XOrbitPartInFacesStandardSpaceGroup(S,[[0,1,5],[1,2,0]],[127X[104X
+    [4X[25X>[125X [27XSet( [ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ], [[1/17,6,1/2],[1,2,7]]]));[127X[104X
+    [4X[28X[ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ] ][128X[104X
+    [4X[25Xgap>[125X [27XOrbitPartAndRepresentativesInFacesStandardSpaceGroup(S,[[0,1,5],[1,2,0]],[127X[104X
+    [4X[25X>[125X [27XSet( [ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ], [[1/17,6,1/2],[1,2,7]]]));[127X[104X
+    [4X[28X[ [ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ],[128X[104X
+    [4X[28X      [ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ] ] ][128X[104X
+  [4X[32X[104X
+  
+  [1X3.1-6 StabilizerOnSetsStandardSpaceGroup[101X
+  
+  [33X[1;0Y[29X[2XStabilizerOnSetsStandardSpaceGroup[102X( [3Xgroup[103X, [3Xset[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10Yfinite group of affine matrices (OnRight)[133X
+  
+  [33X[0;0YGiven  a  set  [3Xset[103X of vectors and a space group [3Xgroup[103X in standard form, this
+  method  calculates  the  stabilizer of that set in the full crystallographic
+  group.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[28X[128X[104X
+    [4X[25Xgap>[125X [27XG:=SpaceGroup(3,12);;[127X[104X
+    [4X[25Xgap>[125X [27Xv:=[ 0, 0,0 ];;[127X[104X
+    [4X[25Xgap>[125X [27Xs:=StabilizerOnSetsStandardSpaceGroup(G,[v]);[127X[104X
+    [4X[28X<matrix group with 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xs2:=OrbitStabilizerInUnitCubeOnRight(G,v).stabilizer;[127X[104X
+    [4X[28X<matrix group with 2 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xs2=s;[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[28X[128X[104X
+  [4X[32X[104X
+  
+  [1X3.1-7 RepresentativeActionOnRightOnSets[101X
+  
+  [33X[1;0Y[29X[2XRepresentativeActionOnRightOnSets[102X( [3Xgroup[103X, [3Xset[103X, [3Ximageset[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10YAffine matrix.[133X
+  
+  [33X[0;0YReturns  an  element of the space group [22XS[122X which takes the set [3Xset[103X to the set
+  [3Ximageset[103X. The group must be in standard form and act on the right.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XS:=SpaceGroup(3,5);;[127X[104X
+    [4X[25Xgap>[125X [27XRepresentativeActionOnRightOnSets(G, [[0,0,0],[0,1/2,0]],[127X[104X
+    [4X[25X>[125X [27X       [ [ 0, 1/2, 0 ], [ 0, 1, 0 ] ]);[127X[104X
+    [4X[28X[ [ 0, -1, 0, 0 ], [ -1, 0, 0, 0 ], [ 0, 0, -1, 0 ], [ 0, 1, 0, 1 ] ][128X[104X
+  [4X[32X[104X
+  
+  
+  [1X3.1-8 [33X[0;0YGetting other orbit parts[133X[101X
+  
+  [33X[0;0Y[5XHAPcryst[105X  does  not  calculate the full orbit but only the part of it having
+  coefficients  between  [22X-1/2[122X  and  [22X1/2[122X.  The  other parts of the orbit can be
+  calculated using the following functions.[133X
+  
+  [1X3.1-9 ShiftedOrbitPart[101X
+  
+  [33X[1;0Y[29X[2XShiftedOrbitPart[102X( [3Xpoint[103X, [3Xorbitpart[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10YSet of vectors[133X
+  
+  [33X[0;0YTakes each vector in [3Xorbitpart[103X to the cube unit cube centered in [3Xpoint[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XShiftedOrbitPart([0,0,0],[[1/2,1/2,1/3],-[1/2,1/2,1/2],[19,3,1]]);[127X[104X
+    [4X[28X[ [ 1/2, 1/2, 1/3 ], [ 1/2, 1/2, 1/2 ], [ 0, 0, 0 ] ][128X[104X
+    [4X[25Xgap>[125X [27XShiftedOrbitPart([1,1,1],[[1/2,1/2,1/2],-[1/2,1/2,1/2]]);[127X[104X
+    [4X[28X[ [ 3/2, 3/2, 3/2 ] ][128X[104X
+  [4X[32X[104X
+  
+  [1X3.1-10 TranslationsToOneCubeAroundCenter[101X
+  
+  [33X[1;0Y[29X[2XTranslationsToOneCubeAroundCenter[102X( [3Xpoint[103X, [3Xcenter[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10YList of integer vectors[133X
+  
+  [33X[0;0YThis  method  returns  the list of all integer vectors which translate [3Xpoint[103X
+  into the box [3Xcenter[103X[22X+[-1/2,1/2]^n[122X[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XTranslationsToOneCubeAroundCenter([1/2,1/2,1/3],[0,0,0]);[127X[104X
+    [4X[28X[ [ 0, 0, 0 ], [ 0, -1, 0 ], [ -1, 0, 0 ], [ -1, -1, 0 ] ][128X[104X
+    [4X[25Xgap>[125X [27XTranslationsToOneCubeAroundCenter([1,0,1],[0,0,0]);[127X[104X
+    [4X[28X[ [ -1, 0, -1 ] ][128X[104X
+  [4X[32X[104X
+  
+  [1X3.1-11 TranslationsToBox[101X
+  
+  [33X[1;0Y[29X[2XTranslationsToBox[102X( [3Xpoint[103X, [3Xbox[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10YAn iterator of integer vectors or the empty iterator[133X
+  
+  [33X[0;0YGiven  a vector [22Xv[122X and a list of pairs, this function returns the translation
+  vectors  (integer vectors) which take [22Xv[122X into the box [3Xbox[103X. The box [3Xbox[103X has to
+  be given as a list of pairs.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XTranslationsToBox([0,0],[[1/2,2/3],[1/2,2/3]]);[127X[104X
+    [4X[28X[  ][128X[104X
+    [4X[25Xgap>[125X [27XTranslationsToBox([0,0],[[-3/2,1/2],[1,4/3]]);[127X[104X
+    [4X[28X[ [ -1, 1 ], [ 0, 1 ] ][128X[104X
+    [4X[25Xgap>[125X [27XTranslationsToBox([0,0],[[-3/2,1/2],[2,1]]);[127X[104X
+    [4X[28XError, Box must not be empty called from[128X[104X
+    [4X[28X...[128X[104X
+  [4X[32X[104X
+  

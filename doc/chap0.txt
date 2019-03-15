@@ -1,1 +1,97 @@
-Placeholder
+  
+  
+                                   [1X HAPcryst [101X
+  
+  
+                  [1X A HAP extension for crytallographic groups [101X
+  
+  
+                               Version 0.1.11dev
+  
+  
+                                27 October 2013
+  
+  
+                                  Marc Roeder
+  
+                                  The GAP Team
+  
+  
+  
+  Marc Roeder
+      Email:    [7Xmailto:marc_roeder@web.de[107X
+      Homepage: [7Xhttp://csserver.evansville.edu/~mroeder[107X
+  The GAP Team
+      Email:    [7Xmailto:support@gap-system.org[107X
+  
+  -------------------------------------------------------
+  [1XCopyright[101X
+  [33X[0;0Y© 2007 Marc Röder.[133X
+  
+  [33X[0;0YThis  package  is  distributed  under  the  terms  of the GNU General Public
+  License  version  2 or later (at your convenience). See the file [11XLICENSE.txt[111X
+  or [7Xhttps://www.gnu.org/copyleft/gpl.html[107X[133X
+  
+  
+  -------------------------------------------------------
+  [1XAcknowledgements[101X
+  [33X[0;0YThis work was supported by Marie Curie Grant No. MTKD-CT-2006-042685[133X
+  
+  
+  -------------------------------------------------------
+  
+  
+  [1XContents (HAPcryst)[101X
+  
+  1 [33X[0;0YIntroduction[133X
+    1.1 [33X[0;0YAbstract and Notation[133X
+      1.1-1 [33X[0;0YThe natural action of crystallographic groups[133X
+    1.2 [33X[0;0YRequirements[133X
+      1.2-1 [33X[0;0YRecommendation concerning polymake[133X
+    1.3 [33X[0;0YGlobal Variables[133X
+      1.3-1 InfoHAPcryst
+  2 [33X[0;0YBits and Pieces[133X
+    2.1 [33X[0;0YMatrices and Vectors[133X
+      2.1-1 SignRat
+      2.1-2 VectorModOne
+      2.1-3 IsSquareMat
+      2.1-4 DimensionSquareMat
+    2.2 [33X[0;0YAffine Matrices OnRight[133X
+      2.2-1 LinearPartOfAffineMatOnRight
+      2.2-2 BasisChangeAffineMatOnRight
+      2.2-3 TranslationOnRightFromVector
+    2.3 [33X[0;0YGeometry[133X
+      2.3-1 GramianOfAverageScalarProductFromFiniteMatrixGroup
+      2.3-2 [33X[0;0YInequalities[133X
+      2.3-3 BisectorInequalityFromPointPair
+      2.3-4 WhichSideOfHyperplane
+      2.3-5 RelativePositionPointAndPolygon
+    2.4 [33X[0;0YSpace Groups[133X
+      2.4-1 PointGroupRepresentatives
+  3 [33X[0;0YAlgorithms of Orbit-Stabilizer Type[133X
+    3.1 [33X[0;0YOrbit Stabilizer for Crystallographic Groups[133X
+      3.1-1 OrbitStabilizerInUnitCubeOnRight
+      3.1-2 OrbitStabilizerInUnitCubeOnRightOnSets
+      3.1-3 OrbitPartInVertexSetsStandardSpaceGroup
+      3.1-4 OrbitPartInFacesStandardSpaceGroup
+      3.1-5 OrbitPartAndRepresentativesInFacesStandardSpaceGroup
+      3.1-6 StabilizerOnSetsStandardSpaceGroup
+      3.1-7 RepresentativeActionOnRightOnSets
+      3.1-8 [33X[0;0YGetting other orbit parts[133X
+      3.1-9 ShiftedOrbitPart
+      3.1-10 TranslationsToOneCubeAroundCenter
+      3.1-11 TranslationsToBox
+  4 [33X[0;0YResolutions of Crystallographic Groups[133X
+    4.1 [33X[0;0YFundamental Domains[133X
+      4.1-1 FundamentalDomainStandardSpaceGroup
+      4.1-2 FundamentalDomainBieberbachGroup
+      4.1-3 FundamentalDomainFromGeneralPointAndOrbitPartGeometric
+      4.1-4 IsFundamentalDomainStandardSpaceGroup
+      4.1-5 IsFundamentalDomainBieberbachGroup
+    4.2 [33X[0;0YFace Lattice and Resolution[133X
+      4.2-1 ResolutionBieberbachGroup
+      4.2-2 FaceLatticeAndBoundaryBieberbachGroup
+      4.2-3 ResolutionFromFLandBoundary
+  
+  
+  [32X

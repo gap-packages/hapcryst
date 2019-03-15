@@ -1,102 +1,108 @@
-#############################################################################
-##  
-##  Demo PackageInfo.g for the GitHubPagesForGAP
-##
-
 SetPackageInfo( rec(
 
-PackageName := "GitHubPagesForGAP",
-
-Subtitle := "A GitHub Pages generator for GAP packages",
-Version := "0.2",
-Date := "04/02/2017", # dd/mm/yyyy format
+PackageName := "HAPcryst",
+Subtitle := "A HAP extension for crytallographic groups",
+Version := "0.1.11dev",
+Date := "27/10/2013", # dd/mm/yyyy format
+License := "GPL-2.0-or-later",
 
 Persons := [
   rec(
-    LastName      := "Horn",
-    FirstNames    := "Max",
+    LastName      := "Roeder",
+    FirstNames    := "Marc",
     IsAuthor      := true,
     IsMaintainer  := true,
-    Email         := "max.horn@math.uni-giessen.de",
-    WWWHome       := "http://www.quendi.de/math",
-    PostalAddress := Concatenation(
-                       "AG Algebra\n",
-                       "Mathematisches Institut\n",
-                       "Justus-Liebig-Universität Gießen\n",
-                       "Arndtstraße 2\n",
-                       "35392 Gießen\n",
-                       "Germany" ),
-    Place         := "Gießen",
-    Institution   := "Justus-Liebig-Universität Gießen"
+    Email         := "marc_roeder@web.de",
+    WWWHome       := "http://csserver.evansville.edu/~mroeder",
   ),
-
   rec(
-    LastName      := "Thor",
-    FirstNames    := "A. U.",
-    IsAuthor      := true,
-    IsMaintainer  := false,
-    #Email         := "author@example.com",
-  ),
-
-  rec(
-    LastName      := "Itor",
-    FirstNames    := "Jan",
+    LastName      := "GAP Team",
+    FirstNames    := "The",
     IsAuthor      := false,
     IsMaintainer  := true,
-    #Email         := "janitor@example.com",
+    Email         := "support@gap-system.org",
   ),
 ],
 
-Status := "other",
+# Status := "accepted",
+Status := "deposited",
 
-# The following are not strictly necessary in your own PackageInfo.g
-# (in the sense that update.g only looks at the usual fields
-# like PackageWWWHome, ArchiveURL etc.). But they are convenient
-# if you use exactly the scheme for your package website that we propose.
-GithubUser := "gap-system",
-GithubRepository := ~.PackageName,
-GithubWWW := Concatenation("https://github.com/", ~.GithubUser, "/", ~.GithubRepository),
+PackageWWWHome  := "https://gap-packages.github.io/hapcryst/",
+README_URL      := Concatenation( ~.PackageWWWHome, "README.md" ),
+PackageInfoURL  := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+SourceRepository := rec(
+    Type := "git",
+    URL := "https://github.com/gap-packages/hapcryst",
+),
+IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
+ArchiveURL      := Concatenation( ~.SourceRepository.URL,
+                                 "/releases/download/v", ~.Version,
+                                 "/hapcryst-", ~.Version ),
+ArchiveFormats := ".tar.gz",
 
-PackageWWWHome := Concatenation("https://", ~.GithubUser, ".github.io/", ~.GithubRepository, "/"),
-README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
-PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
-# The following assumes you are using the Github releases system. If not, adjust
-# it accordingly.
-ArchiveURL     := Concatenation(~.GithubWWW,
-                    "/releases/download/v", ~.Version, "/",
-                    ~.GithubRepository, "-", ~.Version),
+AbstractHTML := "This is an extension to the HAP package by Graham Ellis. It implements geometric methods for the calculation of resolutions of Bieberbach groups.",
 
-ArchiveFormats := ".tar.gz .tar.bz2",
-
-AbstractHTML := 
-  "This is a pseudo package that contains no actual\
-  <span class=\"pkgname\">GAP</span> code. Instead, it is a template for other\
-  GAP packages that allows to quickly setup GitHub Pages.",
-
-PackageDoc := rec(
-  BookName  := "GitHubPagesForGAP",
+PackageDoc := [
+rec(
+  # use same as in GAP
+  BookName  := "HAPcryst",
   ArchiveURLSubset := ["doc"],
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
-  LongTitle := "A GitHub Pages generator for GAP packages",
+  LongTitle := "The crystallographic group extension to HAP",
+  Autoload  := true
 ),
+rec(
+  BookName  := "HAPprog",
+  ArchiveURLSubset := ["lib/datatypes/doc"],
+  HTMLStart := "lib/datatypes/doc/chap0.html",
+  PDFFile   := "lib/datatypes/doc/manual.pdf",
+  SixFile   := "lib/datatypes/doc/manual.six",
+  LongTitle := "An experimental framework for objectifying the data structures of Hap",
+  Autoload  := true
+)
+],
 
-# The following dependencies are fake and for testing / demo purposes
+
 Dependencies := rec(
-  GAP := ">=4.8.1",
+  GAP := ">=4.4.10",
   NeededOtherPackages := [
-    ["GAPDoc", ">= 1.2"],
-    ["IO", ">= 4.1"],
-  ],
-  SuggestedOtherPackages := [["orb", ">= 4.2"]],
-  ExternalConditions := []
+                   ["Polycyclic",">=2.8.1"],
+                   ["AClib",">=1.1"],
+                   ["cryst",">=4.1.5"],
+                   ["HAP",">=1.8"],
+                   ["polymaking",">=0.7.9"],
+                   ],
+  SuggestedOtherPackages := [
+                   [ "Carat", ">=1.1" ],
+                   ["CrystCat",">=1.1.2"],
+                   ["GAPDoc", ">= 0.99"]
+                   ],
+  ExternalConditions := ["polymake (http://www.polymake.org) must be installed to calculate resolutions"]
 ),
 
 AvailabilityTest := ReturnTrue,
 
-Keywords := ["GitHub Pages", "GAP"]
+TestFile := "tst/testall.g",
+
+Keywords := ["homological algebra","crystallographic groups","resolution"],
+
+AutoDoc := rec(
+    TitlePage := rec(
+        Acknowledgements := """
+          This work was supported by Marie Curie Grant No. MTKD-CT-2006-042685
+        """,
+        Copyright := """
+            &copyright; 2007 Marc Röder. <P/>
+
+            This package is distributed under the terms of the GNU General
+            Public License version 2 or later (at your convenience). See the
+            file <File>LICENSE</File> or
+            <URL>https://www.gnu.org/copyleft/gpl.html</URL>
+        """,
+        Version := Concatenation( "Version ", ~.Version ),
+    )
+),
 
 ));
-
-

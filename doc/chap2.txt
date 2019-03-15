@@ -1,0 +1,195 @@
+  
+  [1X2 [33X[0;0YBits and Pieces[133X[101X
+  
+  [33X[0;0YThis  chapter contains a few very basic functions which are needed for space
+  group calculations and were missing in standard [5XGAP[105X.[133X
+  
+  
+  [1X2.1 [33X[0;0YMatrices and Vectors[133X[101X
+  
+  [1X2.1-1 SignRat[101X
+  
+  [33X[1;0Y[29X[2XSignRat[102X( [3Xx[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10Ysign  of  the  rational  number [3Xx[103X (Standard [5XGAP[105X currently only has
+            [10XSignInt[110X).[133X
+  
+  [1X2.1-2 VectorModOne[101X
+  
+  [33X[1;0Y[29X[2XVectorModOne[102X( [3Xv[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10YRational vector of the same length with enties in [22X[0,1)[122X[133X
+  
+  [33X[0;0YFor a rational vector [3Xv[103X, this returns the vector with all entries taken "mod
+  1".[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XSignRat((-4)/(-2));[127X[104X
+    [4X[28X1[128X[104X
+    [4X[25Xgap>[125X [27XSignRat(9/(-2));[127X[104X
+    [4X[28X-1[128X[104X
+    [4X[25Xgap>[125X [27XVectorModOne([1/10,100/9,5/6,6/5]);[127X[104X
+    [4X[28X[ 1/10, 1/9, 5/6, 1/5 ][128X[104X
+  [4X[32X[104X
+  
+  [1X2.1-3 IsSquareMat[101X
+  
+  [33X[1;0Y[29X[2XIsSquareMat[102X( [3Xmatrix[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10Y[9Xtrue[109X if [3Xmatrix[103X is a square matrix and [9Xfalse[109X otherwise.[133X
+  
+  [1X2.1-4 DimensionSquareMat[101X
+  
+  [33X[1;0Y[29X[2XDimensionSquareMat[102X( [3Xmatrix[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10YNumber  of  lines  in  the  matrix [3Xmatrix[103X if it is square and [9Xfail[109X
+            otherwise[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xm:=[[1,2,3],[4,5,6],[9,6,12]];[127X[104X
+    [4X[28X[ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 9, 6, 12 ] ][128X[104X
+    [4X[25Xgap>[125X [27XIsSquareMat(m);[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XDimensionSquareMat(m);[127X[104X
+    [4X[28X3[128X[104X
+    [4X[25Xgap>[125X [27XDimensionSquareMat([[1,2],[1,2,3]]);[127X[104X
+    [4X[28XError, Matrix is not square called from[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YAffine  mappings  of  [22Xn[122X  dimensional space are often written as a pair [22X(A,v)[122X
+  where  [22XA[122X  is  a  linear  mapping  and  [22Xv[122X  is a vector. [5XGAP[105X represents affine
+  mappings  by  [22Xn+1[122X  times  [22Xn+1[122X  matrices  [22XM[122X  which  satisfy [22XM_{n+1,n+1}=1[122X and
+  [22XM_{i,n+1}=0[122X for all [22X1≤ i ≤ n[122X.[133X
+  
+  [33X[0;0YAn  affine matrix acts on an [22Xn[122X dimensional space which is written as a space
+  of [22Xn+1[122X tuples with [22Xn+1[122Xst entry [22X1[122X. Here we give two functions to handle these
+  affine matrices.[133X
+  
+  
+  [1X2.2 [33X[0;0YAffine Matrices OnRight[133X[101X
+  
+  [1X2.2-1 LinearPartOfAffineMatOnRight[101X
+  
+  [33X[1;0Y[29X[2XLinearPartOfAffineMatOnRight[102X( [3Xmat[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10Ythe  linear  part  of  the  affine matrix [3Xmat[103X. That is, everything
+            except for the last row and column.[133X
+  
+  [1X2.2-2 BasisChangeAffineMatOnRight[101X
+  
+  [33X[1;0Y[29X[2XBasisChangeAffineMatOnRight[102X( [3Xtransform[103X, [3Xmat[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10Yaffine matrix with same dimensions as [3Xmat[103X[133X
+  
+  [33X[0;0YA  basis change [3Xtransform[103X of an [22Xn[122X dimensional space induces a transformation
+  on  affine mappings on this space. If [3Xmat[103X is a affine matrix (in particular,
+  it  is  [22X(n+1)×  (n+1)[122X), this method returns the image of [3Xmat[103X under the basis
+  transformation induced by [3Xtransform[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xc:=[[0,1],[1,0]];[127X[104X
+    [4X[28X[ [ 0, 1 ], [ 1, 0 ] ][128X[104X
+    [4X[25Xgap>[125X [27Xm:=[[1/2,0,0],[0,2/3,0],[1,0,1]];[127X[104X
+    [4X[28X[ [ 1/2, 0, 0 ], [ 0, 2/3, 0 ], [ 1, 0, 1 ] ][128X[104X
+    [4X[25Xgap>[125X [27XBasisChangeAffineMatOnRight(c,m);[127X[104X
+    [4X[28X[ [ 2/3, 0, 0 ], [ 0, 1/2, 0 ], [ 0, 1, 1 ] ][128X[104X
+  [4X[32X[104X
+  
+  [1X2.2-3 TranslationOnRightFromVector[101X
+  
+  [33X[1;0Y[29X[2XTranslationOnRightFromVector[102X( [3Xv[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10YAffine matrix[133X
+  
+  [33X[0;0YGiven  a  vector [3Xv[103X with [22Xn[122X entries, this method returns a [22X(n+1)× (n+1)[122X matrix
+  which corresponds to the affine translation defined by [3Xv[103X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xm:=TranslationOnRightFromVector([1,2,3]);;[127X[104X
+    [4X[25Xgap>[125X [27XDisplay(m);[127X[104X
+    [4X[28X[ [  1,  0,  0,  0 ],[128X[104X
+    [4X[28X  [  0,  1,  0,  0 ],[128X[104X
+    [4X[28X  [  0,  0,  1,  0 ],[128X[104X
+    [4X[28X  [  1,  2,  3,  1 ] ][128X[104X
+    [4X[25Xgap>[125X [27XLinearPartOfAffineMatOnRight(m);[127X[104X
+    [4X[28X[ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ][128X[104X
+    [4X[25Xgap>[125X [27XBasisChangeAffineMatOnRight([[3,2,1],[0,1,0],[0,0,1]],m);[127X[104X
+    [4X[28X[ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ], [ 3, 4, 4, 1 ] ][128X[104X
+  [4X[32X[104X
+  
+  
+  [1X2.3 [33X[0;0YGeometry[133X[101X
+  
+  [1X2.3-1 GramianOfAverageScalarProductFromFiniteMatrixGroup[101X
+  
+  [33X[1;0Y[29X[2XGramianOfAverageScalarProductFromFiniteMatrixGroup[102X( [3XG[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10YSymmetric positive definite matrix[133X
+  
+  [33X[0;0YFor  a  finite  matrix  group  [3XG[103X,  the  gramian matrix of the average scalar
+  product is returned. This is the sum over all [22Xgg^t[122X with [22Xg∈ G[122X (actually it is
+  enough  to take a generating set). The group [3XG[103X is orthogonal with respect to
+  the scalar product induced by the returned matrix.[133X
+  
+  
+  [1X2.3-2 [33X[0;0YInequalities[133X[101X
+  
+  [33X[0;0YInequalities  are  represented  in  the  same  way  they  are represented in
+  [5Xpolymaking[105X.  The  vector  [22X(v_0,...,v_n)[122X represents the inequality [22X0≤ v_0+v_1
+  x_1+... + v_n x_n[122X.[133X
+  
+  [1X2.3-3 BisectorInequalityFromPointPair[101X
+  
+  [33X[1;0Y[29X[2XBisectorInequalityFromPointPair[102X( [3Xv1[103X, [3Xv2[103X[, [3Xgram[103X] ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10Yvector of length [10XLength(v1)+1[110X[133X
+  
+  [33X[0;0YCalculates  the  inequality  defining the half-space containing [3Xv1[103X such that
+  [10X[3Xv1[103X[10X-[3Xv2[103X[10X[110X  is  perpendicular  on  the  bounding  hyperplane.  And  [10X([3Xv1[103X[10X-[3Xv2[103X[10X)/2[110X  is
+  contained in the bounding hyperplane.[133X
+  [33X[0;0YIf  the  matrix [3Xgram[103X is given, it is used as the gramian matrix. Otherwiese,
+  the  standard  scalar product is used. It is not checked if [3Xgram[103X is positive
+  definite or symmetric.[133X
+  
+  [1X2.3-4 WhichSideOfHyperplane[101X
+  
+  [33X[1;0Y[29X[2XWhichSideOfHyperplane[102X( [3Xv[103X, [3Xineq[103X ) [32X method[133X
+  [33X[1;0Y[29X[2XWhichSideOfHyperplaneNC[102X( [3Xv[103X, [3Xineq[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10Y-1 (below) 0 (in) or 1 (above).[133X
+  
+  [33X[0;0YLet [3Xv[103X be a vector of length [22Xn[122X and [3Xineq[103X an inequality represented by a vector
+  of  length  [22Xn+1[122X.  Then  [10XWhichSideOfHyperplane([3Xv,  ineq[103X[10X)[110X  returns 1 if [3Xv[103X is a
+  solution  of the inequality but not the equation given by [3Xineq[103X, it returns 0
+  if  [3Xv[103X  is  a  solution to the equation and -1 if it is not a solution of the
+  inequality [3Xineq[103X.[133X
+  
+  [33X[0;0YThe NC version does not test the input for correctness.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XBisectorInequalityFromPointPair([0,0],[1,0]);[127X[104X
+    [4X[28X[ 1, -2, 0 ][128X[104X
+    [4X[25Xgap>[125X [27Xineq:=BisectorInequalityFromPointPair([0,0],[1,0],[[5,4],[4,5]]);[127X[104X
+    [4X[28X[ 5, -10, -8 ][128X[104X
+    [4X[25Xgap>[125X [27Xineq{[2,3]}*[1/2,0];[127X[104X
+    [4X[28X-5[128X[104X
+    [4X[25Xgap>[125X [27XWhichSideOfHyperplane([0,0],ineq);[127X[104X
+    [4X[28X1[128X[104X
+    [4X[25Xgap>[125X [27XWhichSideOfHyperplane([1/2,0],ineq);[127X[104X
+    [4X[28X0[128X[104X
+  [4X[32X[104X
+  
+  [1X2.3-5 RelativePositionPointAndPolygon[101X
+  
+  [33X[1;0Y[29X[2XRelativePositionPointAndPolygon[102X( [3Xpoint[103X, [3Xpoly[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10Yone of [10X"VERTEX", "FACET", "OUTSIDE", "INSIDE"[110X[133X
+  
+  [33X[0;0YLet  [3Xpoly[103X  be  a  [9XPolymakeObject[109X and [3Xpoint[103X a vector. If [3Xpoint[103X is a vertex of
+  [3Xpoly[103X,  the  string [10X"VERTEX"[110X is returned. If [3Xpoint[103X lies inside [3Xpoly[103X, [10X"INSIDE"[110X
+  is returned and if it lies in a facet, [10X"FACET"[110X is returned and if [3Xpoint[103X does
+  not lie inside [3Xpoly[103X, the function returns [10X"OUTSIDE"[110X.[133X
+  
+  
+  [1X2.4 [33X[0;0YSpace Groups[133X[101X
+  
+  [1X2.4-1 PointGroupRepresentatives[101X
+  
+  [33X[1;0Y[29X[2XPointGroupRepresentatives[102X( [3Xgroup[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XPointGroupRepresentatives[102X( [3Xgroup[103X ) [32X method[133X
+  [6XReturns:[106X  [33X[0;10Ylist of matrices[133X
+  
+  [33X[0;0YGiven  an  [9XAffineCrystGroupOnLeftOrRight[109X  [3Xgroup[103X,  this  returns  a  list  of
+  representatives  of  the  point  group  of  [3Xgroup[103X.  That  is,  a  system  of
+  representatives  for  the  factor  group  modulo  translations.  This  is an
+  attribute of [9XAffineCrystGroupOnLeftOrRight[109X[133X
+  

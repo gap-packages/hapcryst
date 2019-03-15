@@ -1,0 +1,108 @@
+  
+  [1X1 [33X[0;0YIntroduction[133X[101X
+  
+  
+  [1X1.1 [33X[0;0YAbstract and Notation[133X[101X
+  
+  [33X[0;0Y[5XHAPcryst[105X  is an extension for "Homological Algebra Programming" ([5XHAP[105X, [Ell])
+  by  Graham  Ellis.  It  uses  geometric methods to calculate resolutions for
+  crystallographic groups. In this manual, we will use the terms "space group"
+  and "crystallographic group" synonymous. As usual in [5XGAP[105X, group elements are
+  supposed  to act from the right. To emphasize this fact, some functions have
+  names  ending  in "OnRight" (namely those, which rely on the action from the
+  right).  This  is  also  meant  to  make  work with [5XHAPcryst[105X and [5Xcryst[105X [EGN]
+  easier.[133X
+  
+  [33X[0;0YThe  functions called "somethingStandardSpaceGroup" are supposed to work for
+  standard  crystallographic groups on left and right some time in the future.
+  Currently  only  the  versions  acting on right are implemented. As in [5Xcryst[105X
+  [EGN],  space  groups  are  represented  as  affine  linear  groups. For the
+  computations  in  [5XHAPcryst[105X,  crystallographic groups have to be in "standard
+  form".  That  is,  the translation basis has to be the standard basis of the
+  space.  This  implies  that  the  linear part of a group element need not be
+  orthogonal with respect to the usual scalar product.[133X
+  
+  
+  [1X1.1-1 [33X[0;0YThe natural action of crystallographic groups[133X[101X
+  
+  [33X[0;0YThere  is  some confusion about the way crystallographic groups are written.
+  This  concerns the question if we act on left or on right and if vectors are
+  of the form [10X[1,...][110X or [10X[...,1][110X.[133X
+  
+  [33X[0;0YAs  mentioned, [5XHAPcryst[105X handles affine crystallographic groups on right (and
+  maybe later also on left) acting on vectors of the form [22X[...,1][122X.[133X
+  
+  [33X[0;0Y[12XBUT:[112X  The  functions  in [5XHAPcryst[105X do not take augmented vectors as input (no
+  leading  or  ending ones). The handling of vectors is done internally. So in
+  [5XHAPcryst[105X, a crystallographic group is a group of [22Xn× n[122X matrices which acts on
+  a  vector  space  of  dimension [22Xn-1[122X whose elements are vectors of length [22Xn-1[122X
+  (not [22Xn[122X). Example:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XG:=SpaceGroup(3,4); #This group acts on 3-Space[127X[104X
+    [4X[28XSpaceGroupOnRightBBNWZ( 3, 2, 1, 1, 2 )[128X[104X
+    [4X[25Xgap>[125X [27XDisplay(Representative(G));[127X[104X
+    [4X[28X[ [  1,  0,  0,  0 ],[128X[104X
+    [4X[28X  [  0,  1,  0,  0 ],[128X[104X
+    [4X[28X  [  0,  0,  1,  0 ],[128X[104X
+    [4X[28X  [  0,  0,  0,  1 ] ][128X[104X
+    [4X[25Xgap>[125X [27XOrbitStabilizerInUnitCubeOnRight(G,[1/2,0,0]);[127X[104X
+    [4X[28Xrec( orbit := [ [ 1/2, 0, 0 ], [ 1/2, 1/2, 0 ] ],[128X[104X
+    [4X[28X  stabilizer := Group([ [ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ],[128X[104X
+    [4X[28X          [ 0, 0, 0, 1 ] ] ]) )[128X[104X
+  [4X[32X[104X
+  
+  
+  [1X1.2 [33X[0;0YRequirements[133X[101X
+  
+  [33X[0;0YThe following [5XGAP[105X packages are required[133X
+  
+  [30X    [33X[0;6Y[5Xpolymaking[105X  which  in  turn  depends  on  the  computational  geometry
+        software polymake.[133X
+  
+  [30X    [33X[0;6Y[5XHAP[105X[133X
+  
+  [30X    [33X[0;6Y[5XCryst[105X[133X
+  
+  [33X[0;0YThe following [5XGAP[105X packages are not required but highly recommended:[133X
+  
+  [30X    [33X[0;6Y[5Xcarat[105X[133X
+  
+  [30X    [33X[0;6Y[5XCrystCat[105X[133X
+  
+  [30X    [33X[0;6Y[5XGAPDoc[105X is needed to display the online manual[133X
+  
+  
+  [1X1.2-1 [33X[0;0YRecommendation concerning polymake[133X[101X
+  
+  [33X[0;0YCalculating   resolutions   of   Bieberbach   groups  involves  convex  hull
+  computations.  polymake  by  default  uses  cdd  to  compute  convex  hulls.
+  Experiments  suggest  that  lrs  is  the  more  suitable  algorithm  for the
+  computations  done  in  HAPcryst  than  the  default cdd. You can change the
+  behaviour of by editing the file "yourhomedirectory/.polymake/prefer.pl". It
+  should  contain  a  section like this (just make sure lrs is before cdd, the
+  position of beneath_beyond does not matter):[133X
+  
+  [4X[32X[104X
+    [4X#########################################[104X
+    [4Xapplication polytope;[104X
+    [4X[104X
+    [4Xprefer "*.convex_hull  lrs, beneath_beyond, cdd";[104X
+  [4X[32X[104X
+  
+  
+  [1X1.3 [33X[0;0YGlobal Variables[133X[101X
+  
+  [33X[0;0Y[5XHAPcryst[105X  itself  does  only  have  one global variable, namely [2XInfoHAPcryst[102X
+  ([14X1.3-1[114X).  The  location of files generated for interaction with polymake are
+  determined by the value of [2XPOLYMAKE_DATA_DIR[102X ([14Xpolymaking: POLYMAKE_DATA_DIR[114X)
+  which is a global variable of [5Xpolymaking[105X.[133X
+  
+  [1X1.3-1 InfoHAPcryst[101X
+  
+  [33X[1;0Y[29X[2XInfoHAPcryst[102X[32X info class[133X
+  
+  [33X[0;0YAt  a  level of 1, only the most important messages are printed. At level 2,
+  additional  information  is  displayed, and level 3 is even more verbose. At
+  level 0, [5XHAPcryst[105X remains silent.[133X
+  
