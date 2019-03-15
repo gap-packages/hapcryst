@@ -28,7 +28,7 @@ Persons := [
 Status := "deposited",
 
 PackageWWWHome  := "https://gap-packages.github.io/hapcryst/",
-README_URL      := Concatenation( ~.PackageWWWHome, "README.md" ),
+README_URL      := Concatenation( ~.PackageWWWHome, "README" ),
 PackageInfoURL  := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 SourceRepository := rec(
     Type := "git",
