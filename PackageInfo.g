@@ -65,7 +65,7 @@ rec(
 
 
 Dependencies := rec(
-  GAP := ">=4.4.10",
+  GAP := ">=4.9",
   NeededOtherPackages := [
                    ["Polycyclic",">=2.8.1"],
                    ["AClib",">=1.1"],
