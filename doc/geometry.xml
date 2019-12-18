@@ -80,7 +80,7 @@ gap> List([0..3],Dimension(R));
 	  </Item>
   </List>
   This representation is compatible with the representation of free
-  <M>\Z G</M> modules in <Package>Hap</Package> and this method essentially
+  <M>\mathbb Z G</M> modules in <Package>Hap</Package> and this method essentially
   calculates a free resolution of <A>group</A>. If the value of  
   <Ref InfoClass="InfoHAPcryst" /> is 2 or more, additional information about
   the number of faces in every codimension, the number of orbits of the group
