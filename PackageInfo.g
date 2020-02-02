@@ -1,9 +1,9 @@
 SetPackageInfo( rec(
 
 PackageName := "HAPcryst",
-Subtitle := "A HAP extension for crytallographic groups",
+Subtitle := "A HAP extension for crystallographic groups",
 Version := "0.1.12",
-Date := "27/10/2013", # dd/mm/yyyy format
+Date := "02/02/2020", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
 Persons := [
