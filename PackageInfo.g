@@ -1,9 +1,9 @@
 SetPackageInfo( rec(
 
 PackageName := "HAPcryst",
-Subtitle := "A HAP extension for crytallographic groups",
-Version := "0.1.11dev",
-Date := "27/10/2013", # dd/mm/yyyy format
+Subtitle := "A HAP extension for crystallographic groups",
+Version := "0.1.12",
+Date := "02/02/2020", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -12,8 +12,7 @@ Persons := [
     FirstNames    := "Marc",
     IsAuthor      := true,
     IsMaintainer  := true,
-    Email         := "marc_roeder@web.de",
-    WWWHome       := "http://csserver.evansville.edu/~mroeder",
+    Email         := "roeder.marc@gmail.com",
   ),
   rec(
     LastName      := "GAP Team",
@@ -28,7 +27,7 @@ Persons := [
 Status := "deposited",
 
 PackageWWWHome  := "https://gap-packages.github.io/hapcryst/",
-README_URL      := Concatenation( ~.PackageWWWHome, "README.md" ),
+README_URL      := Concatenation( ~.PackageWWWHome, "README" ),
 PackageInfoURL  := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 SourceRepository := rec(
     Type := "git",
@@ -66,7 +65,7 @@ rec(
 
 
 Dependencies := rec(
-  GAP := ">=4.4.10",
+  GAP := ">=4.9",
   NeededOtherPackages := [
                    ["Polycyclic",">=2.8.1"],
                    ["AClib",">=1.1"],

@@ -3,34 +3,29 @@
                                    [1X HAPcryst [101X
   
   
-                  [1X A HAP extension for crytallographic groups [101X
+                 [1X A HAP extension for crystallographic groups [101X
   
   
-                               Version 0.1.11dev
+                                 Version 0.1.12
   
   
-                                27 October 2013
+                                2 February 2020
   
   
                                   Marc Roeder
   
-                                  The GAP Team
-  
   
   
   Marc Roeder
-      Email:    [7Xmailto:marc_roeder@web.de[107X
-      Homepage: [7Xhttp://csserver.evansville.edu/~mroeder[107X
-  The GAP Team
-      Email:    [7Xmailto:support@gap-system.org[107X
+      Email:    [7Xmailto:roeder.marc@gmail.com[107X
   
   -------------------------------------------------------
   [1XCopyright[101X
   [33X[0;0Y© 2007 Marc Röder.[133X
   
   [33X[0;0YThis  package  is  distributed  under  the  terms  of the GNU General Public
-  License  version  2 or later (at your convenience). See the file [11XLICENSE.txt[111X
-  or [7Xhttps://www.gnu.org/copyleft/gpl.html[107X[133X
+  License  version  2  or later (at your convenience). See the file [11XLICENSE[111X or
+  [7Xhttps://www.gnu.org/copyleft/gpl.html[107X[133X
   
   
   -------------------------------------------------------

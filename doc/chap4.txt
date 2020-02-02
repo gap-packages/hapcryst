@@ -171,7 +171,7 @@
   functions  calcualte free resolutions. This calculation is done by finding a
   fundamental  domain  for  the  group. For a description of the [9XHapResolution[109X
   datatype, see the [5XHap[105X data types documentation or the experimental datatypes
-  documentation [14XResolutions in Hap???[114X[133X
+  documentation [14XHAPprog: Resolutions in Hap[114X[133X
   
   [1X4.2-1 ResolutionBieberbachGroup[101X
   
