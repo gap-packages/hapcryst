@@ -20,5 +20,26 @@
 /doc/manual.pdf
 /doc/title.xml
 
+/lib/datatypes/doc/chap*.html
+/lib/datatypes/doc/chap*.txt
+/lib/datatypes/doc/*.css
+/lib/datatypes/doc/*.js
+/lib/datatypes/doc/chooser.html
+/lib/datatypes/doc/*.aux
+/lib/datatypes/doc/*.bbl
+/lib/datatypes/doc/*.blg
+/lib/datatypes/doc/*.brf
+/lib/datatypes/doc/*.idx
+/lib/datatypes/doc/*.ilg
+/lib/datatypes/doc/*.ind
+/lib/datatypes/doc/*.lab
+/lib/datatypes/doc/*.log
+/lib/datatypes/doc/*.out
+/lib/datatypes/doc/*.pnr
+/lib/datatypes/doc/*.six
+/lib/datatypes/doc/*.tex
+/lib/datatypes/doc/*.toc
+/lib/datatypes/doc/manual.pdf
+
 /tmp/
 /gh-pages/
