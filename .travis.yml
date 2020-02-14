@@ -15,8 +15,8 @@ matrix:
   include:
     - env: GAPBRANCH=master
     - env: GAPBRANCH=stable-4.11
-    - env: GAPBRANCH=stable-4.10
-    - env: GAPBRANCH=stable-4.9
+    - env: GAPBRANCH=stable-4.10 GAP_PKGS_TO_CLONE="cryst" # for bugfixes
+    - env: GAPBRANCH=stable-4.9  GAP_PKGS_TO_CLONE="cryst" # for bugfixes
 
 branches:
   only:
