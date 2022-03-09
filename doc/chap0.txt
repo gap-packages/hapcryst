@@ -6,10 +6,10 @@
                  [1X A HAP extension for crystallographic groups [101X
   
   
-                                 Version 0.1.13
+                                 Version 0.1.14
   
   
-                                10 February 2020
+                                  9 March 2022
   
   
                                   Marc Roeder

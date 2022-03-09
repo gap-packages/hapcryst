@@ -100,7 +100,7 @@
   
   [1X1.3-1 InfoHAPcryst[101X
   
-  [33X[1;0Y[29X[2XInfoHAPcryst[102X[32X info class[133X
+  [33X[1;0Y[29X[2XInfoHAPcryst[102X [32X info class[133X
   
   [33X[0;0YAt  a  level of 1, only the most important messages are printed. At level 2,
   additional  information  is  displayed, and level 3 is even more verbose. At

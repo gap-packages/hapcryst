@@ -2,8 +2,8 @@ SetPackageInfo( rec(
 
 PackageName := "HAPcryst",
 Subtitle := "A HAP extension for crystallographic groups",
-Version := "0.1.13",
-Date := "10/02/2020", # dd/mm/yyyy format
+Version := "0.1.14",
+Date := "09/03/2022", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -78,7 +78,7 @@ Dependencies := rec(
                    ["CrystCat",">=1.1.2"],
                    ["GAPDoc", ">= 0.99"]
                    ],
-  ExternalConditions := ["polymake (http://www.polymake.org) must be installed to calculate resolutions"]
+  ExternalConditions := ["polymake (https://polymake.org) must be installed to calculate resolutions"]
 ),
 
 AvailabilityTest := ReturnTrue,
