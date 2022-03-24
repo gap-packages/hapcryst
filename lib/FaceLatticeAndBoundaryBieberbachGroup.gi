@@ -2,13 +2,6 @@
 ##
 #W FaceLatticeAndBoundaryBieberbachGroup.gi 			 HAPcryst package		 Marc Roeder
 ##
-##  
-
-##
-#H @(#)$Id: FaceLatticeAndBoundaryBieberbachGroup.gi, v 0.1.10 2012/04/19 20:12:51 gap Exp $
-##
-#Y	 Copyright (C) 2006 Marc Roeder 
-#Y 
 #Y This program is free software; you can redistribute it and/or 
 #Y modify it under the terms of the GNU General Public License 
 #Y as published by the Free Software Foundation; either version 2 
@@ -23,8 +16,6 @@
 #Y along with this program; if not, write to the Free Software 
 #Y Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
-Revision.("/Users/roeder/gap/HAPcryst/HAPcryst/lib/FaceLatticeAndBoundaryBieberbachGroup_gi"):=
-	"@(#)$Id: FaceLatticeAndBoundaryBieberbachGroup.gi, v 0.1.10 2012/04/19   20:12:51  gap Exp $";
 InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
         [IsPolymakeObject,IsGroup],
         function(poly,group)  
