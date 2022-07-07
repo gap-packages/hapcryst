@@ -46,7 +46,7 @@ rec(
   # use same as in GAP
   BookName  := "HAPcryst",
   ArchiveURLSubset := ["doc"],
-  HTMLStart := "doc/chap0.html",
+  HTMLStart := "doc/chap0_mj.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "The crystallographic group extension to HAP",
