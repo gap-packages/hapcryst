@@ -2,8 +2,8 @@ SetPackageInfo( rec(
 
 PackageName := "HAPcryst",
 Subtitle := "A HAP extension for crystallographic groups",
-Version := "0.1.14",
-Date := "09/03/2022", # dd/mm/yyyy format
+Version := "0.1.15",
+Date := "26/07/2022", # dd/mm/yyyy format
 License := "GPL-2.0-or-later",
 
 Persons := [
@@ -46,7 +46,7 @@ rec(
   # use same as in GAP
   BookName  := "HAPcryst",
   ArchiveURLSubset := ["doc"],
-  HTMLStart := "doc/chap0.html",
+  HTMLStart := "doc/chap0_mj.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "The crystallographic group extension to HAP",

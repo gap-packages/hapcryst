@@ -1,6 +1,6 @@
 name: HAPcryst
-version: 0.1.14
-date: 2022-03-09
+version: 0.1.15
+date: 2022-07-26
 description: |
     A HAP extension for crystallographic groups
 
@@ -49,13 +49,13 @@ packageinfo: https://gap-packages.github.io/hapcryst/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/gap-packages/hapcryst/releases/download/v0.1.14/hapcryst-0.1.14.tar.gz
+      url: https://github.com/gap-packages/hapcryst/releases/download/v0.1.15/hapcryst-0.1.15.tar.gz
 
 abstract: |
     This is an extension to the HAP package by Graham Ellis. It implements geometric methods for the calculation of resolutions of Bieberbach groups.
 
 status: deposited
-doc-html: doc/chap0.html
+doc-html: doc/chap0_mj.html
 doc-pdf: doc/manual.pdf
 keywords: |
     homological algebra, crystallographic groups, resolution.
@@ -63,7 +63,7 @@ citeas: |
     <p class='BibEntry'>
     [<span class='BibKey'>RT22</span>]   <b class='BibAuthor'>Roeder, M. and GAP Team, T.</b>,
      <i class='BibTitle'>HAPcryst, A HAP extension for crystallographic groups,
-             Version 0.1.14</i>
+             Version 0.1.15</i>
      (<span class='BibYear'>2022</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://gap-packages.github.io/hapcryst/">https://gap-packages.github.io/hapcryst/</a></span>.
@@ -71,11 +71,11 @@ citeas: |
     
 
 bibtex: |
-    @misc{ HAPcryst0.1.14,
+    @misc{ HAPcryst0.1.15,
       author =           {Roeder, M. and GAP Team, T.},
       title =            {{HAPcryst},   A  HAP  extension  for  crystallographic
-                          groups, {V}ersion 0.1.14},
-      month =            {Mar},
+                          groups, {V}ersion 0.1.15},
+      month =            {Jul},
       year =             {2022},
       note =             {GAP package},
       howpublished =     {\href       {https://gap-packages.github.io/hapcryst/}
