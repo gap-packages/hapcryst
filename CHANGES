@@ -1,3 +1,10 @@
+0.1.12
+- utility SignRat removed and calls to SignRat changed to SignInt in files 
+  lib/translations.gi and examples/orbitcolouring.gap
+  this is in preparation for a new Sign to be included in the main library 
+
+------------------ 
+
 0.1.11:
 
 - HAPcryst now calls polymaking with keywords "FACES" and "DIMS" to create
