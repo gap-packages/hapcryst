@@ -1,6 +1,6 @@
 #############################################################################
 ##
-#W translations.gi 			 HAPcryst package		 Marc Roeder
+#W translations.gi 		HAPcryst package		 Marc Roeder
 ##
 ##  
 
@@ -89,7 +89,7 @@ InstallMethod(ShiftedOrbitPart,
             returnpoint[i]:=x[i]-Int(x[i]);
             if AbsoluteValue(returnpoint[i])>1/2
                then
-                returnpoint[i]:=returnpoint[i]+SignRat(returnpoint[i]);
+                returnpoint[i]:=returnpoint[i]+SignInt(returnpoint[i]);
             elif returnpoint[i]=-1/2 
               then
                 returnpoint[i]:=1/2;
@@ -121,10 +121,10 @@ InstallMethod(TranslationsToOneCubeAroundCenter,[IsVector,IsVector],
         abs:=AbsoluteValue(difference[entry]);
         if abs=1/2
            then
-            difference[entry]:=[0,SignRat(difference[entry])];
+            difference[entry]:=[0,SignInt(difference[entry])];
         elif abs>1/2
           then
-            difference[entry]:=[SignRat(difference[entry])];
+            difference[entry]:=[SignInt(difference[entry])];
         else
             difference[entry]:=[0];
         fi;
