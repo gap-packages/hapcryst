@@ -53,7 +53,7 @@ smallestPointOfOneCubeAroundCenter:=function(center)
     for i in [1..Size(center)]
       do
         entry:=edge[i];
-        sign:=SignRat(entry);
+        sign:=SignInt(entry);
         if sign=0 then sign:=1; fi;
         minusentry:=-sign/2+entry;
         plusentry:=sign/2+entry;
