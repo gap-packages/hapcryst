@@ -1,5 +1,6 @@
 name: HAPcryst
-version: 0.1.15
+version: "0.1.15"
+license: "GPL-2.0-or-later"
 date: 2022-07-26
 description: |
     A HAP extension for crystallographic groups
@@ -38,7 +39,7 @@ suggested-pkgs:
       version: ">=1.1"
     - name: "CrystCat"
       version: ">=1.1.2"
-      url: "https://www.math.uni-bielefeld.de/~gaehler/gap45/packages.php"
+      url: "https://www.math.uni-bielefeld.de/~gaehler/gap/packages.php"
     - name: "GAPDoc"
       version: ">= 0.99"
       url: "http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc"
