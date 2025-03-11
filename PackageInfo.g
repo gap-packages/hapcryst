@@ -50,7 +50,6 @@ rec(
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
   LongTitle := "The crystallographic group extension to HAP",
-  Autoload  := true
 ),
 rec(
   BookName  := "HAPprog",
@@ -59,7 +58,6 @@ rec(
   PDFFile   := "lib/datatypes/doc/manual.pdf",
   SixFile   := "lib/datatypes/doc/manual.six",
   LongTitle := "An experimental framework for objectifying the data structures of Hap",
-  Autoload  := true
 )
 ],
 
