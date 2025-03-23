@@ -203,7 +203,7 @@ fraction2floatString:=function(q,precision)
        then
         return "0";
     fi;
-    sign:=SignRat(q);
+    sign:=SignInt(q);
     if sign=-1
        then
         signString:="-";
