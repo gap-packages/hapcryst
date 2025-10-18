@@ -189,7 +189,7 @@ gap> WhichSideOfHyperplane([1/2,0],ineq);
 0
 </Example>
 
-<ManSection><Meth Name="RelativePositionPointAndPolygon" Arg="point, poly"/>
+<ManSection><Oper Name="RelativePositionPointAndPolygon" Arg="point, poly"/>
   <Returns>one of <C>"VERTEX", "FACET", "OUTSIDE", "INSIDE"</C></Returns>
   <Description>
    Let <A>poly</A> be a <K>PolymakeObject</K> and <A>point</A> a vector. If
@@ -207,7 +207,6 @@ gap> WhichSideOfHyperplane([1/2,0],ineq);
 <Section><Heading>Space Groups</Heading>
 
 <ManSection><Attr Name="PointGroupRepresentatives" Arg="group"/>
-            <Meth Name="PointGroupRepresentatives" Arg="group"/>
   <Returns>list of matrices</Returns>
   <Description>
    Given an <K>AffineCrystGroupOnLeftOrRight</K> <A>group</A>, this returns a

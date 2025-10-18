@@ -12,8 +12,7 @@ work for Bieberbach groups, while the first ("geometric") algorithm works for
 arbitrary crystallographic groups given a point with trivial stabilizer.
 
 <ManSection>
-<Meth Name="FundamentalDomainStandardSpaceGroup" Arg="[v], G" />
-<Meth Name="FundamentalDomainStandardSpaceGroup" Arg="v, G" />
+<Oper Name="FundamentalDomainStandardSpaceGroup" Arg="[v,] G" />
  <Returns>a <K>PolymakeObject</K></Returns>
   <Description>
    Let <A>G</A> be an <K>AffineCrystGroupOnRight</K> and <A>v</A> a vector. A
@@ -37,8 +36,7 @@ gap> Polymake(fd,"N_VERTICES");
 ]]></Example>
 
 <ManSection>
-<Meth Name="FundamentalDomainBieberbachGroup" Arg="G"/> 
-<Meth Name="FundamentalDomainBieberbachGroup" Arg="v G [gram]"/> 
+<Oper Name="FundamentalDomainBieberbachGroup" Arg="[v,] G [,gram]"/>
  <Returns>a <K>PolymakeObject</K></Returns>
  <Description>
   Given a starting vector <A>v</A> and a Bieberbach group <A>G</A> in
