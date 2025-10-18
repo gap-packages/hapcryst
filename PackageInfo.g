@@ -63,13 +63,13 @@ rec(
 
 
 Dependencies := rec(
-  GAP := ">=4.9",
+  GAP := ">=4.12",
   NeededOtherPackages := [
                    ["Polycyclic",">=2.8.1"],
                    ["AClib",">=1.1"],
                    ["cryst",">=4.1.5"],
                    ["HAP",">=1.8"],
-                   ["polymaking",">=0.7.9"],
+                   ["polymaking",">=0.8.6"],
                    ],
   SuggestedOtherPackages := [
                    [ "Carat", ">=1.1" ],
