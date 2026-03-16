@@ -35,8 +35,7 @@ should be compared and the vector passed to
 <C>OrbitStabilizerInUnitCubeOnRight</C> should be an element of the returned
 orbit (part).
 
-<Example>
-   <![CDATA[
+<Example><![CDATA[
 gap> S:=SpaceGroup(3,5);;
 gap> OrbitStabilizerInUnitCubeOnRight(S,[1/2,0,9/11]);   
 rec( orbit := [ [ 0, 1/2, 2/11 ], [ 1/2, 0, 9/11 ] ], 
@@ -44,8 +43,7 @@ rec( orbit := [ [ 0, 1/2, 2/11 ], [ 1/2, 0, 9/11 ] ],
           [ 0, 0, 0, 1 ] ] ]) )
 gap> OrbitStabilizerInUnitCubeOnRight(S,[0,0,0]);     
 rec( orbit := [ [ 0, 0, 0 ] ], stabilizer := <matrix group with 2 generators> )
-]]>
-</Example>
+]]></Example>
 
 If you are interested in other parts of the orbit, you can use <Ref
 Meth="VectorModOne"/> for the base point and the functions <Ref
@@ -196,8 +194,7 @@ gap> OrbitPartAndRepresentativesInFacesStandardSpaceGroup(S,[[0,1,5],[1,2,0]],
   </Description>
 </ManSection>
 
-<Example> 
-<![CDATA[
+<Example> <![CDATA[
 gap> G:=SpaceGroup(3,12);;
 gap> v:=[ 0, 0,0 ];;
 gap> s:=StabilizerOnSetsStandardSpaceGroup(G,[v]);
@@ -206,8 +203,7 @@ gap> s2:=OrbitStabilizerInUnitCubeOnRight(G,v).stabilizer;
 <matrix group with 2 generators>
 gap> s2=s;
 true
-]]>
-</Example>
+]]></Example>
 
 <ManSection>
   <Meth Name="RepresentativeActionOnRightOnSets"

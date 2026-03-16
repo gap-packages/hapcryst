@@ -38,8 +38,7 @@ No contracting homotopy available.
 
 gap> List([0..3],Dimension(R));
 [ 6, 12, 7, 1 ]
-]]>
-</Example>
+]]></Example>
 
 <ManSection>
   <Meth Name="FaceLatticeAndBoundaryBieberbachGroup" Arg="poly, group"/>

@@ -112,8 +112,8 @@ gap> FundamentalDomainBieberbachGroup(S:ineqThreshold:=1000);
 #I  v: 336/183 f:32
 #I  new: 0
 #I  out of inequalities
-<polymake object>]]>
-</Example>
+<polymake object>
+]]></Example>
 
 <ManSection>
 <Meth Name="FundamentalDomainFromGeneralPointAndOrbitPartGeometric" Arg="v
