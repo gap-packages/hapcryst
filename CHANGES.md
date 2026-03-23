@@ -3,7 +3,8 @@ This file describes changes in the AutoDoc package.
 
 ## 0.2.0 (2026-MM-DD)
 
-- TODO
+- Change `TranslationsToBox` back to returning a list, resolve inconsistencies
+  between its documentation and behavior.
 
 ## 0.1.15 (2022-07-26)
 

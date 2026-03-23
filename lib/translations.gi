@@ -66,8 +66,7 @@ InstallMethod(TranslationsToBox,[IsVector,IsDenseList],
         coord:=point[entry];
         difference[entry]:=[nextint(box[entry][1]-coord)..prevint(box[entry][2]-coord)];
     od;
-    return Iterator(Cartesian(difference));
-#    return CartesianIterator(difference);
+    return Cartesian(difference);
 end);
 
 
