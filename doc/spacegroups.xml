@@ -177,7 +177,8 @@ gap> OrbitPartInFacesStandardSpaceGroup(S,[[0,1,5],[1,2,0]],
 gap> OrbitPartAndRepresentativesInFacesStandardSpaceGroup(S,[[0,1,5],[1,2,0]],
 > Set( [ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ], [[1/17,6,1/2],[1,2,7]]]));
 [ [ [ [ 0, 1, 5 ], [ 1, 2, 0 ] ],
-      [ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ], [ 0, 0, 0, 1 ] ] ] ]
+      [ [ 0, -1, 0, 0 ], [ -1, 0, 0, 0 ], [ 0, 0, -1, 0 ], [ 2, 2, 5, 1 ] ] ]
+ ]
 ]]></Example>
 
 
