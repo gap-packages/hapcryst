@@ -74,6 +74,7 @@ RefreshPackageBooksForHelp("hapcryst");
 old_InfoAutoDoc:=InfoLevel(InfoAutoDoc);
 SetInfoLevel(InfoAutoDoc, 0);  # avoid  "WARNING: Package contains multiple books, only using the first one"
 AutoDoc(rec(
+    extract_examples := true,
     scaffold := rec( MainPage := false ),
 ));
 SetInfoLevel(InfoAutoDoc, old_InfoAutoDoc);
