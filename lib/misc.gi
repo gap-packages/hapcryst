@@ -46,7 +46,7 @@ end);
 
 InstallMethod(IsSquareMat,"for matrices",[IsMatrix],
         function(mat)
-        return NrRows(mat) = NrCols(mat);
+        return IsRectangularTable(mat) and NrRows(mat) = NrCols(mat);
 end);
 
 
@@ -55,8 +55,8 @@ end);
 
 InstallMethod(DimensionSquareMat,"for matrices",[IsMatrix],
         function(mat)
-    if NrRows(mat) <> NrCols(mat) then
-        Error("Matrix is not square");
+    if not IsSquareMat(mat) then
+        return fail;
     fi;
     return NrRows(mat);
 end);
