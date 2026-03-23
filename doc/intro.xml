@@ -43,7 +43,7 @@ group of <M>n\times n</M> matrices which acts on a vector space of dimension
 <M>n-1</M> whose elements are vectors of length <M>n-1</M> (not <M>n</M>).
 Example:
 
-<Example>
+<Example><![CDATA[
 gap> G:=SpaceGroup(3,4); #This group acts on 3-Space
 SpaceGroupOnRightBBNWZ( 3, 2, 1, 1, 2 )
 gap> Display(Representative(G));
@@ -55,7 +55,7 @@ gap> OrbitStabilizerInUnitCubeOnRight(G,[1/2,0,0]);
 rec( orbit := [ [ 1/2, 0, 0 ], [ 1/2, 1/2, 0 ] ],
   stabilizer := Group([ [ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ],
           [ 0, 0, 0, 1 ] ] ]) )
-</Example>
+]]></Example>
 
 </Subsection>
 
