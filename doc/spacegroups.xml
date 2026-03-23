@@ -270,8 +270,7 @@ gap> TranslationsToOneCubeAroundCenter([1,0,1],[0,0,0]);
 
 <ManSection>
  <Meth Name="TranslationsToBox" Arg="point, box"/>
-<!-- <Returns>List of integer vectors or the empty list</Returns>-->
- <Returns>An iterator of integer vectors or the empty iterator</Returns>
+ <Returns>List of integer vectors or the empty list</Returns>
  <Description>
   Given a vector <M>v</M> and a list of pairs, this function returns the
   translation vectors (integer vectors) which take <M>v</M> into the box
@@ -285,8 +284,7 @@ gap> TranslationsToBox([0,0],[[1/2,2/3],[1/2,2/3]]);
 gap> TranslationsToBox([0,0],[[-3/2,1/2],[1,4/3]]);
 [ [ -1, 1 ], [ 0, 1 ] ]
 gap> TranslationsToBox([0,0],[[-3/2,1/2],[2,1]]);
-Error, Box must not be empty called from
-...
+Error, Box must not be empty
 </Example>
 
 
