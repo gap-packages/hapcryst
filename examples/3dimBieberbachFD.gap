@@ -108,8 +108,7 @@ generateFundamentalDomain:=function(point,groupnr)
     group:=SpaceGroup(3,groupnr);
 #    poly:=FundamentalDomainStandardSpaceGroup(point,group);
     poly:=FundamentalDomainBieberbachGroupNC(point,group);
-    if not IsFundamentalDomainStandardSpaceGroup(poly,group)
-       then
+    if not IsFundamentalDomainStandardSpaceGroup(poly,group) then
         Error("failed generating fundamental domain");
     fi;        
     filename:=writeFundamentalDomain(poly,group,point,groupnr);
@@ -135,8 +134,7 @@ generateTessellationFromPolytope:=function(point,poly,groupnr)
     vertices:=Polymake(poly,"VERTICES");
     orbitdecomp:=edgeOrbitDecomposition(facets,vertices,group);
     maps:=[IdentityMat(4)];
-    for facet in facets
-      do
+    for facet in facets do
         orbit:=First(orbitdecomp,o->facet in o);
         otherfacet:=First(orbit,f->f<>facet);
         Add(maps,RepresentativeActionOnRightOnSets(group,Set(otherfacet,i->vertices[i]),Set(facet,i->vertices[i])));

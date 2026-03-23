@@ -28,8 +28,7 @@
 InstallMethod(UndirectedWord_LargeGroupRep,
         [IsHapLargeGroupResolutionRep,IsDenseList],
         function(resolution,word)
-    if not IsFreeZGWordNoTermCheck_LargeGroupRep(resolution,word)
-       then
+    if not IsFreeZGWordNoTermCheck_LargeGroupRep(resolution,word) then
         Error("<word> is not a valid word");
     fi;
     return UndirectedWordNC_LargeGroupRep(resolution,word);
@@ -43,13 +42,10 @@ InstallMethod(UndirectedWordNC_LargeGroupRep,
     local   fam,  returnword,  term,  coeffs,  i;
     fam:=FamilyObj(Zero(GroupRingOfResolution(resolution)));
     returnword:=[];
-    for term in [1..Size(word)]
-      do
+    for term in [1..Size(word)] do
         coeffs:=CoefficientsAndMagmaElementsAsLists(word[term]);
-       for i in [1..Size(coeffs[1])]
-          do
-            if coeffs[1][i]<>0
-               then
+       for i in [1..Size(coeffs[1])] do
+            if coeffs[1][i]<>0 then
                coeffs[1][i]:=1;
            fi;
         od;
@@ -65,17 +61,13 @@ InstallMethod(IsUndirectedWord_LargeGroupRep,
         [IsHapLargeGroupResolutionRep,IsDenseList],
         function(resolution,word)
     local   zero,  term;
-    if not IsFreeZGWordNoTermCheck_LargeGroupRep(resolution,word)
-       then
+    if not IsFreeZGWordNoTermCheck_LargeGroupRep(resolution,word) then
         return false;
     fi;
     zero:=Zero(GroupRingOfResolution(resolution));
-    for term in word
-      do
-        if term<>zero
-           then
-            if not Set(CoefficientsAndMagmaElementsAsLists(term)[1])=[1]
-               then
+    for term in word do
+        if term<>zero then
+            if not Set(CoefficientsAndMagmaElementsAsLists(term)[1])=[1] then
                 return false;
             fi;
         fi;
@@ -89,17 +81,13 @@ InstallMethod(IsUndirectedWord_LargeGroupRep,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,term,word)
     local   zero;
-    if not IsFreeZGWord_LargeGroupRep(resolution,term,word)
-       then
+    if not IsFreeZGWord_LargeGroupRep(resolution,term,word) then
         return false;
     fi;
     zero:=Zero(GroupRingOfResolution(resolution));
-    for term in word
-      do
-        if term<>zero
-           then
-            if not Set(CoefficientsAndMagmaElementsAsLists(term)[1])=[1]
-               then
+    for term in word do
+        if term<>zero then
+            if not Set(CoefficientsAndMagmaElementsAsLists(term)[1])=[1] then
                 return false;
             fi;
         fi;
@@ -118,8 +106,7 @@ end);
 InstallMethod(OneCoefficientPartOfWord_LargeGroupRep,
         [IsHapLargeGroupResolutionRep,IsVector],
         function(resolution,word)
-    if not IsFreeZGWordNoTermCheck_LargeGroupRep(resolution,word)
-       then
+    if not IsFreeZGWordNoTermCheck_LargeGroupRep(resolution,word) then
         Error("<word> is not valid");
     fi;
     return OneCoefficientPartOfWordNC_LargeGroupRep(resolution,word);
@@ -135,15 +122,11 @@ InstallMethod(OneCoefficientPartOfWordNC_LargeGroupRep,
     zero:=Zero(GroupRingOfResolution(resolution));
     one:=ZeroCoefficient(zero)^0;
     fam:=FamilyObj(zero);
-    for term in [1..Size(word)]
-      do
-        if word[term]<>zero
-           then
+    for term in [1..Size(word)] do
+        if word[term]<>zero then
             coeffs:=CoefficientsAndMagmaElementsAsLists(word[term]);
-            for i in [1..Size(coeffs[1])]
-              do
-                if coeffs[1][i]<>one
-                   then
+            for i in [1..Size(coeffs[1])] do
+                if coeffs[1][i]<>one then
                     Unbind(coeffs[1][i]);
                     Unbind(coeffs[2][i]);
                 fi;
@@ -167,13 +150,11 @@ InstallMethod(IntersectingUndirectedWords_LargeGroupRep,
         [IsHapLargeGroupResolutionRep,IsDenseList,IsDenseList],
         function(resolution,word1,word2)
     
-    if not Size(word1)=Size(word2)
-       then
+    if not Size(word1)=Size(word2) then
         Error("words of different length");
     elif not (IsUndirectedWord_LargeGroupRep(resolution,word1) 
             and IsUndirectedWord_LargeGroupRep(resolution,word2)
-            )
-       then
+            ) then
         Error("<word1>  and <word2> must be valid words");
     fi;
     return IntersectingUndirectedWordsNC_LargeGroupRep(resolution,word1,word2);
@@ -187,14 +168,11 @@ InstallMethod(IntersectingUndirectedWordsNC_LargeGroupRep,
         function(resolution,word1,word2)
     local   zero,  term,  gElts1,  gElts2;
     zero:=Zero(GroupRingOfResolution(resolution));
-    for term in [1..Size(word1)]
-      do
-        if word1[term]<>zero and word2[term]<>zero
-           then
+    for term in [1..Size(word1)] do
+        if word1[term]<>zero and word2[term]<>zero then
             gElts1:=CoefficientsAndMagmaElementsAsLists(word1[term])[2];
             gElts2:=Set(CoefficientsAndMagmaElementsAsLists(word2[term])[2]);
-            if ForAny(gElts1,i->i in gElts2)
-               then
+            if ForAny(gElts1,i->i in gElts2) then
                 return true;
             fi;
         fi;
@@ -210,8 +188,7 @@ InstallMethod(IsUndirectedSubWord_LargeGroupRep,
         [IsHapLargeGroupResolutionRep,IsDenseList,IsDenseList],
         function(resolution,word1,word2)
     if IsUndirectedWord_LargeGroupRep(resolution,word1)
-            and IsUndirectedWord_LargeGroupRep(resolution,word2)
-       then
+            and IsUndirectedWord_LargeGroupRep(resolution,word2) then
         return IsUndirectedSubWordNC_LargeGroupRep(resolution,word1,word2);
     else
         Error("words must be undirected words of <resolution>");
@@ -224,16 +201,13 @@ InstallMethod(IsUndirectedSubWordNC_LargeGroupRep,
         [IsHapLargeGroupResolutionRep,IsDenseList,IsDenseList],
         function(resolution,word1,word2)
     local   term,  groupelts1,  groupelts2;
-    if Size(word1)<>Size(word2)
-       then
+    if Size(word1)<>Size(word2) then
         return false;
     else
-        for term in [1..Size(word1)]
-          do
+        for term in [1..Size(word1)] do
             groupelts1:=CoefficientsAndMagmaElementsAsLists(word1[term])[2];
             groupelts2:=CoefficientsAndMagmaElementsAsLists(word2[term])[2];
-            if not IsSubset(groupelts1,groupelts2)
-               then
+            if not IsSubset(groupelts1,groupelts2) then
                 return false;
             fi;
         od;
@@ -250,8 +224,7 @@ end);
 InstallMethod(UndirectedBoundaryOfFreeZGLetter_LargeGroupRep,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,dim,cell)
-    if not IsFreeZGLetter_LargeGroupRep(resolution,dim,cell)
-       then
+    if not IsFreeZGLetter_LargeGroupRep(resolution,dim,cell) then
         Error("invalid letter");
     fi;
     return UndirectedBoundaryOfFreeZGLetterNC_LargeGroupRep(resolution,dim,cell);
@@ -269,10 +242,8 @@ InstallMethod(UndirectedBoundaryOfFreeZGLetterNC_LargeGroupRep,
     fam:=FamilyObj(zero);
     boundary:=BoundaryOfFreeZGLetterNC_LargeGroupRep(resolution,dim,cell);
     return UndirectedWord_LargeGroupRep(resolution,boundary);
-#    for term in [1..Size(boundary)]
-#      do
-#        if term<>zero
-#           then
+#    for term in [1..Size(boundary)] do
+#        if term<>zero then
 #            coeffsAndGroupElts:=CoefficientsAndMagmaElementsAsLists(boundary[term]);
 #            coeffs:=coeffsAndGroupElts[1];
 #            Apply(coeffs,function(i) if i<>0 then return 1; else return 0; fi; end);
@@ -294,11 +265,9 @@ InstallMethod(UndirectedBoundaryOfFreeZGWord,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,dim,word)
     local   boundary_large;
-    if IsFreeZGWord_LargeGroupRep(resolution,dim,word)
-       then
+    if IsFreeZGWord_LargeGroupRep(resolution,dim,word) then
         return UndirectedBoundaryOfFreeZGWordNC_LargeGroupRep(resolution,dim,word);
-    elif IsFreeZGWord(resolution,dim,word)
-      then
+    elif IsFreeZGWord(resolution,dim,word) then
         boundary_large:=UndirectedBoundaryOfFreeZGWordNC_LargeGroupRep(resolution,dim,ConvertStandardWord(resolution,dim,word));
         return ConvertWordToStandardRep(resolution,dim-1,boundary_large);
     else
@@ -311,8 +280,7 @@ end);
 InstallMethod(UndirectedBoundaryOfFreeZGWord_LargeGroupRep,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,dim,word)
-    if not IsFreeZGWord_LargeGroupRep(resolution,dim,word)
-       then
+    if not IsFreeZGWord_LargeGroupRep(resolution,dim,word) then
         Error("invalid word");
     fi;
     return UndirectedBoundaryOfFreeZGWordNC_LargeGroupRep(resolution,dim,word);
@@ -328,10 +296,8 @@ InstallMethod(UndirectedBoundaryOfFreeZGWordNC_LargeGroupRep,
     zero:=Zero(GroupRingOfResolution(resolution));
     fam:=FamilyObj(zero);
     boundary:=[];
-    for term in [1..Size(word)]
-      do
-        if word[term]<>zero
-           then
+    for term in [1..Size(word)] do
+        if word[term]<>zero then
             thistermbound:=BoundaryOfGenerator_LargeGroupRep(resolution,dim,term);
             boundary:=boundary+UndirectedWord_LargeGroupRep(resolution,thistermbound)*word[term];
         fi;
@@ -349,20 +315,16 @@ InstallMethod(LowerSpaceFromWord_LargeGroupRep,
             lowerspace,  position,  returnspaces,  lsp,  returnspace,  
             thispart;
     
-    if not (IsSet(lowerterms) and ForAll(lowerterms,i->IsInt(i) and i>=0)) 
-       then
+    if not (IsSet(lowerterms) and ForAll(lowerterms,i->IsInt(i) and i>=0)) then
         Error("<lowerterms> must be a set of non-negative integers");
     fi;
-    if term<Maximum(lowerterms)
-       then
+    if term<Maximum(lowerterms) then
         Error("term<Maximum(lowerterm)");
     fi;
-    if not IsFreeZGWord_LargeGroupRep(resolution,term,word)
-       then
+    if not IsFreeZGWord_LargeGroupRep(resolution,term,word) then
         Error("word not valid");
     fi;
-    if lowerterms=[term]
-       then
+    if lowerterms=[term] then
         return [word];
     fi;
     
@@ -371,16 +333,13 @@ InstallMethod(LowerSpaceFromWord_LargeGroupRep,
     one:=zero^0;
     zerovec:=ListWithIdenticalEntries(Size(word),zero);
     thisterm:=term;
-    for i in [1..Size(word)]
-      do
+    for i in [1..Size(word)] do
         lowerspace:=ShallowCopy(zerovec);
         lowerspace[i]:=one;
-        while thisterm>Minimum(lowerterms)
-          do
+        while thisterm>Minimum(lowerterms) do
             lowerspace:=UndirectedBoundaryOfFreeZGWord_LargeGroupRep(resolution,thisterm,lowerspace);
             thisterm:=thisterm-1;
-            if thisterm in lowerterms
-               then
+            if thisterm in lowerterms then
                 position:=Position(lowerterms,thisterm);
                 lowerspaceparts[position][i]:=lowerspace;
             fi;
@@ -389,16 +348,13 @@ InstallMethod(LowerSpaceFromWord_LargeGroupRep,
     Info(InfoHAPcryst,2,"template done");
     
     returnspaces:=[];
-    for lsp in [1..Size(lowerterms)]
-      do
+    for lsp in [1..Size(lowerterms)] do
         Info(InfoHAPcryst,2,"dimension ",lowerterms[lsp]);
-        if lowerterms[lsp]=term
-           then
+        if lowerterms[lsp]=term then
             returnspace:=word;
         else
             returnspace:=ListWithIdenticalEntries(Size(lowerspaceparts[lsp]),zero);
-            for i in [1..Size(word)]
-              do
+            for i in [1..Size(word)] do
                 thispart:=lowerspaceparts[lsp][i];
                 returnspace:=returnspace+List(thispart,x->x*word[i]);
             od;
@@ -416,12 +372,10 @@ InstallMethod(SubspaceListFromWord,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,dim,word)
     local   spaces_large;
-    if IsFreeZGWord_LargeGroupRep(resolution,dim,word)
-       then
+    if IsFreeZGWord_LargeGroupRep(resolution,dim,word) then
         spaces_large:=SubspaceListFromWordNC_LargeGroupRep(resolution,dim,word);
         return spaces_large;
-    elif IsFreeZGWord(resolution,dim,word)
-      then
+    elif IsFreeZGWord(resolution,dim,word) then
         spaces_large:=SubspaceListFromWordNC_LargeGroupRep(resolution,
                               dim,
                               ConvertStandardWord(resolution,dim,word)
@@ -439,8 +393,7 @@ end);
 InstallMethod(SubspaceListFromWord_LargeGroupRep,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,dim,word)
-    if IsFreeZGWord_LargeGroupRep(resolution,dim,word)
-       then
+    if IsFreeZGWord_LargeGroupRep(resolution,dim,word) then
         return SubspaceListFromWordNC_LargeGroupRep(resolution,dim,word);
     else
         Error("<word> is not a valid word in large group representation");
@@ -456,8 +409,7 @@ InstallMethod(SubspaceListFromWordNC_LargeGroupRep,
     local   subspaces,  i;
     subspaces:=List([0..dim],i->[]);
     subspaces[dim+1]:=UndirectedWord_LargeGroupRep(resolution,word);
-    for i in [dim-1,dim-2..0]
-      do
+    for i in [dim-1,dim-2..0] do
         subspaces[i+1]:=UndirectedBoundaryOfFreeZGWordNC_LargeGroupRep(resolution,i+1,subspaces[i+2]);
     od;
     return subspaces;
@@ -474,11 +426,9 @@ InstallMethod(IsConnectedWord,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,dim,word)
     local   converted_word;
-    if IsFreeZGWord_LargeGroupRep(resolution,dim,word)
-       then
+    if IsFreeZGWord_LargeGroupRep(resolution,dim,word) then
         return IsConnectedWordNC_LargeGroupRep(resolution,dim,word);
-    elif IsFreeZGWord(resolution,dim,word)
-      then
+    elif IsFreeZGWord(resolution,dim,word) then
         converted_word:=ConvertStandardWord(resolution,dim,word);
         return IsConnectedWordNC_LargeGroupRep(resolution,dim,converted_word);
     else
@@ -499,13 +449,10 @@ InstallMethod(IsConnectedWordNC_LargeGroupRep,
     fam:=FamilyObj(zero);
     zerovec:=List([1..Size(word)],i->zero);
     lettersAndBound:=[];
-    for term in [1..Size(word)]
-      do
-        if word[term]<>zero
-           then
+    for term in [1..Size(word)] do
+        if word[term]<>zero then
             groupels:=CoefficientsAndMagmaElementsAsLists(word[term])[2];
-            for g in groupels
-              do
+            for g in groupels do
                 letter:=ShallowCopy(zerovec);
                 letter[term]:=ElementOfMagmaRing(fam,0,[1],[g]);
                 Add(lettersAndBound,[letter,
@@ -524,19 +471,16 @@ InstallMethod(IsConnectedWordNC_LargeGroupRep,
         addToBlob:=Filtered(lettersAndBound,i->
                            IntersectingUndirectedWordsNC_LargeGroupRep(resolution,i[2],blobbound)
                            );
-        if addToBlob<>[]
-           then
+        if addToBlob<>[] then
             SubtractSet(lettersAndBound,addToBlob);
             addToBlobBound:=Sum(List(addToBlob,i->i[2]));
             blobbound:=UndirectedWord_LargeGroupRep(resolution,blobbound+addToBlobBound);
         fi;
     until lettersAndBound=[] or addToBlob=[];
     
-    if lettersAndBound=[]
-       then
+    if lettersAndBound=[] then
         return true;
-    elif addToBlob=[]
-      then
+    elif addToBlob=[] then
         return false;
     fi;    
 end);
@@ -554,8 +498,7 @@ InstallMethod(ConnectingPath,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList,IsDenseList,IsDenseList],
         function(resolution,dim,area,cellblob,cell)
     local   cell_large,  cellblob_large,  area_large,  path_large;
-    if IsFreeZGLetter(resolution,dim,cell)
-       then
+    if IsFreeZGLetter(resolution,dim,cell) then
         cell_large:=ConvertStandardLetter(resolution,dim,cell);
         cellblob_large:=ConvertStandardWord(resolution,dim,cellblob);
         area_large:=ConvertStandardWord(resolution,dim,area);
@@ -565,14 +508,12 @@ InstallMethod(ConnectingPath,
                             cellblob_large,
                             cell_large
                             );
-        if path_large=fail
-           then
+        if path_large=fail then
             return fail;
         else
             return ConvertWordToStandardRep(resolution,dim,path_large);
         fi;
-    elif IsFreeZGLetter_LargeGroupRep(resolution,dim,cell)
-      then
+    elif IsFreeZGLetter_LargeGroupRep(resolution,dim,cell) then
         path_large:=ConnectingPath_LargeGroupRep(resolution,
                             dim,
                             area,
@@ -594,16 +535,13 @@ InstallMethod(ConnectingPath_LargeGroupRep,
     
     if not (IsUndirectedWord_LargeGroupRep(resolution,area)
             and IsFreeZGWord_LargeGroupRep(resolution,dim,cellblob)
-            )
-       then
+            ) then
         Error("<area> and <cellblob> must be undirected words");
     elif  not (IsFreeZGLetter_LargeGroupRep(resolution,dim,cell)
             and IsUndirectedWord_LargeGroupRep(resolution,cell)
-            )
-      then
+            ) then
         Error("<cell> is not a valid undirected letter");
-    elif not IsUndirectedSubWordNC_LargeGroupRep(resolution,area,cellblob) and cell in area
-       then
+    elif not IsUndirectedSubWordNC_LargeGroupRep(resolution,area,cellblob) and cell in area then
         Error("<area> does not contain <cellblob> and <cell>");
     fi;
     return ConnectingPathNC_LargeGroupRep(resolution,dim,area,cellblob,cell);
@@ -635,14 +573,12 @@ InstallMethod(ConnectingPathNC_LargeGroupRep,
         endpoint:=First(thingsThatCouldBeAdded,i->
                         IntersectingUndirectedWords_LargeGroupRep(resolution,i[2],connectTo)
                         );
-        if endpoint<>fail
-           then
+        if endpoint<>fail then
             return UndirectedWord_LargeGroupRep(resolution,startingBit+endpoint[1]);
         else
             newSphereAndBounds:=Difference(sphereAndBounds,thingsThatCouldBeAdded);
             repeat
-                if thingsThatCouldBeAdded=[]
-                   then
+                if thingsThatCouldBeAdded=[] then
                     return [];
                 fi;
                 addface:=Remove(thingsThatCouldBeAdded);
@@ -664,13 +600,10 @@ InstallMethod(ConnectingPathNC_LargeGroupRep,
     fam:=FamilyObj(zero);
     zerovec:=List([1..Size(area)],i->zero);
     sphereAndBounds:=[];
-    for term in [1..Size(area)]
-      do
-        if area[term]<>zero
-           then
+    for term in [1..Size(area)] do
+        if area[term]<>zero then
             groupels:=CoefficientsAndMagmaElementsAsLists(area[term])[2];
-            for g in groupels
-              do
+            for g in groupels do
                 letter:=ShallowCopy(zerovec);
                 letter[term]:=ElementOfMagmaRing(fam,0,[1],[g]);
                 Add(sphereAndBounds,[letter,
@@ -680,8 +613,7 @@ InstallMethod(ConnectingPathNC_LargeGroupRep,
         fi;
     od;
 
-    if cell in cellblob
-       then
+    if cell in cellblob then
         return List(cell,i->zero);
     fi;
     
@@ -691,8 +623,7 @@ InstallMethod(ConnectingPathNC_LargeGroupRep,
                   cell,
                   UndirectedBoundaryOfFreeZGLetterNC_LargeGroupRep(resolution,dim,cell)
                   );
-    if path=[]
-       then
+    if path=[] then
         return fail;
     else
         return path;
@@ -723,11 +654,9 @@ InstallMethod(IsContractibleWord,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,dim,subspace)
     local   converted_subspace;
-    if IsFreeZGWord_LargeGroupRep(resolution,dim,subspace)
-       then
+    if IsFreeZGWord_LargeGroupRep(resolution,dim,subspace) then
         return IsContractibleWordNC_LargeGroupRep(resolution,dim,subspace);
-    elif IsFreeZGWord(resolution,dim,subspace)
-       then
+    elif IsFreeZGWord(resolution,dim,subspace) then
         converted_subspace:=ConvertWordToStandardRep(resolution,dim,subspace);
         return IsContractibleWordNC_LargeGroupRep(resolution,dim,converted_subspace);
     else
@@ -743,12 +672,10 @@ InstallMethod(IsContractiblePartialSpace,
         function(resolution,dim,spacelist)
     local   spacelist_large;
     if ForAll([1..Size(spacelist)],subspace->
-               IsFreeZGWord_LargeGroupRep(resolution,subspace-1,spacelist[subspace]))
-       then
+               IsFreeZGWord_LargeGroupRep(resolution,subspace-1,spacelist[subspace])) then
         return IsContractiblePartialSpaceNC_LargeGroupRep(resolution,dim,spacelist);
     elif ForAll([1..Size(spacelist)],subspace->
-            IsFreeZGWord(resolution,subspace-1,spacelist[subspace]))
-      then
+            IsFreeZGWord(resolution,subspace-1,spacelist[subspace])) then
         spacelist_large:=List(spacelist,space->ConvertStandardWord(resolution,dim,space));
         return IsContractiblePartialSpaceNC_LargeGroupRep(resolution,dim,spacelist_large);
     else
@@ -783,19 +710,15 @@ InstallMethod(SphereContainingCell,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList,IsDenseList],
         function(resolution,dim,space,cell)
     local   complex;
-    if not IsFreeZGLetter_LargeGroupRep(resolution,dim,cell)
-       then
+    if not IsFreeZGLetter_LargeGroupRep(resolution,dim,cell) then
         Error("<cell> is not a valid letter");
-    elif not IsFreeZGWord_LargeGroupRep(resolution,dim,space)
-      then
+    elif not IsFreeZGWord_LargeGroupRep(resolution,dim,space) then
         Error("<space> is not a valid word");
-    elif not IsUndirectedSubWord_LargeGroupRep(resolution,space,cell)
-       then
+    elif not IsUndirectedSubWord_LargeGroupRep(resolution,space,cell) then
         Error("<cell> not in <space>");
     fi;
     complex:=ChainComplexFromWordNC_LargeGroupRep(resolution,dim,space);
-    if not Homology(complex,dim)=[0]
-       then
+    if not Homology(complex,dim)=[0] then
         Error("<space> does not contain a unique sphere");
     fi;
     return SphereContainingCellNC_LargeGroupRep(resolution,dim,space,cell);
@@ -808,19 +731,15 @@ InstallMethod(SphereContainingCell_LargeGroupRep,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList,IsDenseList],
         function(resolution,dim,space,cell)
     local   complex;
-    if not IsFreeZGLetter_LargeGroupRep(resolution,dim,cell)
-       then
+    if not IsFreeZGLetter_LargeGroupRep(resolution,dim,cell) then
         Error("<cell> is not a valid letter");
-    elif not IsFreeZGWord_LargeGroupRep(resolution,dim,space)
-      then
+    elif not IsFreeZGWord_LargeGroupRep(resolution,dim,space) then
         Error("<space> is not a valid word");
-    elif not IsUndirectedSubWord_LargeGroupRep(resolution,space,cell)
-       then
+    elif not IsUndirectedSubWord_LargeGroupRep(resolution,space,cell) then
         Error("<cell> not in <space>");
     fi;
     complex:=ChainComplexFromWordNC_LargeGroupRep(resolution,dim,space);
-    if not Homology(complex,dim)=[0]
-       then
+    if not Homology(complex,dim)=[0] then
         Error("<space> does not contain a unique sphere");
     fi;
     return SphereContainingCellNC_LargeGroupRep(resolution,dim,space,cell);
@@ -842,13 +761,10 @@ InstallMethod(SphereContainingCellNC_LargeGroupRep,
     fam:=FamilyObj(zero);
     zerovec:=List([1..Size(space)],i->zero);
     space_and_bounds:=[];
-    for term in [1..Size(space)]
-      do
-        if space[term]<>zero
-           then
+    for term in [1..Size(space)] do
+        if space[term]<>zero then
             groupels:=CoefficientsAndMagmaElementsAsLists(space[term])[2];
-            for g in groupels
-              do
+            for g in groupels do
                 letter:=ShallowCopy(zerovec);
                 letter[term]:=ElementOfMagmaRing(fam,0,[1],[g]);
                 Add(space_and_bounds,[letter,
@@ -866,8 +782,7 @@ InstallMethod(SphereContainingCellNC_LargeGroupRep,
     complex:=ChainComplexFromPartialSpaceNC_LargeGroupRep(resolution,
                      subspacelist
                      );
-    while Homology(complex,dim)<>[0]
-      do
+    while Homology(complex,dim)<>[0] do
         newcells:=Filtered(space_and_bounds,c->
                           IntersectingUndirectedWordsNC_LargeGroupRep(resolution,c[2],spherebound)
                           );
@@ -877,8 +792,7 @@ InstallMethod(SphereContainingCellNC_LargeGroupRep,
                                dim,
                                Sum(List(newcells,i->i[1]))
                                );
-        for i in [1..Size(new_subspaces)]
-          do
+        for i in [1..Size(new_subspaces)] do
            subspacelist[i]:=UndirectedWordNC_LargeGroupRep(resolution,subspacelist[i]+new_subspaces[i]);
        od;
        spherebound:=subspacelist[dim];
@@ -898,11 +812,9 @@ InstallMethod(ChainComplexFromWord,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,dim,subspace)
     local   converted_subspace;
-    if IsFreeZGWord_LargeGroupRep(resolution,dim,subspace)
-       then
+    if IsFreeZGWord_LargeGroupRep(resolution,dim,subspace) then
         return ChainComplexFromWordNC_LargeGroupRep(resolution,dim,subspace);
-    elif IsFreeZGWord(resolution,dim,subspace)
-      then
+    elif IsFreeZGWord(resolution,dim,subspace) then
         converted_subspace:=ConvertStandardWord(resolution,dim,subspace);
         return ChainComplexFromWordNC_LargeGroupRep(resolution,dim,subspace);
     else
@@ -930,8 +842,7 @@ InstallMethod(ChainComplexFromPartialSpace_LargeGroupRep,
         function(resolution,subspaces)
     if not ForAll([1..Size(subspaces)],dim->
                IsFreeZGWord_LargeGroupRep(resolution,dim-1,subspaces[dim])
-               )
-       then
+               ) then
         Error("subspace list contains invalid words");
     fi;
     return ChainComplexFromPartialSpaceNC_LargeGroupRep(resolution,subspaces);
@@ -955,20 +866,16 @@ InstallMethod(ChainComplexFromPartialSpaceNC_LargeGroupRep,
     word2vec:=function(generators,word)
         local   vec,  term,  coeffsAndGroupElts,  termgenerators,  g,  
                 pos;
-        if Size(generators)<>Size(word)
-           then
+        if Size(generators)<>Size(word) then
             Error("dimension mismatch");
         fi;
         vec:=List(generators,i->0*[1..Size(i)]);
-        for term in [1..Size(word)]
-          do
+        for term in [1..Size(word)] do
             coeffsAndGroupElts:=CoefficientsAndMagmaElementsAsLists(word[term]);
             termgenerators:=generators[term];
-            for g in [1..Size(coeffsAndGroupElts[2])]
-              do
+            for g in [1..Size(coeffsAndGroupElts[2])] do
                 pos:=Position(termgenerators,coeffsAndGroupElts[2][g]);
-                if pos<>fail
-                   then
+                if pos<>fail then
                     vec[term][pos]:=coeffsAndGroupElts[1][g];
                 else
                     Error("word-vector conversion error");
@@ -981,13 +888,11 @@ InstallMethod(ChainComplexFromPartialSpaceNC_LargeGroupRep,
     
     boundary:=function(k,j)
         local   letter,  boundaryAsWord;
-        if k=Size(subspaces)+1
-           then
+        if k=Size(subspaces)+1 then
             return [];
         fi;
         boundaryAsWord:=BoundaryOfFreeZGLetterNC_LargeGroupRep(resolution,k,ccGenerators[k+1][j]);
-        if boundaryAsWord=[]
-           then
+        if boundaryAsWord=[] then
             return [];
         else
             return word2vec(generatorGroupEltsList[k],boundaryAsWord);
@@ -996,11 +901,9 @@ InstallMethod(ChainComplexFromPartialSpaceNC_LargeGroupRep,
     
     
     dimension:=function(k)
-        if k<Size(subspaces)
-           then
+        if k<Size(subspaces) then
             return Size(ccGenerators[k+1]);
-        elif k=Size(subspaces)
-          then
+        elif k=Size(subspaces) then
           return 0;
         else
             Error("chain complex too short");
@@ -1018,14 +921,11 @@ InstallMethod(ChainComplexFromPartialSpaceNC_LargeGroupRep,
                                  List(s,i->Set(CoefficientsAndMagmaElementsAsLists(i)[2]))
                                  );;
     ccGenerators:=List(generatorGroupEltsList,i->[]);
-    for term in [1..Size(generatorGroupEltsList)]
-      do
+    for term in [1..Size(generatorGroupEltsList)] do
         thistermdimension:=Size(generatorGroupEltsList[term]);
         zerovec:=List([1..thistermdimension],i->zero);
-        for dim in [1..thistermdimension]
-          do
-            for g in [1..Size(generatorGroupEltsList[term][dim])]
-              do
+        for dim in [1..thistermdimension] do
+            for g in [1..Size(generatorGroupEltsList[term][dim])] do
                 generator:=ShallowCopy(zerovec);
                 generator[dim]:=ElementOfMagmaRing(fam,zeroCoeff,[oneCoeff],[generatorGroupEltsList[term][dim][g]]);
                 Add(ccGenerators[term],generator);

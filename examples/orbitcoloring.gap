@@ -35,29 +35,23 @@
 CholeskyDecomposition:=function(mat)
     local   dim, L,  line,x,  col;
     
-    if not mat=TransposedMat(mat)
-       then
+    if not mat=TransposedMat(mat) then
         Error("matrix is not symmetric");
     fi;
     dim:=DimensionSquareMat(mat);
-    if not ForAll([1..dim],d->Determinant(mat{[1..d]}{[1..d]})>0)
-       then
+    if not ForAll([1..dim],d->Determinant(mat{[1..d]}{[1..d]})>0) then
         Error("matrix is not positive definite");
     fi;
     L:=NullMat(dim,dim);
     L[1][1]:=sqrt(mat[1][1]);
-    for line in [1..dim]
-      do
-        for col in [1..line-1]
-          do
-            if col>1 
-               then
+    for line in [1..dim] do
+        for col in [1..line-1] do
+            if col>1  then
                 L[line][col]:=(mat[line][col]-(L[line]{[1..col-1]}*L[col]{[1..col-1]}))/L[col][col];
             else
                 L[line][col]:=mat[line][col]/L[col][col];
             fi;
-            if line>1 
-               then
+            if line>1  then
                 L[line][line]:=sqrt(mat[line][line]-L[line]{[1..line-1]}^2);
             fi;
         od;
@@ -83,23 +77,17 @@ hsv2rgb:=function(hsv)
     p:=V*(1-S);
     q:=V*(1-f*S);
     t:=V*(1-(1-f)*S);
-    if Hi=0
-       then
+    if Hi=0 then
         rgb:=[V,t,p];
-    elif Hi=1
-      then
+    elif Hi=1 then
         rgb:= [q,V,p];
-    elif Hi=2
-      then
+    elif Hi=2 then
         rgb:= [p,V,t];
-    elif Hi=3
-      then
+    elif Hi=3 then
         rgb:= [p,q,V];
-    elif Hi=4
-      then 
+    elif Hi=4 then
         rgb:= [t,p,V];
-    elif Hi=5
-      then
+    elif Hi=5 then
         rgb:= [V,p,q];
     else
         Error("bad programming, Marc");
@@ -114,23 +102,19 @@ end;
 ncolorStrings:=function(n)
     local   colorlist,  Hvalues,  color,  rem,  H,  S,  V;
     
-    if n<=10
-       then
+    if n<=10 then
         colorlist:=List([0..n-1]*360/n,i->[Int(i),255,255]);
     else
         colorlist:=[];
         Hvalues:=Reversed([0..Int(n/3)+1]*360/(Int(n/3)+1));
-        for color in [1..n]
-          do
+        for color in [1..n] do
 #                        H:=(360/(Int(n/4)+1))*Int(color/4);
             rem:=(color-1) mod 3;
-            if rem=0
-               then
+            if rem=0 then
                 H:=Remove(Hvalues);
                 S:=255;
                 V:=255;
-            elif rem=1
-              then
+            elif rem=1 then
                 S:=127;
                 V:=255;
             else
@@ -153,23 +137,19 @@ end;
 ncolorStringsPale:=function(n)
     local   colorlist,  Hvalues,  color,  rem,  H,  S,  V;
     
-    if n<=10
-       then
+    if n<=10 then
         colorlist:=List([0..n-1]*360/n,i->[Int(i),180,200]);
     else
         colorlist:=[];
         Hvalues:=Reversed([0..Int(n/3)+1]*360/(Int(n/3)+1));
-        for color in [1..n]
-          do
+        for color in [1..n] do
             #            H:=(360/(Int(n/4)+1))*Int(color/4);
             rem:=(color-1) mod 3;
-            if rem=0
-               then
+            if rem=0 then
                 H:=Remove(Hvalues);
                 S:=127;
                 V:=255;
-            elif rem=1
-              then
+            elif rem=1 then
                 S:=64;
                 V:=255;
             else
@@ -199,20 +179,17 @@ fraction2floatString:=function(q,precision)
     local   sign,  signString,  magnitude,  beforepoint,  qright,  
             prezeros,  afterpoint,  returnstring;
     
-    if q=0
-       then
+    if q=0 then
         return "0";
     fi;
     sign:=SignRat(q);
-    if sign=-1
-       then
+    if sign=-1 then
         signString:="-";
     else
         signString:="";
     fi;
     
-    if AbsoluteValue(q)>0
-       then
+    if AbsoluteValue(q)>0 then
         beforepoint:=String(sign*Int(q));
         qright:=sign*(q-Int(q));
     else 
@@ -220,11 +197,9 @@ fraction2floatString:=function(q,precision)
         beforepoint:="0";
     fi;
     
-    if qright<>0
-       then
+    if qright<>0 then
         magnitude:=LogInt(NumeratorRat(qright),10)-LogInt(DenominatorRat(qright),10);
-        if AbsoluteValue(qright)*10^(-magnitude)<1
-           then
+        if AbsoluteValue(qright)*10^(-magnitude)<1 then
             magnitude:=magnitude-1;
         fi;
         prezeros:=Concatenation(List([1..-magnitude-1],i->"0"));
@@ -233,12 +208,10 @@ fraction2floatString:=function(q,precision)
     else
         returnstring:=Concatenation(signString,beforepoint,".0");
     fi;
-    while returnstring[Size(returnstring)]='0'
-      do
+    while returnstring[Size(returnstring)]='0' do
         Unbind(returnstring[Size(returnstring)]);
     od;
-    if returnstring[Size(returnstring)]='.'
-       then
+    if returnstring[Size(returnstring)]='.' then
         Unbind(returnstring[Size(returnstring)]);
     fi;
     return returnstring;
@@ -255,8 +228,7 @@ numberWithLeadingZeros:=function(n,digits)
     local   string;
     
     string:=String(n);
-    while Size(string)<digits
-       do
+    while Size(string)<digits do
         string:=Concatenation(["0",string]);
     od;
     return string;
@@ -271,8 +243,7 @@ vertexOrbitDecomposition:=function(vertexlist,group)
     
     vertices:=Set(vertexlist);
     vertexorbits:=[];
-    while vertices<>[]
-      do
+    while vertices<>[] do
         vertex:=vertices[1];
         orbit:=Concatenation(
                        OrbitPartInVertexSetsStandardSpaceGroup(group,[vertex],
@@ -292,8 +263,7 @@ edgeOrbitDecomposition:=function(edges,vertexlist,group)
     
     edgesasvectors:=Set(edges,i->Set(i,j->vertexlist[j]));
     edgeorbits:=[];
-    while edgesasvectors<>[]
-      do
+    while edgesasvectors<>[] do
         edge:=edgesasvectors[1];
         orbit:=Set(OrbitPartInVertexSetsStandardSpaceGroup(group,edge,
                        Set(vertexlist)));
@@ -329,24 +299,19 @@ javaviewWrappedDatastring:=function(title,abstract,detail,datastring,wrapper)
         
     outstring:=[];
     stream:=InputTextFile(wrapper);
-    while not IsEndOfStream(stream)
-      do
+    while not IsEndOfStream(stream) do
         line:=ReadLine(stream);
-        if line="##Insert Title##\n"
-           then
+        if line="##Insert Title##\n" then
             line:=enclosedByTag(title,"title");
             Append(line,"\n");
-        elif line ="##Insert Abstract##\n"
-          then
+        elif line ="##Insert Abstract##\n" then
             line:=enclosedByTag(abstract,"abstract");
             Append(line,"\n");
     
-        elif line ="##Insert Detail##\n"
-          then
+        elif line ="##Insert Detail##\n" then
             line:=enclosedByTag(detail,"detail");
             Append(line,"\n");
-        elif line="##Insert Data String##\n"
-          then
+        elif line="##Insert Data String##\n" then
             line:=enclosedByTag(datastring,"geometries");
             Append(line,"\n");
         else
@@ -424,12 +389,10 @@ end;
         edgeorbits:=edgeOrbitDecomposition(edges,vertices,group);    
 
         orientededges:=[];
-        for orbit in edgeorbits
-          do
+        for orbit in edgeorbits do
             firstedge:=Set(orbit[1],int2vec);
             Add(orientededges,List(firstedge,vec2int));
-            for edge in orbit{[2..Size(orbit)]}
-              do
+            for edge in orbit{[2..Size(orbit)]} do
                 vecedge:=Set(edge,int2vec);
                 map:=RepresentativeActionOnRightOnSets(group,firstedge,vecedge);
                 edgeimage:=List(firstedge,v->(Concatenation(v,[1])*map));
@@ -479,14 +442,12 @@ javaviewFacetBlock:=function(poly,group)
     facelattice:=Polymake(poly,"FACE_LATTICE");
     edges:=Set(facelattice[Size(facelattice)-1]);
     ofacets:=[];
-    for facet in facets
-      do
+    for facet in facets do
         facetedges:=Set(Filtered(edges,e->IsSubset(facet,e)));
         ofacet:=List(facetedges[1]);
         RemoveSet(facetedges,ofacet);
         nextvertex:=ofacet[2];
-        while facetedges<>[]
-          do
+        while facetedges<>[] do
             nextedge:=First(facetedges,f->nextvertex in f);
             RemoveSet(facetedges,nextedge);
             nextvertex:=First(nextedge,i->i<>nextvertex);
@@ -500,15 +461,13 @@ javaviewFacetBlock:=function(poly,group)
     ## We're lucky this happens in 3-space.
     
     vertices:=Polymake(poly,"VERTICES");
-   for pos in [1..Size(ofacets)]
-      do
+   for pos in [1..Size(ofacets)] do
         v1:=vertices[ofacets[pos][2]]-vertices[ofacets[pos][1]];
         v2:=vertices[ofacets[pos][3]]-vertices[ofacets[pos][1]];
         normal:=crossProduct(v1,v2);
         eq:=Concatenation([vertices[ofacets[pos][1]]*normal],normal);
         testpoint:=vertices[Representative(Difference([1..Size(vertices)],ofacets[pos]))];
-        if WhichSideOfHyperplane(testpoint,eq)=-1
-           then
+        if WhichSideOfHyperplane(testpoint,eq)=-1 then
             ofacets[pos]:=Reversed(ofacets[pos]);
         fi;
     od;
@@ -552,13 +511,10 @@ javaviewDatastring:=function(poly,maps,group,precision)
     
     allgeometries:=[];
     
-    for i in [1..Size(maps)]
-      do
-        if i=1 
-           then
+    for i in [1..Size(maps)] do
+        if i=1  then
             gshow:="\"show\"";
-            if Size(maps)=1
-               then
+            if Size(maps)=1 then
                 numberstring:="";
             else
                 numberstring:=" FD";

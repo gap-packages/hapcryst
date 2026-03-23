@@ -13,8 +13,7 @@ InstallMethod(HasseDiagramAsList,[IsRecord],
     facenumber:=Size(hasse.hasse);
     
 
-    if nodes[1][2]=[]
-       then
+    if nodes[1][2]=[] then
         Info(InfoPolymaking,1,"polymake returned dual Hasse diagram. Recovering original");
         ####
         # if the Hasse diagram ends in a list of points,
@@ -34,8 +33,7 @@ InstallMethod(HasseDiagramAsList,[IsRecord],
             # column is still wrong. So we do some renumbering:
         #permlist[1]:=Size(nodes);
         #pi2:=PermList(permlist); 
-        for node in nodes
-          do
+        for node in nodes do
             node[2]:=OnSets(node[2],pi);
         od;
     fi;
@@ -48,22 +46,19 @@ InstallMethod(HasseDiagramAsList,[IsRecord],
     Apply(nodes,i->Concatenation(i,[[]]));
     maxnode:=Size(nodes);
 #    Remove(nodes,maxnode);
-    for i in [1..maxnode]#-1]
-      do
+    for i in [1..maxnode]#-1] do
 #        Apply(nodes[i][1],i->i+1);
 #        if nodes[i][2]=[maxnode]
 #           then
 #            nodes[i][2]:=[];
 #        else
-            for upface in nodes[i][2]
-              do
+            for upface in nodes[i][2] do
                 Add(nodes[upface-1][3],i);
             od;
 #        fi;
     od;
     
-    for node in nodes
-      do
+    for node in nodes do
         Apply(node,Set);
     od;
     
@@ -78,30 +73,24 @@ InstallMethod(HasseDiagramAsList,[IsRecord],
     faceblocks:=Set(faceblocks);
     RemoveSet(faceblocks,[0]);
     
-    for blockindex in [1..Size(faceblocks)]
-      do
+    for blockindex in [1..Size(faceblocks)] do
         nodes[blockindex]:=nodes{faceblocks[blockindex]};
     od;
-    while Size(nodes)>Size(faceblocks)
-      do
+    while Size(nodes)>Size(faceblocks) do
         Remove(nodes);
     od;     
-    for blockindex in [1..Size(nodes)]
-      do
-        if blockindex>1
-           then
+    for blockindex in [1..Size(nodes)] do
+        if blockindex>1 then
             downshift:=-faceblocks[blockindex-1][1]+1;
         else
             downshift:=0;
         fi;
-        if blockindex<Size(nodes)
-           then
+        if blockindex<Size(nodes) then
             upshift:=-faceblocks[blockindex+1][1];
         else
             upshift:=0;
         fi;
-        for face in nodes[blockindex]
-          do
+        for face in nodes[blockindex] do
             face[2]:=face[2]+upshift;
             face[3]:=face[3]+downshift;
         od;

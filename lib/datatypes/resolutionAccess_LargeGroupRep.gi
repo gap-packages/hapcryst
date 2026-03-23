@@ -82,8 +82,7 @@ end);
 InstallMethod(MultiplyGroupElts_LargeGroupRep,"for HapResolutions of large groups",
         [IsHapLargeGroupResolutionRep,IsObject,IsObject],
         function(resolution,x,y)    
-    if not IsSubset(GroupOfResolution(resolution),[x,y])
-       then
+    if not IsSubset(GroupOfResolution(resolution),[x,y]) then
         Error("<x> and <y> must belong to <resolution>'s group");
     else
        return MultiplyGroupEltsNC_LargeGroupRep(resolution,x,y); 
@@ -100,11 +99,9 @@ end);
 InstallMethod(MultiplyGroupElts,"for HapResolutions of large groups",
         [IsHapLargeGroupResolutionRep,IsObject,IsObject],
         function(resolution,x,y)    
-    if IsSubset(GroupOfResolution(resolution),[x,y])
-       then
+    if IsSubset(GroupOfResolution(resolution),[x,y]) then
         return MultiplyGroupEltsNC_LargeGroupRep(resolution,x,y); 
-    elif ForAll([x,y],i->IsValidGroupInt(resolution,i))
-      then
+    elif ForAll([x,y],i->IsValidGroupInt(resolution,i)) then
         return MultiplyGroupEltsNC(resolution,x,y);
     else
         TryNextMethod();       
@@ -129,8 +126,7 @@ end);
 InstallMethod(StrongestValidRepresentationForLetter,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,term, letter)
-    if IsFreeZGLetter_LargeGroupRep(resolution,term,letter)
-       then
+    if IsFreeZGLetter_LargeGroupRep(resolution,term,letter) then
         return IsHapLargeGroupResolutionRep;
     else
         TryNextMethod();
@@ -148,8 +144,7 @@ end);
 InstallMethod(StrongestValidRepresentationForWord,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,term, word)
-    if IsFreeZGWord_LargeGroupRep(resolution,term,word)
-       then
+    if IsFreeZGWord_LargeGroupRep(resolution,term,word) then
         return IsHapLargeGroupResolutionRep;
     else
         TryNextMethod();
@@ -165,8 +160,7 @@ end);
 InstallMethod(ConvertStandardLetter,
         [IsHapResolutionRep,IsInt,IsDenseList],
         function(resolution,term,letter)
-    if not IsFreeZGLetter(resolution,term,letter)
-       then
+    if not IsFreeZGLetter(resolution,term,letter) then
         Error("<letter> is not a valid letter");
     fi;
     return ConvertStandardLetterNC(resolution,term,letter);
@@ -187,8 +181,7 @@ end);
 InstallMethod(ConvertStandardWord,
         [IsHapResolutionRep,IsInt,IsDenseList],
         function(resolution,term,word)
-    if not IsFreeZGWord(resolution,term,word)
-       then
+    if not IsFreeZGWord(resolution,term,word) then
         Error("<word> is not a valid word");
     fi;
     return ConvertStandardWordNC(resolution,term,word);
@@ -209,8 +202,7 @@ end);
 InstallMethod(ConvertLetterToStandardRep,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,term,letter)
-    if not IsFreeZGLetter_LargeGroupRep(resolution,term,letter)
-       then
+    if not IsFreeZGLetter_LargeGroupRep(resolution,term,letter) then
         Error("<letter> is not a valid letter in large group representation.");
     fi;
     return ConvertLetterToStandardRepNC(resolution,term,letter);
@@ -232,8 +224,7 @@ end);
 InstallMethod(ConvertWordToStandardRep,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,term,word)
-    if not IsFreeZGWord_LargeGroupRep(resolution,term,word)
-       then
+    if not IsFreeZGWord_LargeGroupRep(resolution,term,word) then
         Error("<letter> is not a valid letter in large group representation.");
     fi;
     return ConvertWordToStandardRepNC(resolution,term,word);
@@ -264,8 +255,7 @@ InstallMethod(IsFreeZGLetter_LargeGroupRep,"For HapResolutions of large groups",
             and IsInt(letter[1])
             and AbsInt(letter[1])<=Dimension(resolution)(term)
             and letter[2] in GroupOfResolution(resolution)
-            )
-       then
+            ) then
         return false;
     else
         return true;
@@ -284,15 +274,13 @@ InstallMethod(IsFreeZGWord_LargeGroupRep,"For HapResolutions of large groups",
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,term,word)
     local   firstEntries,  secondEntries;
-    if not ForAll(word,IsDenseList)
-       then
+    if not ForAll(word,IsDenseList) then
         return false;
     fi;
     firstEntries:=List(word,i->AbsInt(i[1]));
     secondEntries:=Set(word,i->i[2]);
     if Maximum(firstEntries)<=Dimension(resolution)(term)
-       and IsSubset(GroupOfResolution(resolution),secondEntries)
-       then
+       and IsSubset(GroupOfResolution(resolution),secondEntries) then
         return true;
     else
         return false;
@@ -330,8 +318,7 @@ InstallMethod(MultiplyFreeZGLetterWithGroupElt_LargeGroupRep,"For HapResolutions
         function(resolution,letter,g)
     if not (IsSubset(GroupOfResolution(resolution),[g,letter[2]])
             and IsInt(letter[1])
-            )
-       then
+            ) then
         Error("<letter> or <g> of wrong form");
     fi;
     return MultiplyFreeZGLetterWithGroupEltNC_LargeGroupRep(resolution,letter,g);
@@ -345,8 +332,7 @@ InstallMethod(MultiplyFreeZGLetterWithGroupElt,"For HapResolutions of large grou
         function(resolution,letter,g)
     if not (IsSubset(GroupOfResolution(resolution),[g,letter[2]])
             and IsInt(letter[1])
-            )
-       then
+            ) then
         TryNextMethod();
     fi;
     return MultiplyFreeZGLetterWithGroupEltNC_LargeGroupRep(resolution,letter,g);
@@ -383,8 +369,7 @@ InstallMethod(MultiplyFreeZGWordWithGroupElt_LargeGroupRep,"For HapResolution",
     group:=GroupOfResolution(resolution);
     if not (ForAll(word,i->IsInt(i[1]) and i[2] in group)
             and g in group
-            )
-       then
+            ) then
         Error("<g> or <word> are not valid");
     fi;
     return MultiplyFreeZGWordWithGroupEltNC_LargeGroupRep(resolution,word,g);
@@ -400,8 +385,7 @@ InstallMethod(MultiplyFreeZGWordWithGroupElt,"For HapResolution",
     group:=GroupOfResolution(resolution);
     if not (ForAll(word,i->IsInt(i[1]) and i[2] in group)
             and g in group
-            )
-       then
+            ) then
         TryNextMethod();
     fi;
     return MultiplyFreeZGWordWithGroupEltNC_LargeGroupRep(resolution,word,g);
@@ -441,8 +425,7 @@ InstallMethod(BoundaryOfFreeZGLetterNC_LargeGroupRep,
     sign:=SignInt(cell[1]);
     boundary:=resolution!.boundary2(resolution,term,AbsInt(cell[1]));
     boundary:=MultiplyFreeZGWordWithGroupEltNC_LargeGroupRep(resolution,boundary,cell[2]);
-    if sign=-1
-       then
+    if sign=-1 then
         return NegateWord(boundary);
     else
         return boundary;
@@ -462,8 +445,7 @@ InstallMethod(BoundaryOfFreeZGLetter_LargeGroupRep,"For HapResolutions of large 
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,term,letter)
         
-    if not IsFreeZGLetter_LargeGroupRep(resolution,term,letter)
-       then
+    if not IsFreeZGLetter_LargeGroupRep(resolution,term,letter) then
         Error("<letter> is not a proper letter");
     fi;
     return BoundaryOfFreeZGLetterNC_LargeGroupRep(resolution,term,letter);
@@ -476,11 +458,9 @@ InstallMethod(BoundaryOfFreeZGLetter,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,term,letter)
     local   letter_large;
-    if IsFreeZGLetter_LargeGroupRep(resolution,term,letter)
-       then
+    if IsFreeZGLetter_LargeGroupRep(resolution,term,letter) then
         return BoundaryOfFreeZGLetterNC_LargeGroupRep(resolution,term,letter);        
-    elif IsFreeZGLetter(resolution,term,letter)
-      then
+    elif IsFreeZGLetter(resolution,term,letter) then
         letter_large:=ConvertStandardLetterNC(resolution,term,letter);
         return ConvertWordToStandardRepNC(resolution,term,BoundaryOfFreeZGLetterNC_LargeGroupRep(resolution,term,letter_large));
     else
@@ -505,8 +485,7 @@ InstallMethod(BoundaryOfFreeZGWordNC_LargeGroupRep,"For HapResolutions of large 
         function(resolution,term,word)
     local   boundary,  letter,  letterbound;
     boundary:=[];
-    for letter in word
-      do
+    for letter in word do
         letterbound:=BoundaryOfFreeZGLetterNC_LargeGroupRep(resolution,term,letter);
         boundary:=AddFreeWords(boundary,letterbound);
     od;
@@ -524,8 +503,7 @@ end);
 InstallMethod(BoundaryOfFreeZGWord_LargeGroupRep,"For HapResolution",
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,term,word)
-    if not IsFreeZGWord_LargeGroupRep(resolution,term,word)
-       then
+    if not IsFreeZGWord_LargeGroupRep(resolution,term,word) then
         Error("<word> is not an element of the <term>th module");
     fi;
     return BoundaryOfFreeZGWordNC_LargeGroupRep(resolution,term,word);
@@ -538,11 +516,9 @@ InstallMethod(BoundaryOfFreeZGWord,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,term,letter)
     local   word_large;
-    if IsFreeZGWord_LargeGroupRep(resolution,term,letter)
-       then
+    if IsFreeZGWord_LargeGroupRep(resolution,term,letter) then
         return BoundaryOfFreeZGWordNC_LargeGroupRep(resolution,term,letter);        
-    elif IsFreeZGLetter(resolution,term,letter)
-      then
+    elif IsFreeZGLetter(resolution,term,letter) then
         word_large:=ConvertWordToStandardRepNC(resolution,term,letter);
         return ConvertWordToStandardRepNC(resolution,term,BoundaryOfFreeZGWordNC(resolution,term,word_large));
     else

@@ -80,11 +80,9 @@ InstallMethod(PartialContractingHomotopyLookup,
     local   resolution;
     
     resolution:=ResolutionOfContractingHomotopy(homotopy);
-    if term>=EvaluateProperty(resolution,"length")
-       then
+    if term>=EvaluateProperty(resolution,"length") then
         Error("resolution too short");
-    elif not generator<=Dimension(resolution)(term)
-       then
+    elif not generator<=Dimension(resolution)(term) then
         Error("no such generator");
     fi;
     return PartialContractingHomotopyLookupNC(homotopy,term,generator,groupel);
@@ -104,15 +102,13 @@ InstallMethod(PartialContractingHomotopyLookupNC,
     local   knownMap,  space;
     
     knownMap:=homotopy!.knownPartOfHomotopy;
-    if not (IsBound(knownMap[term+2]) and IsBound(knownMap[term+1]))
-       then 
+    if not (IsBound(knownMap[term+2]) and IsBound(knownMap[term+1])) then
         return fail;
     fi;
     space:=knownMap[term+1].space;
     knownMap:=knownMap[term+2].map;
     
-    if not IsBound(knownMap[generator]) or knownMap[generator]=[]
-      then
+    if not IsBound(knownMap[generator]) or knownMap[generator]=[] then
         return fail;
     else
         return First(knownMap[generator],x->x[1]=groupel);

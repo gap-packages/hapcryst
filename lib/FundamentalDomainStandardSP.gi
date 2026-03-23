@@ -50,18 +50,15 @@ smallestPointOfOneCubeAroundCenter:=function(center)
 
 #    middle:=List(center,i->0);
     edge:=List(center);
-    for i in [1..Size(center)]
-      do
+    for i in [1..Size(center)] do
         entry:=edge[i];
         sign:=SignRat(entry);
         if sign=0 then sign:=1; fi;
         minusentry:=-sign/2+entry;
         plusentry:=sign/2+entry;
-        if AbsoluteValue(minusentry)<AbsoluteValue(plusentry)
-           then
+        if AbsoluteValue(minusentry)<AbsoluteValue(plusentry) then
             edge[i]:=minusentry;
-        elif AbsoluteValue(minusentry)=AbsoluteValue(plusentry)
-          then
+        elif AbsoluteValue(minusentry)=AbsoluteValue(plusentry) then
             edge[i]:=(minusentry+plusentry)/2;            
 #            middle[i]:=(minusentry+plusentry)/2;
 #            edge[i]:=plusentry;
@@ -76,8 +73,7 @@ end;
 
 
 NextLargerInteger:=function(rat)
-    if IsInt(rat) 
-       then 
+    if IsInt(rat) then
         return rat;
     else
         return Int(rat+1);
@@ -96,14 +92,11 @@ inequalitiesFromVertices:=function(center,offset,signvectors,orbitpart,vertices,
     ineqs:=function(center,points,vertices,rsquare)
         local   returnlist,  point,  ineq;
         returnlist:=[];
-        for point in points
-          do
-            if (point-center)^2<=rsquare 
-               then
+        for point in points do
+            if (point-center)^2<=rsquare then
                 ineq:=BisectorInequalityFromPointPair(center,point);
-                if ineq<>fail and ForAny(vertices,thiscorner->WhichSideOfHyperplane(thiscorner,ineq)=-1)
+                if ineq<>fail and ForAny(vertices,thiscorner->WhichSideOfHyperplane(thiscorner,ineq)=-1) then
 #                  if ForAny(vertices,thiscorner->WhichSideOfHyperplane(thiscorner,ineq)=-1)
-                   then
                     Add(returnlist,ineq);
                 fi;
             fi;
@@ -112,8 +105,7 @@ inequalitiesFromVertices:=function(center,offset,signvectors,orbitpart,vertices,
     end;
         
     inequalities:=[];
-    for sign in signvectors
-      do
+    for sign in signvectors do
         off:=List([1..Size(sign)],i->sign[i]*offset[i])+orbitpart;
         Append(inequalities,ineqs(center,off,vertices,radiussquare));
     od;
@@ -127,8 +119,7 @@ needsConsideration:=function(offset,radiussquare)
 #    edgeAndMiddle:=smallestPointOfOneCubeAroundCenter(offset);
  #   if edgeAndMiddle.edge^2<radiussquare or 
     #      edgeAndMiddle.middle^2<=radiussquare
-    if smallestPointOfOneCubeAroundCenter(offset)^2<=radiussquare
-       then
+    if smallestPointOfOneCubeAroundCenter(offset)^2<=radiussquare then
         return true; 
     else
         return false;
@@ -144,14 +135,12 @@ reducePolytope:=function(poly,center,offset,signvectors,radiussquare,orbitpart)
     
     vertices:=Polymake(poly,"VERTICES");
     inequalities:=inequalitiesFromVertices(center,offset,signvectors,orbitpart,vertices,radiussquare);
-    if inequalities <> []
-       then
+    if inequalities <> [] then
         UniteSet(inequalities,Polymake(poly,"FACETS"));
         ClearPolymakeObject(poly,["polytope","2.3","RationalPolytope"]);
         AppendInequalitiesToPolymakeObject(poly,inequalities);
         Polymake(poly,"VERTICES FACETS");
-        if InfoLevel(InfoHAPcryst)>1
-           then
+        if InfoLevel(InfoHAPcryst)>1 then
             Print("|",Size(Polymake(poly,"VERTICES")),":",Size(Polymake(poly,"FACETS")),">\c");
         fi;
         return true;
@@ -235,36 +224,28 @@ polyChanged:=reducePolytope(partialFD,
 radmax:=radiussquareMaxentryMaxsum(partialFD,center,dim);
 sums:=Iterator([1..radmax.maxsum]);
 currentsum:=1;
-if InfoLevel(InfoHAPcryst)>1
-   then
+if InfoLevel(InfoHAPcryst)>1 then
     Print(radmax,"\n");
 fi;      
 
-while currentsum<radmax.maxsum
-  do
+while currentsum<radmax.maxsum do
     currentsum:=NextIterator(sums);
-    if InfoLevel(InfoHAPcryst)>1
-       then
+    if InfoLevel(InfoHAPcryst)>1 then
         Print("\n",currentsum,"(",Int(radmax.radiussquare),"-",radmax.maxsum,"-",radmax.maxentry,")\n");
     fi;
-    for nrNon0 in [1..Minimum(currentsum,dim)]
-      do
+    for nrNon0 in [1..Minimum(currentsum,dim)] do
         signs:=Tuples([1,-1],nrNon0);
         signvectors:=NullMat(Size(signs),dim);
         non0entries:=Iterator(RestrictedPartitions(currentsum,[1..radmax.maxentry],nrNon0));
         offsetvector:=List(center,i->0);
-        for non0part in non0entries
-          do
+        for non0part in non0entries do
             offsetvector{[1..nrNon0]}:=non0part;
             issmall:=(non0part^2<=radmax.radiussquare);
-            for offset in PermutationsList(offsetvector)
-              do
-                if issmall or needsConsideration(offset,radmax.radiussquare)
-                   then
+            for offset in PermutationsList(offsetvector) do
+                if issmall or needsConsideration(offset,radmax.radiussquare) then
                     non0indices:=Positions(List(offset,i->i<>0),true);
                     Apply(signvectors,i->List(i,j->1));
-                    for index in [1..Size(signs)]
-                      do
+                    for index in [1..Size(signs)] do
                         signvectors[index]{non0indices}:=signs[index];
                     od;
                     polyChanged:=reducePolytope(partialFD,
@@ -273,12 +254,10 @@ while currentsum<radmax.maxsum
                                          signvectors,
                                          radmax.radiussquare,
                                          orbitpartAroundCenter);
-                    if polyChanged 
-                       then
+                    if polyChanged then
                         radmax:=radiussquareMaxentryMaxsum(partialFD,center,dim);
                     fi;
-                    if radmax.maxsum<currentsum
-                       then
+                    if radmax.maxsum<currentsum then
                         return partialFD;   ## We found it!
                     fi;
                 fi;
