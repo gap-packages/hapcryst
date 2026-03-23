@@ -30,8 +30,7 @@
 InstallMethod(UndirectedBoundaryOfFreeZGLetter_LargeGroupRep,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,dim,cell)
-    if not IsFreeZGLetter_LargeGroupRep(resolution,dim,cell)
-       then
+    if not IsFreeZGLetter_LargeGroupRep(resolution,dim,cell) then
         Error("invalid letter");
     fi;
     return UndirectedBoundaryOfFreeZGLetterNC_LargeGroupRep(resolution,dim,cell);
@@ -53,11 +52,9 @@ InstallMethod(UndirectedBoundaryOfFreeZGWord,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,dim,word)
     local   boundary_large;
-    if IsFreeZGWord_LargeGroupRep(resolution,dim,word)
-       then
+    if IsFreeZGWord_LargeGroupRep(resolution,dim,word) then
         return UndirectedBoundaryOfFreeZGWordNC_LargeGroupRep(resolution,dim,word);
-    elif IsFreeZGWord(resolution,dim,word)
-      then
+    elif IsFreeZGWord(resolution,dim,word) then
         boundary_large:=UndirectedBoundaryOfFreeZGWordNC_LargeGroupRep(resolution,dim,ConvertStandardWord(resolution,dim,word));
         return ConvertWordToStandardRep(resolution,dim-1,boundary_large);
     else
@@ -68,8 +65,7 @@ end);
 InstallMethod(UndirectedBoundaryOfFreeZGWord_LargeGroupRep,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,dim,word)
-    if not IsFreeZGWord_LargeGroupRep(resolution,dim,word)
-       then
+    if not IsFreeZGWord_LargeGroupRep(resolution,dim,word) then
         Error("invalid word");
     fi;
     return UndirectedBoundaryOfFreeZGWordNC_LargeGroupRep(resolution,dim,word);
@@ -90,11 +86,9 @@ InstallMethod(SubspaceListFromWord,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,dim,word)
     local   spaces_large;
-    if IsFreeZGWord_LargeGroupRep(resolution,dim,word)
-       then
+    if IsFreeZGWord_LargeGroupRep(resolution,dim,word) then
         spaces_large:=SubspaceListFromWordNC_LargeGroupRep(resolution,dim,word);
-    elif IsFreeZGWord(resolution,dim,word)
-      then
+    elif IsFreeZGWord(resolution,dim,word) then
         spaces_large:=SubspaceListFromWordNC_LargeGroupRep(resolution,
                               dim,
                               ConvertStandardWord(resolution,dim,word)
@@ -110,8 +104,7 @@ end);
 InstallMethod(SubspaceListFromWord_LargeGroupRep,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,dim,word)
-    if IsFreeZGWord_LargeGroupRep(resolution,dim,word)
-       then
+    if IsFreeZGWord_LargeGroupRep(resolution,dim,word) then
         return SubspaceListFromWordNC_LargeGroupRep(resolution,dim,word);
     else
         Error("<word> is not a valid word in large group representation");
@@ -124,8 +117,7 @@ InstallMethod(SubspaceListFromWordNC_LargeGroupRep,
     local   subspaces,  i;
     subspaces:=List([0..dim],i->[]);
     subspaces[dim+1]:=Set(word,i->[AbsInt(i[1]),i[2]]);
-    for i in [dim-1,dim-2..0]
-      do
+    for i in [dim-1,dim-2..0] do
 #        subspaces[i+1]:=Union(List(subspaces[i+2],
 #                                j->UndirectedBoundaryOfFreeZGLetter_LargeGroupRep(resolution,i+1,j))
 #                              );
@@ -146,11 +138,9 @@ InstallMethod(IsConnectedWord,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,dim,word)
     local   converted_word;
-    if IsFreeZGWord_LargeGroupRep(resolution,dim,word)
-       then
+    if IsFreeZGWord_LargeGroupRep(resolution,dim,word) then
         return IsConnectedWordNC_LargeGroupRep(resolution,dim,word);
-    elif IsFreeZGWord(resolution,dim,word)
-      then
+    elif IsFreeZGWord(resolution,dim,word) then
         converted_word:=ConvertStandardWord(resolution,dim,word);
         return IsConnectedWordNC_LargeGroupRep(resolution,dim,converted_word);
     else
@@ -176,19 +166,16 @@ InstallMethod(IsConnectedWordNC_LargeGroupRep,
     
     repeat
         addToBlob:=Filtered(lettersAndBound,i->Intersection(i[2],blobbound)<>[]);
-        if addToBlob<>[]
-           then
+        if addToBlob<>[] then
             SubtractSet(lettersAndBound,addToBlob);
             addToBlobBound:=Union(List(addToBlob,i->i[2]));
             blobbound:=Union(blobbound,addToBlobBound);
         fi;
     until lettersAndBound=[] or addToBlob=[];
     
-    if lettersAndBound=[]
-       then
+    if lettersAndBound=[] then
         return true;
-    elif addToBlob=[]
-      then
+    elif addToBlob=[] then
         return false;
     fi;    
 end);
@@ -206,8 +193,7 @@ InstallMethod(ConnectingPath,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList,IsDenseList,IsDenseList],
         function(resolution,dim,area,cellblob,cell)
     local   cell_large,  cellblob_large,  area_large,  path_large;
-    if IsFreeZGLetter(resolution,dim,cell)
-       then
+    if IsFreeZGLetter(resolution,dim,cell) then
         cell_large:=ConvertStandardLetter(resolution,dim,cell);
         cellblob_large:=ConvertStandardWord(resolution,dim,cellblob);
         area_large:=ConvertStandardWord(resolution,dim,area);
@@ -217,14 +203,12 @@ InstallMethod(ConnectingPath,
                             cellblob_large,
                             cell_large
                             );
-        if path_large=fail
-           then
+        if path_large=fail then
             return fail;
         else
             return ConvertWordToStandardRep(resolution,dim,path_large);
         fi;
-    elif IsFreeZGLetter_LargeGroupRep(resolution,dim,cell)
-      then
+    elif IsFreeZGLetter_LargeGroupRep(resolution,dim,cell) then
         path_large:=ConnectingPath_LargeGroupRep(resolution,
                             dim,
                             area,
@@ -246,14 +230,11 @@ InstallMethod(ConnectingPath_LargeGroupRep,
     
     if not (IsFreeZGWord_LargeGroupRep(resolution,dim,area)
             and IsFreeZGWord_LargeGroupRep(resolution,dim,cellblob)
-            )
-       then
+            ) then
         Error("<area> and <cellblob> must be valid words");
-    elif  not IsFreeZGLetter_LargeGroupRep(resolution,dim,cell)
-      then
+    elif  not IsFreeZGLetter_LargeGroupRep(resolution,dim,cell) then
         Error("<cell> is not a valid letter");
-    elif not IsSubset(area,cellblob) and cell in area
-       then
+    elif not IsSubset(area,cellblob) and cell in area then
         Error("<area> does not contain <cellblob> and <cell>");
     fi;
     return ConnectingPathNC_LargeGroupRep(resolution,dim,area,cellblob,cell);
@@ -281,14 +262,12 @@ InstallMethod(ConnectingPathNC_LargeGroupRep,
         thingsThatCouldBeAdded:=Filtered(sphereAndBounds,i->Intersection(i[2],startingbitboundary)<>[]);
         
         endpoint:=First(thingsThatCouldBeAdded,i->Intersection(i[2],connectTo)<>[]);
-        if endpoint<>fail
-           then
+        if endpoint<>fail then
             return Concatenation(startingBit,[endpoint[1]]);
         else
             newSphereAndBounds:=Difference(sphereAndBounds,thingsThatCouldBeAdded);
             repeat
-                if thingsThatCouldBeAdded=[]
-                   then
+                if thingsThatCouldBeAdded=[] then
                     return [];
                 fi;
                 addface:=Remove(thingsThatCouldBeAdded);
@@ -306,8 +285,7 @@ InstallMethod(ConnectingPathNC_LargeGroupRep,
     end;
     
     
-    if cell in cellblob
-       then
+    if cell in cellblob then
         return [];
     fi;
     sphereAndBounds:=Set(area,i->[i,UndirectedBoundaryOfFreeZGLetterNC_LargeGroupRep(resolution,dim,i)]);
@@ -318,8 +296,7 @@ InstallMethod(ConnectingPathNC_LargeGroupRep,
                   [cell],
                    UndirectedBoundaryOfFreeZGLetterNC_LargeGroupRep(resolution,dim,cell)
                   );
-    if path=[]
-       then
+    if path=[] then
         return fail;
     else
         return path;
@@ -350,11 +327,9 @@ InstallMethod(IsContractibleWord,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,dim,subspace)
     local   converted_subspace;
-    if IsFreeZGWord_LargeGroupRep(resolution,dim,subspace)
-       then
+    if IsFreeZGWord_LargeGroupRep(resolution,dim,subspace) then
         return IsContractibleWordNC_LargeGroupRep(resolution,dim,subspace);
-    elif IsFreeZGWord(resolution,dim,subspace)
-       then
+    elif IsFreeZGWord(resolution,dim,subspace) then
         converted_subspace:=ConvertWordToStandardRep(resolution,dim,subspace);
         return IsContractibleWordNC(resolution,dim,converted_subspace);
     else
@@ -369,11 +344,9 @@ InstallMethod(IsContractiblePartialSpace,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,dim,spacelist)
     local   spacelist_large;
-    if ForAll(spacelist,subspace->IsFreeZGWord_LargeGroupRep(resolution,dim,subspace))
-       then
+    if ForAll(spacelist,subspace->IsFreeZGWord_LargeGroupRep(resolution,dim,subspace)) then
         return IsContractiblePartialSpaceNC_LargeGroupRep(resolution,dim,spacelist);
-    elif ForAll(spacelist,subspace->IsFreeZGWord(resolution,dim,subspace))
-      then
+    elif ForAll(spacelist,subspace->IsFreeZGWord(resolution,dim,subspace)) then
         spacelist_large:=List(spacelist,space->ConvertStandardWord(resolution,dim,space));
         return IsContractiblePartialSpaceNC_LargeGroupRep(resolution,dim,spacelist_large);
     else
@@ -408,19 +381,15 @@ InstallMethod(SphereContainingCell,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList,IsDenseList],
         function(resolution,dim,space,cell)
     local   complex;
-    if not IsFreeZGLetter_LargeGroupRep(resolution,dim,cell)
-       then
+    if not IsFreeZGLetter_LargeGroupRep(resolution,dim,cell) then
         Error("<cell> is not a valid letter");
-    elif not IsFreeZGWord_LargeGroupRep(resolution,dim,space)
-      then
+    elif not IsFreeZGWord_LargeGroupRep(resolution,dim,space) then
         Error("<space> is not a valid word");
-    elif not cell in space
-       then
+    elif not cell in space then
         Error("<cell> not in <space>");
     fi;
     complex:=ChainComplexFromWordNC_LargeGroupRep(resolution,dim,space);
-    if not Homology(complex,dim)=[0]
-       then
+    if not Homology(complex,dim)=[0] then
         Error("<space> does not contain a unique sphere");
     fi;
     return SphereContainingCellNC_LargeGroupRep(resolution,dim,space,cell);
@@ -432,19 +401,15 @@ InstallMethod(SphereContainingCell_LargeGroupRep,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList,IsDenseList],
         function(resolution,dim,space,cell)
     local   complex;
-    if not IsFreeZGLetter_LargeGroupRep(resolution,dim,cell)
-       then
+    if not IsFreeZGLetter_LargeGroupRep(resolution,dim,cell) then
         Error("<cell> is not a valid letter");
-    elif not IsFreeZGWord_LargeGroupRep(resolution,dim,space)
-      then
+    elif not IsFreeZGWord_LargeGroupRep(resolution,dim,space) then
         Error("<space> is not a valid word");
-    elif not cell in space
-       then
+    elif not cell in space then
         Error("<cell> not in <space>");
     fi;
     complex:=ChainComplexFromWordNC_LargeGroupRep(resolution,dim,space);
-    if not Homology(complex,dim)=[0]
-       then
+    if not Homology(complex,dim)=[0] then
         Error("<space> does not contain a unique sphere");
     fi;
     return SphereContainingCellNC_LargeGroupRep(resolution,dim,space,cell);
@@ -469,8 +434,7 @@ InstallMethod(SphereContainingCellNC_LargeGroupRep,
     complex:=ChainComplexFromPartialSpace(resolution,
                      subspacelist
                      );
-    while not Homology(complex,dim)=[0]
-      do
+    while not Homology(complex,dim)=[0] do
         newcells:=Filtered(space_and_bounds,c->ForAny(c[2],i->i in spherebound));
         SubtractSet(space_and_bounds,newcells);
         UniteSet(sphere,List(newcells,i->i[1]));
@@ -479,8 +443,7 @@ InstallMethod(SphereContainingCellNC_LargeGroupRep,
                                dim,
                                List(newcells,i->i[1])
                                );
-        for i in [1..Size(new_subspaces)]
-          do
+        for i in [1..Size(new_subspaces)] do
             UniteSet(subspacelist[i],new_subspaces[i]);
         od;
     od;
@@ -498,11 +461,9 @@ InstallMethod(ChainComplexFromWord,
         [IsHapLargeGroupResolutionRep,IsInt,IsDenseList],
         function(resolution,dim,subspace)
     local   converted_subspace;
-    if IsFreeZGWord_LargeGroupRep(resolution,dim,subspace)
-       then
+    if IsFreeZGWord_LargeGroupRep(resolution,dim,subspace) then
         return ChainComplexFromWordNC_LargeGroupRep(resolution,dim,subspace);
-    elif IsFreeZGWord(resolution,dim,subspace)
-      then
+    elif IsFreeZGWord(resolution,dim,subspace) then
         converted_subspace:=ConvertWordToStandardRep(resolution,dim,subspace);
         return ChainComplexFromWordNC(resolution,dim,subspace);
     else
@@ -530,8 +491,7 @@ InstallMethod(ChainComplexFromPartialSpace_LargeGroupRep,
         function(resolution,subspaces)
     if not ForAll([1..Size(subspaces)],dim->
                IsFreeZGWord_LargeGroupRep(resolution,dim-1,subspaces[dim])
-               )
-       then
+               ) then
         Error("subspace list contains invalid words");
     fi;
     return ChainComplexFromPartialSpaceNC_LargeGroupRep(resolution,subspaces);
@@ -550,11 +510,9 @@ InstallMethod(ChainComplexFromPartialSpaceNC_LargeGroupRep,
     word2vec:=function(generators,word)
         local   vec,  letter,  pos;
         vec:=List([1..Size(generators)],i->0);
-        for letter in word
-          do
+        for letter in word do
             pos:=Position(generators,undirectedLetter(letter));
-            if pos<>fail
-               then
+            if pos<>fail then
                 vec[pos]:=vec[pos]+SignInt(letter[1]);
             else
                 Error("word-vector conversion error");
@@ -565,8 +523,7 @@ InstallMethod(ChainComplexFromPartialSpaceNC_LargeGroupRep,
     
     boundary:=function(k,j)
         local   letter,  boundaryAsWord;
-        if k=Size(subspaces+1)
-           then
+        if k=Size(subspaces+1) then
             return [];
         fi;
         letter:=subspaces[k+1][j];
@@ -576,11 +533,9 @@ InstallMethod(ChainComplexFromPartialSpaceNC_LargeGroupRep,
     
     
     dimension:=function(k)
-        if k<Size(subspaces)
-           then
+        if k<Size(subspaces) then
             return Size(subspaces[k+1]);
-        elif k=Size(subspaces)
-          then
+        elif k=Size(subspaces) then
           return 0;
         else
             Error("chain complex too short");

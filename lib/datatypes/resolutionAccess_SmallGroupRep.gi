@@ -58,8 +58,7 @@ InstallMethod(PositionInGroupOfResolution, "For HapResolutions of small groups",
         [IsHapSmallGroupResolutionRep,IsObject],
         function(resolution,g)
     local   pos;
-    if not g in GroupOfResolution(resolution)
-       then
+    if not g in GroupOfResolution(resolution) then
         Error("<g> is not in <resolution>'s group");
     fi;
     return PositionInGroupOfResolutionNC(resolution,g);

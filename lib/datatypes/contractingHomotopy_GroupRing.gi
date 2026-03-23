@@ -31,8 +31,7 @@ InstallMethod(MaximalSubspaceOfHomotopy_LargeGroupRep,
         function(homotopy,term)
     local   resolution;
     resolution:=ResolutionOfContractingHomotopy(homotopy);
-    if not IsHapLargeGroupResolutionRep(resolution)
-       then
+    if not IsHapLargeGroupResolutionRep(resolution) then
         Error("not implemented yet. Resolution not in large group rep");
     fi;
     return homotopy!.knownPartOfHomotopy[term+1].space;
@@ -52,15 +51,13 @@ InstallMethod (ImageOfContractingHomotopy_LargeGroupRep,
             upcell,  sign,  bound,  boundi,  pos,  otherimages,  j;
     
     resolution:=ResolutionOfContractingHomotopy(homotopy);
-    if not IsFreeZGWord_LargeGroupRep(resolution,term,word)
-       then
+    if not IsFreeZGWord_LargeGroupRep(resolution,term,word) then
         Error("invalid <word>");
     fi;
     
     wordCoeffs:=List([1..Size(word)],i->[]);
     grpWordUndir:=List([1..Size(word)],i->[]);
-    for i in [1..Size(word)]
-      do
+    for i in [1..Size(word)] do
         coeffsgrpels:=CoefficientsAndMagmaElementsAsLists(word[i]);
         wordCoeffs[i]:=coeffsgrpels[1];
         grpWordUndir[i]:=coeffsgrpels[2];
@@ -73,25 +70,20 @@ InstallMethod (ImageOfContractingHomotopy_LargeGroupRep,
     family:=FamilyObj(zero);
     embedding:=Embedding(GroupOfResolution(resolution),GroupRingOfResolution(resolution));
     returnword:=upzerovec;
-    for i in [1..Size(word)]
-      do
-        for g in [1..Size(grpWordUndir[i])]
-          do
+    for i in [1..Size(word)] do
+        for g in [1..Size(grpWordUndir[i])] do
             image:=PartialContractingHomotopyLookup(homotopy,term,i,grpWordUndir[i][g]);
-            if image=fail
-               then
+            if image=fail then
                 letter:=ShallowCopy(zerovec);
                 letter[i]:=Image(embedding,grpWordUndir[i][g]);
                 if not IsUndirectedSubWord_LargeGroupRep(resolution,
                            MaximalSubspaceOfHomotopy_LargeGroupRep(homotopy,term),
                            letter
-                           )
-                   then
+                           ) then
                     Error("not implemented yet");
                 fi;
             else
-                if image[2]<>[]
-                   then
+                if image[2]<>[] then
                     sign:=SignInt(image[2][1]);
                     firstimage:=sign*Image(embedding,image[2][2]);
                     upcell:=ShallowCopy(upzerovec);

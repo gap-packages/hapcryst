@@ -30,8 +30,7 @@ InstallMethod(BisectorInequalityFromPointPair,
         [IsVector,IsVector,IsMatrix],
         function(center,point,gram)
     local   centergram,  pointgram,  inequality;
-    if center=point 
-       then 
+    if center=point then
         return fail;
     fi;              
     centergram:=center*gram; 
@@ -47,8 +46,7 @@ InstallMethod(BisectorInequalityFromPointPair,
         function(center,point)
     local   centergram,  centernorm,  pointgram,  inequality;
     
-    if center=point 
-       then 
+    if center=point then
         return fail;
     fi;              
     inequality:=Concatenation([-center^2+point^2],2*(center-point));
@@ -63,12 +61,10 @@ InstallMethod(WhichSideOfHyperplane,
         function(vector,inequality)
     local   size,  eval;
     size:=Size(inequality);
-    if not Size(vector)+1=size
-       then
+    if not Size(vector)+1=size then
         Error("<vector> and <inequality> must be given by a vector.");
     fi;
-    if not ForAll(Union(vector,inequality),IsRat)
-       then
+    if not ForAll(Union(vector,inequality),IsRat) then
         Error("This does only work for rational vector spaces");
     fi;
     return WhichSideOfHyperplaneNC(vector,inequality);
@@ -80,11 +76,9 @@ InstallMethod(WhichSideOfHyperplaneNC,
         function(vector,inequality)
     local   eval;
     eval:=vector*inequality{[2..Size(inequality)]}+inequality[1];
-    if eval>0
-       then
+    if eval>0 then
         return 1;
-    elif eval<0
-      then
+    elif eval<0 then
         return -1;
     else
         return 0;
@@ -101,27 +95,22 @@ InstallMethod(RelativePositionPointAndPolygon,
         function(point,poly)
     local   facetpositions,  facet,  side;
     
-    if point in Polymake(poly,"VERTICES")
-       then
+    if point in Polymake(poly,"VERTICES") then
         return "VERTEX";
     fi;
-    if Polymake(poly,"DIM")=0
-       then
+    if Polymake(poly,"DIM")=0 then
         return "OUTSIDE";
     fi;
     facetpositions:=[];
-    for facet in Polymake(poly,"FACETS")
-      do
+    for facet in Polymake(poly,"FACETS") do
         side:=WhichSideOfHyperplane(point,facet);
-        if side=-1
-           then 
+        if side=-1 then
             return "OUTSIDE";
         else
             AddSet(facetpositions,side);
         fi;
     od;
-    if facetpositions=[1]
-       then
+    if facetpositions=[1] then
         return "INSIDE";
     else        
         return "FACET";

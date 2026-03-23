@@ -25,20 +25,17 @@
 InequalitiesTimesMatrix:=function(ineqs,mat)
     local   dim,  inverse,  translationPart,  returnlist,  ineq,  
             returnineq,  newv;
-    if not IsAffineMatrixOnRight(mat)
-       then
+    if not IsAffineMatrixOnRight(mat) then
         Error("only implemented for matrices on right");
     fi;
     dim:=Size(mat);
     inverse:=Inverse(LinearPartOfAffineMatOnRight(mat));
     translationPart:=mat[dim]{[1..dim-1]};
-    if inverse=fail
-       then
+    if inverse=fail then
         Error("matrix not invertible");
     fi;
     returnlist:=[];
-    for ineq in ineqs 
-      do
+    for ineq in ineqs do
         returnineq:=List(ineq);
         newv:=inverse*ineq{[2..dim]};
         returnineq[1]:=ineq[1]-translationPart*newv;
@@ -52,18 +49,15 @@ end;
 
 TranslatedInequalities:=function(ineqs,trans)
     local   dim,  returnineqs,  ineq;
-    if not IsVector(trans)
-       then
+    if not IsVector(trans) then
         Error("translation must be given as a vector");
     fi;
     dim:=Size(trans);
-    if not Set(ineqs,Size)=[dim+1]
-       then
+    if not Set(ineqs,Size)=[dim+1] then
         Error("inequalities of wrong size");
     fi;
     returnineqs:=List(ineqs);
-    for ineq in [1..Size(ineqs)]
-      do
+    for ineq in [1..Size(ineqs)] do
         returnineqs[ineq][1]:=returnineqs[ineq][1]-trans*ineqs[ineq]{[2..Size(trans)+1]};
     od;
     return returnineqs;
@@ -81,13 +75,11 @@ end;
 
 VectorsTimesAffineMat:=function(vecs,mat)
     local   dim;
-    if not IsAffineMatrixOnRight(mat)
-       then
+    if not IsAffineMatrixOnRight(mat) then
         Error("<mat> is not an affine matrix on right");
     fi;
     dim:=Size(mat);
-    if not Set(vecs,Size)=[dim-1]
-       then
+    if not Set(vecs,Size)=[dim-1] then
         Error("vectors of wrong form");
     fi;
     return List(vecs,v->VectorTimesAffineMatNC(v,mat));
@@ -98,18 +90,15 @@ end;
 RelativePositionPointAndInequalities:=function(point,ineqs)
     local   facetpositions,  facet,  side;
     facetpositions:=[];
-    for facet in ineqs
-      do
+    for facet in ineqs do
         side:=WhichSideOfHyperplane(point,facet);
-        if side=-1
-           then 
+        if side=-1 then
             return "OUTSIDE";
         else
             AddSet(facetpositions,side);
         fi;
     od;
-    if facetpositions=[1]
-       then
+    if facetpositions=[1] then
         return "INSIDE";
     else
         return "FACET";
@@ -141,29 +130,23 @@ coveringOfUnitBox:=function(fudom,boxcenter,group)
     
     # find all images of the box that intersect with the original one.
     # This is done by looking at the corners of the box
-    for g in pgReps
-      do
+    for g in pgReps do
         image:=Set(vertices,v->VectorTimesAffineMatNC(v,g));
         translations:=Union(List(image,v->TranslationsToOneCubeAroundCenter(v,boxcenter)));
-        for h in List(translations,t->g*TranslationOnRightFromVector(t))
-          do
+        for h in List(translations,t->g*TranslationOnRightFromVector(t)) do
             Add(cover,h);
             if (not corner_covered) and RelativePositionPointAndInequalities(smallestCorner,
-                       InequalitiesTimesMatrix(inequalities,h))<>"OUTSIDE"
-               then
+                       InequalitiesTimesMatrix(inequalities,h))<>"OUTSIDE" then
                 corner_covered:=true;
                 cornerbox:=h;
             fi;
         od;
-        if not corner_covered
-           then
+        if not corner_covered then
             cornerTranslations:=Union(List(image,v->TranslationsToOneCubeAroundCenter(v,smallestCorner)));
             imageinequalities:=InequalitiesTimesMatrix(inequalities,g);
-            while cornerTranslations<>[] and not corner_covered
-              do
+            while cornerTranslations<>[] and not corner_covered do
                 trans:=Remove(cornerTranslations);
-                if not corner_covered and RelativePositionPointAndInequalities(smallestCorner,TranslatedInequalities(imageinequalities,trans))<>"OUTSIDE"
-                   then
+                if not corner_covered and RelativePositionPointAndInequalities(smallestCorner,TranslatedInequalities(imageinequalities,trans))<>"OUTSIDE" then
                     corner_covered:=true;
                     cornerbox:=g*TranslationOnRightFromVector(trans);
                     Add(cover,cornerbox);
@@ -186,8 +169,7 @@ discFunction:=function(fudom,resolution,contractionCell_groupel)
             cwSpaceBox,  data,  disc;
     
     group:=GroupOfResolution(resolution);
-    if not IsFundamentalDomainStandardSpaceGroup(fudom,group)
-       then
+    if not IsFundamentalDomainStandardSpaceGroup(fudom,group) then
         Error("this is not a fundmental domain for this resolution");
     fi;
     Print(".\c");
@@ -211,8 +193,7 @@ discFunction:=function(fudom,resolution,contractionCell_groupel)
                 boxcover_thisterm,  c,  t,  transvector,  
                 all_translations,  i,  sign,  returnword;
         
-        if not IsFreeZGLetter_LargeGroupRep(resolution,term,letter)
-           then
+        if not IsFreeZGLetter_LargeGroupRep(resolution,term,letter) then
             Error("letter is not a valid ZG letter");
         fi;
         zero:=Zero(GroupRingOfResolution(resolution));
@@ -221,13 +202,11 @@ discFunction:=function(fudom,resolution,contractionCell_groupel)
         dim:=Size(g)-1;
         identity:=IdentityMat(dim);
         boxcover_thisterm:=Union(List(CoefficientsAndMagmaElementsAsLists(data.cwSpaceBox[term+1][gen])[2],g->List(data.cover,c->g*c)));
-        for c in boxcover_thisterm
-          do
+        for c in boxcover_thisterm do
             t:=ginv*c;
             #multiplying from the left is right here,
             # we calculate the inverse translation.
-            if t{[1..dim]}{[1..dim]}=identity
-               then
+            if t{[1..dim]}{[1..dim]}=identity then
                 transvector:=-t[dim+1]{[1..dim]};
                 break;
             fi;
@@ -237,16 +216,13 @@ discFunction:=function(fudom,resolution,contractionCell_groupel)
         # the covered box space.
         # This translation may not be unique. But we don't care.
         #
-        if not ForAll(transvector,IsInt)
-           then
+        if not ForAll(transvector,IsInt) then
             Error("translation vector not integer");
         fi;
         all_translations:=[];
-        for i in [1..dim]
-          do
+        for i in [1..dim] do
             sign:=SignInt(transvector[i]);
-            while transvector[i]<>0
-              do
+            while transvector[i]<>0 do
                 Add(all_translations,ShallowCopy(transvector));
                 transvector[i]:=transvector[i]-sign;
             od;

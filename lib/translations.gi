@@ -31,38 +31,31 @@ InstallMethod(TranslationsToBox,[IsVector,IsDenseList],
     local   nextint,prevint,  difference,  entry,  isinbox,  coord;
     
     nextint:=function(x)
-        if IsInt(x) 
-           then 
+        if IsInt(x) then
             return x;
-        elif x<0
-          then
+        elif x<0 then
             return Int(x);
         else 
             return Int(x)+1;
         fi;
     end;
     prevint:=function(x)
-        if IsInt(x) 
-           then 
+        if IsInt(x) then
             return x;
-        elif x<0
-          then
+        elif x<0 then
             return Int(x)-1;
         else 
             return Int(x);
         fi;
     end;
     
-    if not ForAll(box, IsVector) and ForAll(box,i->Size(i)=2)
-       then
+    if not ForAll(box, IsVector) and ForAll(box,i->Size(i)=2) then
         Error("Box must be given as a list of pairs");
-    elif not ForAll(box,i->i[2]>i[1])
-      then
+    elif not ForAll(box,i->i[2]>i[1]) then
         Error("Box must not be empty");
     fi;
     difference:=[];
-    for entry in [1..Size(point)]
-      do
+    for entry in [1..Size(point)] do
         coord:=point[entry];
         difference[entry]:=[nextint(box[entry][1]-coord)..prevint(box[entry][2]-coord)];
     od;
@@ -83,14 +76,11 @@ InstallMethod(ShiftedOrbitPart,
         local   returnpoint,  i,  difference;
 
         returnpoint:=ShallowCopy(x);
-        for i in[1..Size(x)]
-          do
+        for i in[1..Size(x)] do
             returnpoint[i]:=x[i]-Int(x[i]);
-            if AbsoluteValue(returnpoint[i])>1/2
-               then
+            if AbsoluteValue(returnpoint[i])>1/2 then
                 returnpoint[i]:=returnpoint[i]+SignRat(returnpoint[i]);
-            elif returnpoint[i]=-1/2 
-              then
+            elif returnpoint[i]=-1/2 then
                 returnpoint[i]:=1/2;
             fi;
         od;
@@ -115,14 +105,11 @@ InstallMethod(TranslationsToOneCubeAroundCenter,[IsVector,IsVector],
     returnlist:=[];
     trans:=List(center-point,Int);
     difference:=center-(trans+point);
-    for entry in [1..Size(difference)]
-      do
+    for entry in [1..Size(difference)] do
         abs:=AbsoluteValue(difference[entry]);
-        if abs=1/2
-           then
+        if abs=1/2 then
             difference[entry]:=[0,SignRat(difference[entry])];
-        elif abs>1/2
-          then
+        elif abs>1/2 then
             difference[entry]:=[SignRat(difference[entry])];
         else
             difference[entry]:=[0];

@@ -26,14 +26,11 @@
 # did work in all of the cases I tried.
 InstallMethod(SignRat, "for rationals",[IsRat],
         function(rat)
-    if rat>0
-       then
+    if rat>0 then
         return 1;
-    elif rat<0
-      then
+    elif rat<0 then
         return -1;
-    elif rat=0
-      then
+    elif rat=0 then
         return 0;
     else
         Error("cannot calculate sign of rational");
@@ -72,8 +69,7 @@ InstallMethod(LinearPartOfAffineMatOnRight,"for affine matrices on right",
         [IsMatrix],
         function(mat)
     local dim;
-    if not IsAffineMatrixOnRight(mat)
-       then
+    if not IsAffineMatrixOnRight(mat) then
         Error("matrix must be an affine matrix acting from the right");
     fi;
     dim:=DimensionSquareMat(mat);
@@ -92,8 +88,7 @@ InstallMethod(BasisChangeAffineMatOnRight,"for affine matrices on right",
         function(transform,mat)
     local   dim,  linpart,  transpart,  transformed;
     dim:=DimensionSquareMat(mat);
-    if not dim>1 and IsAffineMatrixOnRight(mat)
-       then
+    if not dim>1 and IsAffineMatrixOnRight(mat) then
         Error("This matrix is not affine acting on right");
     fi;
     linpart:=LinearPartOfAffineMatOnRight(mat);

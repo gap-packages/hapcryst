@@ -44,12 +44,10 @@ InstallMethod(PointGroupRepresentatives,"for crystallographic groups on right",
     walkthetreeright:=function(element,gens)
         local   g,  endofbranch,  newel,  newellin,  differences,
                 newtrans;
-        for g in gens
-          do
+        for g in gens do
             newel:=element*g;
             newellin:=linearPart(newel);
-            if not (newellin in pointgroupels)
-               then
+            if not (newellin in pointgroupels) then
                 AddSet(affinepointgroupels,newel);
                 AddSet(pointgroupels,newellin);
                 walkthetreeright(newel,gens);
@@ -60,12 +58,10 @@ InstallMethod(PointGroupRepresentatives,"for crystallographic groups on right",
     walkthetreeleft:=function(element,gens)
         local   g,  endofbranch,  newel,  newellin,  differences,
                 newtrans;
-        for g in gens
-          do
+        for g in gens do
             newel:=g*element;
             newellin:=linearPart(newel);
-            if not (newellin in pointgroupels)
-               then
+            if not (newellin in pointgroupels) then
                 AddSet(affinepointgroupels,newel);
                 AddSet(pointgroupels,newellin);
                 walkthetreeleft(newel,gens);
@@ -87,17 +83,14 @@ InstallMethod(PointGroupRepresentatives,"for crystallographic groups on right",
     #
     affinepointgroupels:=[IdentityMat(dim)];
     pointgroupels:=[IdentityMat(dim-1)];
-    if IsAffineCrystGroupOnRight(group)
-       then
+    if IsAffineCrystGroupOnRight(group) then
         walkthetreeright(generators[1]^0,generators);
-        if not Size(PointGroup(AffineCrystGroupOnRight(generators)))=Size(affinepointgroupels)
-           then
+        if not Size(PointGroup(AffineCrystGroupOnRight(generators)))=Size(affinepointgroupels) then
             Error("generation of point group failed!");
         fi;
     else
         walkthetreeleft(generators[1]^0,generators);
-        if not Size(PointGroup(AffineCrystGroupOnLeft(generators)))=Size(affinepointgroupels)
-           then
+        if not Size(PointGroup(AffineCrystGroupOnLeft(generators)))=Size(affinepointgroupels) then
             Error("generation of point group failed!");
         fi;
     fi;
@@ -124,31 +117,25 @@ InstallMethod(OrbitStabilizerInUnitCubeOnRight,"for space groups on right",
     local   orbitpart,  stabilizer,  xaff,  pointgroupreps,  g,  
             imageaff,  image,  translation;
 
-    if not IsAffineCrystGroupOnRight(group) and IsStandardSpaceGroup(group)
-       then
+    if not IsAffineCrystGroupOnRight(group) and IsStandardSpaceGroup(group) then
         Error("Group must be an AffineCrystGroupOnRight in standard form");
     fi;
     orbitpart:=[];
     stabilizer:=[];
-    if not VectorModOne(x)=x
-       then
+    if not VectorModOne(x)=x then
         Error("please choose a vector from [0,1)^n");
     fi;
     xaff:=Concatenation(x,[1]);
     Add(orbitpart,x);
     pointgroupreps:=PointGroupRepresentatives(group);
-    for g in pointgroupreps
-      do
+    for g in pointgroupreps do
         imageaff:=xaff*g;
         image:=VectorModOne(imageaff){[1..Size(imageaff)-1]};
-        if not image in orbitpart
-           then
+        if not image in orbitpart then
             AddSet(orbitpart,image);
-        elif imageaff=xaff
-          then
+        elif imageaff=xaff then
             Add(stabilizer,g);
-        elif image=x
-          then
+        elif image=x then
             translation:=IdentityMat(Size(xaff));
             translation[Size(translation)]:=-imageaff+xaff;
             translation[Size(translation)][Size(translation)]:=1;
@@ -172,26 +159,22 @@ InstallMethod(OrbitStabilizerInUnitCubeOnRightOnSets,
             pointgroupreps,  g,  imageaff,  point,  transvector,  
             image;
     
-    if not IsStandardSpaceGroup(group) and IsAffineCrystGroupOnRight(group)
-       then
+    if not IsStandardSpaceGroup(group) and IsAffineCrystGroupOnRight(group) then
         Error("group must be a StandardSpaceGroup acting on right");
     fi;
     dim:=DimensionOfMatrixGroup(group);
-    if not Set(set,VectorModOne)=set or not Set(set,Size)=[dim-1]
-       then
+    if not Set(set,VectorModOne)=set or not Set(set,Size)=[dim-1] then
         Error("please choose a set of vectors from [0,1)^n");
     fi;
     
-    if not IsSet(set) and ForAll(set,IsVector)
-       then
+    if not IsSet(set) and ForAll(set,IsVector) then
         Error("set must be a Set of Vectors");
     fi;
     
     stepsFromZeroOne:=function(q)
         local   r;
         r:=Int(q);
-        if q<0
-           then
+        if q<0 then
             return r-1;
         else
             return r;
@@ -204,23 +187,18 @@ InstallMethod(OrbitStabilizerInUnitCubeOnRightOnSets,
     setaff:=Set(set,x->Concatenation(x,[1]));
     Add(orbitpart,set);
     pointgroupreps:=PointGroupRepresentatives(group);
-    for g in pointgroupreps
-      do
+    for g in pointgroupreps do
         imageaff:=Set(setaff,s->s*g);
-        if imageaff=setaff
-           then
+        if imageaff=setaff then
             Add(stabilizer,g);
         fi;
-        for point in imageaff
-          do
+        for point in imageaff do
             transvector:=List(point{[1..Size(point)-1]},
                               i->stepsFromZeroOne(i));
             image:=Set(imageaff,i->i{[1..Size(point)-1]}-transvector);
-            if not image in orbitpart
-               then
+            if not image in orbitpart then
                 AddSet(orbitpart,image);
-            elif image=set
-              then
+            elif image=set then
                 Add(stabilizer,g*TranslationOnRightFromVector(-transvector));
             fi;
         od;
@@ -250,15 +228,13 @@ InstallMethod(OrbitPartInVertexSetsStandardSpaceGroup,
             newimage,  g,  image,  point,  trans,  index,  
             stillinvertices;
     
-    if not IsStandardSpaceGroup(group) or not IsAffineCrystGroupOnRight(group)
-       then
+    if not IsStandardSpaceGroup(group) or not IsAffineCrystGroupOnRight(group) then
         TryNextMethod();
     fi;
     if not (IsSet(vertexset) 
             and IsMatrix(vertexset)
             and IsSet(allvertices)
-            and IsSubset(allvertices,vertexset))
-       then
+            and IsSubset(allvertices,vertexset)) then
         Error("<vertexset> must be a subset of <allvertices> which must be a set of vectors");
     fi;
     dim:=Size(allvertices[1]);
@@ -269,28 +245,22 @@ InstallMethod(OrbitPartInVertexSetsStandardSpaceGroup,
     setaff:=Set(vertexset,x->Concatenation(x,[1]));
     newimagesize:=Size(setaff);
     newimage:=[1..newimagesize];
-    for g in pointGroupReps
-      do
+    for g in pointGroupReps do
 #        imageaff:=Set(setaff,s->s*g);
         image:=Set(setaff*g,i->i{[1..dim]});
         point:=image[1];#{[1..dim]};
-        for trans in allvertices-point
-          do
-            if ForAll(trans,IsInt)
-               then
+        for trans in allvertices-point do
+            if ForAll(trans,IsInt) then
                 index:=1;
                 stillinvertices:=true;
-                while index<=newimagesize and stillinvertices
-                  do
+                while index<=newimagesize and stillinvertices do
                     newimage[index]:=image[index]+trans;
-                    if not newimage[index] in allvertices
-                       then
+                    if not newimage[index] in allvertices then
                         stillinvertices:=false;
                     fi;
                     index:=index+1;
                 od;
-                if stillinvertices
-                   then
+                if stillinvertices then
                     Add(orbit,Set(newimage));
                 fi;
             fi;
@@ -325,16 +295,14 @@ InstallMethod(OrbitPartInFacesStandardSpaceGroup,
             point,  targetbatch,  trans,  index,  thereisaface,  
             candidatefaces,  newimage,  newentry;
     
-    if not IsStandardSpaceGroup(group) or not IsAffineCrystGroupOnRight(group)
-       then
+    if not IsStandardSpaceGroup(group) or not IsAffineCrystGroupOnRight(group) then
         TryNextMethod();
     fi;
     if not (IsSet(vertexset) 
             and IsSet(faceset)
             and ForAll(faceset,IsSet)
             and vertexset in faceset
-            and IsMatrix(vertexset))
-       then
+            and IsMatrix(vertexset)) then
         Error("<vertexset> must be an element of <faceset> which must be a set of sets of vectors");
     fi;
     
@@ -345,15 +313,11 @@ InstallMethod(OrbitPartInFacesStandardSpaceGroup,
     currentfirst:=[];
     facesbyfirstvertex:=[];
     currentfirstposition:=0;    
-    for face in faceset
-      do
-        for i in [1..Size(face)]
-          do
+    for face in faceset do
+        for i in [1..Size(face)] do
             Add(allvertices[i],face[i]);
-            if i=1
-               then
-                if currentfirst=face[1]
-                   then
+            if i=1 then
+                if currentfirst=face[1] then
                     Add(facesbyfirstvertex[currentfirstposition],face);
                 else
                     currentfirst:=face[1];
@@ -374,39 +338,32 @@ InstallMethod(OrbitPartInFacesStandardSpaceGroup,
     setaff:=List(vertexset,x->Concatenation(x,[1]));
     newimagesize:=Size(setaff);
 
-    for g in pointGroupReps
-      do
+    for g in pointGroupReps do
         image:=Set(setaff*g,i->i{[1..dim]});
         point:=image[1];
         
             #<point>+trans has to be the smallest vector in the image set:
-        for targetbatch in facesbyfirstvertex
-          do
+        for targetbatch in facesbyfirstvertex do
             trans:=targetbatch[1][1]-point;
-            if ForAll(trans,IsInt)
-               then
+            if ForAll(trans,IsInt) then
                 index:=1;
                 thereisaface:=true;
                 candidatefaces:=targetbatch;
                 newimage:=[targetbatch[1][1]];
-                while index<=newimagesize and thereisaface
-                  do
+                while index<=newimagesize and thereisaface do
                     newentry:=image[index]+trans;
                     newimage[index]:=newentry;
-                    if not newentry in allvertices[index]
-                       then
+                    if not newentry in allvertices[index] then
                         thereisaface:=false;
                     else
                         candidatefaces:=Filtered(candidatefaces,c->c[index]=newentry);
                         index:=index+1;
                     fi;
-                    if candidatefaces=[]
-                       then
+                    if candidatefaces=[] then
                         thereisaface:=false;
                     fi;
                 od;
-                if thereisaface 
-                   then
+                if thereisaface then
                     Add(orbit,newimage);
                     
                 fi;
@@ -447,16 +404,14 @@ InstallMethod(OrbitPartAndRepresentativesInFacesStandardSpaceGroup,
             point,  targetbatch,  trans,  index,  thereisaface,  
             candidatefaces,  newimage,  newentry,  representative;
     
-    if not IsStandardSpaceGroup(group) or not IsAffineCrystGroupOnRight(group)
-       then
+    if not IsStandardSpaceGroup(group) or not IsAffineCrystGroupOnRight(group) then
         TryNextMethod();
     fi;
     if not (IsSet(vertexset) 
             and IsSet(faceset)
             and ForAll(faceset,IsSet)
             and vertexset in faceset
-            and IsMatrix(vertexset))
-       then
+            and IsMatrix(vertexset)) then
         Error("<vertexset> must be an element of <faceset> which must be a set of sets of vectors");
     fi;
     
@@ -467,15 +422,11 @@ InstallMethod(OrbitPartAndRepresentativesInFacesStandardSpaceGroup,
     currentfirst:=[];
     facesbyfirstvertex:=[];
     currentfirstposition:=0;    
-    for face in faceset
-      do
-        for i in [1..Size(face)]
-          do
+    for face in faceset do
+        for i in [1..Size(face)] do
             Add(allvertices[i],face[i]);
-            if i=1
-               then
-                if currentfirst=face[1]
-                   then
+            if i=1 then
+                if currentfirst=face[1] then
                     Add(facesbyfirstvertex[currentfirstposition],face);
                 else
                     currentfirst:=face[1];
@@ -498,41 +449,33 @@ InstallMethod(OrbitPartAndRepresentativesInFacesStandardSpaceGroup,
     
     newimagesize:=Size(setaff);
     
-    for g in pointGroupReps
-      do
+    for g in pointGroupReps do
         image:=Set(setaff*g,i->i{[1..dim]});
         point:=image[1];
         
             #<point>+trans has to be the smallest vector in the image set:
-        for targetbatch in facesbyfirstvertex
-          do
+        for targetbatch in facesbyfirstvertex do
             trans:=targetbatch[1][1]-point;
-            if ForAll(trans,IsInt)
-               then
+            if ForAll(trans,IsInt) then
                 index:=2;
                 thereisaface:=true;
                 candidatefaces:=targetbatch;
                 newimage:=[targetbatch[1][1]];
-                while index<=newimagesize and thereisaface
-                  do
+                while index<=newimagesize and thereisaface do
                     newentry:=image[index]+trans;
                     newimage[index]:=newentry;
-                    if not newentry in allvertices[index]
-                       then
+                    if not newentry in allvertices[index] then
                         thereisaface:=false;
                     else
                         candidatefaces:=Filtered(candidatefaces,c->c[index]=newentry);
                         index:=index+1;
                     fi;
-                    if candidatefaces=[]
-                       then
+                    if candidatefaces=[] then
                         thereisaface:=false;
                     fi;
                 od;
-                if thereisaface 
-                   then
-                    if not newimage in orbit
-                       then
+                if thereisaface then
+                    if not newimage in orbit then
                         representative:=ShallowCopy(g);
                         representative[dim+1]:=representative[dim+1]+trans;
                         Add(orbit,newimage);
@@ -561,33 +504,27 @@ InstallMethod(StabilizerOnSetsStandardSpaceGroup,
     local   pointGroupReps,  dim,  stabgens,  setaff,  representative,  
             alpha,  image,  trans,  addel;
     
-    if not (IsStandardSpaceGroup(group) and IsAffineCrystGroupOnRight(group))
-       then
+    if not (IsStandardSpaceGroup(group) and IsAffineCrystGroupOnRight(group)) then
         TryNextMethod();
     fi;
     pointGroupReps:=PointGroupRepresentatives(group);
     
-    if not IsSet(set) and IsMatrix(set)
-      then
+    if not IsSet(set) and IsMatrix(set) then
         Error("<set> must be a set of vectors");
     fi;
     dim:=Size(set[1]);
-    if not dim=DimensionOfMatrixGroup(group)-1
-       then
+    if not dim=DimensionOfMatrixGroup(group)-1 then
         Error("group and vectors don't fit");
     fi;
     
     stabgens:=[];
     setaff:=List(set,x->Concatenation(x,[1]));
     representative:=setaff[1];
-    for alpha in pointGroupReps
-      do
+    for alpha in pointGroupReps do
         image:=Set(setaff,i->i*alpha);
         trans:=image[1]-representative;
-        if ForAll(trans,IsInt)
-           then
-            if image=setaff+trans
-               then
+        if ForAll(trans,IsInt) then
+            if image=setaff+trans then
                 addel:=MutableCopyMat(alpha);
                 addel[dim+1]:=addel[dim+1]-trans;
                 Add(stabgens,addel);
@@ -608,21 +545,18 @@ InstallMethod(RepresentativeActionOnRightOnSets,"for crystallographic groups on 
     local   dim,  pointgroupreps,  setaff,  imagesetaff,  imagepoint,  
             g,  setaffimage,  point,  difference,  candidate;
     
-    if not IsStandardSpaceGroup(group) and IsAffineCrystGroupOnRight(group)
-       then
+    if not IsStandardSpaceGroup(group) and IsAffineCrystGroupOnRight(group) then
         Error("group must be a StandardSpaceGroup acting on right");
     fi;
     dim:=DimensionOfMatrixGroup(group)-1;
-    if not ForAll([set,imageset],IsSet) or set=[] or imageset=[] or Size(set)<>Size(imageset)
-       then
+    if not ForAll([set,imageset],IsSet) or set=[] or imageset=[] or Size(set)<>Size(imageset) then
         Error("set and imageset must be propper non empty sets of the same size");
     fi;
     if not Set(set,Size)=[dim] 
        or not Size(set)=Size(imageset)
        or not Set(imageset,Size)=[dim]
        or not ForAll(set,IsVector)
-       or not ForAll(imageset,IsVector)
-       then
+       or not ForAll(imageset,IsVector) then
         Error("<set> and <imageset> must be sets of vectors of the right length");
     fi;
     
@@ -632,14 +566,11 @@ InstallMethod(RepresentativeActionOnRightOnSets,"for crystallographic groups on 
     imagesetaff:=List(imageset,x->Concatenation(x,[1])); 
     imagepoint:=imagesetaff[1];
 
-    for g in pointgroupreps
-      do
+    for g in pointgroupreps do
         setaffimage:=List(setaff,s->s*g);
         difference:=imagepoint-Minimum(setaffimage);
-        if ForAll(difference,IsInt)
-           then
-            if ForAll(setaffimage,i->i+difference in imagesetaff)
-               then
+        if ForAll(difference,IsInt) then
+            if ForAll(setaffimage,i->i+difference in imagesetaff) then
                 candidate:=ShallowCopy(g);
                 candidate[dim+1]:=candidate[dim+1]+difference;
                 return candidate;
@@ -669,14 +600,12 @@ InstallMethod(GramianOfAverageScalarProductFromFiniteMatrixGroup,
         function(group)
     local   dim,  basis,  summands,  g,  gramian,  i,  j,  denom;
     
-    if not IsFinite(group)
-       then
+    if not IsFinite(group) then
         Error("this only works for finite groups");
     fi;
     dim:=Size(Representative(group));
     basis:=IdentityMat(dim);
-    if ForAll(GeneratorsOfGroup(group),g->TransposedMat(g)=Inverse(g))
-       then
+    if ForAll(GeneratorsOfGroup(group),g->TransposedMat(g)=Inverse(g)) then
         gramian:=basis;
     else
         summands:=Set(group,i->i*TransposedMat(i));

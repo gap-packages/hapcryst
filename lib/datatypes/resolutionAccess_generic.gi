@@ -74,8 +74,7 @@ InstallMethod(PositionInGroupOfResolutionNC, "For HapResolutions",
         function(resolution,g)
     local   pos;
     pos:=Position(resolution!.elts,g);
-    if pos=fail
-       then
+    if pos=fail then
         Add(resolution!.elts,g);
         pos:=Size(resolution!.elts);
     fi;
@@ -97,8 +96,7 @@ InstallMethod(PositionInGroupOfResolution, "For HapResolutions",
         [IsHapResolution,IsObject],
         function(resolution,g)
     local   pos;
-    if not g in GroupOfResolution(resolution)
-       then
+    if not g in GroupOfResolution(resolution) then
         return fail;
     fi;
     return PositionInGroupOfResolutionNC(resolution,g);
@@ -159,8 +157,7 @@ InstallMethod(MultiplyGroupElts,"for HapResolutions",
         function(resolution,x,y)    
     if not (IsValidGroupInt(resolution,x)
             and IsValidGroupInt(resolution,y)
-            )
-       then
+            ) then
         Error("<x> and <y> must represent elements of <resolution>'s group");
     else
        return MultiplyGroupEltsNC(resolution,x,y); 
@@ -198,8 +195,7 @@ end);
 InstallMethod(StrongestValidRepresentationForLetter,
         [IsHapResolutionRep,IsInt,IsDenseList],
         function(resolution,term, letter)
-    if IsFreeZGLetter(resolution,term,letter)
-       then
+    if IsFreeZGLetter(resolution,term,letter) then
         return IsHapResolutionRep;
     else
         TryNextMethod();
@@ -217,8 +213,7 @@ end);
 InstallMethod(StrongestValidRepresentationForWord,
         [IsHapResolutionRep,IsInt,IsDenseList],
         function(resolution,term, word)
-    if IsFreeZGWord(resolution,term,word)
-       then
+    if IsFreeZGWord(resolution,term,word) then
         return IsHapResolutionRep;
     else
         TryNextMethod();
@@ -241,8 +236,7 @@ InstallMethod(IsFreeZGLetter,"For HapResolutions",
             and ForAll(letter,IsInt)
             and AbsInt(letter[1])<=Dimension(resolution)(term)
             and IsValidGroupInt(resolution,letter[2])
-            )
-       then
+            ) then
         return false;
     else
         return true;
@@ -260,8 +254,7 @@ end);
 InstallMethod(IsFreeZGWord,"For HapResolutions",
         [IsHapResolution,IsInt,IsDenseList],
         function(resolution,term,word)
-    if not ForAll(word,IsDenseList)
-       then
+    if not ForAll(word,IsDenseList) then
         return false;
     else
         return IsDenseList(word) and ForAll(word,c->IsFreeZGLetter(resolution,term,c));
@@ -298,12 +291,10 @@ InstallMethod(MultiplyFreeZGLetterWithGroupElt,"For HapResolution",
         function(resolution,letter,g)
     if not (IsValidGroupInt(resolution,letter[2])
             and IsValidGroupInt(resolution,g)
-            )
-       then
+            ) then
         Error("invalid group element indices");
     fi;
-    if not IsInt(letter[1])
-       then
+    if not IsInt(letter[1]) then
         Error("first entry in letter must be an integer");
     fi;
     return MultiplyFreeZGLetterWithGroupEltNC(resolution,letter,g);
@@ -334,12 +325,10 @@ end);
 InstallMethod(MultiplyFreeZGWordWithGroupElt,"For HapResolution",
         [IsHapResolution,IsDenseList,IsPosInt],
         function(resolution,word,g)
-    if not IsFreeZGWord(resolution,word)
-       then
+    if not IsFreeZGWord(resolution,word) then
         Error("<word> must be a valid ZG word");
     fi;
-    if not IsValidGroupInt(resolution,g)
-       then
+    if not IsValidGroupInt(resolution,g) then
         Error("<g> is not a valid group element index");
     fi;
     return MultiplyFreeZGWordWithGroupEltNC(resolution,word,g);
@@ -361,8 +350,7 @@ InstallMethod(BoundaryOfFreeZGLetterNC,"For HapResolution",
     sign:=SignInt(letter[1]);
     boundary:=BoundaryMap(resolution)(term,AbsInt(letter[1]));
     boundary:=MultiplyFreeZGWordWithGroupEltNC(resolution,boundary,letter[2]);
-    if sign=-1
-       then
+    if sign=-1 then
         return NegateWord(boundary);
     else
         return boundary;
@@ -381,8 +369,7 @@ InstallMethod(BoundaryOfFreeZGLetter,"For HapResolution",
         [IsHapResolution,IsInt,IsDenseList],
         function(resolution,term,letter)
         
-    if not IsFreeZGLetter(resolution,term,letter)
-       then
+    if not IsFreeZGLetter(resolution,term,letter) then
         Error("<letter> is not a proper letter");
     fi;
     return BoundaryOfFreeZGLetterNC(resolution,term,letter);
@@ -403,8 +390,7 @@ InstallMethod(BoundaryOfFreeZGWordNC,"For HapResolution",
         function(resolution,term,word)
     local   boundary,  letter,  letterbound;
     boundary:=[];
-    for letter in word
-      do
+    for letter in word do
         letterbound:=BoundaryOfFreeZGLetterNC(resolution,term,letter);
         boundary:=AddFreeWords(boundary,letterbound);
     od;
@@ -421,8 +407,7 @@ end);
 InstallMethod(BoundaryOfFreeZGWord,"For HapResolution",
         [IsHapResolution,IsInt,IsDenseList],
         function(resolution,term,word)
-    if not IsFreeZGWord(resolution,term,word)
-       then
+    if not IsFreeZGWord(resolution,term,word) then
         Error("<word> is not an element of the <term>th module");
     fi;
     return BoundaryOfFreeZGWordNC(resolution,term,word);

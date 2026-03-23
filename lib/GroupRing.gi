@@ -33,8 +33,7 @@ InstallMethod(CoefficientsAndMagmaElementsAsLists,
         function(elt)
     local   coeffsAndMagmaElts,  length;
     coeffsAndMagmaElts:=CoefficientsAndMagmaElements(elt);
-    if coeffsAndMagmaElts=[]
-       then
+    if coeffsAndMagmaElts=[] then
         return [[],[]];
     else
         length:=Size(coeffsAndMagmaElts)/2;
@@ -50,13 +49,11 @@ InstallMethod(Indicator,"for magma ring with one",
         function(elm)
     local   zero,  coeffs,  one;
     zero:=ZeroCoefficient(elm);
-    if not IsMultiplicativeElementWithOne(zero)
-       then
+    if not IsMultiplicativeElementWithOne(zero) then
         Error("Ring of magma ring must have a one");
    else
         coeffs:=CoefficientsAndMagmaElementsAsLists(elm);
-        if coeffs[1]=[]
-           then
+        if coeffs[1]=[] then
             return elm;
         else
             one:=zero^0;

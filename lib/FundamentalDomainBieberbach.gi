@@ -85,32 +85,26 @@ InstallMethod(FundamentalDomainBieberbachGroup,
     local   needBieberbachTest,  phi,  dim,  fd;
     
     needBieberbachTest:=false;
-    if not (IsStandardSpaceGroup(group) and IsAffineCrystGroupOnRight(group))
-       then
+    if not (IsStandardSpaceGroup(group) and IsAffineCrystGroupOnRight(group)) then
         Error("group must be a StandardSpaceGroup acting on right");
     else 
         phi:=IsomorphismPcpGroup(group);
-        if phi=fail
-           then
+        if phi=fail then
             Info(InfoHAPcryst,1,"Couldn't calculate pcp representation. Testing tortion freeness later");
             needBieberbachTest:=true;
-        elif not IsAlmostBieberbachGroup(Image(phi))
-          then
+        elif not IsAlmostBieberbachGroup(Image(phi)) then
             Error("group must be a Bieberbach group");
         fi;
     fi;
     dim:=Size(center);
-    if not (dim=Size(gram) and DimensionOfMatrixGroup(group)=dim+1)
-       then
+    if not (dim=Size(gram) and DimensionOfMatrixGroup(group)=dim+1) then
         Error("dimensions don't match");
     fi;
-    if not IsTrivial(StabilizerOnSetsStandardSpaceGroup(group,[center]))
-       then
+    if not IsTrivial(StabilizerOnSetsStandardSpaceGroup(group,[center])) then
         Error("group must be a Bieberbach group");
     fi;
     fd:=FundamentalDomainBieberbachGroupNC(center,group,gram);
-    if not needBieberbachTest or IsFundamentalDomainBieberbachGroup(fd,group)
-       then
+    if not needBieberbachTest or IsFundamentalDomainBieberbachGroup(fd,group) then
         return fd;
     else
         Error("group must be a Bieberbach group");
@@ -149,8 +143,7 @@ InstallMethod(FundamentalDomainBieberbachGroupNC,
         #points:=Set(ShiftedOrbitPart(center,orbitpart));
         #UniteSet(points,center+directions);
         #    UniteSet(points,Union(List(directions,d->d+points)));
-        if gram<>IdentityMat(dim)
-           then
+        if gram<>IdentityMat(dim) then
             ineqs:=Set(points,
                        i->BisectorInequalityFromPointPair(center,i,gram));
         else
@@ -175,8 +168,7 @@ InstallMethod(FundamentalDomainBieberbachGroupNC,
         dim:=Size(vertex);
         affinevertex:=Concatenation(vertex,[1]);
         returnlist:=[];
-        for g in PointGroupRepresentatives(group)
-          do
+        for g in PointGroupRepresentatives(group) do
             gl:=LinearPartOfAffineMatOnRight(g);
             gli:=Inverse(gl);
             gt:=g[dim+1]{[1..dim]};
@@ -184,20 +176,16 @@ InstallMethod(FundamentalDomainBieberbachGroupNC,
             image:=affimage{[1..dim]};
             ###
             trans:=TranslationsToBox(image,box);
-            for t in trans 
-              do
-                if not image+t in vertices 
-                   then
-                    if satisfiesAllInequalities(image+t,ineqs)
-                       then
+            for t in trans do
+                if not image+t in vertices then
+                    if satisfiesAllInequalities(image+t,ineqs) then
                         Add(returnlist,center*gl+gt+t);
                         Add(returnlist,(center-gt-t)*gli);
                     fi;
                 fi;
             od;
         od;
-        if returnlist=[]
-           then
+        if returnlist=[] then
             return [];
         fi;
         returnlist:=Set(returnlist);
@@ -215,8 +203,7 @@ InstallMethod(FundamentalDomainBieberbachGroupNC,
         dim:=Size(vertex);
         affinevertex:=Concatenation(vertex,[1]);
         returnlist:=[];
-        for g in PointGroupRepresentatives(group)
-          do
+        for g in PointGroupRepresentatives(group) do
             gl:=LinearPartOfAffineMatOnRight(g);
             gli:=Inverse(gl);
             gt:=g[dim+1]{[1..dim]};
@@ -224,20 +211,16 @@ InstallMethod(FundamentalDomainBieberbachGroupNC,
             image:=affimage{[1..dim]};
             ###
             trans:=TranslationsToBox(image,box);
-            for t in trans 
-              do
-                if not image+t in vertices 
-                   then
-                    if satisfiesAllInequalities(image+t,ineqs)
-                       then
+            for t in trans do
+                if not image+t in vertices then
+                    if satisfiesAllInequalities(image+t,ineqs) then
                         Add(returnlist,center*gl+gt+t);
                         Add(returnlist,(center-gt-t)*gli);
                     fi;
                 fi;
             od;
         od;
-        if returnlist=[]
-           then
+        if returnlist=[] then
             return [];
         fi;
         returnlist:=Set(returnlist);
@@ -250,18 +233,17 @@ InstallMethod(FundamentalDomainBieberbachGroupNC,
     
     shuffledList:=function(list)
         local   positionlist,  indexlist,  i,  nextpos;
-        if Size(list)=1
-           then return list;
-       fi;
-       positionlist:=EmptyPlist(Size(list));
-       indexlist:=[1..Size(list)];
-       for i in [Size(list),Size(list)-1..1]
-         do
-           nextpos:=Random(1,i);
-           Add(positionlist,indexlist[nextpos]);
-           Remove(indexlist,nextpos);
-       od;
-       return list{positionlist};
+        if Size(list)=1 then
+            return list;
+        fi;
+        positionlist:=EmptyPlist(Size(list));
+        indexlist:=[1..Size(list)];
+        for i in [Size(list),Size(list)-1..1] do
+            nextpos:=Random(1,i);
+            Add(positionlist,indexlist[nextpos]);
+            Remove(indexlist,nextpos);
+        od;
+        return list{positionlist};
     end;
               
     ###################
@@ -281,8 +263,7 @@ InstallMethod(FundamentalDomainBieberbachGroupNC,
     ##
     
     ineqThreshold:=ValueOption("ineqThreshold");
-    if ineqThreshold=fail
-       then
+    if ineqThreshold=fail then
         ineqThreshold:=200;
     fi;
     isEuclidean:=(gram=IdentityMat(dim));
@@ -314,8 +295,7 @@ InstallMethod(FundamentalDomainBieberbachGroupNC,
         
         ##
         box:=[1..dim];
-        for i in [1..dim]
-          do
+        for i in [1..dim] do
             ilist:=allvertices{[1..Size(allvertices)]}[i];
             box[i]:=[Minimum(ilist),Maximum(ilist)];
         od;
@@ -323,8 +303,7 @@ InstallMethod(FundamentalDomainBieberbachGroupNC,
 #        Sort(donevertices);
 #        vertices:=(Filtered(Polymake(partialFD,"VERTICES"),v->not v in donevertices));
 #        vertices:=Difference(allvertices,donevertices);
-        if vertices=[] 
-           then 
+        if vertices=[] then
             Info(InfoHAPcryst,2,"out of vertices");
             return partialFD;
         fi;
@@ -335,10 +314,8 @@ InstallMethod(FundamentalDomainBieberbachGroupNC,
             v:=Remove(vertices,Random(1,Size(vertices)));
 #            v:=Remove(vertices);
             Add(donevertices,v);
-            if satisfiesAllInequalities(v,newinequalities)
-               then
-                if isEuclidean 
-                   then
+            if satisfiesAllInequalities(v,newinequalities) then
+                if isEuclidean then
                     new:= newInequalitiesEuclidean(v,center,inequalities,
                                   allvertices,box,group);
                 else
@@ -351,8 +328,7 @@ InstallMethod(FundamentalDomainBieberbachGroupNC,
         until vertices=[] or Size(newinequalities)>ineqThreshold;
 
         Info(InfoHAPcryst,3,"new: ",Size(newinequalities));
-        if newinequalities<>[]
-           then
+        if newinequalities<>[] then
             ClearPolymakeObject(partialFD,["polytope","2.3","RationalPolytope"]);
 #            AppendInequalitiesToPolymakeObject(partialFD,shuffledList(inequalities));;
             AppendInequalitiesToPolymakeObject(partialFD,inequalities);;

@@ -30,8 +30,7 @@ InstallMethod(FundamentalDomainStandardSpaceGroup,
         [IsGroup],
         function(group)
     local   dim;
-    if not (IsStandardSpaceGroup(group) and IsAffineCrystGroupOnRight(group))
-       then
+    if not (IsStandardSpaceGroup(group) and IsAffineCrystGroupOnRight(group)) then
         Error("group must be a StandardSpaceGroup acting on right");
     fi;
     dim:=DimensionOfMatrixGroup(group)-1;
@@ -47,8 +46,7 @@ InstallMethod(FundamentalDomainStandardSpaceGroup,
         [IsVector,IsGroup],
         function(center,group)
     local   dim,  gram,  orbitstab;
-    if not (IsStandardSpaceGroup(group) and IsAffineCrystGroupOnRight(group))
-       then
+    if not (IsStandardSpaceGroup(group) and IsAffineCrystGroupOnRight(group)) then
         Error("group must be a StandardSpaceGroup acting on right");
     fi;
 
@@ -56,8 +54,7 @@ InstallMethod(FundamentalDomainStandardSpaceGroup,
         gram:=GramianOfAverageScalarProductFromFiniteMatrixGroup(
                    PointGroup(group));
 
-    if not IsTrivial(StabilizerOnSetsStandardSpaceGroup(group,[center]))
-       then
+    if not IsTrivial(StabilizerOnSetsStandardSpaceGroup(group,[center])) then
         Error("center point not in general position");
     fi;
         return FundamentalDomainBieberbachGroupNC(center,group,gram);
@@ -75,8 +72,7 @@ InstallMethod(IsFundamentalDomainStandardSpaceGroup,
             orbitpart,  i,  j,  facets,  polystab,  facet,  orbit,  
             facetstab,  staborbit;
     
-    if not (IsStandardSpaceGroup(group) and IsAffineCrystGroupOnRight(group))
-       then
+    if not (IsStandardSpaceGroup(group) and IsAffineCrystGroupOnRight(group)) then
         Error("group must be a StandardSpaceGroup acting on right");
     fi;
     
@@ -87,22 +83,18 @@ InstallMethod(IsFundamentalDomainStandardSpaceGroup,
     ### First check that the images of <poly> do not overlap:
         
     box:=List([1..dim],i->[Minimum(List(vertices,v->v[i])),Maximum(List(vertices,v->v[i]))]);
-    while vertexset<>[]
-      do
+    while vertexset<>[] do
         vertex:=Remove(vertexset);
         orbitstab:=OrbitStabilizerInUnitCubeOnRight(group,VectorModOne(vertex));
         #        orbitpart:=Concatenation(List(orbitstab.orbit,i->List(TranslationsToBox(i,box),j->i+j)));
         orbitpart:=[];
-        for i in orbitstab.orbit
-          do
-            for j in TranslationsToBox(i,box)
-              do
+        for i in orbitstab.orbit do
+            for j in TranslationsToBox(i,box) do
                 Add(orbitpart,i+j);
             od;
         od;
 
-        if ForAny(orbitpart,v->RelativePositionPointAndPolygon(v,poly) in ["INSIDE","FACET"])
-           then
+        if ForAny(orbitpart,v->RelativePositionPointAndPolygon(v,poly) in ["INSIDE","FACET"]) then
             return false;
         else
             SubtractSet(vertexset,orbitpart);
@@ -116,22 +108,17 @@ InstallMethod(IsFundamentalDomainStandardSpaceGroup,
     vertexset:=Set(vertices);
     facets:=Set(Polymake(poly,"VERTICES_IN_FACETS"),i->Set(i,j->vertices[j]));
     polystab:=StabilizerOnSetsStandardSpaceGroup(group,Set(vertices));
-    while facets<>[]
-      do
+    while facets<>[] do
         facet:=facets[1];
         orbit:=OrbitPartInVertexSetsStandardSpaceGroup(group,facet,vertexset);
-        if not ForAll(orbit,i-> i in facets)
-           then
+        if not ForAll(orbit,i-> i in facets) then
             return false;
         fi;
         
-        if Size(polystab)=1
-           then
-            if Size(orbit)=1
-               then
+        if Size(polystab)=1 then
+            if Size(orbit)=1 then
                 facetstab:=StabilizerOnSetsStandardSpaceGroup(group,facet);
-                if Size(facetstab)=1
-                   then
+                if Size(facetstab)=1 then
                     #no image of <poly> can be on the other side of <facet>.
                     # If <facetstab> <>1, it contains an element flipping 
                     # <poly> to the other side of <facet>.
@@ -149,11 +136,9 @@ InstallMethod(IsFundamentalDomainStandardSpaceGroup,
                 ## The second ones are ok. For the other ones, we have to 
                 ## check if there  is an element of the facet stabilizer
                 ## swapping <poly> to the other side of <facet>.
-            if Size(staborbit)<Size(orbit)
-               then
+            if Size(staborbit)<Size(orbit) then
                 facetstab:=StabilizerOnSetsStandardSpaceGroup(group,facet);
-                if IsSubgroup(polystab,facetstab)
-                   then
+                if IsSubgroup(polystab,facetstab) then
                    return false; 
                 fi;
             fi;
@@ -174,14 +159,11 @@ InstallMethod(IsFundamentalDomainBieberbachGroup,
     local   isfd,  phi,  vertices,  facelattice,  faces,  face,  stab;
     
     isfd:=IsFundamentalDomainStandardSpaceGroup(poly,group);
-    if not isfd
-       then
+    if not isfd then
         return false;
-    elif IsPolycyclicGroup(group)
-      then
+    elif IsPolycyclicGroup(group) then
         phi:=IsomorphismPcpGroup(group);
-        if IsTorsionFree(Image(phi))
-           then
+        if IsTorsionFree(Image(phi)) then
             return true;
         else
             return fail;
@@ -189,13 +171,10 @@ InstallMethod(IsFundamentalDomainBieberbachGroup,
     else
         vertices:=Polymake(poly,"VERTICES");
         facelattice:=Polymake(poly,"FACE_LATTICE");
-        for faces in facelattice
-          do
-            for face in faces
-              do
+        for faces in facelattice do
+            for face in faces do
                 stab:=StabilizerOnSetsStandardSpaceGroup(group,Set(vertices{face}));
-                if not IsTrivial(stab)
-                   then
+                if not IsTrivial(stab) then
                     return fail;
                 fi;
             od;

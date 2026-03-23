@@ -28,11 +28,9 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
     removeSomeFaces:=function(upfaces,faces)
         local   upfaceentries,  faceindex,  face;
         upfaceentries:=AsSet(Flat(upfaces));
-        for faceindex in [1..Size(faces)]
-          do
+        for faceindex in [1..Size(faces)] do
             face:=faces[faceindex];
-            if not (IsSubset(upfaceentries,face) and ForAny(upfaces,f->IsSubset(f,face)))
-               then
+            if not (IsSubset(upfaceentries,face) and ForAny(upfaces,f->IsSubset(f,face))) then
                 Unbind(faces[faceindex]);
             fi;
         od;
@@ -45,8 +43,7 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
                 todolist,  setfacelist,  returnlist,  thissize,  list,  
                 orbit,  thisorbit,  fpos,  fpositions;
 
-        if not ForAll(facelist,IsSet)
-           then
+        if not ForAll(facelist,IsSet) then
             Error("face list must be a list of sets");
         fi;
         
@@ -56,29 +53,24 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
         
         # convert all faces to vectors:
         todolist:=Set(facelist,i->Set(vertexlist{i}));
-        if IsSet(facelist)
-           then
+        if IsSet(facelist) then
             setfacelist:=facelist;
         else
             setfacelist:=AsSet(facelist);
         fi;
         returnlist:=[];
 
-        while todolist<>[]
-          do
+        while todolist<>[] do
             thissize:=Size(todolist[1]);
             list:=Filtered(todolist,o->Size(o)=thissize);
             SubtractSet(todolist,list);
 
-            while list<>[]
-              do
+            while list<>[] do
                 orbit:=OrbitPartAndRepresentativesInFacesStandardSpaceGroup(group,list[1],list);
                 thisorbit:=[];
-                for fpos in [1..Size(orbit)]
-                  do
+                for fpos in [1..Size(orbit)] do
                     fpositions:=Set(orbit[fpos][1],i->vertexpositionlookup[PositionSet(sortedvertices,i)]);
-                    if fpositions in setfacelist
-                       then
+                    if fpositions in setfacelist then
                         Add(thisorbit,[Position(facelist,fpositions),orbit[fpos][2]]);
                     fi;
                 od;
@@ -102,33 +94,28 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
         upfaces:=hasse[codim]{[1..nrupfaces]}[1];
         newhasseentry:=[];
         idMat:=IdentityMat(Size(hasse));
-        for orbit in orbitsandreps 
-          do
+        for orbit in orbitsandreps do
             gen:=faces[orbit[1][1]];
             Add(newhasseentry,[gen,[]]);
             genIndex:=Size(newhasseentry);
             upindices:=Filtered([1..nrupfaces],
                        i->IsSubset(upfaces[i],gen));
             #update boundary for faces containing new generator:
-            for upface in upindices
-              do
+            for upface in upindices do
                 AddSet(hasse[codim][upface][2],[genIndex,idMat]);
             od;
             
             #replace all faces in the generator-orbit with representatives:
-            if Size(orbit)>1
-               then
+            if Size(orbit)>1 then
                 genvertices:=Set(vertices{gen});
-                for o in orbit{[2..Size(orbit)]}
-                  do
+                for o in orbit{[2..Size(orbit)]} do
                     oface:=faces[o[1]];
                     upindices:=Filtered([1..nrupfaces],
                                        i->IsSubset(upfaces[i],oface));
                     
                     entry:=[genIndex,o[2]];
                     
-                    for upface in upindices
-                      do
+                    for upface in upindices do
                         AddSet(hasse[codim][upface][2],entry); 
                     od;
                 od;
@@ -148,28 +135,20 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
         local   elts,  faces,  face,  line;
         
         elts:=[];
-        for faces in hasse 
-          do
-            for face in faces
-              do
-                for line in face[2]
-                  do
+        for faces in hasse do
+            for face in faces do
+                for line in face[2] do
                     Add(elts,line[2]);
                 od;
             od;
         od;
-#        if elts<>[]
-#           then
+#        if elts<>[] then
 #            elts:=Set(elts);
 #            AddSet(elts,IdentityMat(Size(elts[1])));
-#            for faces in hasse 
-#              do
-#                for face in faces
-#                  do
-#                    for line in face[2]
-#                      do
-#                        if not IsInt(line[2]) 
-#                           then
+#            for faces in hasse do
+#                for face in faces do
+#                    for line in face[2] do
+#                        if not IsInt(line[2]) then
 #                            line[2]:=PositionSet(elts,line[2]);
 #                        fi;
 #                    od;
@@ -191,14 +170,10 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
         zero:=Zero(groupring);
         family:=FamilyObj(zero);
         groupelements:=[];
-        for dim in [2..Size(hasse)]
-          do
-            for face in hasse[dim]
-              do
-                for term in face[2]
-                  do
-                    if IsMatrix(term[2])
-                       then
+        for dim in [2..Size(hasse)] do
+            for face in hasse[dim] do
+                for term in face[2] do
+                    if IsMatrix(term[2]) then
                         Add(groupelements,term[2]);
                         term[2]:=SignInt(term[1])*
                                  ElementOfMagmaRing(family,0,[1],[term[2]]);
@@ -208,10 +183,8 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
                 Sort(face[2]);
                 firstpos:=1;
                 firstgen:=face[2][firstpos][1];
-                for position in [2..Size(face[2])]
-                  do
-                    if face[2][position][1]=firstgen
-                       then
+                for position in [2..Size(face[2])] do
+                    if face[2][position][1]=firstgen then
                         face[2][firstpos][2]:=face[2][firstpos][2]
                                               +face[2][position][2];
                         Unbind(face[2][position]);
@@ -226,8 +199,7 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
         od;
         groupelements:=Set(groupelements);
         one:=One(UnderlyingMagma(groupring));
-        if groupelements[1]<>one
-           then
+        if groupelements[1]<>one then
             onepos:=Position(groupelements,one);
             groupelements[onepos]:=groupelements[1];
             groupelements[1]:=one;
@@ -293,11 +265,9 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
         ##                                         ###########################
         
         
-        if k=1    # First, define the boundary of 1-faces
-           then
+        if k=1 then    # First, define the boundary of 1-faces
             facebound:=face[2];
-            if facebound[1]>facebound[2]
-               then
+            if facebound[1]>facebound[2] then
                 linesdone:=[facebound[1],[-facebound[2][1],facebound[2][2]]];
             else
                 linesdone:=[[-facebound[1][1],facebound[1][2]],facebound[2]];
@@ -320,18 +290,15 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
             linesinpoint:=[];
             pointset:=[];
             idMat:=IdentityMat(Size(hasse));
-            for line in linestodo  
+            for line in linestodo do
               # form: line=[<pos>,<mat>]
               # <pos>: generator position
               # <mat>: matrix taking generator to actual line.
-              do
                 linemat:=line[2];
                 points:=List(hasse[k][line[1]][2],p->[AbsInt(p[1]),p[2]*linemat]);
-                for point in points
+                for point in points do
                   #form of point as form of line but one dimension lower
-                  do
-                    if not point in pointset
-                       then
+                    if not point in pointset then
                         Add(linesinpoint,[point,[line]]);
                     else
                         pos:=PositionSet(pointset,point);
@@ -343,8 +310,7 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
             od;
             
             firstlinepos:=PositionProperty(linestodo,i->i[2]=idMat);
-            if firstlinepos=fail
-               then
+            if firstlinepos=fail then
                 firstline:=Remove(linestodo);
             else
                 firstline:=linestodo[firstlinepos];
@@ -357,12 +323,10 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
             linesdone:=[];
 
             repeat
-                for line in linesforthisrun
-                  do
+                for line in linesforthisrun do
                     linesdone:=Set(linesdone);
                     if not ([line[1],line[2]] in linesdone 
-                            or [-line[1],line[2]] in linesdone)
-                       then
+                            or [-line[1],line[2]] in linesdone) then
                         Add(linesdone,line);
                     fi;
                     linebound:=boundaryFromPair(k-1,line,hasse);
@@ -372,20 +336,17 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
                     dirlessline:=dirLess(line);
                     points:=Difference(lineboundDirless,pointsdone);
                     
-                    for point in points
-                      do
+                    for point in points do
                         Add(pointsdone,point);
                         pointsign:=SignInt(linebound[PositionSet(lineboundDirless,point)][1]);
                                            
                         otherline:=linesinpoint[PositionSet(pointset,point)];
                         otherline:=First(otherline[2],l->l<>dirlessline); 
                                                 
-                        if otherline in linestodo
-                           then
+                        if otherline in linestodo then
                             RemoveSet(linestodo,otherline);
                             otherlinebound:=boundaryFromPair(k-1,otherline,hasse);
-                            if pointsign=SignInt(First(otherlinebound,i->dirLess(i)=point)[1])
-                            then 
+                            if pointsign=SignInt(First(otherlinebound,i->dirLess(i)=point)[1]) then
                                 orientedOtherLine:=[-otherline[1],otherline[2]];
                             else
                                 orientedOtherLine:=otherline;
@@ -406,8 +367,7 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
 ######################################################################
 ######################################################################
 
-    if not IsStandardSpaceGroup(group) and IsAffineCrystGroupOnRight(group)
-       then
+    if not IsStandardSpaceGroup(group) and IsAffineCrystGroupOnRight(group) then
         Error("<group> must be a StandardSpaceGroup acting on right");
     fi;
     dim:=DimensionOfMatrixGroup(group)-1;
@@ -416,8 +376,7 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
     Polymake(poly,"VERTICES");
     vertices:=Polymake(poly,"VERTICES");
     MakeImmutable(vertices);
-    if not dim=Size(vertices[1]-1)
-       then
+    if not dim=Size(vertices[1]-1) then
         Error("group and polyhedron do not match");
     fi;
     ##
@@ -435,8 +394,7 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
     #    moduleGenerators[1]:=[1];# so this means [hasse[1][1]];
 
     #Now the next nodes:
-    for codim in [1..dim]
-      do
+    for codim in [1..dim] do
         #At this stage, hasse[codim+1] is a list of faces.
         initialfacenumber:=Size(hasse[codim+1]);##########
         timetmp:=Runtime();########
@@ -447,22 +405,18 @@ InstallMethod(FaceLatticeAndBoundaryBieberbachGroup,
         Info(InfoHAPcryst,3,codim,"(",Size(hasse[codim+1]),"/",initialfacenumber,"):",StringTime(Runtime()-timetmp));
     od;
     
-    for codim in [1..Int((dim+1)/2)]
-      do
+    for codim in [1..Int((dim+1)/2)] do
         tmp:=hasse[codim];
         hasse[codim]:=hasse[dim+2-codim];
         hasse[dim+2-codim]:=tmp;
     od;
     Info(InfoHAPcryst,3,"Face lattice done (",StringTime(Runtime()-starttime),"). Calculating boundary ");
-    for k in [1..dim]
-      do
-        for j in [1..Size(hasse[k+1])]
-          do
+    for k in [1..dim] do
+        for j in [1..Size(hasse[k+1])] do
             hasse[k+1][j][2]:=calculateBoundary(k,j,hasse);
         od;
     od;
-    if fail in Flat(hasse)
-       then
+    if fail in Flat(hasse) then
         Error("boundary generation failed");
     fi;
 

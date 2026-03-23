@@ -42,8 +42,7 @@ InstallMethod(ResolutionBieberbachGroup,"for affine cryst groups on right",
     local   gram,  poly,  fl;
     
     gram:=GramianOfAverageScalarProductFromFiniteMatrixGroup(PointGroup(group));
-    if not Order(gram)=1
-       then
+    if not Order(gram)=1 then
         Info(InfoHAPcryst,2,"non standard");
     fi;
     poly:=FundamentalDomainBieberbachGroup(center,group,gram);
@@ -64,8 +63,7 @@ InstallMethod(ResolutionFromFLandBoundary,"for affine cryst groups on right",
             boundary2,  groupring,  resolution,  homotopy,  hasse,  
             properties;
     dimension:=function(k)
-        if k<0 or k>Size(fl.hasse)-1
-           then
+        if k<0 or k>Size(fl.hasse)-1 then
             return 0;
         else
             return Size(fl.hasse[k+1]);
@@ -73,8 +71,7 @@ InstallMethod(ResolutionFromFLandBoundary,"for affine cryst groups on right",
     end;
     
     dimension2:=function(resolution,k)
-        if k<0 or k>Size(resolution!.hasse)-1
-           then
+        if k<0 or k>Size(resolution!.hasse)-1 then
             return 0;
         else
             return Size(resolution!.hasse[k+1]);
@@ -87,23 +84,19 @@ InstallMethod(ResolutionFromFLandBoundary,"for affine cryst groups on right",
         local   word,  jsign,  stdword,  pos,  coeffsAndGroupElts,  g,  
                 sign,  mult,  entry,  i;
 
-        if k<=0 or k>=Size(fl.hasse)
-           then
+        if k<=0 or k>=Size(fl.hasse) then
             return [];
         else            
             word:=fl.hasse[k+1][AbsInt(j)][2];
             jsign:=SignInt(j);
             stdword:=[];
-            for pos in [1..Size(word)]
-              do
+            for pos in [1..Size(word)] do
                 coeffsAndGroupElts:=CoefficientsAndMagmaElementsAsLists(word[pos][2]);
-                for g in [1..Size(coeffsAndGroupElts[1])]
-                  do
+                for g in [1..Size(coeffsAndGroupElts[1])] do
                     sign:=jsign*SignInt(coeffsAndGroupElts[1][g]);
                     mult:=AbsInt(coeffsAndGroupElts[1][g]);
                     entry:=[sign*word[pos][1],Position(fl.elts,coeffsAndGroupElts[2][g])];
-                    for i in [1..mult]
-                      do                      
+                    for i in [1..mult] do
                         Add(stdword,entry);
                     od;
                 od;
@@ -124,8 +117,7 @@ InstallMethod(ResolutionFromFLandBoundary,"for affine cryst groups on right",
     elts:=StructuralCopy(fl.elts);
     
     appendToElts:=function(g)
-        if not g in group
-           then
+        if not g in group then
             Error("not an element of the right group");
         fi;
         Add(elts,g);    
@@ -138,15 +130,13 @@ InstallMethod(ResolutionFromFLandBoundary,"for affine cryst groups on right",
     
     boundary2:=function(resolution,k,j)
         local   zero,  family,  vector,  term;
-        if k<=0 or k>=Size(resolution!.hasse)
-           then
+        if k<=0 or k>=Size(resolution!.hasse) then
             return [];
         else
             zero:=Zero(resolution!.groupring);
             family:=FamilyObj(zero);
             vector:=List([1..Dimension(resolution)(k-1)],i->zero);
-            for term in resolution!.hasse[k+1][j][2]
-              do
+            for term in resolution!.hasse[k+1][j][2] do
                 vector[term[1]]:=vector[term[1]]+
                                  term[2];
             od;
@@ -155,12 +145,10 @@ InstallMethod(ResolutionFromFLandBoundary,"for affine cryst groups on right",
     end;
     
     
-    if not (IsAffineCrystGroupOnRight(group) and IsStandardSpaceGroup(group))
-       then
+    if not (IsAffineCrystGroupOnRight(group) and IsStandardSpaceGroup(group)) then
         Error("group is not a StandardSpaceGroup acting on right");
     fi;
-    if not ForAll(fl.elts,i->i in group)
-       then
+    if not ForAll(fl.elts,i->i in group) then
         Error("group does not match face lattice");
     fi;
     
