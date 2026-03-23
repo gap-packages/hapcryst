@@ -22,24 +22,6 @@
 #Y along with this program; if not, write to the Free Software 
 #Y Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA
 ##
-# there seems to be not method for rationals, even though SignInt 
-# did work in all of the cases I tried.
-InstallMethod(SignRat, "for rationals",[IsRat],
-        function(rat)
-    if rat>0
-       then
-        return 1;
-    elif rat<0
-      then
-        return -1;
-    elif rat=0
-      then
-        return 0;
-    else
-        Error("cannot calculate sign of rational");
-    fi;
-    #return SignInt(rat*DenominatorRat(rat));
-end);
   
 
 ##############################

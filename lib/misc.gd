@@ -24,10 +24,6 @@
 ##
 ##############################
 #
-DeclareOperation("SignRat",[IsRat]);
-        
-##############################
-#
 # New operations for matrices. The names say it all
 # 
 DeclareProperty("IsSquareMat",IsMatrix);
