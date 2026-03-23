@@ -19,14 +19,14 @@ group calculations and were missing in standard &GAP;.
  </Description>
 </ManSection>
 
-<Example>
+<Example><![CDATA[
 gap> SignRat((-4)/(-2));
 1
 gap> SignRat(9/(-2));
 -1
 gap> VectorModOne([1/10,100/9,5/6,6/5]);
 [ 1/10, 1/9, 5/6, 1/5 ]
-</Example>
+]]></Example>
 
 <ManSection>
   <Meth Name="IsSquareMat" Arg="matrix"/>
@@ -43,7 +43,7 @@ gap> VectorModOne([1/10,100/9,5/6,6/5]);
   </Returns>
 </ManSection>
 
-<Example>
+<Example><![CDATA[
 gap> m:=[[1,2,3],[4,5,6],[9,6,12]];
 [ [ 1, 2, 3 ], [ 4, 5, 6 ], [ 9, 6, 12 ] ]
 gap> IsSquareMat(m);
@@ -52,7 +52,7 @@ gap> DimensionSquareMat(m);
 3
 gap> DimensionSquareMat([[1,2],[1,2,3]]);
 fail
-</Example>
+]]></Example>
 
 Affine mappings of <M>n</M> dimensional space are often written as a
 pair <M>(A,v)</M> where <M>A</M> is a linear mapping and <M>v</M> is a
@@ -87,14 +87,14 @@ written as a space of <M>n+1</M> tuples with <M>n+1</M>st entry
  </Description>
 </ManSection>
 
-<Example>
+<Example><![CDATA[
 gap> c:=[[0,1],[1,0]];
 [ [ 0, 1 ], [ 1, 0 ] ]
 gap> m:=[[1/2,0,0],[0,2/3,0],[1,0,1]];
 [ [ 1/2, 0, 0 ], [ 0, 2/3, 0 ], [ 1, 0, 1 ] ]
 gap> BasisChangeAffineMatOnRight(c,m);
 [ [ 2/3, 0, 0 ], [ 0, 1/2, 0 ], [ 0, 1, 1 ] ]
-</Example>
+]]></Example>
 
 
  <ManSection>
@@ -107,7 +107,7 @@ gap> BasisChangeAffineMatOnRight(c,m);
 </Description>
 </ManSection>
 
-<Example>
+<Example><![CDATA[
 gap> m:=TranslationOnRightFromVector([1,2,3]);;
 gap> Display(m);
 [ [  1,  0,  0,  0 ],
@@ -118,7 +118,7 @@ gap> LinearPartOfAffineMatOnRight(m);
 [ [ 1, 0, 0 ], [ 0, 1, 0 ], [ 0, 0, 1 ] ]
 gap> BasisChangeAffineMatOnRight([[3,2,1],[0,1,0],[0,0,1]],m);
 [ [ 1, 0, 0, 0 ], [ 0, 1, 0, 0 ], [ 0, 0, 1, 0 ], [ 3, 4, 4, 1 ] ]
-</Example>
+]]></Example>
 
 </Section>
 
@@ -176,7 +176,7 @@ represents the inequality <M>0\leq v_0+v_1 x_1+\ldots + v_n x_n</M>.
   </Description>
 </ManSection>
 
-<Example>
+<Example><![CDATA[
 gap> BisectorInequalityFromPointPair([0,0],[1,0]);
 [ 1, -2, 0 ]
 gap> ineq:=BisectorInequalityFromPointPair([0,0],[1,0],[[5,4],[4,5]]);
@@ -187,7 +187,7 @@ gap> WhichSideOfHyperplane([0,0],ineq);
 1
 gap> WhichSideOfHyperplane([1/2,0],ineq);
 0
-</Example>
+]]></Example>
 
 <ManSection><Oper Name="RelativePositionPointAndPolygon" Arg="point, poly"/>
   <Returns>one of <C>"VERTEX", "FACET", "OUTSIDE", "INSIDE"</C></Returns>
