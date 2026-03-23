@@ -51,7 +51,7 @@ true
 gap> DimensionSquareMat(m);
 3
 gap> DimensionSquareMat([[1,2],[1,2,3]]);
-Error, Matrix is not square called from
+fail
 </Example>
 
 Affine mappings of <M>n</M> dimensional space are often written as a
