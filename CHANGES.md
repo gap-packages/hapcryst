@@ -1,67 +1,74 @@
-0.1.11:
+This file describes changes in the AutoDoc package.
+
+
+## 0.2.0 (2026-MM-DD)
+
+- TODO
+
+## 0.1.15 (2022-07-26)
+
+## 0.1.14 (2022-03-09)
+
+## 0.1.13 (2020-02-10)
+
+## 0.1.12 (2020-02-02)
+
+## 0.1.11 (2013-10-27)
 
 - HAPcryst now calls polymaking with keywords "FACES" and "DIMS" to create
-  a resulution of a Bieberbach group. This requires a "next generation"
+  a resolution of a Bieberbach group. This requires a "next generation"
   version of polymake.
 - One minor change that should reduce the number of calls to polymake by one.
-------------------
 
-0.1.10:
+## 0.1.10 (2012-04-19)
+
 - dependencies changed: AClib and Polycyclic added
 
-------------------
+## 0.1.9 (2010-06-03)
 
-
-0.1.9:
 - package moved to Evansville
 
-------------------
+## 0.1.8 (2008-12-02)
 
-0.1.8:
-- IsFundamentalDomainBieberbachGroup added 
-- FundamentalDomainBieberbachGroup now tests for Bieberbachness in the 
+- `IsFundamentalDomainBieberbachGroup` added 
+- `FundamentalDomainBieberbachGroup` now tests for Bieberbachness in the 
    non-pcp case as well.
-- FundamentalDomainStandardSpaceGroup now uses the same algorithm for all cases
+- `FundamentalDomainStandardSpaceGroup` now uses the same algorithm for all cases
 - HAPcryst now requires polymaking version >=0.7.6
 - polymake files generated now know about their data type
 - Package moved from Galway to Kaiserslautern
 
+## 0.1.7 (2008-08-13)
 
-------------------
-
-0.1.7:
-- TranslationOnRightFromVector now uses a ShallowCopy of the given vector as 
+- `TranslationOnRightFromVector` now uses a `ShallowCopy` of the given vector as 
    the last row of the returned matrix (rather than the vector itself)
-- Resolutions now pretend to have length <dim>+1.
-- FundamentalDomainBieberbach doesn't test VOLUME any more. This is far too
+- Resolutions now pretend to have length `<dim>+1`.
+- `FundamentalDomainBieberbach` doesn't test VOLUME any more. This is far too
    expensive as a standard test.
 - The "examples" directory is now included in the package archive and a bit 
    more user-friendly
 - Test file added
-- Some changes in README.HAPcryst
+- Some changes in `README.HAPcryst`
 - HAPcryst is now a deposited package
-------------------
 
-0.1.6:
-Changed requirements:
---------------------
+## 0.1.6
+
+**Changed requirements:**
 - HAPcryst now depends on GAP version >=4.4.10
 - HAPcryst now depends on Hap
 - HAPcryst now suggests GAPdoc
 
-New functionality:
------------------
-- HapLargeGroupRep introduced
+**New functionality:**
+- `HapLargeGroupRep` introduced
 - experimental framework for HAP datatypes implemented and documented.
-   Book name: HAPprog  living in lib/datatypes/doc
+   Book name: HAPprog  living in `lib/datatypes/doc`
 - some functions to generate chain complexes from resolutions added
 - WhichSideOfHyperplane now has an NC version.
 
+**Changes/improvements**
 
-Changes/improvements
---------------------
-In FundamentalDomainBieberbach:
--  now evaluates the option ineqThreshold.
+In `FundamentalDomainBieberbach`:
+-  now evaluates the option `ineqThreshold`.
    This value triggers convex hull computations if "enough" new inequalities 
    are known. Default is 200.
 -  now tests the volume of the initial 
@@ -73,85 +80,82 @@ In FundamentalDomainBieberbach:
 -  now writes the inequalities for polymake in 
    random order. This seems to improve speed.
 -  should now be a little bit faster.
-   (Use of WhichSideOfHyperplaneNC,
+   (Use of `WhichSideOfHyperplaneNC`,
     Set->List modifications in the main procedure and newInequalities
     the elimination of a unnecessary polymake call)
 
-In FaceLatticAndBoundary:
+In `FaceLatticAndBoundary`:
 - doesn't end with a large demand for memory any more.
-- the hasse diagram now contains pairs [gen,groupringel] of integer <gen> and 
-  group ring element <groupringel> to say that the <gen>th entry of the boundary
-  vector is <groupringel>. This is then turned in a vector by the boundary 
+- the hasse diagram now contains pairs [gen,groupringel] of integer `<gen>` and 
+  group ring element `<groupringel>` to say that the `<gen>`th entry of the boundary
+  vector is `<groupringel>`. This is then turned in a vector by the boundary 
   function. So no change in behaviour for the user.
 
-In ResolutionFromFLandBoundary:
+In `ResolutionFromFLandBoundary`:
  - the function now copies the .elts list of the face lattice,
 
 In other places:
 - Replaced some AddSet with Add commands in the orbit-stabilizer procedures.
-- TranslationsToBox now returns an iterator rather than a list 
+- `TranslationsToBox` now returns an iterator rather than a list 
    (->RDS needed for CartesianIterator. This will probably vanish when the
      next GAP version is released).
-- ResolutionBieberbach now removes the temporary file it creates.
-- The example program now uses FACE_LATTICE rather than HASSE_DIAGRAM
-   (output type of HASSE_DIAGRAM has changed in polymaking)
+- `ResolutionBieberbach` now removes the temporary file it creates.
+- The example program now uses `FACE_LATTICE` rather than `HASSE_DIAGRAM`
+   (output type of `HASSE_DIAGRAM` has changed in polymaking)
 - some functions to generate chain complexes from resolutions added
 - some very experimental code for contracting homotopies added (undocumented)
 - test file added.
-------------------
 
-0.1.5:
-- Changed bug in FaceLatticeAndBoundary the output is now HAP compliant again.
-  (does not make a difference for `Homology').
+## 0.1.5
 
-- Changed PackageInfo.g to point to the new homepage
+- Changed bug in `FaceLatticeAndBoundary` the output is now HAP compliant again.
+  (does not make a difference for `Homology`).
 
+- Changed `PackageInfo.g` to point to the new homepage
 
-------------------
+## 0.1.4
 
-0.1.4:
-- Fixed an embarrassing bug in StabilizerOnSetsStandardSpaceGroup
+- Fixed an embarrassing bug in `StabilizerOnSetsStandardSpaceGroup`
 
-- introduced new methods OrbitPartInFacesStandardSpaceGroup and
-  OrbitPartAndRepresentativesInFacesStandardSpaceGroup
+- introduced new methods `OrbitPartInFacesStandardSpaceGroup` and
+  `OrbitPartAndRepresentativesInFacesStandardSpaceGroup`
 
-- FaceLatticeAndBoundaryBieberbachGroup is now a good deal faster 
+- `FaceLatticeAndBoundaryBieberbachGroup` is now a good deal faster 
   in some hard cases.
 
-- removed unused variable HAPCRYST_TMPDIR. POLYMAKE_DATA_DIR 
+- removed unused variable `HAPCRYST_TMPDIR`. `POLYMAKE_DATA_DIR` 
   should do the job.
 
 - corrected a few errors in the manual
 
 - README written (thanks to David Joyner).
 
-------------------
+## 0.1.3
 
-0.1.3:
 - Changed package dependencies (Cryst >=4.1.5)
 - Added description for PointGroupRepresentatives to manual.
-------------------
 
-0.1.2:
+## 0.1.2
+
 Changes affecting behaviour of HAPcryst:
 
-- Removed LatticeTransAndPointGroupRepsOnRight.
+- Removed `LatticeTransAndPointGroupRepsOnRight`.
 
-- Added PointGroupRepresentatives (attribute)
+- Added `PointGroupRepresentatives` (attribute)
 
-- Fixed a bug in FundamentalDomainBieberbachGroup which could lead to wrong 
+- Fixed a bug in `FundamentalDomainBieberbachGroup` which could lead to wrong 
   results in the non-standard case.
 
-- Fixed a minor bug in FundamentalDomainAffineCrystGroupOnRight which could lead
+- Fixed a minor bug in `FundamentalDomainAffineCrystGroupOnRight` which could lead
   to calculating "fundamental domains" in cases where this is not possible...
 
-- Added StabilizerOnSetsStandardSpaceGroup 
+- Added `StabilizerOnSetsStandardSpaceGroup` 
 
-- Added IsFundamentalDomainStandardSpaceGroup 
+- Added `IsFundamentalDomainStandardSpaceGroup` 
 
-- All OrbitStabilizer algorithms now return the stabilizer rather than just generators.
+- All `OrbitStabilizer` algorithms now return the stabilizer rather than just generators.
 
-- FundamentalDomainBieberbachGroup now checks if a group is Bieberbach or outputs a
+- `FundamentalDomainBieberbachGroup` now checks if a group is Bieberbach or outputs a
   line of information, if no check is performed.
 
 
@@ -164,8 +168,6 @@ Minor changes:
 
 - Some changes in documentation
 
-------------------
+## 0.1.1
 
-0.1.1:
-- First version as a package.------------------
-
+- First version as a package.
