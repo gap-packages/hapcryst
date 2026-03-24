@@ -3,16 +3,31 @@ This file describes changes in the AutoDoc package.
 
 ## 0.2.0 (2026-MM-DD)
 
+- Require GAP >= 4.12
+- Require polymaking >= 0.8.6
 - Change `TranslationsToBox` back to returning a list, resolve inconsistencies
   between its documentation and behavior.
+- Fix `DimensionSquareMat` to actually reject non-square matrices, and also to
+  return `fail` instead of raising an error for bad inputs (as documented)
+- Fix `IsSquareMat` to not return true for *all* matrices
+- Various janitorial changes
 
 ## 0.1.15 (2022-07-26)
 
+- Janitorial changes
+
 ## 0.1.14 (2022-03-09)
+
+- Update some URLs in the manual
 
 ## 0.1.13 (2020-02-10)
 
+- Janitorial changes
+
 ## 0.1.12 (2020-02-02)
+
+- Add GAP Team as maintainer
+- Janitorial changes
 
 ## 0.1.11 (2013-10-27)
 
