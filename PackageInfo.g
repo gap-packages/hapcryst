@@ -1,95 +1,103 @@
+#############################################################################
+##  
+##  Demo PackageInfo.g for the GitHubPagesForGAP
+##
+
 SetPackageInfo( rec(
 
-PackageName := "HAPcryst",
-Subtitle := "A HAP extension for crystallographic groups",
-Version := "0.1.15",
-Date := "26/07/2022", # dd/mm/yyyy format
-License := "GPL-2.0-or-later",
+PackageName := "GitHubPagesForGAP",
+
+Subtitle := "A GitHub Pages generator for GAP packages",
+Version := "0.4",
+Date := "10/04/2025", # dd/mm/yyyy format
+License := "0BSD",
 
 Persons := [
   rec(
-    LastName      := "Roeder",
-    FirstNames    := "Marc",
+    LastName      := "Horn",
+    FirstNames    := "Max",
     IsAuthor      := true,
     IsMaintainer  := true,
-    Email         := "roeder.marc@gmail.com",
+    Email         := "mhorn@rptu.de",
+    WWWHome       := "https://www.quendi.de/math",
+    GitHubUsername:= "fingolfin",
+    PostalAddress := Concatenation(
+                       "Fachbereich Mathematik\n",
+                       "RPTU Kaiserslautern-Landau\n",
+                       "Gottlieb-Daimler-Straße 48\n",
+                       "67663 Kaiserslautern\n",
+                       "Germany" ),
+    Place         := "Kaiserslautern, Germany",
+    Institution   := "RPTU Kaiserslautern-Landau"
   ),
+
   rec(
-    LastName      := "GAP Team",
-    FirstNames    := "The",
+    LastName      := "Thor",
+    FirstNames    := "A. U.",
+    IsAuthor      := true,
+    IsMaintainer  := false,
+    #Email         := "author@example.com",
+  ),
+
+  rec(
+    LastName      := "Itor",
+    FirstNames    := "Jan",
     IsAuthor      := false,
     IsMaintainer  := true,
-    Email         := "support@gap-system.org",
+    #Email         := "janitor@example.com",
   ),
 ],
 
-# Status := "accepted",
-Status := "deposited",
+Status := "other",
 
-PackageWWWHome  := "https://gap-packages.github.io/hapcryst/",
-README_URL      := Concatenation( ~.PackageWWWHome, "README.md" ),
-PackageInfoURL  := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
-SourceRepository := rec(
-    Type := "git",
-    URL := "https://github.com/gap-packages/hapcryst",
-),
-IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-ArchiveURL      := Concatenation( ~.SourceRepository.URL,
-                                 "/releases/download/v", ~.Version,
-                                 "/hapcryst-", ~.Version ),
-ArchiveFormats := ".tar.gz",
+# The following are not strictly necessary in your own PackageInfo.g
+# (in the sense that update.g only looks at the usual fields
+# like PackageWWWHome, ArchiveURL etc.). But they are convenient
+# if you use exactly the scheme for your package website that we propose.
+GithubUser := "gap-system",
+GithubRepository := ~.PackageName,
+GithubWWW := Concatenation("https://github.com/", ~.GithubUser, "/", ~.GithubRepository),
 
-AbstractHTML := "This is an extension to the HAP package by Graham Ellis. It implements geometric methods for the calculation of resolutions of Bieberbach groups.",
+PackageWWWHome := Concatenation("https://", ~.GithubUser, ".github.io/", ~.GithubRepository, "/"),
+README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
+PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
+# The following assumes you are using the Github releases system. If not, adjust
+# it accordingly.
+ArchiveURL     := Concatenation(~.GithubWWW,
+                    "/releases/download/v", ~.Version, "/",
+                    ~.GithubRepository, "-", ~.Version),
+
+ArchiveFormats := ".tar.gz .tar.bz2",
+
+AbstractHTML := 
+  "This is a pseudo package that contains no actual\
+  <span class=\"pkgname\">GAP</span> code. Instead, it is a template for other\
+  GAP packages that allows to quickly setup GitHub Pages.",
 
 PackageDoc := rec(
-  # use same as in GAP
-  BookName  := "HAPcryst",
+  BookName  := "GitHubPagesForGAP",
   ArchiveURLSubset := ["doc"],
-  HTMLStart := "doc/chap0_mj.html",
+  HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
-  LongTitle := "The crystallographic group extension to HAP",
+  LongTitle := "A GitHub Pages generator for GAP packages",
 ),
 
-
+# The following dependencies are fake and for testing / demo purposes
 Dependencies := rec(
-  GAP := ">=4.12",
+  GAP := ">=4.8.1",
   NeededOtherPackages := [
-                   ["Polycyclic",">=2.8.1"],
-                   ["AClib",">=1.1"],
-                   ["cryst",">=4.1.5"],
-                   ["HAP",">=1.8"],
-                   ["polymaking",">=0.8.6"],
-                   ],
-  SuggestedOtherPackages := [
-                   [ "Carat", ">=1.1" ],
-                   ["CrystCat",">=1.1.2"],
-                   ["GAPDoc", ">= 0.99"]
-                   ],
-  ExternalConditions := ["polymake (https://polymake.org) must be installed to calculate resolutions"]
+    ["GAPDoc", ">= 1.2"],
+    ["IO", ">= 4.1"],
+  ],
+  SuggestedOtherPackages := [["orb", ">= 4.2"]],
+  ExternalConditions := []
 ),
 
 AvailabilityTest := ReturnTrue,
 
-TestFile := "tst/testall.g",
-
-Keywords := ["homological algebra","crystallographic groups","resolution"],
-
-AutoDoc := rec(
-    TitlePage := rec(
-        Acknowledgements := """
-          This work was supported by Marie Curie Grant No. MTKD-CT-2006-042685
-        """,
-        Copyright := """
-            &copyright; 2007 Marc Röder. <P/>
-
-            This package is distributed under the terms of the GNU General
-            Public License version 2 or later (at your convenience). See the
-            file <File>LICENSE</File> or
-            <URL>https://www.gnu.org/copyleft/gpl.html</URL>
-        """,
-        Version := Concatenation( "Version ", ~.Version ),
-    )
-),
+Keywords := ["GitHub Pages", "GAP"]
 
 ));
+
+
