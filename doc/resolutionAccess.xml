@@ -1,50 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?> 
-<!DOCTYPE Book SYSTEM "gapdoc.dtd">
-
-<Book Name="HAPprog">
-
-<TitlePage>
-
-  <Title><Package>Hap Programming</Package> &ndash; An experimental framework
-for objectifying the data structures of Hap</Title>
-
-  <Version>( development version of
-<#Include SYSTEM "today.ver">
- )
-  </Version>
-  <Author>Marc Röder
-    <Email>marc.roeder(at)nuigalway.ie</Email>
-  </Author>
-
-  <Abstract>
-   This extension does not change the behaviour of Hap and is fully
-   backwards-compatible. It is not a part of Hap and there is no guarantee that
-   it will at any point be supported by Hap. Use at your own risk.
-  </Abstract>
-
-  <Address>
-  Marc Röder, Department of Mathematics, NUI Galway, Irleland
-  </Address>
-
-  <Acknowledgements>
-  This work was supported by Marie Curie Grant No. MTKD-CT-2006-042685
-  </Acknowledgements>
-
-  <Copyright>&copyright; 2007 Marc Röder. <P/>
-
-    This package is distributed under the terms of the GNU General
-    Public License version 2 or later (at your convenience). See the  file
-    <File>LICENSE</File> or 
-    <URL>https://www.gnu.org/copyleft/gpl.html</URL>
-
-  </Copyright>
-</TitlePage>
-
-<TableOfContents/>
-
-
-<Body>
-<Chapter Label="hapresolution"><Heading>Resolutions in Hap</Heading>
+<?xml version="1.0" encoding="UTF-8"?>
+<Appendix Label="hapresolution"><Heading>Resolutions in Hap</Heading>
 
 This document is only concerned with the representation of resolutions in
 Hap. Note that it is not a part of Hap. The framework provided here is just an
@@ -146,14 +101,14 @@ The effort of having two versions of <C>boundary</C> and <C>dimension</C> is
 necessary to keep the structure compatible with the usual Hap resolution.
 </Section>
 
-</Chapter>
+</Appendix>
 
 
 
 <!-- ================================================== -->
 
 
-<Chapter><Heading>Accessing and Manipulating Resolutions</Heading>
+<Appendix><Heading>Accessing and Manipulating Resolutions</Heading>
 
 
 <Section><Heading>Representation-Independent Access Methods</Heading>
@@ -449,12 +404,9 @@ universal methods.
 
 <#Include SYSTEM "./resolutionAccess_GroupRing.xml">
 
-</Chapter>
+</Appendix>
 
-<Chapter><Heading>Contracting Homotopies</Heading>
+<Appendix><Heading>Contracting Homotopies</Heading>
 
 <#Include SYSTEM "./contraction.xml">
-</Chapter>
-
-</Body>
-</Book>
+</Appendix>

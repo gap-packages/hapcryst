@@ -11,7 +11,6 @@ html:
 
 clean:
 	cd doc && ./clean
-	cd lib/datatypes/doc && ./clean
 
 check:
 	$(GAP) $(GAP_ARGS) tst/testall.g

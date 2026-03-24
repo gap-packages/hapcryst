@@ -27,6 +27,8 @@
 </Chapter>
 
 </Body>
+<!-- appendix -->
+ <#Include SYSTEM "resolutionAccess.xml">
 <Bibliography Databases="HAPcryst" /> 
 <TheIndex/>
 </Book>
