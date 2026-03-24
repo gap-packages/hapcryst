@@ -7,6 +7,37 @@ if fail = LoadPackage("AutoDoc", ">= 2016.01.21") then
     Error("AutoDoc 2016.01.21 or newer is required");
 fi;
 
+# GAP only registers package books that already have a manual.six file when
+# LoadPackageDocumentation is called. Since we build the auxiliary HAPprog book
+# first and the main manual in the same GAP session, the latter would otherwise
+# still see the pre-build state and fail to resolve <Ref BookName="HAPprog">.
+# Refreshing the package books here makes the newly written manual.six visible
+# to the help system before AutoDoc builds the main manual.
+RefreshPackageBooksForHelp := function(pkgname)
+    local info, pkgdoc, norm, pos, variants;
+
+    info := PackageInfo(pkgname)[1];
+    for pkgdoc in info.PackageDoc do
+        variants := [
+            SIMPLE_STRING(pkgdoc.BookName),
+            SIMPLE_STRING(Concatenation(pkgdoc.BookName, " (not loaded)"))
+        ];
+        for norm in variants do
+            # Remove both the registered book name and any parsed manual.six
+            # cache entry. This forces GAP to rescan the rebuilt book from disk.
+            pos := Position(HELP_KNOWN_BOOKS[1], norm);
+            if pos <> fail then
+                HELP_REMOVE_BOOK(HELP_KNOWN_BOOKS[2][pos][1]);
+            fi;
+            if IsBound(HELP_BOOKS_INFO.(norm)) then
+                Unbind(HELP_BOOKS_INFO.(norm));
+            fi;
+        od;
+    od;
+
+    LoadPackageDocumentation(info);
+end;
+
 #
 # build the HAPProf book first, as the main book / package manual references it
 #
@@ -32,6 +63,10 @@ MakeGAPDocDoc( "lib/datatypes/doc", # path to the directory containing the main 
 # Copy the *.css and *.js files from the styles directory of the GAPDoc 
 # package into the directory containing the package manual.
 CopyHTMLStyleFiles( "lib/datatypes/doc" );
+
+# Re-register both books after HAPprog has been built so the following AutoDoc
+# run can resolve cross-references into it in this same GAP session.
+RefreshPackageBooksForHelp("hapcryst");
 
 #
 # Build the actual package manual
