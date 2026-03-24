@@ -6,7 +6,7 @@ fundamental domain for the group.
 
 For a description of the <K>HapResolution</K> datatype, see the
 <Package>Hap</Package> data types documentation or the experimental datatypes
-documentation <Ref Label="Resolutions in Hap" BookName="HAPprog"/>
+documentation <Ref Label="hapresolution"/>
 
 <ManSection>
 <Meth Name="ResolutionBieberbachGroup" Arg="G [v]"/>

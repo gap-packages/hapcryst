@@ -41,8 +41,7 @@ ArchiveFormats := ".tar.gz",
 
 AbstractHTML := "This is an extension to the HAP package by Graham Ellis. It implements geometric methods for the calculation of resolutions of Bieberbach groups.",
 
-PackageDoc := [
-rec(
+PackageDoc := rec(
   # use same as in GAP
   BookName  := "HAPcryst",
   ArchiveURLSubset := ["doc"],
@@ -51,15 +50,6 @@ rec(
   SixFile   := "doc/manual.six",
   LongTitle := "The crystallographic group extension to HAP",
 ),
-rec(
-  BookName  := "HAPprog",
-  ArchiveURLSubset := ["lib/datatypes/doc"],
-  HTMLStart := "lib/datatypes/doc/chap0.html",
-  PDFFile   := "lib/datatypes/doc/manual.pdf",
-  SixFile   := "lib/datatypes/doc/manual.six",
-  LongTitle := "An experimental framework for objectifying the data structures of Hap",
-)
-],
 
 
 Dependencies := rec(
