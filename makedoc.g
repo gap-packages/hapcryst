@@ -7,8 +7,9 @@ if fail = LoadPackage("AutoDoc", ">= 2016.01.21") then
     Error("AutoDoc 2016.01.21 or newer is required");
 fi;
 
-AutoDoc(rec( scaffold := rec( MainPage := false )));
-
+#
+# build the HAPProf book first, as the main book / package manual references it
+#
 MakeGAPDocDoc( "lib/datatypes/doc", # path to the directory containing the main file
                "resolutionAccess",  # the name of the main file (without extension)
                           # list of (probably source code) files relative 
@@ -32,7 +33,9 @@ MakeGAPDocDoc( "lib/datatypes/doc", # path to the directory containing the main 
 # package into the directory containing the package manual.
 CopyHTMLStyleFiles( "lib/datatypes/doc" );
 
-# Create the manual.lab file which is needed if the main manuals or another 
-# package is referring to your package
-GAPDocManualLab( "HAPcryst" );; 
- 
+#
+# Build the actual package manual
+#
+AutoDoc(rec(
+    scaffold := rec( MainPage := false ),
+));
