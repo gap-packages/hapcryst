@@ -1,7 +1,7 @@
 This file describes changes in the AutoDoc package.
 
 
-## 0.2.0 (2026-MM-DD)
+## 0.2.0 (2026-03-24)
 
 - Require GAP >= 4.12
 - Require polymaking >= 0.8.6
