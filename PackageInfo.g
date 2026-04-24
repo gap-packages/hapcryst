@@ -66,7 +66,7 @@ Dependencies := rec(
                    ["CrystCat",">=1.1.2"],
                    ["GAPDoc", ">= 0.99"]
                    ],
-  ExternalConditions := ["polymake (https://polymake.org) must be installed to calculate resolutions"]
+  ExternalConditions := [["polymake must be installed to calculate resolutions", "https://polymake.org"]],
 ),
 
 AvailabilityTest := ReturnTrue,
