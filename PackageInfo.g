@@ -62,7 +62,7 @@ Dependencies := rec(
                    ["polymaking",">=0.8.6"],
                    ],
   SuggestedOtherPackages := [
-                   [ "Carat", ">=1.1" ],
+                   ["CaratInterface",">=2.3.1"],
                    ["CrystCat",">=1.1.2"],
                    ["GAPDoc", ">= 0.99"]
                    ],
