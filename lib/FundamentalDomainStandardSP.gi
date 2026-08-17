@@ -154,10 +154,7 @@ initialPolytope:=function(center)
     local   dim,  poly,  signvectors,  cubevertices;
     
     dim:=Size(center);
-    poly:=CreatePolymakeObject("partialFD",
-                  POLYMAKE_DATA_DIR,
-                  ["polytope","2.3","RationalPolytope"]
-                  );
+    poly:=CreatePolymakeObject(["polytope","2.3","RationalPolytope"]);
     signvectors:=Tuples([-1,1],dim);
     cubevertices:=(1/2*signvectors)+center;
     

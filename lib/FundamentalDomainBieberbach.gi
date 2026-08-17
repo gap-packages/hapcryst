@@ -270,10 +270,7 @@ InstallMethod(FundamentalDomainBieberbachGroupNC,
     orbitpart:=OrbitStabilizerInUnitCubeOnRight(group,center).orbit;;
     
     newinequalities:=initialInequalities(center,gram);;
-    partialFD:=CreatePolymakeObject("partialFD",
-                       POLYMAKE_DATA_DIR,
-                       ["polytope","2.3","RationalPolytope"]
-                       );
+    partialFD:=CreatePolymakeObject(["polytope","2.3","RationalPolytope"]);
     AppendToPolymakeObject(partialFD,
             ConvertMatrixToPolymakeString("FACETS",newinequalities)
             );
