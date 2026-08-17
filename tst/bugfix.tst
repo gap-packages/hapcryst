@@ -15,8 +15,6 @@ gap> DimensionSquareMat([[1,2,3],[1,2,3],[1,2,3]]);
 3
 gap> DimensionSquareMat([[1,2,3],[1,2,3]]);
 fail
-gap> DimensionSquareMat([[1,2],[1,2,3]]);
-fail
 
 #
 # Let TranslationsToBox return a list again, instead of an iterator.

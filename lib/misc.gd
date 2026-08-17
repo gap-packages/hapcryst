@@ -29,8 +29,10 @@ DeclareOperation("SignRat",[IsRat]);
 ##############################
 #
 # New operations for matrices. The names say it all
-# 
-DeclareProperty("IsSquareMat",IsMatrix);
+#
+if not IsBound(IsSquareMatrix) then  # GAP > 4.16 provides IsSquareMat and IsSquareMatrix
+  DeclareProperty("IsSquareMat",IsMatrix);
+fi;
 DeclareOperation("DimensionSquareMat",[IsMatrix]);
 
 ##############################
