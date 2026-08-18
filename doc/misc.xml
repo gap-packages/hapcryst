@@ -50,7 +50,7 @@ gap> IsSquareMat(m);
 true
 gap> DimensionSquareMat(m);
 3
-gap> DimensionSquareMat([[1,2],[1,2,3]]);
+gap> DimensionSquareMat([[1,2,3],[4,5,6]]);
 fail
 ]]></Example>
 
