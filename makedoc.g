@@ -8,5 +8,6 @@ if fail = LoadPackage("AutoDoc", ">= 2016.01.21") then
 fi;
 
 AutoDoc(rec(
+    extract_examples := true,
     scaffold := rec( MainPage := false ),
 ));
