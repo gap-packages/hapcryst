@@ -1,6 +1,12 @@
 This file describes changes in the AutoDoc package.
 
 
+## 0.2.1 (2026-08-18)
+
+- Don't define `IsSquareMat` if GAP provides it (it does since 4.16.0)
+- Compatibility with future `polymaking` changes (don't use `POLYMAKE_DATA_DIR`)
+- Various janitorial changes
+
 ## 0.2.0 (2026-03-24)
 
 - Require GAP >= 4.12
