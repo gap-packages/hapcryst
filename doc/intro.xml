@@ -146,8 +146,7 @@ file or by using <Ref Var="SetHAPcrystDataDirectory"/>.
 <Package>HAPcryst</Package> itself does only have one global variable, namely
 <Ref InfoClass="InfoHAPcryst"/>. 
 The location of files generated for interaction with polymake are determined by
-the value of <Ref Var="POLYMAKE_DATA_DIR" BookName="polymaking"/> which is a
-global variable of <Package>polymaking</Package>.
+the <Package>polymaking</Package>.
 
 <ManSection>
     <InfoClass Name="InfoHAPcryst"/>
