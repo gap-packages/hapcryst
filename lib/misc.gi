@@ -41,10 +41,12 @@ end);
 
 ##############################
 
-InstallMethod(IsSquareMat,"for matrices",[IsMatrix],
+if not IsBound(IsSquareMatrix) then  # GAP > 4.16 provides IsSquareMat and IsSquareMatrix
+    InstallMethod(IsSquareMat,"for matrices",[IsMatrix],
         function(mat)
         return IsRectangularTable(mat) and NrRows(mat) = NrCols(mat);
-end);
+    end);
+fi;
 
 
 ##############################
