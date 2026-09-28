@@ -1,16 +1,40 @@
-.PHONY: doc html clean check
+.PHONY: help run doc html clean check test
+
+PKGNAME = HAPcryst
+TESTFILE = tst/testall.g
+
+# directory containing this Makefile, so 'make -f path/to/Makefile' works too
+PKGDIR := $(patsubst %/,%,$(dir $(abspath $(lastword $(MAKEFILE_LIST)))))
 
 GAP ?= gap
-GAP_ARGS = -q --quitonbreak --packagedirs $(abspath .)
+GAP_ARGS = -q --quitonbreak --packagedirs "$(PKGDIR)"
 
-doc:
-	$(GAP) $(GAP_ARGS) makedoc.g -c 'QUIT;'
+.DEFAULT_GOAL := help
 
-html:
-	NOPDF=1 $(GAP) $(GAP_ARGS) makedoc.g -c 'QUIT;'
+# list every target annotated with a '## description' comment
+help: ## show this help
+	@echo "The following make targets are available:"
+	@awk -F ':.*## ' '/^[a-zA-Z_-]+:.*## / { t[++n] = $$1; d[n] = $$2; if (length($$1) > w) w = length($$1) } \
+		END { for (i = 1; i <= n; i++) printf "  make %-" w "s  %s\n", t[i], d[i] }' $(MAKEFILE_LIST)
+	@echo
+	@echo "To use a different GAP executable than '$(GAP)', set GAP, e.g.:"
+	@echo "  make check GAP=/path/to/gap"
+	@echo "  make check GAP=gap-4.16"
 
-clean:
-	cd doc && ./clean
+run: ## start GAP and load the package
+	$(GAP) --packagedirs "$(PKGDIR)" -c 'LoadPackage("$(PKGNAME)");'
 
-check:
-	$(GAP) $(GAP_ARGS) tst/testall.g
+# AutoDoc writes into doc/ relative to the current directory
+doc: ## build the documentation (HTML, text and PDF)
+	cd "$(PKGDIR)" && $(GAP) $(GAP_ARGS) makedoc.g -c 'QUIT;'
+
+html: ## build the documentation without PDF
+	cd "$(PKGDIR)" && NOPDF=1 $(GAP) $(GAP_ARGS) makedoc.g -c 'QUIT;'
+
+clean: ## remove generated documentation files
+	cd "$(PKGDIR)/doc" && ./clean
+
+check: ## run the test suite
+	$(GAP) $(GAP_ARGS) "$(PKGDIR)/$(TESTFILE)"
+
+test: check ## alias for check
