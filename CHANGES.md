@@ -1,6 +1,5 @@
 This file describes changes in the AutoDoc package.
 
-
 ## 0.2.1 (2026-08-18)
 
 - Don't define `IsSquareMat` if GAP provides it (it does since 4.16.0)
